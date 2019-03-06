@@ -9,10 +9,14 @@
 #define OOP_ARCADE_2018_SHAREDLIBRARY_HPP
 
 #include <string>
+#include "SharedLibraryException.hpp"
 
 class SharedLibrary {
 public:
 	void load(const std::string &libname);
+	void unload();
+private:
+	void *_lib;
 };
 
 #endif

@@ -9,7 +9,7 @@ CC		=	g++
 
 DSRC	=	src/
 
-SRC		=	$(DSRC)Basic.cpp					\
+SRC		=	$(DSRC)/library/.cpp)	\
 
 MAIN	=	main.cpp
 

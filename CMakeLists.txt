@@ -8,4 +8,4 @@ include_directories(src)
 
 file(GLOB_RECURSE sources src/*.cpp)
 add_executable(OOP_arcade_2018 ${sources})
-target_link_libraries(OOP_arcade_2018 gtest gtest_main gcov)
+target_link_libraries(OOP_arcade_2018 gtest gtest_main dl)

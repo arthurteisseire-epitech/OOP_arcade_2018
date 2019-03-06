@@ -5,10 +5,18 @@
 ** SharedLibrary.cpp
 */
 
+#include <dlfcn.h>
 #include "SharedLibrary.hpp"
 #include "SharedLibraryException.hpp"
 
 void SharedLibrary::load(const std::string &libname)
 {
-	throw SharedLibraryException("loading " + libname + " failed");
+	_lib = dlopen(std::string("lib" + libname + ".so").c_str(), RTLD_LAZY);
+	if (!_lib)
+		throw SharedLibraryException(dlerror());
+}
+
+void SharedLibrary::unload()
+{
+	dlclose(_lib);
 }
