@@ -7,7 +7,12 @@
 
 #include "SharedLibraryException.hpp"
 
+SharedLibraryException::SharedLibraryException(const std::string &message) :
+	_message(message)
+{
+}
+
 char const *SharedLibraryException::what() const noexcept
 {
-	return "hello";
+	return std::string("SharedLibraryError: " + _message).c_str();
 }

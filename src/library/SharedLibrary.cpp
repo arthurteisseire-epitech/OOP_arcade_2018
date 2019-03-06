@@ -10,5 +10,5 @@
 
 void SharedLibrary::load(const std::string &libname)
 {
-	throw SharedLibraryException();
+	throw SharedLibraryException("loading " + libname + " failed");
 }

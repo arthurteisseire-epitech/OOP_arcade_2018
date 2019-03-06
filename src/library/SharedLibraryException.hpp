@@ -8,13 +8,15 @@
 #ifndef OOP_ARCADE_2018_SHAREDLIBRARYEXCEPTION_HPP
 #define OOP_ARCADE_2018_SHAREDLIBRARYEXCEPTION_HPP
 
-#include <exception>
+#include <string>
 
 class SharedLibraryException : public std::exception {
 public:
-	SharedLibraryException() = default;
+	explicit SharedLibraryException(const std::string &message);
 	~SharedLibraryException() override = default;
 	char const *what() const noexcept override;
+private:
+	const std::string _message;
 };
 
 #endif
