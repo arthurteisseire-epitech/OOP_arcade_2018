@@ -7,10 +7,11 @@
 
 #include "gtest/gtest.h"
 #include "SharedLibrary.hpp"
+#include "SharedLibraryException.hpp"
 
 TEST(SharedLibrary, LoadError)
 {
         SharedLibrary lib;
 
-        ASSERT_ANY_THROW(lib.load("qt"));
+        ASSERT_THROW(lib.load("qt"), SharedLibraryException);
 }

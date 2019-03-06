@@ -6,8 +6,9 @@
 */
 
 #include "SharedLibrary.hpp"
+#include "SharedLibraryException.hpp"
 
 void SharedLibrary::load(const std::string &libname)
 {
-	throw std::exception();
+	throw SharedLibraryException();
 }
