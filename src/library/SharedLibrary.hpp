@@ -13,8 +13,9 @@
 
 class SharedLibrary {
 public:
+	SharedLibrary();
+	~SharedLibrary();
 	void load(const std::string &libname);
-	void unload();
 private:
 	void *_lib;
 };
