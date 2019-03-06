@@ -8,11 +8,11 @@
 #include "SharedLibraryException.hpp"
 
 SharedLibraryException::SharedLibraryException(const std::string &message) :
-	_message(message)
+	_message("SharedLibraryError: " + message)
 {
 }
 
 char const *SharedLibraryException::what() const noexcept
 {
-	return std::string("SharedLibraryError: " + _message).c_str();
+	return _message.c_str();
 }
