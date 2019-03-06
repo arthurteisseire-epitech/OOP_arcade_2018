@@ -16,7 +16,8 @@ SharedLibrary::SharedLibrary() :
 
 SharedLibrary::~SharedLibrary()
 {
-	dlclose(_lib);
+	if (_lib)
+		dlclose(_lib);
 }
 
 void SharedLibrary::load(const std::string &libname)
