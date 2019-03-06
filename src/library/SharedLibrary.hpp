@@ -16,6 +16,7 @@ public:
 	SharedLibrary();
 	~SharedLibrary();
 	void load(const std::string &libname);
+	void *sym(const std::string &symname);
 private:
 	void *_lib;
 };

@@ -8,9 +8,9 @@
 #include <QtGui>
 #include "Test.hpp"
 
-QWidget *createWidget()
+void showWidget()
 {
 	auto widget = new QWidget();
 	widget->resize(100, 100);
-	return widget;
+	widget->show();
 }

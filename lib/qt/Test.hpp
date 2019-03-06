@@ -14,4 +14,4 @@
 #define TEST_COMMON_DLLSPEC Q_DECL_IMPORT
 #endif
 
-extern "C" TEST_COMMON_DLLSPEC QWidget *createWidget();
+extern "C" TEST_COMMON_DLLSPEC void showWidget();

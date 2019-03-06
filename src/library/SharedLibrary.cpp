@@ -24,7 +24,12 @@ void SharedLibrary::load(const std::string &libname)
 {
 	if (_lib)
 		dlclose(_lib);
-	_lib = dlopen(std::string("lib" + libname + ".so").c_str(), RTLD_LAZY);
+	_lib = dlopen(libname.c_str(), RTLD_LAZY);
 	if (!_lib)
 		throw SharedLibraryException(dlerror());
+}
+
+void *SharedLibrary::sym(const std::string &symname)
+{
+        return dlsym(_lib, symname.c_str());
 }
