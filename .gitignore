@@ -17,3 +17,6 @@ CMakeFiles/
 # Project
 arcade
 *.so*
+
+# Qt
+lib/qt/Makefile
