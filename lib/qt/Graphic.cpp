@@ -7,30 +7,30 @@
 
 #include <QtGui>
 #include <iostream>
-#include "Test.hpp"
+#include "Graphic.hpp"
 
 IGraphic *instantiate(int &ac, char *av[])
 {
-	return new App(ac, av);
+	return new Graphic(ac, av);
 }
 
-App::App(int &ac, char *av[]) :
+Graphic::Graphic(int &ac, char *av[]) :
 	_app(new QApplication(ac, av))
 {
 }
 
-int App::exec()
+int Graphic::exec()
 {
         return _app->exec();
 }
 
-void App::createWidget()
+void Graphic::createWidget()
 {
 	_widget = new QWidget();
 	_widget->resize(100, 100);
 }
 
-void App::showWidget()
+void Graphic::showWidget()
 {
 	_widget->show();
 }

@@ -15,9 +15,9 @@
 #define TEST_COMMON_DLLSPEC Q_DECL_IMPORT
 #endif
 
-class App : public IGraphic {
+class Graphic : public IGraphic {
 public:
-	App(int &ac, char *av[]);
+	Graphic(int &ac, char *av[]);
 	int exec() override;
 	void createWidget() override;
 	void showWidget() override;
