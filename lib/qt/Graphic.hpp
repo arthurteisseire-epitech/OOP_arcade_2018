@@ -10,9 +10,9 @@
 #include "IGraphic.hpp"
 
 #if defined ARCADE
-#define TEST_COMMON_DLLSPEC Q_DECL_EXPORT
+#define COMMON_SO Q_DECL_EXPORT
 #else
-#define TEST_COMMON_DLLSPEC Q_DECL_IMPORT
+#define COMMON_SO Q_DECL_IMPORT
 #endif
 
 class Graphic : public IGraphic {
@@ -26,4 +26,4 @@ private:
 	QWidget *_widget;
 };
 
-extern "C" TEST_COMMON_DLLSPEC IGraphic *instantiate(int &ac, char *av[]);
+extern "C" COMMON_SO IGraphic *instantiate(int &ac, char *av[]);
