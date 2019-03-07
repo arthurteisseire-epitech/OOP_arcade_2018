@@ -13,7 +13,6 @@ public:
 	virtual int exec() = 0;
 	virtual void draw() = 0;
 	virtual void processSprite() = 0;
-	virtual void createWindow() = 0;
 };
 
 #endif

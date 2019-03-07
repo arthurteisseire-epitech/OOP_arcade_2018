@@ -19,6 +19,7 @@ Graphic::Graphic(int &ac, char *av[]) :
 	_centralWidget(std::make_unique<QWidget>()),
 	_window(std::make_unique<QMainWindow>())
 {
+	_window->setCentralWidget(_centralWidget.get());
 }
 
 int Graphic::exec()
@@ -33,9 +34,4 @@ void Graphic::processSprite()
 void Graphic::draw()
 {
 	_window->show();
-}
-
-void Graphic::createWindow()
-{
-	_window->setCentralWidget(_centralWidget.get());
 }

@@ -21,7 +21,6 @@ public:
 	int exec() override;
 	void processSprite() override;
 	void draw() override;
-	void createWindow() override;
 private:
 	std::unique_ptr<QApplication> _app;
 	std::unique_ptr<QWidget> _centralWidget;

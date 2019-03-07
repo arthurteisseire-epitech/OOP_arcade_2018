@@ -13,7 +13,6 @@ int main(int argc, char *argv[])
 	LibraryLoader loader(argc, argv);
 	IGraphic *g = loader.loadGraphicInstance("lib/qt/lib_arcade_qt5.so");
 
-	g->createWindow();
 	g->processSprite();
 	g->draw();
 	return g->exec();
