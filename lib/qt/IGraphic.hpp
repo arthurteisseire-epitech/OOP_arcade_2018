@@ -11,8 +11,8 @@
 class IGraphic {
 public:
 	virtual int exec() = 0;
-	virtual void showWidget() = 0;
-	virtual void createWidget() = 0;
+	virtual void draw() = 0;
+	virtual void processSprite() = 0;
 };
 
 #endif

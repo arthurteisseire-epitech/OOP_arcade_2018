@@ -19,8 +19,8 @@ class Graphic : public IGraphic {
 public:
 	Graphic(int &ac, char *av[]);
 	int exec() override;
-	void createWidget() override;
-	void showWidget() override;
+	void processSprite() override;
+	void draw() override;
 private:
 	QApplication *_app;
 	QWidget *_widget;

@@ -24,13 +24,13 @@ int Graphic::exec()
         return QApplication::exec();
 }
 
-void Graphic::createWidget()
+void Graphic::processSprite()
 {
 	_widget = new QWidget();
 	_widget->resize(100, 100);
 }
 
-void Graphic::showWidget()
+void Graphic::draw()
 {
 	_widget->show();
 }
