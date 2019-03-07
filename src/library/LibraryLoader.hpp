@@ -5,8 +5,8 @@
 ** LibraryLoader.hpp
 */
 
-#ifndef OOP_ARCADE_2018_SHAREDLIBRARY_HPP
-#define OOP_ARCADE_2018_SHAREDLIBRARY_HPP
+#ifndef OOP_ARCADE_2018_LIBRARYLOADER_HPP
+#define OOP_ARCADE_2018_LIBRARYLOADER_HPP
 
 #include <string>
 #include "LibraryLoaderException.hpp"
