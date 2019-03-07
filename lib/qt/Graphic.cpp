@@ -21,7 +21,7 @@ Graphic::Graphic(int &ac, char *av[]) :
 
 int Graphic::exec()
 {
-        return _app->exec();
+        return QApplication::exec();
 }
 
 void Graphic::createWidget()
