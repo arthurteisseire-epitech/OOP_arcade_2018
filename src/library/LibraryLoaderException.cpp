@@ -7,12 +7,12 @@
 
 #include "LibraryLoaderException.hpp"
 
-SharedLibraryException::SharedLibraryException(const std::string &message) :
+LibraryLoaderException::LibraryLoaderException(const std::string &message) :
 	_message("SharedLibraryError: " + message)
 {
 }
 
-char const *SharedLibraryException::what() const noexcept
+char const *LibraryLoaderException::what() const noexcept
 {
 	return _message.c_str();
 }

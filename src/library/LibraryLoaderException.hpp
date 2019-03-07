@@ -10,10 +10,10 @@
 
 #include <string>
 
-class SharedLibraryException : public std::exception {
+class LibraryLoaderException : public std::exception {
 public:
-	explicit SharedLibraryException(const std::string &message);
-	~SharedLibraryException() override = default;
+	explicit LibraryLoaderException(const std::string &message);
+	~LibraryLoaderException() override = default;
 	char const *what() const noexcept override;
 private:
 	const std::string _message;

@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2018
 ** OOP_arcade_2018
 ** File description:
-** LibraryLoaderException.cpp
+** LibraryLoaderTest.cpp
 */
 
 #include "gtest/gtest.h"
@@ -13,5 +13,5 @@ TEST(SharedLibrary, LoadError)
 {
         LibraryLoader lib;
 
-        ASSERT_THROW(lib.load("qt"), SharedLibraryException);
+        ASSERT_THROW(lib.load("qt"), LibraryLoaderException);
 }

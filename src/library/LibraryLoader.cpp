@@ -26,7 +26,7 @@ void LibraryLoader::load(const std::string &libname)
 		dlclose(_lib);
 	_lib = dlopen(libname.c_str(), RTLD_LAZY);
 	if (!_lib)
-		throw SharedLibraryException(dlerror());
+		throw LibraryLoaderException(dlerror());
 }
 
 void *LibraryLoader::findSym(const std::string &symname)
