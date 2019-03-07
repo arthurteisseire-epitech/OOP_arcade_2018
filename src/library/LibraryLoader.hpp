@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2018
 ** OOP_arcade_2018
 ** File description:
-** SharedLibrary.hpp
+** LibraryLoader.hpp
 */
 
 #ifndef OOP_ARCADE_2018_SHAREDLIBRARY_HPP
@@ -11,12 +11,12 @@
 #include <string>
 #include "SharedLibraryException.hpp"
 
-class SharedLibrary {
+class LibraryLoader {
 public:
-	SharedLibrary();
-	~SharedLibrary();
+	LibraryLoader();
+	~LibraryLoader();
 	void load(const std::string &libname);
-	void *sym(const std::string &symname);
+	void *findSym(const std::string &symname);
 private:
 	void *_lib;
 };

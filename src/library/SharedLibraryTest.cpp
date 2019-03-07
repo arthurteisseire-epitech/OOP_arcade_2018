@@ -6,12 +6,12 @@
 */
 
 #include "gtest/gtest.h"
-#include "SharedLibrary.hpp"
+#include "LibraryLoader.hpp"
 #include "SharedLibraryException.hpp"
 
 TEST(SharedLibrary, LoadError)
 {
-        SharedLibrary lib;
+        LibraryLoader lib;
 
         ASSERT_THROW(lib.load("qt"), SharedLibraryException);
 }

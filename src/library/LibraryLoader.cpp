@@ -2,25 +2,25 @@
 ** EPITECH PROJECT, 2018
 ** OOP_arcade_2018
 ** File description:
-** SharedLibrary.cpp
+** LibraryLoader.cpp
 */
 
 #include <dlfcn.h>
-#include "SharedLibrary.hpp"
+#include "LibraryLoader.hpp"
 #include "SharedLibraryException.hpp"
 
-SharedLibrary::SharedLibrary() :
+LibraryLoader::LibraryLoader() :
 	_lib(nullptr)
 {
 }
 
-SharedLibrary::~SharedLibrary()
+LibraryLoader::~LibraryLoader()
 {
 	if (_lib)
 		dlclose(_lib);
 }
 
-void SharedLibrary::load(const std::string &libname)
+void LibraryLoader::load(const std::string &libname)
 {
 	if (_lib)
 		dlclose(_lib);
@@ -29,7 +29,7 @@ void SharedLibrary::load(const std::string &libname)
 		throw SharedLibraryException(dlerror());
 }
 
-void *SharedLibrary::sym(const std::string &symname)
+void *LibraryLoader::findSym(const std::string &symname)
 {
         return dlsym(_lib, symname.c_str());
 }
