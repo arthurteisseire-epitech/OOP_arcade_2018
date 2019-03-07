@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
-project(OOP_arcade_2018)
+project(arcade)
 
 add_compile_options(-Wall -Wextra)
 set(CMAKE_CXX_STANDARD 20)
@@ -9,6 +9,11 @@ find_package(Qt5Widgets)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 
 include_directories(src src/library lib/qt lib)
+
+add_custom_target(graphicals
+        COMMAND make
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib/qt
+)
 
 file(GLOB_RECURSE core src/*.cpp main.cpp)
 file(GLOB_RECURSE lib lib/*.cpp)

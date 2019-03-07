@@ -13,6 +13,9 @@ coverage
 .idea/
 cmake-build-debug/
 CMakeFiles/
+CMakeCache.txt
+*.cbp
+cmake_install.cmake
 
 # Project
 arcade
@@ -20,3 +23,4 @@ arcade
 
 # Qt
 lib/qt/Makefile
+.qmake.stash
