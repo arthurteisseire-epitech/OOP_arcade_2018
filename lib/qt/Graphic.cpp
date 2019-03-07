@@ -29,6 +29,10 @@ int Graphic::exec()
 
 void Graphic::processSprite()
 {
+	QPalette palette;
+	palette.setColor(QPalette::Background, Qt::black);
+	_centralWidget->setAutoFillBackground(true);
+	_centralWidget->setPalette(palette);
 }
 
 void Graphic::draw()
