@@ -9,8 +9,10 @@
 #include "LibraryLoader.hpp"
 #include "LibraryLoaderException.hpp"
 
-LibraryLoader::LibraryLoader() :
-	_lib(nullptr)
+LibraryLoader::LibraryLoader(int &argc, char **argv) :
+	_lib(nullptr),
+	_argc(argc),
+	_argv(argv)
 {
 }
 
@@ -32,4 +34,13 @@ void LibraryLoader::load(const std::string &libname)
 void *LibraryLoader::findSym(const std::string &symname)
 {
         return dlsym(_lib, symname.c_str());
+}
+
+IGraphic *LibraryLoader::loadGraphicInstance(std::string libname)
+{
+	IGraphic *(*instantiate)(int &, char *[]);
+
+	load(libname);
+	instantiate = (IGraphic *(*)(int &, char *[]))findSym("entryPoint");
+	return instantiate(_argc, _argv);
 }

@@ -11,7 +11,9 @@
 
 TEST(SharedLibrary, LoadError)
 {
-        LibraryLoader lib;
+        int ac = 1;
+        char *av[] = {"hello"};
+        LibraryLoader lib(ac, av);
 
         ASSERT_THROW(lib.load("qt"), LibraryLoaderException);
 }

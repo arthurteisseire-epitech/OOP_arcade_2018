@@ -10,13 +10,9 @@
 
 int main(int argc, char *argv[])
 {
-	LibraryLoader loader;
-	IGraphic *(*instantiate)(int &, char *[]);
+	LibraryLoader loader(argc, argv);
+	IGraphic *g = loader.loadGraphicInstance("lib/qt/lib_arcade_qt5.so");
 
-	loader.load("lib/qt/lib_arcade_qt5.so");
-	instantiate = (IGraphic *(*)(int &, char *[]))loader.findSym("entryPoint");
-
-	IGraphic *g = instantiate(argc, argv);
 	g->createWidget();
 	g->showWidget();
 	return g->exec();
