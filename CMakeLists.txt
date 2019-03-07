@@ -10,8 +10,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 
 include_directories(src src/library lib/qt lib)
 
-add_custom_target(graphicals
-        COMMAND make
+add_custom_target(
+        graphicals
+        ALL COMMAND make
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib/qt
 )
 
