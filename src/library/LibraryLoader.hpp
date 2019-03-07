@@ -9,7 +9,7 @@
 #define OOP_ARCADE_2018_SHAREDLIBRARY_HPP
 
 #include <string>
-#include "SharedLibraryException.hpp"
+#include "LibraryLoaderException.hpp"
 
 class LibraryLoader {
 public:

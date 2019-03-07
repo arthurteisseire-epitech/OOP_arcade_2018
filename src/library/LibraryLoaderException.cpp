@@ -2,10 +2,10 @@
 ** EPITECH PROJECT, 2018
 ** OOP_arcade_2018
 ** File description:
-** SharedLibraryException.cpp
+** LibraryLoaderException.cpp
 */
 
-#include "SharedLibraryException.hpp"
+#include "LibraryLoaderException.hpp"
 
 SharedLibraryException::SharedLibraryException(const std::string &message) :
 	_message("SharedLibraryError: " + message)

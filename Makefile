@@ -6,17 +6,16 @@
 ##
 
 CC		=	g++
-
 DSRC	=	src/
 
-SRC		=	$(DSRC)/library/.cpp)	\
-
 MAIN	=	main.cpp
+SRC		=	$(DSRC)library/LibraryLoader.cpp		\
+			$(DSRC)library/LibraryException.cpp		\
 
-SRC_UT	=	$(DSRC)BasicTest.cpp				\
+SRC_UT	=	$(wildcard $(DSRC)*Test.cpp)				\
+			$(wildcard $(DSRC)/library/*Test.cpp)		\
 
 INC		=	-I$(DSRC)
-
 CXXFLAGS	+=  -Wall -Wextra $(INC)
 LDFLAGS	=	-lgtest -lgtest_main
 OBJ		=	$(SRC:.cpp=.o) $(MAIN:.cpp=.o)

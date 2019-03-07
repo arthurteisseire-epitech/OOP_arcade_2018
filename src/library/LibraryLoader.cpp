@@ -7,7 +7,7 @@
 
 #include <dlfcn.h>
 #include "LibraryLoader.hpp"
-#include "SharedLibraryException.hpp"
+#include "LibraryLoaderException.hpp"
 
 LibraryLoader::LibraryLoader() :
 	_lib(nullptr)

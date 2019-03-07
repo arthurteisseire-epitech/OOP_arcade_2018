@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2018
 ** OOP_arcade_2018
 ** File description:
-** SharedLibraryException.hpp
+** LibraryLoaderException.hpp
 */
 
 #ifndef OOP_ARCADE_2018_SHAREDLIBRARYEXCEPTION_HPP

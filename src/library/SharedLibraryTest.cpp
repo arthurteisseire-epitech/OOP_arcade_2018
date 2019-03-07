@@ -2,12 +2,12 @@
 ** EPITECH PROJECT, 2018
 ** OOP_arcade_2018
 ** File description:
-** SharedLibraryTest.cpp
+** LibraryLoaderException.cpp
 */
 
 #include "gtest/gtest.h"
 #include "LibraryLoader.hpp"
-#include "SharedLibraryException.hpp"
+#include "LibraryLoaderException.hpp"
 
 TEST(SharedLibrary, LoadError)
 {
