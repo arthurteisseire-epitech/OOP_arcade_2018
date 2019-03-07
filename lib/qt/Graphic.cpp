@@ -9,7 +9,7 @@
 #include <iostream>
 #include "Graphic.hpp"
 
-IGraphic *instantiate(int &ac, char *av[])
+IGraphic *entryPoint(int &ac, char *av[])
 {
 	return new Graphic(ac, av);
 }

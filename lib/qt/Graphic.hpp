@@ -26,4 +26,4 @@ private:
 	QWidget *_widget;
 };
 
-extern "C" COMMON_SO IGraphic *instantiate(int &ac, char *av[]);
+extern "C" COMMON_SO IGraphic *entryPoint(int &ac, char *av[]);

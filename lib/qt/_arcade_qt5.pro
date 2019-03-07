@@ -9,6 +9,6 @@ QT += widgets	\
 
 
 # Directories
-SOURCES += test.cpp
-HEADERS += test.hpp IGraphic.hpp
+SOURCES += Graphic.cpp
+HEADERS += Graphic.hpp IGraphic.hpp
 DEFINES += ARCADE

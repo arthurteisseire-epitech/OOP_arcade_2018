@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 	IGraphic *(*instantiate)(int &, char *[]);
 
 	loader.load("lib/qt/lib_arcade_qt5.so");
-	instantiate = (IGraphic *(*)(int &, char *[]))loader.findSym("instantiate");
+	instantiate = (IGraphic *(*)(int &, char *[]))loader.findSym("entryPoint");
 
 	IGraphic *g = instantiate(argc, argv);
 	g->createWidget();
