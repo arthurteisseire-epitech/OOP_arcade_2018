@@ -21,9 +21,11 @@ public:
 	int exec() override;
 	void processSprite() override;
 	void draw() override;
+	void createWindow() override;
 private:
-	QApplication *_app;
-	QWidget *_widget;
+	std::unique_ptr<QApplication> _app;
+	std::unique_ptr<QWidget> _centralWidget;
+	std::unique_ptr<QMainWindow> _window;
 };
 
 extern "C" COMMON_SO IGraphic *entryPoint(int &ac, char *av[]);

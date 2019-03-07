@@ -15,7 +15,9 @@ IGraphic *entryPoint(int &ac, char *av[])
 }
 
 Graphic::Graphic(int &ac, char *av[]) :
-	_app(new QApplication(ac, av))
+	_app(std::make_unique<QApplication>(ac, av)),
+	_centralWidget(std::make_unique<QWidget>()),
+	_window(std::make_unique<QMainWindow>())
 {
 }
 
@@ -26,11 +28,14 @@ int Graphic::exec()
 
 void Graphic::processSprite()
 {
-	_widget = new QWidget();
-	_widget->resize(100, 100);
 }
 
 void Graphic::draw()
 {
-	_widget->show();
+	_window->show();
+}
+
+void Graphic::createWindow()
+{
+	_window->setCentralWidget(_centralWidget.get());
 }
