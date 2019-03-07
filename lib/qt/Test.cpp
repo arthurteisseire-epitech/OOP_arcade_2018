@@ -6,11 +6,31 @@
 */
 
 #include <QtGui>
+#include <iostream>
 #include "Test.hpp"
 
-void showWidget()
+IGraphic *instantiate(int &ac, char *av[])
 {
-	auto widget = new QWidget();
-	widget->resize(100, 100);
-	widget->show();
+	return new App(ac, av);
+}
+
+App::App(int &ac, char *av[]) :
+	_app(new QApplication(ac, av))
+{
+}
+
+int App::exec()
+{
+        return _app->exec();
+}
+
+void App::createWidget()
+{
+	_widget = new QWidget();
+	_widget->resize(100, 100);
+}
+
+void App::showWidget()
+{
+	_widget->show();
 }

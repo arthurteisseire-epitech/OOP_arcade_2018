@@ -7,6 +7,7 @@
 
 #include <QtGui>
 #include <QtWidgets>
+#include "IGraphic.hpp"
 
 #if defined ARCADE
 #define TEST_COMMON_DLLSPEC Q_DECL_EXPORT
@@ -14,4 +15,15 @@
 #define TEST_COMMON_DLLSPEC Q_DECL_IMPORT
 #endif
 
-extern "C" TEST_COMMON_DLLSPEC void showWidget();
+class App : public IGraphic {
+public:
+	App(int &ac, char *av[]);
+	int exec() override;
+	void createWidget() override;
+	void showWidget() override;
+private:
+	QApplication *_app;
+	QWidget *_widget;
+};
+
+extern "C" TEST_COMMON_DLLSPEC IGraphic *instantiate(int &ac, char *av[]);

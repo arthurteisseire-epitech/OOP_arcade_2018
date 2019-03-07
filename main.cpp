@@ -7,15 +7,18 @@
 
 #include <QtWidgets/QApplication>
 #include "SharedLibrary.hpp"
+#include "IGraphic.hpp"
 
 int main(int argc, char *argv[])
 {
-	QApplication app(argc, argv);
 	SharedLibrary library;
-	void (*show)();
+	IGraphic *(*instantiate)(int &, char *[]);
 
-	library.load("lib/qt/libqt5.so");
-	show = (void (*)())library.sym("showWidget");
-	show();
-	return app.exec();
+	library.load("lib/qt/lib_arcade_qt5.so");
+	instantiate = (IGraphic *(*)(int &, char *[]))library.sym("instantiate");
+
+	IGraphic *g = instantiate(argc, argv);
+	g->createWidget();
+	g->showWidget();
+	return g->exec();
 }
