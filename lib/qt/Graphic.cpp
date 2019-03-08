@@ -5,8 +5,6 @@
 ** Test.cpp
 */
 
-#include <QtGui>
-#include <iostream>
 #include "Graphic.hpp"
 
 IGraphic *entryPoint(int &ac, char *av[])
@@ -15,22 +13,28 @@ IGraphic *entryPoint(int &ac, char *av[])
 }
 
 Graphic::Graphic(int &ac, char *av[]) :
-	_app(std::make_unique<QApplication>(ac, av)),
 	_centralWidget(std::make_unique<QWidget>()),
-	_window(std::make_unique<QMainWindow>())
+	_window(std::make_unique<QMainWindow>()),
+	_thread(&Graphic::startEventLoop, this, ac, av)
 {
 	_window->setCentralWidget(_centralWidget.get());
 }
 
-int Graphic::exec()
+Graphic::~Graphic()
 {
-        return QApplication::exec();
+	_thread.join();
 }
 
-void Graphic::processSprite()
+void Graphic::startEventLoop(int &ac, char **av)
+{
+	_app = std::make_unique<QApplication>(ac, av);
+	_app->exec();
+}
+
+void Graphic::processSprite(QColor color)
 {
 	QPalette palette;
-	palette.setColor(QPalette::Background, Qt::black);
+	palette.setColor(QPalette::Background, color);
 	_centralWidget->setAutoFillBackground(true);
 	_centralWidget->setPalette(palette);
 }
@@ -38,4 +42,9 @@ void Graphic::processSprite()
 void Graphic::draw()
 {
 	_window->show();
+}
+
+bool Graphic::isOpen()
+{
+        return _window->isActiveWindow();
 }

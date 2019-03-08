@@ -8,11 +8,14 @@
 #ifndef OOP_ARCADE_2018_IGRAPHIC_HPP
 #define OOP_ARCADE_2018_IGRAPHIC_HPP
 
+#include <QtGui/QColor>
+
 class IGraphic {
 public:
-	virtual int exec() = 0;
+	virtual ~IGraphic() = 0;
 	virtual void draw() = 0;
-	virtual void processSprite() = 0;
+	virtual void processSprite(QColor color) = 0;
+	virtual bool isOpen() = 0;
 };
 
 #endif
