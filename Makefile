@@ -162,32 +162,32 @@ graphicals/fast:
 	$(MAKE) -f CMakeFiles/graphicals.dir/build.make CMakeFiles/graphicals.dir/build
 .PHONY : graphicals/fast
 
-lib/qt/Graphic.o: lib/qt/Graphic.cpp.o
+lib/qt/QtGraphic.o: lib/qt/QtGraphic.cpp.o
 
-.PHONY : lib/qt/Graphic.o
+.PHONY : lib/qt/QtGraphic.o
 
 # target to build an object file
-lib/qt/Graphic.cpp.o:
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/lib/qt/Graphic.cpp.o
-.PHONY : lib/qt/Graphic.cpp.o
+lib/qt/QtGraphic.cpp.o:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/lib/qt/QtGraphic.cpp.o
+.PHONY : lib/qt/QtGraphic.cpp.o
 
-lib/qt/Graphic.i: lib/qt/Graphic.cpp.i
+lib/qt/QtGraphic.i: lib/qt/QtGraphic.cpp.i
 
-.PHONY : lib/qt/Graphic.i
+.PHONY : lib/qt/QtGraphic.i
 
 # target to preprocess a source file
-lib/qt/Graphic.cpp.i:
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/lib/qt/Graphic.cpp.i
-.PHONY : lib/qt/Graphic.cpp.i
+lib/qt/QtGraphic.cpp.i:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/lib/qt/QtGraphic.cpp.i
+.PHONY : lib/qt/QtGraphic.cpp.i
 
-lib/qt/Graphic.s: lib/qt/Graphic.cpp.s
+lib/qt/QtGraphic.s: lib/qt/QtGraphic.cpp.s
 
-.PHONY : lib/qt/Graphic.s
+.PHONY : lib/qt/QtGraphic.s
 
 # target to generate assembly for a file
-lib/qt/Graphic.cpp.s:
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/lib/qt/Graphic.cpp.s
-.PHONY : lib/qt/Graphic.cpp.s
+lib/qt/QtGraphic.cpp.s:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/lib/qt/QtGraphic.cpp.s
+.PHONY : lib/qt/QtGraphic.cpp.s
 
 main.o: main.cpp.o
 
@@ -309,9 +309,9 @@ help:
 	@echo "... re"
 	@echo "... arcade"
 	@echo "... graphicals"
-	@echo "... lib/qt/Graphic.o"
-	@echo "... lib/qt/Graphic.i"
-	@echo "... lib/qt/Graphic.s"
+	@echo "... lib/qt/QtGraphic.o"
+	@echo "... lib/qt/QtGraphic.i"
+	@echo "... lib/qt/QtGraphic.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
