@@ -15,14 +15,15 @@ int main(int argc, char *argv[])
 {
 	LibraryLoader loader(argc, argv);
 	IGraphic *g = loader.loadGraphicInstance("lib/qt/lib_arcade_qt5.so");
+	int i = 0;
 
-	for (int i = 0; i < 10; ++i) {
-		usleep(1000000);
+	usleep(1000000);
+        while (g->isOpen()) {
 		if (i % 2 == 0)
 			g->processSprite(Qt::black);
 		else
 			g->processSprite(Qt::white);
-		g->draw();
+		++i;
 	}
 	return 0;
 }

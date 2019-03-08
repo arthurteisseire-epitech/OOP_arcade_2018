@@ -44,5 +44,5 @@ void QtGraphic::draw()
 
 bool QtGraphic::isOpen()
 {
-	return _window->isActiveWindow();
+	return _window->isVisible();
 }
