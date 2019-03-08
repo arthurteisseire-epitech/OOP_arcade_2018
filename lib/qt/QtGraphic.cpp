@@ -2,27 +2,27 @@
 ** EPITECH PROJECT, 2018
 ** OOP_arcade_2018
 ** File description:
-** Test.cpp
+** QtGraphic.cpp
 */
 
-#include "Graphic.hpp"
+#include "QtGraphic.hpp"
 
 IGraphic *entryPoint(int &ac, char *av[])
 {
-	return new Graphic(ac, av);
+	return new QtGraphic(ac, av);
 }
 
-Graphic::Graphic(int &ac, char *av[])
+QtGraphic::QtGraphic(int &ac, char *av[])
 {
-	_thread = std::thread(&Graphic::init, this, &ac, av);
+	_thread = std::thread(&QtGraphic::init, this, &ac, av);
 }
 
-Graphic::~Graphic()
+QtGraphic::~QtGraphic()
 {
 	_thread.join();
 }
 
-void Graphic::init(int *ac, char **av)
+void QtGraphic::init(int *ac, char **av)
 {
 	_app = std::make_unique<QApplication>(*ac, av);
 	_centralWidget = std::make_unique<QWidget>();
@@ -31,7 +31,7 @@ void Graphic::init(int *ac, char **av)
 	_app->exec();
 }
 
-void Graphic::processSprite(QColor color)
+void QtGraphic::processSprite(QColor color)
 {
 	QPalette palette;
 	palette.setColor(QPalette::Background, color);
@@ -39,12 +39,12 @@ void Graphic::processSprite(QColor color)
 	_centralWidget->setPalette(palette);
 }
 
-void Graphic::draw()
+void QtGraphic::draw()
 {
 	_window->show();
 }
 
-bool Graphic::isOpen()
+bool QtGraphic::isOpen()
 {
 	return _window->isActiveWindow();
 }

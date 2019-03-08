@@ -2,12 +2,15 @@
 ** EPITECH PROJECT, 2018
 ** OOP_arcade_2018
 ** File description:
-** Test.hpp
+** QtGraphic.hpp
 */
 
 #include <QtGui>
 #include <QtWidgets>
 #include "IGraphic.hpp"
+
+#ifndef OOP_ARCADE_2018_QTGRAPHIC_HPP
+#define OOP_ARCADE_2018_QTGRAPHIC_HPP
 
 #if defined ARCADE
 #define COMMON_SO Q_DECL_EXPORT
@@ -15,10 +18,10 @@
 #define COMMON_SO Q_DECL_IMPORT
 #endif
 
-class Graphic : public IGraphic {
+class QtGraphic : public IGraphic {
 public:
-	Graphic(int &ac, char *av[]);
-	~Graphic();
+	QtGraphic(int &ac, char *av[]);
+	~QtGraphic();
 	void processSprite(QColor color) override;
 	void draw() override;
 	bool isOpen() override;
@@ -32,3 +35,5 @@ private:
 };
 
 extern "C" COMMON_SO IGraphic *entryPoint(int &ac, char *av[]);
+
+#endif
