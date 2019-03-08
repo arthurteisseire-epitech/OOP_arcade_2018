@@ -12,8 +12,9 @@
 TEST(SharedLibrary, LoadError)
 {
         int ac = 1;
-        char *av[] = {"hello"};
+        char *av[1];
         LibraryLoader lib(ac, av);
 
+        av[0] = const_cast<char *>(std::string("test").c_str());
         ASSERT_THROW(lib.load("qt"), LibraryLoaderException);
 }
