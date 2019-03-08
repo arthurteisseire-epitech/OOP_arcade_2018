@@ -23,7 +23,7 @@ public:
 	void draw() override;
 	bool isOpen() override;
 private:
-	void startEventLoop(int *ac, char **av);
+	void init(int *ac, char **av);
 
 	std::unique_ptr<QApplication> _app;
 	std::unique_ptr<QWidget> _centralWidget;

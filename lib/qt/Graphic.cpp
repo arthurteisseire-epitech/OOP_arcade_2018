@@ -14,7 +14,7 @@ IGraphic *entryPoint(int &ac, char *av[])
 
 Graphic::Graphic(int &ac, char *av[])
 {
-	_thread = std::thread(&Graphic::startEventLoop, this, &ac, av);
+	_thread = std::thread(&Graphic::init, this, &ac, av);
 }
 
 Graphic::~Graphic()
@@ -22,7 +22,7 @@ Graphic::~Graphic()
 	_thread.join();
 }
 
-void Graphic::startEventLoop(int *ac, char **av)
+void Graphic::init(int *ac, char **av)
 {
 	_app = std::make_unique<QApplication>(*ac, av);
 	_centralWidget = std::make_unique<QWidget>();
