@@ -18,12 +18,12 @@
 class Graphic : public IGraphic {
 public:
 	Graphic(int &ac, char *av[]);
-	~Graphic() override;
+	~Graphic();
 	void processSprite(QColor color) override;
 	void draw() override;
 	bool isOpen() override;
 private:
-	void startEventLoop(int &ac, char **av);
+	void startEventLoop(int *ac, char **av);
 
 	std::unique_ptr<QApplication> _app;
 	std::unique_ptr<QWidget> _centralWidget;

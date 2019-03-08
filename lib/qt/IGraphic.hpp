@@ -12,7 +12,6 @@
 
 class IGraphic {
 public:
-	virtual ~IGraphic() = 0;
 	virtual void draw() = 0;
 	virtual void processSprite(QColor color) = 0;
 	virtual bool isOpen() = 0;

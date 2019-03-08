@@ -17,12 +17,12 @@ int main(int argc, char *argv[])
 	IGraphic *g = loader.loadGraphicInstance("lib/qt/lib_arcade_qt5.so");
 
 	for (int i = 0; i < 10; ++i) {
+		usleep(1000000);
 		if (i % 2 == 0)
 			g->processSprite(Qt::black);
 		else
 			g->processSprite(Qt::white);
 		g->draw();
-		usleep(1000000);
 	}
 	return 0;
 }
