@@ -26,5 +26,15 @@ TEST(SharedLibrary, LoadGraphicInstanceError)
         LibraryLoader lib(ac, av);
 
         av[0] = const_cast<char *>(std::string("test").c_str());
-        ASSERT_THROW(lib.loadGraphicInstance("non existend lib"), LibraryLoaderException);
+        ASSERT_THROW(lib.loadGraphicInstance("non existent lib"), LibraryLoaderException);
+}
+
+TEST(SharedLibrary, FindSymWithoutLibError)
+{
+        int ac = 1;
+        char *av[1];
+        LibraryLoader lib(ac, av);
+
+        av[0] = const_cast<char *>(std::string("test").c_str());
+        ASSERT_THROW(lib.findSym("lib not yet loaded"), LibraryLoaderException);
 }

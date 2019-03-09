@@ -33,6 +33,8 @@ void LibraryLoader::load(const std::string &libname)
 
 void *LibraryLoader::findSym(const std::string &symname)
 {
+	if (_lib == nullptr)
+		throw LibraryLoaderException("No library loaded yet, can't load any symbol");
         return dlsym(_lib, symname.c_str());
 }
 
