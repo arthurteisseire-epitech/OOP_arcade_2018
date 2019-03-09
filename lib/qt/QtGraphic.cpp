@@ -12,30 +12,27 @@ IGraphic *entryPoint(int &ac, char *av[])
 	return new QtGraphic(ac, av);
 }
 
-QtGraphic::QtGraphic(int &ac, char *av[]) :
-	_thread(&QtGraphic::init, this, &ac, av)
+QtGraphic::QtGraphic(int &ac, char *av[])
 {
-}
-
-QtGraphic::~QtGraphic()
-{
-	_thread.join();
-}
-
-void QtGraphic::init(int *ac, char **av)
-{
-	_app = std::make_unique<QApplication>(*ac, av);
+	_app = std::make_unique<QApplication>(ac, av);
 	_centralWidget = std::make_unique<QWidget>();
 	_window = std::make_unique<QMainWindow>();
 	_window->setCentralWidget(_centralWidget.get());
 	_window->show();
-	_app->exec();
 }
 
-#include <iostream>
+QtGraphic::~QtGraphic()
+{
+	_app->quit();
+}
+
 void QtGraphic::processSprite(QColor color)
 {
-	std::cout << "hello" << std::endl;
+	QPalette p;
+
+	p.setColor(QPalette::Background, color);
+	_centralWidget->setAutoFillBackground(true);
+	_centralWidget->setPalette(p);
 }
 
 void QtGraphic::draw()
@@ -44,5 +41,6 @@ void QtGraphic::draw()
 
 bool QtGraphic::isOpen()
 {
+	QApplication::processEvents();
 	return _window->isVisible();
 }

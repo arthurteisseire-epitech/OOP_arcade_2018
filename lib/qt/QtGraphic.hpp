@@ -18,20 +18,17 @@
 #define COMMON_SO Q_DECL_IMPORT
 #endif
 
-class QtGraphic : public IGraphic {
+class QtGraphic : public IGraphic, public QObject {
 public:
 	QtGraphic(int &ac, char *av[]);
-	~QtGraphic();
-	void processSprite(QColor color) override;
+	~QtGraphic() override;
 	void draw() override;
 	bool isOpen() override;
+	void processSprite(QColor color) override;
 private:
-	void init(int *ac, char **av);
-
 	std::unique_ptr<QApplication> _app;
 	std::unique_ptr<QWidget> _centralWidget;
 	std::unique_ptr<QMainWindow> _window;
-	std::thread _thread;
 };
 
 extern "C" COMMON_SO IGraphic *entryPoint(int &ac, char *av[]);
