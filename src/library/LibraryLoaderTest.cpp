@@ -16,5 +16,15 @@ TEST(SharedLibrary, LoadError)
         LibraryLoader lib(ac, av);
 
         av[0] = const_cast<char *>(std::string("test").c_str());
-        ASSERT_THROW(lib.load("qt"), LibraryLoaderException);
+        ASSERT_THROW(lib.load("Not existent lib"), LibraryLoaderException);
+}
+
+TEST(SharedLibrary, LoadGraphicInstanceError)
+{
+        int ac = 1;
+        char *av[1];
+        LibraryLoader lib(ac, av);
+
+        av[0] = const_cast<char *>(std::string("test").c_str());
+        ASSERT_THROW(lib.loadGraphicInstance("non existend lib"), LibraryLoaderException);
 }
