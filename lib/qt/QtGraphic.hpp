@@ -23,7 +23,7 @@ public:
 	QtGraphic(int &ac, char *av[]);
 	void draw() override;
 	bool isOpen() override;
-	void processSprite(QColor color) override;
+	void processSprite() override;
 private:
 	std::unique_ptr<QApplication> _app;
 	std::unique_ptr<QWidget> _centralWidget;

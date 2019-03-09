@@ -27,13 +27,8 @@ QtGraphic::QtGraphic(int &ac, char *av[]) :
 	_window->show();
 }
 
-void QtGraphic::processSprite(QColor color)
+void QtGraphic::processSprite()
 {
-	QPalette p;
-
-	p.setColor(QPalette::Background, color);
-	_centralWidget->setAutoFillBackground(true);
-	_centralWidget->setPalette(p);
 }
 
 bool QtGraphic::isOpen()
