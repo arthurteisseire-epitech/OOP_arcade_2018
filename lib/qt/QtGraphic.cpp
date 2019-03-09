@@ -12,11 +12,11 @@ IGraphic *entryPoint(int &ac, char *av[])
 	return new QtGraphic(ac, av);
 }
 
-QtGraphic::QtGraphic(int &ac, char *av[])
+QtGraphic::QtGraphic(int &ac, char *av[]) :
+	_app(new QApplication(ac, av)),
+	_centralWidget(new QWidget()),
+	_window(new QMainWindow())
 {
-	_app = std::make_unique<QApplication>(ac, av);
-	_centralWidget = std::make_unique<QWidget>();
-	_window = std::make_unique<QMainWindow>();
 	_window->setCentralWidget(_centralWidget.get());
 	_window->show();
 }
