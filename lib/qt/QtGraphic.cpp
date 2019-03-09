@@ -5,6 +5,8 @@
 ** QtGraphic.cpp
 */
 
+#include <QPixmap>
+#include <iostream>
 #include "QtGraphic.hpp"
 
 IGraphic *entryPoint(int &ac, char *av[])
@@ -15,15 +17,14 @@ IGraphic *entryPoint(int &ac, char *av[])
 QtGraphic::QtGraphic(int &ac, char *av[]) :
 	_app(new QApplication(ac, av)),
 	_centralWidget(new QWidget()),
-	_window(new QMainWindow())
+	_window(new QMainWindow()),
+	_button(new QPushButton("Quit", _centralWidget.get()))
 {
+	QObject::connect(_button.get(), &QAbstractButton::clicked, this, [this] {
+		this->_window->setVisible(false);
+	});
 	_window->setCentralWidget(_centralWidget.get());
 	_window->show();
-}
-
-QtGraphic::~QtGraphic()
-{
-	_app->quit();
 }
 
 void QtGraphic::processSprite(QColor color)
@@ -35,12 +36,12 @@ void QtGraphic::processSprite(QColor color)
 	_centralWidget->setPalette(p);
 }
 
-void QtGraphic::draw()
-{
-}
-
 bool QtGraphic::isOpen()
 {
 	QApplication::processEvents();
 	return _window->isVisible();
+}
+
+void QtGraphic::draw()
+{
 }

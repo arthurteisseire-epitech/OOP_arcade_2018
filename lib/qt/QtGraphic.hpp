@@ -21,7 +21,6 @@
 class QtGraphic : public IGraphic, public QObject {
 public:
 	QtGraphic(int &ac, char *av[]);
-	~QtGraphic() override;
 	void draw() override;
 	bool isOpen() override;
 	void processSprite(QColor color) override;
@@ -29,6 +28,7 @@ private:
 	std::unique_ptr<QApplication> _app;
 	std::unique_ptr<QWidget> _centralWidget;
 	std::unique_ptr<QMainWindow> _window;
+	std::unique_ptr<QPushButton> _button;
 };
 
 extern "C" COMMON_SO IGraphic *entryPoint(int &ac, char *av[]);
