@@ -19,7 +19,6 @@ QtGraphic::QtGraphic(int &ac, char *av[]) :
 	_window(new QMainWindow()),
 	_button(new QPushButton("Quit", _centralWidget.get()))
 {
-	_centralWidget->setStyleSheet("image: url(assets/sample.jpg);");
 	QObject::connect(_button.get(), &QAbstractButton::clicked, this, [this] {
 		this->_window->setVisible(false);
 	});
@@ -27,8 +26,10 @@ QtGraphic::QtGraphic(int &ac, char *av[]) :
 	_window->show();
 }
 
-void QtGraphic::processSprite()
+void QtGraphic::processSprite(const ASprite &sprite)
 {
+	QString path = QString::fromStdString(sprite.getPath());
+	_centralWidget->setStyleSheet("image: url(" + path + ");");
 }
 
 bool QtGraphic::isOpen()

@@ -13,7 +13,7 @@
 class ASprite {
 public:
 	explicit ASprite(const std::string &filename);
-	const std::string &getFilename();
+	const std::string &getPath() const;
 private:
 	std::string _filename;
 };

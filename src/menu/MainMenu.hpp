@@ -13,7 +13,8 @@
 
 class MainMenu {
 public:
-	void loadSprites();
+	MainMenu();
+	const ASprite &getSprite(size_t idx);
 private:
 	std::vector<ASprite> _sprites;
 };

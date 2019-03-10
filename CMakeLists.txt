@@ -13,7 +13,7 @@ find_package(Qt5Widgets)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 
-include_directories(src/library lib/qt component src lib .)
+include_directories(src/library src/menu lib/qt component src lib .)
 
 
 file(GLOB_RECURSE main main.cpp)

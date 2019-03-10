@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/arthur/app/clion/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /usr/bin/cmake
 
 # The command to remove a file.
-RM = /home/arthur/app/clion/bin/cmake/linux/bin/cmake -E remove -f
+RM = /usr/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/arthur/epitech/2018/OOP/OOP_arcade_2018
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/home/arthur/app/clion/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -69,8 +69,8 @@ rebuild_cache/fast: rebuild_cache
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/home/arthur/app/clion/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/bin/cmake-gui -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -290,21 +290,6 @@ src/menu/MainMenu.s:
 	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/menu/MainMenu.s
 .PHONY : src/menu/MainMenu.s
 
-# target to build an object file
-src/menu/MainMenuTest.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/menu/MainMenuTest.o
-.PHONY : src/menu/MainMenuTest.o
-
-# target to preprocess a source file
-src/menu/MainMenuTest.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/menu/MainMenuTest.i
-.PHONY : src/menu/MainMenuTest.i
-
-# target to generate assembly for a file
-src/menu/MainMenuTest.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/menu/MainMenuTest.s
-.PHONY : src/menu/MainMenuTest.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -337,9 +322,6 @@ help:
 	@echo "... src/menu/MainMenu.o"
 	@echo "... src/menu/MainMenu.i"
 	@echo "... src/menu/MainMenu.s"
-	@echo "... src/menu/MainMenuTest.o"
-	@echo "... src/menu/MainMenuTest.i"
-	@echo "... src/menu/MainMenuTest.s"
 .PHONY : help
 
 

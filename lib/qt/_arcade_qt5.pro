@@ -8,7 +8,7 @@ QT += widgets	\
 
 
 # Directories
-SOURCES += QtGraphic.cpp
-HEADERS += QtGraphic.hpp ../IGraphic.hpp
-INCLUDEPATH += $$PWD/..
+SOURCES += QtGraphic.cpp ../../component/ASprite.cpp
+HEADERS += QtGraphic.hpp ../IGraphic.hpp ../../component/ASprite.hpp
+INCLUDEPATH += $$PWD/.. $$PWD/../../component
 DEFINES += ARCADE

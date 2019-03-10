@@ -12,7 +12,7 @@ ASprite::ASprite(const std::string &filename) :
 {
 }
 
-const std::string &ASprite::getFilename()
+const std::string &ASprite::getPath() const
 {
 	return _filename;
 }
