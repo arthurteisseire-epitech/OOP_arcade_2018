@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.11)
 project(arcade)
 
 add_compile_options(-Wall -Wextra)
@@ -8,7 +8,7 @@ find_package(Qt5Widgets)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 
-include_directories(src src/library lib/qt lib)
+include_directories(src src/library lib/qt lib .)
 
 file(GLOB_RECURSE core src/*.cpp main.cpp)
 file(GLOB_RECURSE lib lib/*.cpp)
