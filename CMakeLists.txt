@@ -33,7 +33,7 @@ target_link_libraries(${CMAKE_PROJECT_NAME} dl Qt5::Widgets)
 
 add_custom_target(
         tests_run
-        COMMAND make && ./units
+        COMMAND make && ./units && ./cov.sh
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
