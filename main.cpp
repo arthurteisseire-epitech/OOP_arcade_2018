@@ -14,9 +14,9 @@ int main(int argc, char *argv[])
 	LibraryLoader loader(argc, argv);
 	IGraphic *g = loader.loadGraphicInstance("lib/qt/lib_arcade_qt5.so");
 
-        while (g->isOpen()) {
+	while (g->isOpen()) {
 		g->processSprite();
-	        usleep(100);
+		usleep(100);
 	}
 	return 0;
 }
