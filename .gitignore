@@ -24,3 +24,5 @@ arcade
 # Qt
 lib/qt/Makefile
 .qmake.stash
+Testing/
+CTestTestfile.cmake
