@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.11)
 project(arcade)
 
-add_compile_options(-Wall -Wextra)
+add_compile_options(-Wall -Wextra --coverage)
+set(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} " --coverage")
 set(CMAKE_CXX_STANDARD 14)
 
 find_package(Qt5Widgets)
@@ -21,7 +22,7 @@ file(GLOB_RECURSE tests src/*Test.cpp)
 
 
 add_executable(units ${core} ${tests})
-target_link_libraries(units dl Qt5::Widgets gtest gtest_main)
+target_link_libraries(units dl Qt5::Widgets gtest gtest_main gcov)
 
 add_executable(${CMAKE_PROJECT_NAME} ${main} ${core})
 target_link_libraries(${CMAKE_PROJECT_NAME} dl Qt5::Widgets)
