@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/arthur/app/clion/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /usr/bin/cmake
 
 # The command to remove a file.
-RM = /home/arthur/app/clion/bin/cmake/linux/bin/cmake -E remove -f
+RM = /usr/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/arthur/epitech/2018/OOP/OOP_arcade_2018
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/home/arthur/app/clion/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -69,8 +69,8 @@ rebuild_cache/fast: rebuild_cache
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/home/arthur/app/clion/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -188,119 +188,71 @@ fclean/fast:
 	$(MAKE) -f CMakeFiles/fclean.dir/build.make CMakeFiles/fclean.dir/build
 .PHONY : fclean/fast
 
-main.o: main.cpp.o
-
+# target to build an object file
+main.o:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/main.o
 .PHONY : main.o
 
-# target to build an object file
-main.cpp.o:
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/main.cpp.o
-.PHONY : main.cpp.o
-
-main.i: main.cpp.i
-
+# target to preprocess a source file
+main.i:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/main.i
 .PHONY : main.i
 
-# target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/main.cpp.i
-.PHONY : main.cpp.i
-
-main.s: main.cpp.s
-
+# target to generate assembly for a file
+main.s:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/main.s
 .PHONY : main.s
 
-# target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/main.cpp.s
-.PHONY : main.cpp.s
-
-src/library/LibraryLoader.o: src/library/LibraryLoader.cpp.o
-
+# target to build an object file
+src/library/LibraryLoader.o:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoader.o
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoader.o
 .PHONY : src/library/LibraryLoader.o
 
-# target to build an object file
-src/library/LibraryLoader.cpp.o:
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoader.cpp.o
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoader.cpp.o
-.PHONY : src/library/LibraryLoader.cpp.o
-
-src/library/LibraryLoader.i: src/library/LibraryLoader.cpp.i
-
+# target to preprocess a source file
+src/library/LibraryLoader.i:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoader.i
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoader.i
 .PHONY : src/library/LibraryLoader.i
 
-# target to preprocess a source file
-src/library/LibraryLoader.cpp.i:
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoader.cpp.i
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoader.cpp.i
-.PHONY : src/library/LibraryLoader.cpp.i
-
-src/library/LibraryLoader.s: src/library/LibraryLoader.cpp.s
-
+# target to generate assembly for a file
+src/library/LibraryLoader.s:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoader.s
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoader.s
 .PHONY : src/library/LibraryLoader.s
 
-# target to generate assembly for a file
-src/library/LibraryLoader.cpp.s:
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoader.cpp.s
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoader.cpp.s
-.PHONY : src/library/LibraryLoader.cpp.s
-
-src/library/LibraryLoaderException.o: src/library/LibraryLoaderException.cpp.o
-
+# target to build an object file
+src/library/LibraryLoaderException.o:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoaderException.o
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoaderException.o
 .PHONY : src/library/LibraryLoaderException.o
 
-# target to build an object file
-src/library/LibraryLoaderException.cpp.o:
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoaderException.cpp.o
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoaderException.cpp.o
-.PHONY : src/library/LibraryLoaderException.cpp.o
-
-src/library/LibraryLoaderException.i: src/library/LibraryLoaderException.cpp.i
-
+# target to preprocess a source file
+src/library/LibraryLoaderException.i:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoaderException.i
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoaderException.i
 .PHONY : src/library/LibraryLoaderException.i
 
-# target to preprocess a source file
-src/library/LibraryLoaderException.cpp.i:
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoaderException.cpp.i
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoaderException.cpp.i
-.PHONY : src/library/LibraryLoaderException.cpp.i
-
-src/library/LibraryLoaderException.s: src/library/LibraryLoaderException.cpp.s
-
+# target to generate assembly for a file
+src/library/LibraryLoaderException.s:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoaderException.s
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoaderException.s
 .PHONY : src/library/LibraryLoaderException.s
 
-# target to generate assembly for a file
-src/library/LibraryLoaderException.cpp.s:
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoaderException.cpp.s
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoaderException.cpp.s
-.PHONY : src/library/LibraryLoaderException.cpp.s
-
-src/library/LibraryLoaderTest.o: src/library/LibraryLoaderTest.cpp.o
-
+# target to build an object file
+src/library/LibraryLoaderTest.o:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoaderTest.o
 .PHONY : src/library/LibraryLoaderTest.o
 
-# target to build an object file
-src/library/LibraryLoaderTest.cpp.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoaderTest.cpp.o
-.PHONY : src/library/LibraryLoaderTest.cpp.o
-
-src/library/LibraryLoaderTest.i: src/library/LibraryLoaderTest.cpp.i
-
+# target to preprocess a source file
+src/library/LibraryLoaderTest.i:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoaderTest.i
 .PHONY : src/library/LibraryLoaderTest.i
 
-# target to preprocess a source file
-src/library/LibraryLoaderTest.cpp.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoaderTest.cpp.i
-.PHONY : src/library/LibraryLoaderTest.cpp.i
-
-src/library/LibraryLoaderTest.s: src/library/LibraryLoaderTest.cpp.s
-
-.PHONY : src/library/LibraryLoaderTest.s
-
 # target to generate assembly for a file
-src/library/LibraryLoaderTest.cpp.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoaderTest.cpp.s
-.PHONY : src/library/LibraryLoaderTest.cpp.s
+src/library/LibraryLoaderTest.s:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoaderTest.s
+.PHONY : src/library/LibraryLoaderTest.s
 
 # Help Target
 help:
