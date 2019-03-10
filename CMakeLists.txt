@@ -13,21 +13,22 @@ find_package(Qt5Widgets)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 
-include_directories(src src/library lib/qt lib .)
+include_directories(src/library lib/qt component src lib .)
 
 
 file(GLOB_RECURSE main main.cpp)
 file(GLOB_RECURSE core src/*.cpp)
+file(GLOB_RECURSE component component/*.cpp)
 list(FILTER core EXCLUDE REGEX ".*Test.cpp$")
 
 file(GLOB_RECURSE lib lib/*.cpp)
 file(GLOB_RECURSE tests src/*Test.cpp)
 
 
-add_executable(units ${core} ${tests})
+add_executable(units ${core} ${tests} ${component})
 target_link_libraries(units dl Qt5::Widgets gtest gtest_main gcov)
 
-add_executable(${CMAKE_PROJECT_NAME} ${main} ${core})
+add_executable(${CMAKE_PROJECT_NAME} ${main} ${core} ${component})
 target_link_libraries(${CMAKE_PROJECT_NAME} dl Qt5::Widgets)
 
 add_custom_target(

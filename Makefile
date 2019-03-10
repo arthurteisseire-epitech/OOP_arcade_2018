@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/bin/cmake
+CMAKE_COMMAND = /home/arthur/app/clion/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /usr/bin/cmake -E remove -f
+RM = /home/arthur/app/clion/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/arthur/epitech/2018/OOP/OOP_arcade_2018
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/home/arthur/app/clion/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -69,8 +69,8 @@ rebuild_cache/fast: rebuild_cache
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/cmake-gui -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/home/arthur/app/clion/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -189,6 +189,24 @@ fclean/fast:
 .PHONY : fclean/fast
 
 # target to build an object file
+component/ASprite.o:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/component/ASprite.o
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/component/ASprite.o
+.PHONY : component/ASprite.o
+
+# target to preprocess a source file
+component/ASprite.i:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/component/ASprite.i
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/component/ASprite.i
+.PHONY : component/ASprite.i
+
+# target to generate assembly for a file
+component/ASprite.s:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/component/ASprite.s
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/component/ASprite.s
+.PHONY : component/ASprite.s
+
+# target to build an object file
 main.o:
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/main.o
 .PHONY : main.o
@@ -254,6 +272,39 @@ src/library/LibraryLoaderTest.s:
 	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoaderTest.s
 .PHONY : src/library/LibraryLoaderTest.s
 
+# target to build an object file
+src/menu/MainMenu.o:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/menu/MainMenu.o
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/menu/MainMenu.o
+.PHONY : src/menu/MainMenu.o
+
+# target to preprocess a source file
+src/menu/MainMenu.i:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/menu/MainMenu.i
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/menu/MainMenu.i
+.PHONY : src/menu/MainMenu.i
+
+# target to generate assembly for a file
+src/menu/MainMenu.s:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/menu/MainMenu.s
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/menu/MainMenu.s
+.PHONY : src/menu/MainMenu.s
+
+# target to build an object file
+src/menu/MainMenuTest.o:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/menu/MainMenuTest.o
+.PHONY : src/menu/MainMenuTest.o
+
+# target to preprocess a source file
+src/menu/MainMenuTest.i:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/menu/MainMenuTest.i
+.PHONY : src/menu/MainMenuTest.i
+
+# target to generate assembly for a file
+src/menu/MainMenuTest.s:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/menu/MainMenuTest.s
+.PHONY : src/menu/MainMenuTest.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -268,6 +319,9 @@ help:
 	@echo "... tests_run"
 	@echo "... edit_cache"
 	@echo "... fclean"
+	@echo "... component/ASprite.o"
+	@echo "... component/ASprite.i"
+	@echo "... component/ASprite.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
@@ -280,6 +334,12 @@ help:
 	@echo "... src/library/LibraryLoaderTest.o"
 	@echo "... src/library/LibraryLoaderTest.i"
 	@echo "... src/library/LibraryLoaderTest.s"
+	@echo "... src/menu/MainMenu.o"
+	@echo "... src/menu/MainMenu.i"
+	@echo "... src/menu/MainMenu.s"
+	@echo "... src/menu/MainMenuTest.o"
+	@echo "... src/menu/MainMenuTest.i"
+	@echo "... src/menu/MainMenuTest.s"
 .PHONY : help
 
 
