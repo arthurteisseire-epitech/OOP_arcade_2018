@@ -8,8 +8,6 @@
 #ifndef OOP_ARCADE_2018_IGRAPHIC_HPP
 #define OOP_ARCADE_2018_IGRAPHIC_HPP
 
-#include <QtGui/QColor>
-
 class IGraphic {
 public:
 	virtual void draw() = 0;

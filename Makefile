@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/bin/cmake
+CMAKE_COMMAND = /home/arthur/app/clion/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /usr/bin/cmake -E remove -f
+RM = /home/arthur/app/clion/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/arthur/epitech/2018/OOP/OOP_arcade_2018
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/home/arthur/app/clion/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -69,8 +69,8 @@ rebuild_cache/fast: rebuild_cache
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/cmake-gui -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/home/arthur/app/clion/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -162,33 +162,6 @@ graphicals/fast:
 	$(MAKE) -f CMakeFiles/graphicals.dir/build.make CMakeFiles/graphicals.dir/build
 .PHONY : graphicals/fast
 
-lib/qt/QtGraphic.o: lib/qt/QtGraphic.cpp.o
-
-.PHONY : lib/qt/QtGraphic.o
-
-# target to build an object file
-lib/qt/QtGraphic.cpp.o:
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/lib/qt/QtGraphic.cpp.o
-.PHONY : lib/qt/QtGraphic.cpp.o
-
-lib/qt/QtGraphic.i: lib/qt/QtGraphic.cpp.i
-
-.PHONY : lib/qt/QtGraphic.i
-
-# target to preprocess a source file
-lib/qt/QtGraphic.cpp.i:
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/lib/qt/QtGraphic.cpp.i
-.PHONY : lib/qt/QtGraphic.cpp.i
-
-lib/qt/QtGraphic.s: lib/qt/QtGraphic.cpp.s
-
-.PHONY : lib/qt/QtGraphic.s
-
-# target to generate assembly for a file
-lib/qt/QtGraphic.cpp.s:
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/lib/qt/QtGraphic.cpp.s
-.PHONY : lib/qt/QtGraphic.cpp.s
-
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -270,33 +243,6 @@ src/library/LibraryLoaderException.cpp.s:
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoaderException.cpp.s
 .PHONY : src/library/LibraryLoaderException.cpp.s
 
-src/library/LibraryLoaderTest.o: src/library/LibraryLoaderTest.cpp.o
-
-.PHONY : src/library/LibraryLoaderTest.o
-
-# target to build an object file
-src/library/LibraryLoaderTest.cpp.o:
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoaderTest.cpp.o
-.PHONY : src/library/LibraryLoaderTest.cpp.o
-
-src/library/LibraryLoaderTest.i: src/library/LibraryLoaderTest.cpp.i
-
-.PHONY : src/library/LibraryLoaderTest.i
-
-# target to preprocess a source file
-src/library/LibraryLoaderTest.cpp.i:
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoaderTest.cpp.i
-.PHONY : src/library/LibraryLoaderTest.cpp.i
-
-src/library/LibraryLoaderTest.s: src/library/LibraryLoaderTest.cpp.s
-
-.PHONY : src/library/LibraryLoaderTest.s
-
-# target to generate assembly for a file
-src/library/LibraryLoaderTest.cpp.s:
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoaderTest.cpp.s
-.PHONY : src/library/LibraryLoaderTest.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -309,9 +255,6 @@ help:
 	@echo "... re"
 	@echo "... arcade"
 	@echo "... graphicals"
-	@echo "... lib/qt/QtGraphic.o"
-	@echo "... lib/qt/QtGraphic.i"
-	@echo "... lib/qt/QtGraphic.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
@@ -321,9 +264,6 @@ help:
 	@echo "... src/library/LibraryLoaderException.o"
 	@echo "... src/library/LibraryLoaderException.i"
 	@echo "... src/library/LibraryLoaderException.s"
-	@echo "... src/library/LibraryLoaderTest.o"
-	@echo "... src/library/LibraryLoaderTest.i"
-	@echo "... src/library/LibraryLoaderTest.s"
 .PHONY : help
 
 
