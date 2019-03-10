@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.11)
 project(arcade)
 
 add_compile_options(-Wall -Wextra)
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 14)
 
 find_package(Qt5Widgets)
 
