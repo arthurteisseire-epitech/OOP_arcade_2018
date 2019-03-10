@@ -50,6 +50,6 @@ add_custom_target(
 
 add_custom_target(
         fclean
-        COMMAND make clean
+        COMMAND make clean && make distclean -C lib/qt
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
