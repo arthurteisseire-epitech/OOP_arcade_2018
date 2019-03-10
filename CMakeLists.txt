@@ -18,7 +18,7 @@ target_link_libraries(${CMAKE_PROJECT_NAME} gtest dl pthread Qt5::Widgets)
 
 add_custom_target(
         graphicals
-        ALL COMMAND make
+        ALL COMMAND qmake && make
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib/qt
 )
 
