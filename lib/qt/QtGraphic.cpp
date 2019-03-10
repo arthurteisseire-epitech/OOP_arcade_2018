@@ -19,6 +19,7 @@ QtGraphic::QtGraphic(int &ac, char *av[]) :
 	_window(new QMainWindow()),
 	_button(new QPushButton("Quit", _centralWidget.get()))
 {
+	_centralWidget->setStyleSheet("image: url(assets/sample.jpg);");
 	QObject::connect(_button.get(), &QAbstractButton::clicked, this, [this] {
 		this->_window->setVisible(false);
 	});
