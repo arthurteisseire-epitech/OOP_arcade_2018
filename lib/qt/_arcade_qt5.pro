@@ -5,10 +5,10 @@
 TEMPLATE = lib
 
 QT += widgets	\
-	charts \
 
 
 # Directories
 SOURCES += QtGraphic.cpp
-HEADERS += QtGraphic.hpp IGraphic.hpp
+HEADERS += QtGraphic.hpp ../IGraphic.hpp
+INCLUDEPATH += $$PWD/..
 DEFINES += ARCADE
