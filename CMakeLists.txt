@@ -16,9 +16,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 include_directories(src src/library lib/qt lib .)
 
 
-file(GLOB_RECURSE main src/main.cpp)
+file(GLOB_RECURSE main main.cpp)
 file(GLOB_RECURSE core src/*.cpp)
-list(FILTER core EXCLUDE REGEX ".*Test.cpp$|main.cpp")
+list(FILTER core EXCLUDE REGEX ".*Test.cpp$")
 
 file(GLOB_RECURSE lib lib/*.cpp)
 file(GLOB_RECURSE tests src/*Test.cpp)

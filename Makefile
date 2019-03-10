@@ -189,6 +189,21 @@ fclean/fast:
 .PHONY : fclean/fast
 
 # target to build an object file
+main.o:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/main.o
+.PHONY : main.o
+
+# target to preprocess a source file
+main.i:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/main.i
+.PHONY : main.i
+
+# target to generate assembly for a file
+main.s:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/main.s
+.PHONY : main.s
+
+# target to build an object file
 src/library/LibraryLoader.o:
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoader.o
 	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoader.o
@@ -239,21 +254,6 @@ src/library/LibraryLoaderTest.s:
 	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoaderTest.s
 .PHONY : src/library/LibraryLoaderTest.s
 
-# target to build an object file
-src/main.o:
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/main.o
-.PHONY : src/main.o
-
-# target to preprocess a source file
-src/main.i:
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/main.i
-.PHONY : src/main.i
-
-# target to generate assembly for a file
-src/main.s:
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/main.s
-.PHONY : src/main.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -268,6 +268,9 @@ help:
 	@echo "... tests_run"
 	@echo "... edit_cache"
 	@echo "... fclean"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 	@echo "... src/library/LibraryLoader.o"
 	@echo "... src/library/LibraryLoader.i"
 	@echo "... src/library/LibraryLoader.s"
@@ -277,9 +280,6 @@ help:
 	@echo "... src/library/LibraryLoaderTest.o"
 	@echo "... src/library/LibraryLoaderTest.i"
 	@echo "... src/library/LibraryLoaderTest.s"
-	@echo "... src/main.o"
-	@echo "... src/main.i"
-	@echo "... src/main.s"
 .PHONY : help
 
 
