@@ -20,9 +20,17 @@ file(GLOB_RECURSE lib lib/*.cpp)
 file(GLOB_RECURSE tests src/*Test.cpp)
 
 
+add_executable(units ${core} ${tests})
+target_link_libraries(units dl Qt5::Widgets gtest gtest_main)
+
 add_executable(${CMAKE_PROJECT_NAME} ${main} ${core})
 target_link_libraries(${CMAKE_PROJECT_NAME} dl Qt5::Widgets)
 
+add_custom_target(
+        tests_run
+        COMMAND make && ./units
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)
 
 add_custom_target(
         graphicals

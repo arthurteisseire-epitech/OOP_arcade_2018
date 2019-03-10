@@ -111,17 +111,30 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named fclean
+# Target rules for targets named arcade
 
 # Build rule for target.
-fclean: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 fclean
-.PHONY : fclean
+arcade: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 arcade
+.PHONY : arcade
 
 # fast build rule for target.
-fclean/fast:
-	$(MAKE) -f CMakeFiles/fclean.dir/build.make CMakeFiles/fclean.dir/build
-.PHONY : fclean/fast
+arcade/fast:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/build
+.PHONY : arcade/fast
+
+#=============================================================================
+# Target rules for targets named units
+
+# Build rule for target.
+units: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 units
+.PHONY : units
+
+# fast build rule for target.
+units/fast:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/build
+.PHONY : units/fast
 
 #=============================================================================
 # Target rules for targets named re
@@ -137,19 +150,6 @@ re/fast:
 .PHONY : re/fast
 
 #=============================================================================
-# Target rules for targets named arcade
-
-# Build rule for target.
-arcade: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 arcade
-.PHONY : arcade
-
-# fast build rule for target.
-arcade/fast:
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/build
-.PHONY : arcade/fast
-
-#=============================================================================
 # Target rules for targets named graphicals
 
 # Build rule for target.
@@ -161,6 +161,32 @@ graphicals: cmake_check_build_system
 graphicals/fast:
 	$(MAKE) -f CMakeFiles/graphicals.dir/build.make CMakeFiles/graphicals.dir/build
 .PHONY : graphicals/fast
+
+#=============================================================================
+# Target rules for targets named tests_run
+
+# Build rule for target.
+tests_run: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tests_run
+.PHONY : tests_run
+
+# fast build rule for target.
+tests_run/fast:
+	$(MAKE) -f CMakeFiles/tests_run.dir/build.make CMakeFiles/tests_run.dir/build
+.PHONY : tests_run/fast
+
+#=============================================================================
+# Target rules for targets named fclean
+
+# Build rule for target.
+fclean: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 fclean
+.PHONY : fclean
+
+# fast build rule for target.
+fclean/fast:
+	$(MAKE) -f CMakeFiles/fclean.dir/build.make CMakeFiles/fclean.dir/build
+.PHONY : fclean/fast
 
 main.o: main.cpp.o
 
@@ -196,6 +222,7 @@ src/library/LibraryLoader.o: src/library/LibraryLoader.cpp.o
 # target to build an object file
 src/library/LibraryLoader.cpp.o:
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoader.cpp.o
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoader.cpp.o
 .PHONY : src/library/LibraryLoader.cpp.o
 
 src/library/LibraryLoader.i: src/library/LibraryLoader.cpp.i
@@ -205,6 +232,7 @@ src/library/LibraryLoader.i: src/library/LibraryLoader.cpp.i
 # target to preprocess a source file
 src/library/LibraryLoader.cpp.i:
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoader.cpp.i
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoader.cpp.i
 .PHONY : src/library/LibraryLoader.cpp.i
 
 src/library/LibraryLoader.s: src/library/LibraryLoader.cpp.s
@@ -214,6 +242,7 @@ src/library/LibraryLoader.s: src/library/LibraryLoader.cpp.s
 # target to generate assembly for a file
 src/library/LibraryLoader.cpp.s:
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoader.cpp.s
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoader.cpp.s
 .PHONY : src/library/LibraryLoader.cpp.s
 
 src/library/LibraryLoaderException.o: src/library/LibraryLoaderException.cpp.o
@@ -223,6 +252,7 @@ src/library/LibraryLoaderException.o: src/library/LibraryLoaderException.cpp.o
 # target to build an object file
 src/library/LibraryLoaderException.cpp.o:
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoaderException.cpp.o
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoaderException.cpp.o
 .PHONY : src/library/LibraryLoaderException.cpp.o
 
 src/library/LibraryLoaderException.i: src/library/LibraryLoaderException.cpp.i
@@ -232,6 +262,7 @@ src/library/LibraryLoaderException.i: src/library/LibraryLoaderException.cpp.i
 # target to preprocess a source file
 src/library/LibraryLoaderException.cpp.i:
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoaderException.cpp.i
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoaderException.cpp.i
 .PHONY : src/library/LibraryLoaderException.cpp.i
 
 src/library/LibraryLoaderException.s: src/library/LibraryLoaderException.cpp.s
@@ -241,7 +272,35 @@ src/library/LibraryLoaderException.s: src/library/LibraryLoaderException.cpp.s
 # target to generate assembly for a file
 src/library/LibraryLoaderException.cpp.s:
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoaderException.cpp.s
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoaderException.cpp.s
 .PHONY : src/library/LibraryLoaderException.cpp.s
+
+src/library/LibraryLoaderTest.o: src/library/LibraryLoaderTest.cpp.o
+
+.PHONY : src/library/LibraryLoaderTest.o
+
+# target to build an object file
+src/library/LibraryLoaderTest.cpp.o:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoaderTest.cpp.o
+.PHONY : src/library/LibraryLoaderTest.cpp.o
+
+src/library/LibraryLoaderTest.i: src/library/LibraryLoaderTest.cpp.i
+
+.PHONY : src/library/LibraryLoaderTest.i
+
+# target to preprocess a source file
+src/library/LibraryLoaderTest.cpp.i:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoaderTest.cpp.i
+.PHONY : src/library/LibraryLoaderTest.cpp.i
+
+src/library/LibraryLoaderTest.s: src/library/LibraryLoaderTest.cpp.s
+
+.PHONY : src/library/LibraryLoaderTest.s
+
+# target to generate assembly for a file
+src/library/LibraryLoaderTest.cpp.s:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoaderTest.cpp.s
+.PHONY : src/library/LibraryLoaderTest.cpp.s
 
 # Help Target
 help:
@@ -250,11 +309,13 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
+	@echo "... arcade"
+	@echo "... units"
+	@echo "... re"
+	@echo "... graphicals"
+	@echo "... tests_run"
 	@echo "... edit_cache"
 	@echo "... fclean"
-	@echo "... re"
-	@echo "... arcade"
-	@echo "... graphicals"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
@@ -264,6 +325,9 @@ help:
 	@echo "... src/library/LibraryLoaderException.o"
 	@echo "... src/library/LibraryLoaderException.i"
 	@echo "... src/library/LibraryLoaderException.s"
+	@echo "... src/library/LibraryLoaderTest.o"
+	@echo "... src/library/LibraryLoaderTest.i"
+	@echo "... src/library/LibraryLoaderTest.s"
 .PHONY : help
 
 
