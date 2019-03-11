@@ -26,7 +26,7 @@ QtGraphic::QtGraphic(int &ac, char *av[]) :
 	_window->show();
 }
 
-void QtGraphic::processSprite(const ASprite &sprite)
+void QtGraphic::processSprite(const ISprite &sprite)
 {
 	QString path = QString::fromStdString(sprite.getPath());
 	_centralWidget->setStyleSheet("image: url(" + path + ");");

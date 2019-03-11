@@ -17,14 +17,14 @@
 #include <QtGui>
 #include <QtWidgets>
 #include "IGraphic.hpp"
-#include "ASprite.hpp"
+#include "ISprite.hpp"
 
 class QtGraphic : public IGraphic, public QObject {
 public:
 	QtGraphic(int &ac, char *av[]);
 	void draw() override;
 	bool isOpen() override;
-	void processSprite(const ASprite &sprite) override;
+	void processSprite(const ISprite &sprite) override;
 private:
 	std::unique_ptr<QApplication> _app;
 	std::unique_ptr<QWidget> _centralWidget;

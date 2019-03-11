@@ -12,7 +12,7 @@ MainMenu::MainMenu()
 	_sprites.emplace_back("assets/sample.jpg");
 }
 
-const ASprite &MainMenu::getSprite(size_t idx)
+const Sprite &MainMenu::getSprite(size_t idx)
 {
 	return _sprites[idx];
 }
