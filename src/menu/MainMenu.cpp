@@ -12,6 +12,7 @@ MainMenu::MainMenu()
 	_sprites.push_back(std::unique_ptr<Sprite>(new Sprite("assets/sample.jpg")));
 	_sprites.push_back(std::unique_ptr<Sprite>(new Sprite("assets/sample.jpg")));
 	_sprites.push_back(std::unique_ptr<Sprite>(new Sprite("assets/sample.jpg")));
+	setSpritesPosition();
 }
 
 const std::vector<std::unique_ptr<ISprite>> &MainMenu::getSprites()
