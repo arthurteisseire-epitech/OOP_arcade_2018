@@ -17,6 +17,7 @@ public:
 	~Sprite() override = default;
 	const std::string &getPath() const override;
 	void setPosition(const std::pair<float, float> &pos);
+	const std::pair<float, float> &getPosition() const override;
 private:
 	std::string _filename;
 	std::pair<float, float> _pos;

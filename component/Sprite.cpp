@@ -22,3 +22,8 @@ void Sprite::setPosition(const std::pair<float, float> &pos)
 {
 	_pos = pos;
 }
+
+const std::pair<float, float> &Sprite::getPosition() const
+{
+        return _pos;
+}

@@ -14,6 +14,7 @@ class ISprite {
 public:
 	virtual ~ISprite() = default;
 	virtual const std::string &getPath() const = 0;
+	virtual const std::pair<float, float> &getPosition() const = 0;
 };
 
 #endif
