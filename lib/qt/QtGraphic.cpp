@@ -28,8 +28,20 @@ QtGraphic::QtGraphic(int &ac, char *av[]) :
 
 void QtGraphic::processSprite(const ISprite &sprite)
 {
-	QString path = QString::fromStdString(sprite.getPath());
-	_centralWidget->setStyleSheet("image: url(" + path + ");");
+	try {
+		_sprites.at(&sprite);
+	} catch (const std::out_of_range &e) {
+		auto widget = new QWidget();
+		auto pos = sprite.getPosition();
+		QString path = QString::fromStdString(sprite.getPath());
+
+		widget->setParent(_centralWidget.get());
+		widget->setGeometry((int)pos.first, (int)pos.second, 100, 300);
+		widget->setStyleSheet("image: url(" + path + ");");
+		widget->show();
+
+		_sprites[&sprite] = std::unique_ptr<QWidget>(widget);
+	}
 }
 
 bool QtGraphic::isOpen()

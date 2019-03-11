@@ -22,6 +22,7 @@ const std::vector<std::unique_ptr<ISprite>> &MainMenu::getSprites()
 
 void MainMenu::setSpritesPosition()
 {
-	dynamic_cast<Sprite *>(_sprites[1].get())->setPosition(std::pair<float, float>(10, 10));
-	dynamic_cast<Sprite *>(_sprites[2].get())->setPosition(std::pair<float, float>(20, 20));
+	dynamic_cast<Sprite *>(_sprites[0].get())->setPosition(std::pair<float, float>(200, 300));
+	dynamic_cast<Sprite *>(_sprites[1].get())->setPosition(std::pair<float, float>(200, 500));
+	dynamic_cast<Sprite *>(_sprites[2].get())->setPosition(std::pair<float, float>(200, 700));
 }
