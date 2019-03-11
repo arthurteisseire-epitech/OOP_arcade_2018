@@ -9,14 +9,16 @@
 #define ARCADE_MAINMENU_HPP
 
 #include <vector>
+#include <memory>
+#include "ISprite.hpp"
 #include "Sprite.hpp"
 
 class MainMenu {
 public:
 	MainMenu();
-	const Sprite &getSprite(size_t idx);
+	const std::vector<std::unique_ptr<ISprite>> &getSprites();
 private:
-	std::vector<Sprite> _sprites;
+	std::vector<std::unique_ptr<ISprite>> _sprites;
 };
 
 #endif

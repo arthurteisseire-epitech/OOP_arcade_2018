@@ -9,10 +9,10 @@
 
 MainMenu::MainMenu()
 {
-	_sprites.emplace_back("assets/sample.jpg");
+	_sprites.push_back(std::unique_ptr<Sprite>(new Sprite("assets/sample.jpg")));
 }
 
-const Sprite &MainMenu::getSprite(size_t idx)
+const std::vector<std::unique_ptr<ISprite>> &MainMenu::getSprites()
 {
-	return _sprites[idx];
+        return _sprites;
 }

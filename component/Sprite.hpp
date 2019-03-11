@@ -14,6 +14,7 @@
 class Sprite : public ISprite {
 public:
 	explicit Sprite(const std::string &filename);
+	~Sprite() override = default;
 	const std::string &getPath() const override;
 private:
 	std::string _filename;

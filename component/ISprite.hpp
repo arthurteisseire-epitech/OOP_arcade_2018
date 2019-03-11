@@ -12,6 +12,7 @@
 
 class ISprite {
 public:
+	virtual ~ISprite() = default;
 	virtual const std::string &getPath() const = 0;
 };
 
