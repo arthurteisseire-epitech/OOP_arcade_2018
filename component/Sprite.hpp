@@ -17,10 +17,13 @@ public:
 	~Sprite() override = default;
 	const std::string &getPath() const override;
 	void setPosition(const std::pair<float, float> &pos);
+	void setSize(const std::pair<float, float> &size);
 	const std::pair<float, float> &getPosition() const override;
+	const std::pair<float, float> &getSize() const override;
 private:
 	std::string _filename;
 	std::pair<float, float> _pos;
+	std::pair<float, float> _size;
 };
 
 #endif

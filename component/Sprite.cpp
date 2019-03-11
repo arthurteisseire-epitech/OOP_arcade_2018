@@ -9,7 +9,8 @@
 
 Sprite::Sprite(const std::string &filename) :
 	_filename(filename),
-	_pos(0, 0)
+	_pos(0, 0),
+	_size(0, 0)
 {
 }
 
@@ -25,5 +26,15 @@ void Sprite::setPosition(const std::pair<float, float> &pos)
 
 const std::pair<float, float> &Sprite::getPosition() const
 {
-        return _pos;
+	return _pos;
+}
+
+void Sprite::setSize(const std::pair<float, float> &size)
+{
+	_size = size;
+}
+
+const std::pair<float, float> &Sprite::getSize() const
+{
+	return _size;
 }

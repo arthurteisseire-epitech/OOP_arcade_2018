@@ -33,10 +33,11 @@ void QtGraphic::processSprite(const ISprite &sprite)
 	} catch (const std::out_of_range &e) {
 		auto widget = new QWidget();
 		auto pos = sprite.getPosition();
+		auto size = sprite.getSize();
 		QString path = QString::fromStdString(sprite.getPath());
 
 		widget->setParent(_centralWidget.get());
-		widget->setGeometry((int)pos.first, (int)pos.second, 100, 300);
+		widget->setGeometry((int)pos.first, (int)pos.second, (int)size.first, (int)size.second);
 		widget->setStyleSheet("image: url(" + path + ");");
 		widget->show();
 

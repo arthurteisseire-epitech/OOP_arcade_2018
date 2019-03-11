@@ -17,8 +17,9 @@ class MainMenu {
 public:
 	MainMenu();
 	const std::vector<std::unique_ptr<ISprite>> &getSprites();
-	void setSpritesPosition();
 private:
+	void setSpritesPosition();
+	void setSpritesSize();
 	std::vector<std::unique_ptr<ISprite>> _sprites;
 };
 
