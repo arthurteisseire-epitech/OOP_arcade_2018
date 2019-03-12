@@ -27,6 +27,7 @@ QtGraphic::QtGraphic(int &ac, char *av[]) :
 
 void QtGraphic::processSprite(const ISprite &sprite)
 {
+	_app->setActiveWindow(_window.get());
 	_centralWidget->processSprite(sprite);
 	_centralWidget->repaint();
 }

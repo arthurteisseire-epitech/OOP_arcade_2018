@@ -6,16 +6,21 @@
 */
 
 #include <QPainter>
+#include <QtWidgets/QApplication>
 #include "Widget.hpp"
 
 void Widget::paintEvent(__attribute((unused)) QPaintEvent *e)
 {
 	QPainter painter(this);
+	std::pair<int, int> pos;
+	QRect winRect = QApplication::activeWindow()->geometry();
 
-	for (auto &_sprite : _sprites)
-		painter.drawPixmap((int)_sprite.first->getPosition().first,
-		(int)_sprite.first->getPosition().second,
-		*_sprite.second);
+	for (auto &_sprite : _sprites) {
+		pos.first = (int)(winRect.width() * _sprite.first->getPosition().first);
+		pos.second = (int)(winRect.height() * _sprite.first->getPosition().second);
+
+		painter.drawPixmap(pos.first, pos.second, *_sprite.second);
+	}
 }
 
 void Widget::processSprite(const ISprite &sprite)
