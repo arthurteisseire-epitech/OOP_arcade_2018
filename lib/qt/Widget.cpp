@@ -26,8 +26,7 @@ void Widget::processSprite(const ISprite &sprite)
 	try {
 		pixmap = _sprites.at(&sprite).get();
 	} catch (const std::out_of_range &e) {
-		QString path = QString::fromStdString(sprite.getPath());
-		pixmap = new QPixmap(path);
+		pixmap = new QPixmap(QString::fromStdString(sprite.getPath()));
 		_sprites[&sprite] = std::unique_ptr<QPixmap>(pixmap);
 	}
 	*pixmap = pixmap->scaled((int)size.first, (int)size.second, Qt::IgnoreAspectRatio);
