@@ -5,7 +5,6 @@
 ** QtGraphic.cpp
 */
 
-#include <QPixmap>
 #include "QtGraphic.hpp"
 
 IGraphic *entryPoint(int &ac, char *av[])

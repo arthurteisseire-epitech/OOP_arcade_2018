@@ -8,7 +8,7 @@
 #include <QPainter>
 #include "Widget.hpp"
 
-void Widget::paintEvent(QPaintEvent *e)
+void Widget::paintEvent(__attribute((unused)) QPaintEvent *e)
 {
 	QPainter painter(this);
 
@@ -23,12 +23,11 @@ void Widget::processSprite(const ISprite &sprite)
 	try {
 		_sprites.at(&sprite);
 	} catch (const std::out_of_range &e) {
-		auto pixmap = new QPixmap("assets/sample.jpg");
-		auto size = sprite.getSize();
 		QString path = QString::fromStdString(sprite.getPath());
+		auto size = sprite.getSize();
+		auto pixmap = new QPixmap(path);
 
-		pixmap->load(path);
-		pixmap->scaled((int)size.first, (int)size.second, Qt::KeepAspectRatio);
+		*pixmap = pixmap->scaled((int)size.first, (int)size.second, Qt::IgnoreAspectRatio, Qt::FastTransformation);
 		_sprites[&sprite] = std::unique_ptr<QPixmap>(pixmap);
 	}
 }
