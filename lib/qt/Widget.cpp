@@ -21,6 +21,7 @@ void Widget::paintEvent(__attribute((unused)) QPaintEvent *e)
 void Widget::processSprite(const ISprite &sprite)
 {
 	QPixmap *pixmap;
+	auto size = sprite.getSize();
 
 	try {
 		pixmap = _sprites.at(&sprite).get();
@@ -29,6 +30,5 @@ void Widget::processSprite(const ISprite &sprite)
 		pixmap = new QPixmap(path);
 		_sprites[&sprite] = std::unique_ptr<QPixmap>(pixmap);
 	}
-	auto size = sprite.getSize();
-	*pixmap = pixmap->scaled((int)size.first, (int)size.second, Qt::IgnoreAspectRatio, Qt::FastTransformation);
+	*pixmap = pixmap->scaled((int)size.first, (int)size.second, Qt::IgnoreAspectRatio);
 }
