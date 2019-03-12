@@ -31,7 +31,6 @@ private:
 	std::unique_ptr<Widget> _centralWidget;
 	std::unique_ptr<QMainWindow> _window;
 	std::unique_ptr<QPushButton> _button;
-//	std::map<const ISprite *, std::unique_ptr<QPixmap>> _sprites;
 };
 
 extern "C" COMMON_SO IGraphic *entryPoint(int &ac, char *av[]);
