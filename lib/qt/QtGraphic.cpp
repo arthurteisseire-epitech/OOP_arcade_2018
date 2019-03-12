@@ -15,7 +15,7 @@ IGraphic *entryPoint(int &ac, char *av[])
 
 QtGraphic::QtGraphic(int &ac, char *av[]) :
 	_app(new QApplication(ac, av)),
-	_centralWidget(new QWidget()),
+	_centralWidget(new Widget()),
 	_window(new QMainWindow()),
 	_button(new QPushButton("Quit", _centralWidget.get()))
 {
@@ -28,21 +28,8 @@ QtGraphic::QtGraphic(int &ac, char *av[]) :
 
 void QtGraphic::processSprite(const ISprite &sprite)
 {
-	try {
-		_sprites.at(&sprite);
-	} catch (const std::out_of_range &e) {
-		auto widget = new QWidget();
-		auto pos = sprite.getPosition();
-		auto size = sprite.getSize();
-		QString path = QString::fromStdString(sprite.getPath());
-
-		widget->setParent(_centralWidget.get());
-		widget->setGeometry((int)pos.first, (int)pos.second, (int)size.first, (int)size.second);
-		widget->setStyleSheet("image: url(" + path + ");");
-		widget->show();
-
-		_sprites[&sprite] = std::unique_ptr<QWidget>(widget);
-	}
+	_centralWidget->processSprite(sprite);
+	_centralWidget->repaint();
 }
 
 bool QtGraphic::isOpen()
