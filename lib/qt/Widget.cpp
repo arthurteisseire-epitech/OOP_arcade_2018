@@ -13,11 +13,11 @@ void Widget::paintEvent(__attribute((unused)) QPaintEvent *e)
 {
 	QPainter painter(this);
 	std::pair<int, int> pos;
-	QRect winRect = QApplication::activeWindow()->geometry();
+	QSize winSize = QApplication::activeWindow()->size();
 
 	for (auto &_sprite : _sprites) {
-		pos.first = (int)(winRect.width() * _sprite.first->getPosition().first);
-		pos.second = (int)(winRect.height() * _sprite.first->getPosition().second);
+		pos.first = (int)(winSize.width() * _sprite.first->getPosition().first);
+		pos.second = (int)(winSize.height() * _sprite.first->getPosition().second);
 
 		painter.drawPixmap(pos.first, pos.second, *_sprite.second);
 	}
