@@ -20,14 +20,15 @@ void Widget::paintEvent(__attribute((unused)) QPaintEvent *e)
 
 void Widget::processSprite(const ISprite &sprite)
 {
+	QPixmap *pixmap;
+
 	try {
-		_sprites.at(&sprite);
+		pixmap = _sprites.at(&sprite).get();
 	} catch (const std::out_of_range &e) {
 		QString path = QString::fromStdString(sprite.getPath());
-		auto size = sprite.getSize();
-		auto pixmap = new QPixmap(path);
-
-		*pixmap = pixmap->scaled((int)size.first, (int)size.second, Qt::IgnoreAspectRatio, Qt::FastTransformation);
+		pixmap = new QPixmap(path);
 		_sprites[&sprite] = std::unique_ptr<QPixmap>(pixmap);
 	}
+	auto size = sprite.getSize();
+	*pixmap = pixmap->scaled((int)size.first, (int)size.second, Qt::IgnoreAspectRatio, Qt::FastTransformation);
 }
