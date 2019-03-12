@@ -30,10 +30,10 @@ void MainMenu::setSpritesPosition()
 
 void MainMenu::setSpritesSize()
 {
-	float height = 100;
-	float width = 200;
+	float width = 0.6;
+	float height = 0.1;
 
-	dynamic_cast<Sprite *>(_sprites[0].get())->setSize(std::pair<float, float>(height, width));
-	dynamic_cast<Sprite *>(_sprites[1].get())->setSize(std::pair<float, float>(height, width));
-	dynamic_cast<Sprite *>(_sprites[2].get())->setSize(std::pair<float, float>(height, width));
+	dynamic_cast<Sprite *>(_sprites[0].get())->setSize(std::pair<float, float>(width, height));
+	dynamic_cast<Sprite *>(_sprites[1].get())->setSize(std::pair<float, float>(width, height));
+	dynamic_cast<Sprite *>(_sprites[2].get())->setSize(std::pair<float, float>(width, height));
 }
