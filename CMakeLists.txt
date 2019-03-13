@@ -13,7 +13,7 @@ find_package(Qt5Widgets)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 
-include_directories(src/library src/menu lib/qt component src lib games .)
+include_directories(src/library src/menu lib/qt src lib games component .)
 
 
 file(GLOB_RECURSE main main.cpp)
@@ -31,7 +31,7 @@ add_executable(units ${core} ${tests} ${component} ${games})
 target_link_libraries(units dl Qt5::Widgets gtest gtest_main gcov)
 
 add_executable(${CMAKE_PROJECT_NAME} ${main} ${core} ${component})
-target_link_libraries(${CMAKE_PROJECT_NAME} dl Qt5::Widgets)
+target_link_libraries(${CMAKE_PROJECT_NAME} dl)
 
 add_custom_target(
         tests_run
