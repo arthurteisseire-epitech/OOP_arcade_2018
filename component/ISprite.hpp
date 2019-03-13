@@ -9,10 +9,11 @@
 #define ARCADE_ISPRITE_HPP
 
 #include <string>
+#include "IComponent.hpp"
 
-class ISprite {
+class ISprite : public IComponent {
 public:
-	virtual ~ISprite() = default;
+	~ISprite() override = default;
 	virtual const std::string &getPath() const = 0;
 	virtual const std::pair<float, float> &getPosition() const = 0;
 	virtual const std::pair<float, float> &getSize() const = 0;

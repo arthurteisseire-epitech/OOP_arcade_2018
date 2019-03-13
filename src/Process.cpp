@@ -7,8 +7,18 @@
 
 #include "Process.hpp"
 
-void Process::sprites(const std::vector<std::unique_ptr<ISprite>> &sprites, IGraphic *graphic)
+void Process::sprites(const std::vector<std::reference_wrapper<ISprite>> sprites, IGraphic *graphic)
 {
-	for (auto &sprite : sprites)
-		graphic->processSprite(*sprite);
+	for (auto sprite : sprites)
+		graphic->processSprite(sprite);
+}
+
+void Process::all(std::vector<std::reference_wrapper<IComponent>> components, IGraphic *graphic)
+{
+	std::vector<std::reference_wrapper<ISprite>> sprites_vec;
+
+	for (auto sprite : components)
+		if (sprite.get().getType() == SPRITE)
+			sprites_vec.emplace_back(std::reference_wrapper<ISprite>(dynamic_cast<ISprite &>(sprite.get())));
+	sprites(sprites_vec, graphic);
 }

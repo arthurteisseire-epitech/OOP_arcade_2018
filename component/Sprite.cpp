@@ -38,3 +38,8 @@ const std::pair<float, float> &Sprite::getSize() const
 {
 	return _size;
 }
+
+ComponentType Sprite::getType() const
+{
+	return SPRITE;
+}
