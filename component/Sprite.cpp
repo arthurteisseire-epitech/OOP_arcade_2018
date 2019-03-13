@@ -43,3 +43,13 @@ ComponentType Sprite::getType() const
 {
 	return SPRITE;
 }
+
+void Sprite::moveUp(float y)
+{
+	_pos.second -= y;
+}
+
+void Sprite::moveDown(float y)
+{
+	_pos.second += y;
+}

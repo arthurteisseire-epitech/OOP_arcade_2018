@@ -5,10 +5,12 @@
 ** MainMenu.cpp
 */
 
+#include <algorithm>
+#include "Key.hpp"
 #include "MainMenu.hpp"
 
 arc::MainMenu::MainMenu() :
-	_focus(1)
+	_focus(0)
 {
 	_spriteFocus = std::unique_ptr<Sprite>(new Sprite("assets/focus.png"));
 	_buttons.push_back(std::unique_ptr<Sprite>(new Sprite("assets/sample.jpg")));
@@ -47,18 +49,26 @@ void arc::MainMenu::setSpritesSize()
 	_buttons[2]->setSize(std::pair<float, float>(width, height));
 }
 
+void arc::MainMenu::processEvents(const std::vector<Key> &vector)
+{
+	if (std::find(vector.begin(), vector.end(), DOWN) != vector.end())
+		moveFocusDown();
+	if (std::find(vector.begin(), vector.end(), UP) != vector.end())
+		moveFocusUp();
+}
+
 void arc::MainMenu::moveFocusDown()
 {
-	if (_focus != 0) {
-		--_focus;
-		_spriteFocus->setPosition(_buttons[_focus]->getPosition());
+	if (_focus != _buttons.size() - 1) {
+		++_focus;
+		_spriteFocus->moveDown(0.2);
 	}
 }
 
 void arc::MainMenu::moveFocusUp()
 {
-	if (_focus != _buttons.size() - 1) {
-		++_focus;
-		_spriteFocus->setPosition(_buttons[_focus]->getPosition());
+	if (_focus != 0) {
+		--_focus;
+		_spriteFocus->moveUp(0.2);
 	}
 }

@@ -20,6 +20,7 @@ namespace arc {
 		std::vector<std::reference_wrapper<ISprite>> getSprites();
 		void moveFocusDown();
 		void moveFocusUp();
+		void processEvents(const std::vector<Key> &vector);
 	private:
 		void setSpritesPosition();
 		void setSpritesSize();

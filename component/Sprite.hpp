@@ -22,6 +22,8 @@ public:
 	void setSize(const std::pair<float, float> &size);
 	const std::pair<float, float> &getPosition() const override;
 	const std::pair<float, float> &getSize() const override;
+	void moveUp(float y);
+	void moveDown(float y);
 private:
 	std::string _filename;
 	std::pair<float, float> _pos;
