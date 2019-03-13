@@ -32,7 +32,6 @@ namespace arc {
 	private:
 		std::unique_ptr<QApplication> _app;
 		std::unique_ptr<Widget> _centralWidget;
-		std::unique_ptr<QPushButton> _button;
 	};
 }
 
