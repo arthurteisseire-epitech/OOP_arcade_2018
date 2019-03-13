@@ -1,6 +1,7 @@
 # General
 *.o
 *.a
+*~
 
 # Unit Tests
 *.gcno
