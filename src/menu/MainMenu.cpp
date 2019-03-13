@@ -9,7 +9,7 @@
 
 arc::MainMenu::MainMenu()
 {
-	_sprites.push_back(std::unique_ptr<Sprite>(new Sprite("assets/sample.jpg")));
+	_sprites.push_back(std::unique_ptr<Sprite>(new Sprite("assets/focus.jpeg")));
 	_sprites.push_back(std::unique_ptr<Sprite>(new Sprite("assets/sample.jpg")));
 	_sprites.push_back(std::unique_ptr<Sprite>(new Sprite("assets/sample.jpg")));
 	setSpritesPosition();

@@ -31,6 +31,7 @@ int main(int argc, char *argv[])
 	while (graphic->isOpen()) {
 		arc::Process::all(game->getComponents(), graphic);
 		arc::Process::sprites(mainMenu.getSprites(), graphic);
+		graphic->processEvents();
 		usleep(100);
 	}
 	return 0;

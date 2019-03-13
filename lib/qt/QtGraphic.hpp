@@ -29,9 +29,10 @@ namespace arc {
 		bool isOpen() override;
 		void processSprite(const ISprite &sprite) override;
 		const std::vector<Key> &getKeys() const override;
+		void processEvents() override;
 	private:
 		std::unique_ptr<QApplication> _app;
-		std::unique_ptr<Widget> _centralWidget;
+		std::unique_ptr<Widget> _widget;
 	};
 }
 

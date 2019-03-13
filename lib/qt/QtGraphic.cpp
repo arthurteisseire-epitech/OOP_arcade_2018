@@ -14,21 +14,21 @@ IGraphic *entryPoint(int &ac, char *av[])
 
 arc::QtGraphic::QtGraphic(int &ac, char *av[]) :
 	_app(new QApplication(ac, av)),
-	_centralWidget(new Widget())
+	_widget(new Widget())
 {
-	_centralWidget->show();
+	_widget->show();
 }
 
 void arc::QtGraphic::processSprite(const ISprite &sprite)
 {
-	_centralWidget->processSprite(sprite);
-	_centralWidget->repaint();
+	_widget->processSprite(sprite);
+	_widget->repaint();
 }
 
 bool arc::QtGraphic::isOpen()
 {
 	QApplication::processEvents();
-	return _centralWidget->isVisible();
+	return _widget->isVisible();
 }
 
 void arc::QtGraphic::draw()
@@ -37,5 +37,10 @@ void arc::QtGraphic::draw()
 
 const std::vector<Key> &arc::QtGraphic::getKeys() const
 {
-        return _centralWidget->getKeys();
+        return _widget->getKeys();
+}
+
+void arc::QtGraphic::processEvents()
+{
+	QApplication::processEvents();
 }
