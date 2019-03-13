@@ -9,7 +9,7 @@
 #define OOP_ARCADE_2018_LIBRARYLOADER_HPP
 
 #include <string>
-#include <IGraphic.hpp>
+#include "IGraphic.hpp"
 #include "LibraryLoaderException.hpp"
 
 class LibraryLoader {
@@ -18,8 +18,19 @@ public:
 	~LibraryLoader();
 	void load(const std::string &libname);
 	void *findSym(const std::string &symname);
-	IGraphic *loadGraphicInstance(std::string libname);
+
+	template <typename T>
+	T *loadInstance(const std::string &libname)
+	{
+		T *(*instantiate)(int &, char *[]);
+
+		load(libname);
+		instantiate = (T *(*)(int &, char *[]))findSym("entryPoint");
+		return instantiate(_argc, _argv);
+	}
+
 private:
+	bool check_file_exists(const std::string &name) const;
 	void *_lib;
 	int _argc;
 	char **_argv;

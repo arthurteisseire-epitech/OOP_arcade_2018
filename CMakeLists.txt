@@ -13,7 +13,7 @@ find_package(Qt5Widgets)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 
-include_directories(src/library src/menu lib/qt component src lib .)
+include_directories(src/library src/menu lib/qt component src lib games .)
 
 
 file(GLOB_RECURSE main main.cpp)
@@ -22,10 +22,12 @@ file(GLOB_RECURSE component component/*.cpp)
 list(FILTER core EXCLUDE REGEX ".*Test.cpp$")
 
 file(GLOB_RECURSE lib lib/*.cpp)
-file(GLOB_RECURSE tests src/*Test.cpp)
+file(GLOB_RECURSE games games/*.cpp)
+list(FILTER games EXCLUDE REGEX ".*Test.cpp$")
+file(GLOB_RECURSE tests src/*Test.cpp games/*Test.cpp)
 
 
-add_executable(units ${core} ${tests} ${component})
+add_executable(units ${core} ${tests} ${component} ${games})
 target_link_libraries(units dl Qt5::Widgets gtest gtest_main gcov)
 
 add_executable(${CMAKE_PROJECT_NAME} ${main} ${core} ${component})
@@ -41,6 +43,12 @@ add_custom_target(
         graphicals
         ALL COMMAND qmake && make
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib/qt
+)
+
+add_custom_target(
+        games
+        ALL COMMAND make -C nibbler
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/games
 )
 
 add_custom_target(

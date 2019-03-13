@@ -6,6 +6,7 @@
 */
 
 #include "gtest/gtest.h"
+#include "IGraphic.hpp"
 #include "LibraryLoader.hpp"
 #include "LibraryLoaderException.hpp"
 
@@ -26,7 +27,7 @@ TEST(SharedLibrary, LoadGraphicInstanceError)
         LibraryLoader lib(ac, av);
 
         av[0] = const_cast<char *>(std::string("test").c_str());
-        ASSERT_THROW(lib.loadGraphicInstance("non existent lib"), LibraryLoaderException);
+        ASSERT_THROW(lib.loadInstance<IGraphic>("non existent lib"), LibraryLoaderException);
 }
 
 TEST(SharedLibrary, FindSymWithoutLibError)

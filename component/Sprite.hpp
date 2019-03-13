@@ -15,6 +15,8 @@ class Sprite : public ISprite {
 public:
 	explicit Sprite(const std::string &filename);
 	~Sprite() override = default;
+
+	ComponentType getType() const final;
 	const std::string &getPath() const override;
 	void setPosition(const std::pair<float, float> &pos);
 	void setSize(const std::pair<float, float> &size);
