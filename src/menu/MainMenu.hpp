@@ -13,14 +13,16 @@
 #include "ISprite.hpp"
 #include "Sprite.hpp"
 
-class MainMenu {
-public:
-	MainMenu();
-	const std::vector<std::unique_ptr<ISprite>> &getSprites();
-private:
-	void setSpritesPosition();
-	void setSpritesSize();
-	std::vector<std::unique_ptr<ISprite>> _sprites;
-};
+namespace arc {
+	class MainMenu {
+	public:
+		MainMenu();
+		const std::vector<std::unique_ptr<ISprite>> &getSprites();
+	private:
+		void setSpritesPosition();
+		void setSpritesSize();
+		std::vector<std::unique_ptr<ISprite>> _sprites;
+	};
+}
 
 #endif

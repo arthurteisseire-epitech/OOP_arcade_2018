@@ -10,13 +10,15 @@
 
 #include <string>
 
-class LibraryLoaderException : public std::exception {
-public:
-	explicit LibraryLoaderException(const std::string &message);
-	~LibraryLoaderException() override = default;
-	char const *what() const noexcept override;
-private:
-	const std::string _message;
-};
+namespace arc {
+	class LibraryLoaderException : public std::exception {
+	public:
+		explicit LibraryLoaderException(const std::string &message);
+		~LibraryLoaderException() override = default;
+		char const *what() const noexcept override;
+	private:
+		const std::string _message;
+	};
+}
 
 #endif

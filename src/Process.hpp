@@ -12,10 +12,12 @@
 #include <memory>
 #include "IGraphic.hpp"
 
-class Process {
-public:
-	static void all(std::vector<std::reference_wrapper<IComponent>> components, IGraphic *graphic);
-	static void sprites(std::vector<std::reference_wrapper<ISprite>> sprites, IGraphic *graphic);
-};
+namespace arc {
+	class Process {
+	public:
+		static void all(std::vector<std::reference_wrapper<IComponent>> components, IGraphic *graphic);
+		static void sprites(std::vector<std::reference_wrapper<ISprite>> sprites, IGraphic *graphic);
+	};
+}
 
 #endif

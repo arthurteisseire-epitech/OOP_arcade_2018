@@ -7,7 +7,7 @@
 
 #include "MainMenu.hpp"
 
-MainMenu::MainMenu()
+arc::MainMenu::MainMenu()
 {
 	_sprites.push_back(std::unique_ptr<Sprite>(new Sprite("assets/sample.jpg")));
 	_sprites.push_back(std::unique_ptr<Sprite>(new Sprite("assets/sample.jpg")));
@@ -16,19 +16,19 @@ MainMenu::MainMenu()
 	setSpritesSize();
 }
 
-const std::vector<std::unique_ptr<ISprite>> &MainMenu::getSprites()
+const std::vector<std::unique_ptr<ISprite>> &arc::MainMenu::getSprites()
 {
         return _sprites;
 }
 
-void MainMenu::setSpritesPosition()
+void arc::MainMenu::setSpritesPosition()
 {
 	dynamic_cast<Sprite *>(_sprites[0].get())->setPosition(std::pair<float, float>(0.2, 0.2));
 	dynamic_cast<Sprite *>(_sprites[1].get())->setPosition(std::pair<float, float>(0.2, 0.4));
 	dynamic_cast<Sprite *>(_sprites[2].get())->setPosition(std::pair<float, float>(0.2, 0.6));
 }
 
-void MainMenu::setSpritesSize()
+void arc::MainMenu::setSpritesSize()
 {
 	float width = 0.6;
 	float height = 0.1;

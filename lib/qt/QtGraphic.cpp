@@ -9,33 +9,33 @@
 
 IGraphic *entryPoint(int &ac, char *av[])
 {
-	return new QtGraphic(ac, av);
+	return new arc::QtGraphic(ac, av);
 }
 
-QtGraphic::QtGraphic(int &ac, char *av[]) :
+arc::QtGraphic::QtGraphic(int &ac, char *av[]) :
 	_app(new QApplication(ac, av)),
 	_centralWidget(new Widget())
 {
 	_centralWidget->show();
 }
 
-void QtGraphic::processSprite(const ISprite &sprite)
+void arc::QtGraphic::processSprite(const ISprite &sprite)
 {
 	_centralWidget->processSprite(sprite);
 	_centralWidget->repaint();
 }
 
-bool QtGraphic::isOpen()
+bool arc::QtGraphic::isOpen()
 {
 	QApplication::processEvents();
 	return _centralWidget->isVisible();
 }
 
-void QtGraphic::draw()
+void arc::QtGraphic::draw()
 {
 }
 
-const std::vector<Key> &QtGraphic::getKeys() const
+const std::vector<Key> &arc::QtGraphic::getKeys() const
 {
         return _centralWidget->getKeys();
 }

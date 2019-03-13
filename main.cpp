@@ -15,21 +15,21 @@
 
 int main(int argc, char *argv[])
 {
-	MainMenu mainMenu;
-	LibraryLoader graphicLoader(argc, argv);
-	LibraryLoader gameLoader(argc, argv);
+	arc::MainMenu mainMenu;
+	arc::LibraryLoader graphicLoader(argc, argv);
+	arc::LibraryLoader gameLoader(argc, argv);
 	IGraphic *graphic = nullptr;
 	IGame *game = nullptr;
 
 	try {
 		graphic = graphicLoader.loadInstance<IGraphic>("lib/qt/lib_arcade_qt5.so");
 		game = gameLoader.loadInstance<IGame>("games/nibbler/lib_arcade_nibbler.so");
-	} catch (LibraryLoaderException &exception) {
+	} catch (arc::LibraryLoaderException &exception) {
 		std::cerr << exception.what() << std::endl;
 		return (84);
 	}
 	while (graphic->isOpen()) {
-		Process::all(game->getComponents(), graphic);
+		arc::Process::all(game->getComponents(), graphic);
 		usleep(100);
 	}
 	return 0;

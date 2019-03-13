@@ -21,18 +21,20 @@
 #include "Widget.hpp"
 #include "Key.hpp"
 
-class QtGraphic : public IGraphic, public QObject {
-public:
-	QtGraphic(int &ac, char *av[]);
-	void draw() override;
-	bool isOpen() override;
-	void processSprite(const ISprite &sprite) override;
-	const std::vector<Key> &getKeys() const;
-private:
-	std::unique_ptr<QApplication> _app;
-	std::unique_ptr<Widget> _centralWidget;
-	std::unique_ptr<QPushButton> _button;
-};
+namespace arc {
+	class QtGraphic : public IGraphic, public QObject {
+	public:
+		QtGraphic(int &ac, char *av[]);
+		void draw() override;
+		bool isOpen() override;
+		void processSprite(const ISprite &sprite) override;
+		const std::vector<Key> &getKeys() const;
+	private:
+		std::unique_ptr<QApplication> _app;
+		std::unique_ptr<Widget> _centralWidget;
+		std::unique_ptr<QPushButton> _button;
+	};
+}
 
 extern "C" COMMON_SO IGraphic *entryPoint(int &ac, char *av[]);
 

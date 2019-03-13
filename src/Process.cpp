@@ -7,13 +7,13 @@
 
 #include "Process.hpp"
 
-void Process::sprites(const std::vector<std::reference_wrapper<ISprite>> sprites, IGraphic *graphic)
+void arc::Process::sprites(const std::vector<std::reference_wrapper<ISprite>> sprites, IGraphic *graphic)
 {
 	for (auto sprite : sprites)
 		graphic->processSprite(sprite);
 }
 
-void Process::all(std::vector<std::reference_wrapper<IComponent>> components, IGraphic *graphic)
+void arc::Process::all(std::vector<std::reference_wrapper<IComponent>> components, IGraphic *graphic)
 {
 	std::vector<std::reference_wrapper<ISprite>> sprites_vec;
 
