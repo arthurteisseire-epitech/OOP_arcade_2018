@@ -55,8 +55,8 @@ void Widget::keyPressEvent(QKeyEvent *e)
 	try {
 		Key key = Keys.at(qtKey);
 
-		if (std::find(_key.begin(), _key.end(), key) == _key.end())
-			_key.push_back(key);
+		if (std::find(_keys.begin(), _keys.end(), key) == _keys.end())
+			_keys.push_back(key);
 	} catch (const std::out_of_range &e) {
 	}
 }
@@ -66,10 +66,15 @@ void Widget::keyReleaseEvent(QKeyEvent *e)
 	auto qtKey = static_cast<Qt::Key>(e->key());
 
 	try {
-		auto it = std::find(_key.begin(), _key.end(), Keys.at(qtKey));
+		auto it = std::find(_keys.begin(), _keys.end(), Keys.at(qtKey));
 
-		if (it != _key.end())
-			_key.erase(it);
+		if (it != _keys.end())
+			_keys.erase(it);
 	} catch (const std::out_of_range &e) {
 	}
+}
+
+const std::vector<Key> &Widget::getKeys() const
+{
+        return _keys;
 }

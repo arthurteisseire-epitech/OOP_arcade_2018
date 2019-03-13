@@ -34,3 +34,8 @@ bool QtGraphic::isOpen()
 void QtGraphic::draw()
 {
 }
+
+const std::vector<Key> &QtGraphic::getKeys() const
+{
+        return _centralWidget->getKeys();
+}

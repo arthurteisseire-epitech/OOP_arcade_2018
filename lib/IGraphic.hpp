@@ -8,6 +8,8 @@
 #ifndef OOP_ARCADE_2018_IGRAPHIC_HPP
 #define OOP_ARCADE_2018_IGRAPHIC_HPP
 
+#include <vector>
+#include "Key.hpp"
 #include "ISprite.hpp"
 
 class IGraphic {
@@ -15,6 +17,7 @@ public:
 	virtual void draw() = 0;
 	virtual bool isOpen() = 0;
 	virtual void processSprite(const ISprite &sprite) = 0;
+	virtual const std::vector<Key> &getKeys() const = 0;
 };
 
 #endif

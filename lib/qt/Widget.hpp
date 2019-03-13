@@ -18,12 +18,13 @@ class Widget : public QWidget {
 public:
 	Widget() = default;
 	void processSprite(const ISprite &sprite);
+	const std::vector<Key> &getKeys() const;
 protected:
 	void paintEvent(QPaintEvent *e) override;
 	void keyPressEvent(QKeyEvent *e) override;
 	void keyReleaseEvent(QKeyEvent *e) override;
 private:
 	std::map<const ISprite *, std::unique_ptr<QPixmap>> _sprites;
-	std::vector<Key> _key;
+	std::vector<Key> _keys;
 };
 #endif
