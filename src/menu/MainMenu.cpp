@@ -11,7 +11,7 @@
 #include "Key.hpp"
 #include "MainMenu.hpp"
 
-std::map<Key, void (arc::MainMenu::*)()> arc::MainMenu::KeysFunctions = {
+std::map<Key, void (arc::MainMenu::*)()> arc::MainMenu::_keysMap = {
 	{UP, &arc::MainMenu::moveFocusUp},
 	{DOWN, &arc::MainMenu::moveFocusDown},
 };
@@ -58,9 +58,9 @@ void arc::MainMenu::setSpritesSize()
 
 void arc::MainMenu::processEvents(const std::vector<Key> &vector)
 {
-	for (auto &keyFunc : KeysFunctions)
-		if (std::find(vector.begin(), vector.end(), keyFunc.first) != vector.end())
-			(this->*keyFunc.second)();
+	for (auto &p : _keysMap)
+		if (std::find(vector.begin(), vector.end(), p.first) != vector.end())
+			(this->*p.second)();
 }
 
 void arc::MainMenu::moveFocusDown()
