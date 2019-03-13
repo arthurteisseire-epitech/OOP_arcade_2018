@@ -12,10 +12,11 @@
 static std::map<Qt::Key, Key> Keys = {
 	{Qt::Key_Return, ENTER},
 	{Qt::Key_Enter, ENTER},
+	{Qt::Key_Escape, ESCAPE},
+	{Qt::Key_Down, UP},
 	{Qt::Key_Down, DOWN},
 	{Qt::Key_Left, LEFT},
 	{Qt::Key_Right, RIGHT},
-	{Qt::Key_Escape, ESCAPE},
 };
 
 void Widget::paintEvent(__attribute((unused)) QPaintEvent *e)
