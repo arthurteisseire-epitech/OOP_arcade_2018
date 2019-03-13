@@ -24,8 +24,7 @@ int main(int argc, char *argv[])
 	try {
 		graphic = graphicLoader.loadInstance<IGraphic>("lib/qt/lib_arcade_qt5.so");
 		game = gameLoader.loadInstance<IGame>("games/nibbler/lib_arcade_nibbler.so");
-	}
-	catch (LibraryLoaderException &exception) {
+	} catch (LibraryLoaderException &exception) {
 		std::cerr << exception.what() << std::endl;
 		return (84);
 	}
