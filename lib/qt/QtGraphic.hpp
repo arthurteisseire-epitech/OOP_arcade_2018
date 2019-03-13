@@ -19,6 +19,7 @@
 #include "IGraphic.hpp"
 #include "ISprite.hpp"
 #include "Widget.hpp"
+#include "Key.hpp"
 
 class QtGraphic : public IGraphic, public QObject {
 public:
@@ -29,7 +30,6 @@ public:
 private:
 	std::unique_ptr<QApplication> _app;
 	std::unique_ptr<Widget> _centralWidget;
-	std::unique_ptr<QMainWindow> _window;
 	std::unique_ptr<QPushButton> _button;
 };
 

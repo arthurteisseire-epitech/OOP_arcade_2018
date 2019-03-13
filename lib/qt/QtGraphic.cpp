@@ -14,20 +14,13 @@ IGraphic *entryPoint(int &ac, char *av[])
 
 QtGraphic::QtGraphic(int &ac, char *av[]) :
 	_app(new QApplication(ac, av)),
-	_centralWidget(new Widget()),
-	_window(new QMainWindow()),
-	_button(new QPushButton("Quit", _centralWidget.get()))
+	_centralWidget(new Widget())
 {
-	QObject::connect(_button.get(), &QAbstractButton::clicked, this, [this] {
-		this->_window->setVisible(false);
-	});
-	_window->setCentralWidget(_centralWidget.get());
-	_window->show();
+	_centralWidget->show();
 }
 
 void QtGraphic::processSprite(const ISprite &sprite)
 {
-	_app->setActiveWindow(_window.get());
 	_centralWidget->processSprite(sprite);
 	_centralWidget->repaint();
 }
@@ -35,7 +28,7 @@ void QtGraphic::processSprite(const ISprite &sprite)
 bool QtGraphic::isOpen()
 {
 	QApplication::processEvents();
-	return _window->isVisible();
+	return _centralWidget->isVisible();
 }
 
 void QtGraphic::draw()
