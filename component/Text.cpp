@@ -14,3 +14,8 @@ Text::Text(const std::string &text, const std::pair<float, float> &pos, const st
 	_size(size)
 {
 }
+
+ComponentType Text::getType() const
+{
+	return TEXT;
+}

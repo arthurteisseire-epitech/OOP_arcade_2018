@@ -14,6 +14,9 @@ class Nibbler : public IGame {
 public:
 	Nibbler(int &ac, char *av[]);
 	std::vector<std::reference_wrapper<IComponent>> getComponents() override;
+
+private:
+	unsigned int _score;
 };
 
 extern "C" __attribute__((visibility("default"))) IGame *entryPoint(int &ac, char *av[]);

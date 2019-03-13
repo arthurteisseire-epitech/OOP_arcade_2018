@@ -26,6 +26,7 @@ public:
 	void draw() override;
 	bool isOpen() override;
 	void processSprite(const ISprite &sprite) override;
+	void processText(const IText &sprite) override;
 private:
 	std::unique_ptr<QApplication> _app;
 	std::unique_ptr<Widget> _centralWidget;

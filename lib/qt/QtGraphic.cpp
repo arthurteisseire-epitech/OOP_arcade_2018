@@ -32,6 +32,12 @@ void QtGraphic::processSprite(const ISprite &sprite)
 	_centralWidget->repaint();
 }
 
+#include <iostream>
+void QtGraphic::processText(const IText &text)
+{
+	std::cout << text.getText() << std::endl;
+}
+
 bool QtGraphic::isOpen()
 {
 	QApplication::processEvents();

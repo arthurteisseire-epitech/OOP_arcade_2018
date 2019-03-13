@@ -12,7 +12,8 @@ DCOMPONENT	=	../../component/
 DGAMES	=	../
 
 SRC		=	$(DSRC)Nibbler.cpp		\
-			$(DCOMPONENT)Sprite.cpp
+			$(DCOMPONENT)Sprite.cpp	\
+			$(DCOMPONENT)Text.cpp	\
 
 INC		=	-I$(DSRC) -I$(DCOMPONENT) -I$(DGAMES)
 
