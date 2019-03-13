@@ -25,7 +25,7 @@ void arc::QtGraphic::processSprite(const ISprite &sprite)
 	_widget->repaint();
 }
 
-bool arc::QtGraphic::isOpen()
+bool arc::QtGraphic::isOpen() const
 {
 	QApplication::processEvents();
 	return _widget->isVisible();

@@ -26,7 +26,7 @@ namespace arc {
 	public:
 		QtGraphic(int &ac, char *av[]);
 		void draw() override;
-		bool isOpen() override;
+		bool isOpen() const override;
 		void processSprite(const ISprite &sprite) override;
 		const std::vector<Key> &getKeys() const override;
 		void processEvents() override;

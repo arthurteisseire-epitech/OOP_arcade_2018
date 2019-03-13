@@ -15,7 +15,7 @@
 class IGraphic {
 public:
 	virtual void draw() = 0;
-	virtual bool isOpen() = 0;
+	virtual bool isOpen() const = 0;
 	virtual void processSprite(const ISprite &sprite) = 0;
 	virtual void processEvents() = 0;
 	virtual const std::vector<Key> &getKeys() const = 0;
