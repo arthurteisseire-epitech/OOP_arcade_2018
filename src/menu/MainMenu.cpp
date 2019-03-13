@@ -61,7 +61,7 @@ void arc::MainMenu::moveFocusDown()
 {
 	if (_focus != _buttons.size() - 1) {
 		++_focus;
-		_spriteFocus->moveDown(0.2);
+		_spriteFocus->moveDown(_buttons[_focus]->getPosition().second - _spriteFocus->getPosition().second);
 	}
 }
 
@@ -69,6 +69,6 @@ void arc::MainMenu::moveFocusUp()
 {
 	if (_focus != 0) {
 		--_focus;
-		_spriteFocus->moveUp(0.2);
+		_spriteFocus->moveUp(_spriteFocus->getPosition().second - _buttons[_focus]->getPosition().second);
 	}
 }
