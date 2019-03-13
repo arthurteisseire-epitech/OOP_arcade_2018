@@ -7,7 +7,17 @@
 
 #include <QPainter>
 #include <QtWidgets/QApplication>
+#include <QDebug>
 #include "Widget.hpp"
+
+static std::map<Qt::Key, Key> Keys = {
+	{Qt::Key_Return, ENTER},
+	{Qt::Key_Enter, ENTER},
+	{Qt::Key_Down, DOWN},
+	{Qt::Key_Left, LEFT},
+	{Qt::Key_Right, RIGHT},
+	{Qt::Key_Escape, ECHAP},
+};
 
 void Widget::paintEvent(__attribute((unused)) QPaintEvent *e)
 {
@@ -41,16 +51,26 @@ void Widget::processSprite(const ISprite &sprite)
 
 void Widget::keyPressEvent(QKeyEvent *e)
 {
-	if (e->key() == Qt::Key_Return)
-		_key.push_back(ENTER);
+	auto qtKey = static_cast<Qt::Key>(e->key());
+
+	try {
+		Key key = Keys.at(qtKey);
+
+		if (std::find(_key.begin(), _key.end(), key) == _key.end())
+			_key.push_back(key);
+	} catch (const std::out_of_range &e) {
+	}
 }
 
 void Widget::keyReleaseEvent(QKeyEvent *e)
 {
-	auto it = std::find(_key.begin(), _key.end(), ENTER);
+	auto qtKey = static_cast<Qt::Key>(e->key());
 
-	if (e->key() == Qt::Key_Return) {
+	try {
+		auto it = std::find(_key.begin(), _key.end(), Keys.at(qtKey));
+
 		if (it != _key.end())
-			_key.erase(std::find(_key.begin(), _key.end(), ENTER));
+			_key.erase(it);
+	} catch (const std::out_of_range &e) {
 	}
 }

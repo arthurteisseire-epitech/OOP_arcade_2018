@@ -12,3 +12,4 @@ SOURCES += QtGraphic.cpp Widget.cpp
 HEADERS += QtGraphic.hpp ../IGraphic.hpp ../../component/ISprite.hpp Widget.hpp
 INCLUDEPATH += $$PWD/.. $$PWD/../../component
 DEFINES += ARCADE
+CONFIG += clang++
