@@ -18,10 +18,10 @@ namespace arc {
 	public:
 		MainMenu();
 		std::vector<std::reference_wrapper<ISprite>> getSprites();
-		void moveFocusDown();
-		void moveFocusUp();
 		void processEvents(const std::vector<Key> &vector);
 	private:
+		void moveFocusDown();
+		void moveFocusUp();
 		void setSpritesPosition();
 		void setSpritesSize();
 		std::vector<std::unique_ptr<Sprite>> _buttons;
