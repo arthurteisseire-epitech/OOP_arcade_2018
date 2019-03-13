@@ -17,7 +17,6 @@ namespace arc {
 	public:
 		static void all(std::vector<std::reference_wrapper<IComponent>> components, IGraphic *graphic);
 		static void sprites(const std::vector<std::reference_wrapper<ISprite>> &sprites, IGraphic *graphic);
-		static void sprites(const std::vector<std::unique_ptr<ISprite>> &sprites, IGraphic *graphic);
 	};
 }
 

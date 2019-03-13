@@ -17,11 +17,14 @@ namespace arc {
 	class MainMenu {
 	public:
 		MainMenu();
-		const std::vector<std::unique_ptr<ISprite>> &getSprites();
+		std::vector<std::reference_wrapper<ISprite>> getSprites();
+		void moveFocusDown();
+		void moveFocusUp();
 	private:
 		void setSpritesPosition();
 		void setSpritesSize();
-		std::vector<std::unique_ptr<ISprite>> _sprites;
+		std::vector<std::unique_ptr<Sprite>> _sprites;
+		size_t _focus;
 	};
 }
 

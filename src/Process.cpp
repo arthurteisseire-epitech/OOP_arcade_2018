@@ -7,12 +7,6 @@
 
 #include "Process.hpp"
 
-void arc::Process::sprites(const std::vector<std::unique_ptr<ISprite>> &sprites, IGraphic *graphic)
-{
-	for (const auto &sprite : sprites)
-		graphic->processSprite(*sprite);
-}
-
 void arc::Process::sprites(const std::vector<std::reference_wrapper<ISprite>> &sprites, IGraphic *graphic)
 {
 	for (const auto &sprite : sprites)
