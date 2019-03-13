@@ -23,7 +23,8 @@ namespace arc {
 	private:
 		void setSpritesPosition();
 		void setSpritesSize();
-		std::vector<std::unique_ptr<Sprite>> _sprites;
+		std::vector<std::unique_ptr<Sprite>> _buttons;
+		std::unique_ptr<Sprite> _spriteFocus;
 		size_t _focus;
 	};
 }

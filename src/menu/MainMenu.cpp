@@ -5,16 +5,15 @@
 ** MainMenu.cpp
 */
 
-#include <algorithm>
 #include "MainMenu.hpp"
 
 arc::MainMenu::MainMenu() :
 	_focus(1)
 {
-	_sprites.push_back(std::unique_ptr<Sprite>(new Sprite("assets/focus.png")));
-	_sprites.push_back(std::unique_ptr<Sprite>(new Sprite("assets/sample.jpg")));
-	_sprites.push_back(std::unique_ptr<Sprite>(new Sprite("assets/sample.jpg")));
-	_sprites.push_back(std::unique_ptr<Sprite>(new Sprite("assets/sample.jpg")));
+	_spriteFocus = std::unique_ptr<Sprite>(new Sprite("assets/focus.png"));
+	_buttons.push_back(std::unique_ptr<Sprite>(new Sprite("assets/sample.jpg")));
+	_buttons.push_back(std::unique_ptr<Sprite>(new Sprite("assets/sample.jpg")));
+	_buttons.push_back(std::unique_ptr<Sprite>(new Sprite("assets/sample.jpg")));
 	setSpritesPosition();
 	setSpritesSize();
 }
@@ -23,17 +22,18 @@ std::vector<std::reference_wrapper<ISprite>> arc::MainMenu::getSprites()
 {
 	std::vector<std::reference_wrapper<ISprite>> wrapper;
 
-	for (const auto &sprite : _sprites)
-		wrapper.push_back(*sprite);
+	for (const auto &button : _buttons)
+		wrapper.push_back(*button);
+	wrapper.push_back(*_spriteFocus);
         return wrapper;
 }
 
 void arc::MainMenu::setSpritesPosition()
 {
-	_sprites[0].get()->setPosition(std::pair<float, float>(0.2, 0.2));
-	_sprites[1].get()->setPosition(std::pair<float, float>(0.2, 0.4));
-	_sprites[2].get()->setPosition(std::pair<float, float>(0.2, 0.6));
-	_sprites[3].get()->setPosition(std::pair<float, float>(0.2, 0.8));
+	_spriteFocus->setPosition(std::pair<float, float>(0.05, 0.2));
+	_buttons[0]->setPosition(std::pair<float, float>(0.2, 0.2));
+	_buttons[1]->setPosition(std::pair<float, float>(0.2, 0.4));
+	_buttons[2]->setPosition(std::pair<float, float>(0.2, 0.6));
 }
 
 void arc::MainMenu::setSpritesSize()
@@ -41,20 +41,24 @@ void arc::MainMenu::setSpritesSize()
 	float width = 0.6;
 	float height = 0.1;
 
-	_sprites[0].get()->setSize(std::pair<float, float>(width, height));
-	_sprites[1].get()->setSize(std::pair<float, float>(width, height));
-	_sprites[2].get()->setSize(std::pair<float, float>(width, height));
-	_sprites[3].get()->setSize(std::pair<float, float>(width, height));
+	_spriteFocus->setSize(std::pair<float, float>(0.15, height));
+	_buttons[0]->setSize(std::pair<float, float>(width, height));
+	_buttons[1]->setSize(std::pair<float, float>(width, height));
+	_buttons[2]->setSize(std::pair<float, float>(width, height));
 }
 
 void arc::MainMenu::moveFocusDown()
 {
-	if (_focus != 1)
+	if (_focus != 0) {
 		--_focus;
+		_spriteFocus->setPosition(_buttons[_focus]->getPosition());
+	}
 }
 
 void arc::MainMenu::moveFocusUp()
 {
-	if (_focus != _sprites.size() - 1)
+	if (_focus != _buttons.size() - 1) {
 		++_focus;
+		_spriteFocus->setPosition(_buttons[_focus]->getPosition());
+	}
 }
