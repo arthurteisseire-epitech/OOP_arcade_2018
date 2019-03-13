@@ -7,7 +7,6 @@
 
 #include <QPainter>
 #include <QtWidgets/QApplication>
-#include <QDebug>
 #include "Widget.hpp"
 
 static std::map<Qt::Key, Key> Keys = {
