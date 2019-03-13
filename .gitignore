@@ -25,7 +25,7 @@ CMakeCCompilerId.c
 # Qt
 lib/qt/Makefile
 .qmake.stash
-#
+
 # Project
 arcade
 *.so*
