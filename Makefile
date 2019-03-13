@@ -220,6 +220,24 @@ component/Sprite.s:
 .PHONY : component/Sprite.s
 
 # target to build an object file
+component/Text.o:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/component/Text.o
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/component/Text.o
+.PHONY : component/Text.o
+
+# target to preprocess a source file
+component/Text.i:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/component/Text.i
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/component/Text.i
+.PHONY : component/Text.i
+
+# target to generate assembly for a file
+component/Text.s:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/component/Text.s
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/component/Text.s
+.PHONY : component/Text.s
+
+# target to build an object file
 games/nibbler/src/Nibbler.o:
 	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Nibbler.o
 .PHONY : games/nibbler/src/Nibbler.o
@@ -369,6 +387,9 @@ help:
 	@echo "... component/Sprite.o"
 	@echo "... component/Sprite.i"
 	@echo "... component/Sprite.s"
+	@echo "... component/Text.o"
+	@echo "... component/Text.i"
+	@echo "... component/Text.s"
 	@echo "... games/nibbler/src/Nibbler.o"
 	@echo "... games/nibbler/src/Nibbler.i"
 	@echo "... games/nibbler/src/Nibbler.s"

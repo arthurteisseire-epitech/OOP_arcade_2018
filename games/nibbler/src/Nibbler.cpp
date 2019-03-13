@@ -17,7 +17,7 @@ IGame *entryPoint(int &ac, char *av[])
 std::vector<std::reference_wrapper<IComponent>> Nibbler::getComponents()
 {
 	std::vector<std::reference_wrapper<IComponent>> vec;
-	IComponent *sprite = new Sprite("assets/sample.png");
+	IComponent *sprite = new Sprite("assets/sample.jpg");
 	std::reference_wrapper<IComponent> sprite_ref_wrapper(*sprite);
 
 	dynamic_cast<Sprite *>(sprite)->setSize(std::pair<float, float>(0.5, 0.5));
