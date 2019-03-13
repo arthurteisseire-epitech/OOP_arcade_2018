@@ -13,7 +13,7 @@ enum Key {
 	DOWN,
 	RIGHT,
 	LEFT,
-	ECHAP,
+	ESCAPE,
 	ENTER
 };
 
