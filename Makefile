@@ -1,23 +1,17 @@
 ##
-## EPITECH PROJECT, 2018
-## arcade
+## EPITECH PROJECT, 2017
+## File Name : Makefile
 ## File description:
-## Makefile
+## Project Name : linked_lists
 ##
 
-all:
-	cmake . && make
+RULES	=	all		\
+		clean		\
+		fclean		\
+		re		\
+		test_run	\
 
-clean:
-	cmake . && make clean
+$(RULES):
+	cmake . && $(MAKE) $@
 
-fclean:
-	cmake . && make fclean
-
-re:
-	cmake . && make re
-
-tests_run:
-	cmake . && make tests_run
-
-.PHONY: all clean fclean re tests_run
+.PHONY: $(RULES)
