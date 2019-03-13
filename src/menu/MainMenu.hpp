@@ -27,6 +27,7 @@ namespace arc {
 		std::vector<std::unique_ptr<Sprite>> _buttons;
 		std::unique_ptr<Sprite> _spriteFocus;
 		size_t _focus;
+		static std::map<Key, void (arc::MainMenu::*)()> KeysFunctions;
 	};
 }
 
