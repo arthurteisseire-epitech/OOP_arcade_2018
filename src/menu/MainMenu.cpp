@@ -29,16 +29,6 @@ arc::MainMenu::MainMenu() :
 	setSpritesSize();
 }
 
-std::vector<std::reference_wrapper<arc::ISprite>> arc::MainMenu::getSprites()
-{
-	std::vector<std::reference_wrapper<ISprite>> wrapper;
-
-	for (const auto &button : _buttons)
-		wrapper.emplace_back(*button);
-	wrapper.emplace_back(*_spriteFocus);
-        return wrapper;
-}
-
 void arc::MainMenu::setSpritesPosition()
 {
 	_spriteFocus->setPosition(std::pair<float, float>(0.05, 0.2));
@@ -81,4 +71,14 @@ void arc::MainMenu::moveFocusUp()
 		--_focus;
 		_spriteFocus->moveUp(_spriteFocus->getPosition().second - _buttons[_focus]->getPosition().second);
 	}
+}
+
+std::vector<std::reference_wrapper<arc::ISprite>> arc::MainMenu::getSprites() const
+{
+	std::vector<std::reference_wrapper<ISprite>> wrapper;
+
+	for (const auto &button : _buttons)
+		wrapper.emplace_back(*button);
+	wrapper.emplace_back(*_spriteFocus);
+	return wrapper;
 }
