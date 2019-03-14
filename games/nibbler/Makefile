@@ -12,6 +12,7 @@ DCOMPONENT	=	../../component/
 DGAMES	=	../
 
 SRC		=	$(DSRC)Nibbler.cpp		\
+			$(DSRC)Snake.cpp		\
 			$(DCOMPONENT)Sprite.cpp	\
 			$(DCOMPONENT)Text.cpp	\
 

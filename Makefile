@@ -238,6 +238,21 @@ component/Text.s:
 .PHONY : component/Text.s
 
 # target to build an object file
+games/nibbler/src/Map.o:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Map.o
+.PHONY : games/nibbler/src/Map.o
+
+# target to preprocess a source file
+games/nibbler/src/Map.i:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Map.i
+.PHONY : games/nibbler/src/Map.i
+
+# target to generate assembly for a file
+games/nibbler/src/Map.s:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Map.s
+.PHONY : games/nibbler/src/Map.s
+
+# target to build an object file
 games/nibbler/src/Nibbler.o:
 	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Nibbler.o
 .PHONY : games/nibbler/src/Nibbler.o
@@ -266,6 +281,36 @@ games/nibbler/src/NibblerTest.i:
 games/nibbler/src/NibblerTest.s:
 	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/NibblerTest.s
 .PHONY : games/nibbler/src/NibblerTest.s
+
+# target to build an object file
+games/nibbler/src/Snake.o:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Snake.o
+.PHONY : games/nibbler/src/Snake.o
+
+# target to preprocess a source file
+games/nibbler/src/Snake.i:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Snake.i
+.PHONY : games/nibbler/src/Snake.i
+
+# target to generate assembly for a file
+games/nibbler/src/Snake.s:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Snake.s
+.PHONY : games/nibbler/src/Snake.s
+
+# target to build an object file
+games/nibbler/src/SnakeTest.o:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/SnakeTest.o
+.PHONY : games/nibbler/src/SnakeTest.o
+
+# target to preprocess a source file
+games/nibbler/src/SnakeTest.i:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/SnakeTest.i
+.PHONY : games/nibbler/src/SnakeTest.i
+
+# target to generate assembly for a file
+games/nibbler/src/SnakeTest.s:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/SnakeTest.s
+.PHONY : games/nibbler/src/SnakeTest.s
 
 # target to build an object file
 main.o:
@@ -390,12 +435,21 @@ help:
 	@echo "... component/Text.o"
 	@echo "... component/Text.i"
 	@echo "... component/Text.s"
+	@echo "... games/nibbler/src/Map.o"
+	@echo "... games/nibbler/src/Map.i"
+	@echo "... games/nibbler/src/Map.s"
 	@echo "... games/nibbler/src/Nibbler.o"
 	@echo "... games/nibbler/src/Nibbler.i"
 	@echo "... games/nibbler/src/Nibbler.s"
 	@echo "... games/nibbler/src/NibblerTest.o"
 	@echo "... games/nibbler/src/NibblerTest.i"
 	@echo "... games/nibbler/src/NibblerTest.s"
+	@echo "... games/nibbler/src/Snake.o"
+	@echo "... games/nibbler/src/Snake.i"
+	@echo "... games/nibbler/src/Snake.s"
+	@echo "... games/nibbler/src/SnakeTest.o"
+	@echo "... games/nibbler/src/SnakeTest.i"
+	@echo "... games/nibbler/src/SnakeTest.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

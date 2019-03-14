@@ -19,7 +19,8 @@ TEST(GetComponents, UselessPleaseDelete)
 	std::vector<std::reference_wrapper<IComponent>> components = nibbler.getComponents();
 
 	EXPECT_EQ(components[0].get().getType(), SPRITE);
-	EXPECT_EQ(dynamic_cast<ISprite &>(components[0].get()).getSize(), (std::pair<float, float>(0.2, 0.2)));
+	EXPECT_FLOAT_EQ(dynamic_cast<ISprite &>(components[0].get()).getSize().first, 0.1);
+	EXPECT_FLOAT_EQ(dynamic_cast<ISprite &>(components[0].get()).getSize().second, 0.1);
 }
 
 TEST(Nibbler, GetComponentsScore)
@@ -30,10 +31,8 @@ TEST(Nibbler, GetComponentsScore)
 	bool a = false;
 
 	for (auto comp : components)
-		if (comp.get().getType() == TEXT) {
-			EXPECT_EQ(strncmp(dynamic_cast<IText &>(comp.get()).getText().c_str(), "Score: ",
-					  sizeof("Score:")), 0);
+		if (comp.get().getType() == TEXT &&
+		    strncmp(dynamic_cast<IText &>(comp.get()).getText().c_str(), "Score: ", sizeof("Score:")) == 0)
 			a = true;
-		}
 	ASSERT_TRUE(a);
 }
