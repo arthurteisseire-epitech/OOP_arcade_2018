@@ -10,6 +10,7 @@
 #include <functional>
 #include "Key.hpp"
 #include "MainMenu.hpp"
+#include "Button.hpp"
 
 std::map<Key, void (arc::MainMenu::*)()> arc::MainMenu::_keysMap = {
 	{UP, &arc::MainMenu::moveFocusUp},
@@ -20,9 +21,9 @@ arc::MainMenu::MainMenu() :
 	_focus(0)
 {
 	_spriteFocus = std::unique_ptr<Sprite>(new Sprite("assets/focus.png"));
-	_buttons.push_back(std::unique_ptr<Sprite>(new Sprite("assets/sample.jpg")));
-	_buttons.push_back(std::unique_ptr<Sprite>(new Sprite("assets/sample.jpg")));
-	_buttons.push_back(std::unique_ptr<Sprite>(new Sprite("assets/sampl.jpg")));
+	_buttons.push_back(std::unique_ptr<Button>(new Button("assets/sample.jpg")));
+	_buttons.push_back(std::unique_ptr<Button>(new Button("assets/sample.jpg")));
+	_buttons.push_back(std::unique_ptr<Button>(new Button("assets/sample.jpg")));
 	setSpritesPosition();
 	setSpritesSize();
 }
