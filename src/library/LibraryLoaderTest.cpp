@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** OOP_arcade_2018
+** arcade
 ** File description:
 ** LibraryLoaderTest.cpp
 */
