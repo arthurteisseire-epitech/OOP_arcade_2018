@@ -5,8 +5,8 @@
 ** IGraphic.hpp
 */
 
-#ifndef OOP_ARCADE_2018_IGRAPHIC_HPP
-#define OOP_ARCADE_2018_IGRAPHIC_HPP
+#ifndef ARCADE_IGRAPHIC_HPP
+#define ARCADE_IGRAPHIC_HPP
 
 #include <vector>
 #include "Key.hpp"

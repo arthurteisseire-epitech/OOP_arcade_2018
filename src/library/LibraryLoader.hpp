@@ -5,8 +5,8 @@
 ** LibraryLoader.hpp
 */
 
-#ifndef OOP_ARCADE_2018_LIBRARYLOADER_HPP
-#define OOP_ARCADE_2018_LIBRARYLOADER_HPP
+#ifndef ARCADE_LIBRARYLOADER_HPP
+#define ARCADE_LIBRARYLOADER_HPP
 
 #include <string>
 #include "IGraphic.hpp"
