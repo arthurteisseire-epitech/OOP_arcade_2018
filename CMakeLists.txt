@@ -41,7 +41,7 @@ add_custom_target(
 
 add_custom_target(
         graphicals
-        ALL COMMAND qmake && make install
+        ALL COMMAND qmake && make
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib/qt
 )
 
