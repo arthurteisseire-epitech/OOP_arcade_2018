@@ -21,9 +21,8 @@ std::pair<T, T> operator-(const std::pair<T, T> &p1, const std::pair<T, T> &p2)
 
 arc::Snake::Snake(pos_t start_pos, unsigned int size)
 {
-	for (unsigned int i = 0; i < size; ++i) {
+	for (unsigned int i = 0; i < size; ++i)
 		_body_positions.emplace_back(start_pos + pos_t{i, 0});
-	}
 }
 
 void arc::Snake::eat()

@@ -35,9 +35,12 @@ TEST_F(SnakeTest, Init)
 TEST_F(SnakeTest, Eat)
 {
 	unsigned long length = _body_positions.size();
+	body_t cp = _body_positions;
 
 	eat();
 	EXPECT_EQ(length + 1, _body_positions.size());
+	EXPECT_EQ(abs((int)(cp.back().first - _body_positions.back().first)), 1);
+	EXPECT_EQ(cp.back().second, _body_positions.back().second);
 }
 
 //TEST_F(SnakeTest, Move)
