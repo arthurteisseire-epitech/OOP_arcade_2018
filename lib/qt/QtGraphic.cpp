@@ -44,7 +44,7 @@ void arc::QtGraphic::processEvents()
 	QApplication::processEvents();
 }
 
-const std::vector<Key> &arc::QtGraphic::getKeys() const
+std::map<arc::Key, arc::KeyState> arc::QtGraphic::getKeys()
 {
         return _widget->getKeys();
 }

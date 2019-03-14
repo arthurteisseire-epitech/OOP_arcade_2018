@@ -21,15 +21,18 @@ namespace arc {
 		Widget();
 		bool processSprite(const ISprite &sprite);
 		bool processText(const IText &text);
-		const std::vector<Key> &getKeys() const;
+		std::map<Key, KeyState> getKeys();
 	protected:
 		void paintEvent(QPaintEvent *e) override;
 		void keyPressEvent(QKeyEvent *e) override;
 		void keyReleaseEvent(QKeyEvent *e) override;
 	private:
+		void processKeys(const QKeyEvent *e, arc::KeyState state);
+
 		std::map<const ISprite *, std::unique_ptr<QPixmap>> _sprites;
 		const IText *_text;
-		std::vector<Key> _keys;
+		std::map<Key, KeyState> _keys;
+		static std::map<Qt::Key, Key> _qKeys;
 	};
 }
 

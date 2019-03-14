@@ -20,7 +20,7 @@ namespace arc {
 	public:
 		MainMenu();
 		std::vector<std::reference_wrapper<ISprite>> getSprites();
-		void processEvents(const std::vector<Key> &vector);
+		void processEvents(const std::map<Key, KeyState> &map);
 	private:
 		void moveFocusDown();
 		void moveFocusUp();
