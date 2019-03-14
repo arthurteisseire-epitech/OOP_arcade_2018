@@ -7,6 +7,6 @@
 
 #include "Map.hpp"
 
-Map::Map(unsigned int size) : _size(size)
+arc::Map::Map(unsigned int size) : _size(size)
 {
 }

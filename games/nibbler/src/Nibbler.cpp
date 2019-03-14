@@ -12,14 +12,14 @@
 
 IGame *entryPoint(int &ac, char *av[])
 {
-	return new Nibbler(ac, av);
+	return new arc::Nibbler(ac, av);
 }
 
-Nibbler::Nibbler(int &, char **) : _score(0)
+arc::Nibbler::Nibbler(int &, char **) : _score(0)
 {
 }
 
-std::vector<std::reference_wrapper<IComponent>> Nibbler::getComponents()
+std::vector<std::reference_wrapper<IComponent>> arc::Nibbler::getComponents()
 {
 	std::vector<std::reference_wrapper<IComponent>> vec;
 	IComponent *sprite = new Sprite("games/nibbler/assets/snake_head_up.png");

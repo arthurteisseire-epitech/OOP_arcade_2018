@@ -12,13 +12,14 @@
 #include <string>
 #include <vector>
 
-class Map {
-public:
-	explicit Map(unsigned int size = 100);
+namespace arc {
+	class Map {
+	public:
+		explicit Map(unsigned int size = 100);
 
-private:
-	unsigned int _size;
-};
-
+	private:
+		unsigned int _size;
+	};
+}
 
 #endif //ARCADE_MAP_HPP
