@@ -9,7 +9,8 @@
 #include "ArgParser.hpp"
 
 arc::ArgParser::ArgParser(int &argc, char **argv) :
-	_libraryLoader(argc, argv)
+	_graphicLibraryLoader(argc, argv),
+	_gameLibraryLoader(argc, argv)
 {
 	if (argc != 2) {
 		std::cerr << "Usage : " << std::endl
@@ -17,13 +18,24 @@ arc::ArgParser::ArgParser(int &argc, char **argv) :
 		          << std::endl;
 		exit(84);
 	}
-	loadLibrary(argv[1]);
+	loadGraphicLibrary(argv[1]);
+	loadGameLibrary("games/nibbler/lib_arcade_nibbler.so");
 }
 
-void arc::ArgParser::loadLibrary(const std::string &libname)
+void arc::ArgParser::loadGraphicLibrary(const std::string &libname)
 {
 	try {
-		_graphic = _libraryLoader.loadInstance<IGraphic>(libname);
+		_graphic = _graphicLibraryLoader.loadInstance<IGraphic>(libname);
+	} catch (arc::LibraryLoaderException &exception) {
+		std::cerr << exception.what() << std::endl;
+		exit(84);
+	}
+}
+
+void arc::ArgParser::loadGameLibrary(const std::string &libname)
+{
+	try {
+		_game = _gameLibraryLoader.loadInstance<IGame>(libname);
 	} catch (arc::LibraryLoaderException &exception) {
 		std::cerr << exception.what() << std::endl;
 		exit(84);
@@ -32,5 +44,5 @@ void arc::ArgParser::loadLibrary(const std::string &libname)
 
 arc::Core arc::ArgParser::createCore()
 {
-	return Core(_graphic);
+	return Core(_graphic, _game);
 }

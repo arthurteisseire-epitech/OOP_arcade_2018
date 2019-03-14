@@ -16,7 +16,7 @@
 namespace arc {
 	class Core {
 	public:
-		explicit Core(IGraphic *graphic);
+		explicit Core(IGraphic *graphic, IGame *game);
 		int exec();
 	private:
 		std::unique_ptr<arc::MainMenu> _mainMenu;
