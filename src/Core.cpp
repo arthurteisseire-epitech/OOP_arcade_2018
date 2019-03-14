@@ -25,6 +25,7 @@ int arc::Core::exec()
 		_graphic->processText(text);
 		_graphic->processEvents();
 		_mainMenu->processEvents(_graphic->getKeys());
+		_graphic->draw();
 		usleep(100);
 	}
 	return 0;

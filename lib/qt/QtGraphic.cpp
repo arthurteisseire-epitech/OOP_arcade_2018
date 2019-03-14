@@ -22,7 +22,6 @@ arc::QtGraphic::QtGraphic(int &ac, char *av[]) :
 void arc::QtGraphic::processSprite(const ISprite &sprite)
 {
 	_widget->processSprite(sprite);
-	_widget->repaint();
 }
 
 bool arc::QtGraphic::isOpen() const
@@ -32,6 +31,7 @@ bool arc::QtGraphic::isOpen() const
 
 void arc::QtGraphic::draw()
 {
+	_widget->repaint();
 }
 
 const std::vector<Key> &arc::QtGraphic::getKeys() const
@@ -47,5 +47,4 @@ void arc::QtGraphic::processEvents()
 void arc::QtGraphic::processText(const IText &text)
 {
 	_widget->processText(text);
-	_widget->repaint();
 }
