@@ -8,10 +8,10 @@
 #include <iostream>
 #include "Process.hpp"
 
-const std::unordered_map<arc::ComponentType, void (arc::IGraphic::*)(
+const std::unordered_map<arc::ComponentType, bool (arc::IGraphic::*)(
 	const arc::IComponent &)> arc::Process::_graph_func_map = {
-	{SPRITE, (void (IGraphic::*)(const IComponent &)) &IGraphic::processSprite},
-	{TEXT,   (void (IGraphic::*)(const IComponent &)) &IGraphic::processText}
+	{SPRITE, (bool (IGraphic::*)(const IComponent &)) &IGraphic::processSprite},
+	{TEXT,   (bool (IGraphic::*)(const IComponent &)) &IGraphic::processText}
 };
 
 void arc::Process::sprites(const std::vector<std::reference_wrapper<ISprite>> sprites, IGraphic *graphic)
@@ -38,7 +38,7 @@ void arc::Process::all(std::vector<std::reference_wrapper<IComponent>> component
 }
 
 void arc::Process::any(std::reference_wrapper<IComponent> comp, IGraphic *graphic,
-		       void (IGraphic::*func)(const IComponent &))
+		       bool (IGraphic::*func)(const IComponent &))
 {
 	(graphic->*func)((comp.get()));
 }
