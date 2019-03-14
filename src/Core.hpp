@@ -17,6 +17,7 @@ namespace arc {
 	class Core {
 	public:
 		explicit Core(IGraphic *graphic);
+		int exec();
 	private:
 		std::unique_ptr<arc::MainMenu> _mainMenu;
 		std::unique_ptr<IGraphic> _graphic;

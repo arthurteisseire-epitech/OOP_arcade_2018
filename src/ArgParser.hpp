@@ -8,6 +8,7 @@
 #ifndef ARCADE_ARGPARSER_HPP
 #define ARCADE_ARGPARSER_HPP
 
+#include "LibraryLoader.hpp"
 #include "Core.hpp"
 
 namespace arc {
@@ -15,6 +16,11 @@ namespace arc {
 	public:
 		ArgParser(int &argc, char **argv);
 		arc::Core createCore();
+	private:
+		void loadLibrary(const std::string &libname);
+
+		IGraphic *_graphic;
+		LibraryLoader _libraryLoader;
 	};
 }
 
