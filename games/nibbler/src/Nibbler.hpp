@@ -10,12 +10,14 @@
 
 #include "IGame.hpp"
 
-class Nibbler : public IGame {
-public:
-	Nibbler(int &ac, char *av[]);
-	std::vector<std::reference_wrapper<IComponent>> getComponents() override;
-};
+namespace arc {
+	class Nibbler : public IGame {
+	public:
+		Nibbler(int &ac, char *av[]);
+		std::vector<std::reference_wrapper<IComponent>> getComponents() const override;
+	};
+}
 
-extern "C" __attribute__((visibility("default"))) IGame *entryPoint(int &ac, char *av[]);
+extern "C" __attribute__((visibility("default"))) arc::IGame *entryPoint(int &ac, char *av[]);
 
-#endif //ARCADE_NIBBLER_HPP
+#endif

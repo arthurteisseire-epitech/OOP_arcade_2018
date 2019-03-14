@@ -28,7 +28,7 @@ arc::MainMenu::MainMenu() :
 	setSpritesSize();
 }
 
-std::vector<std::reference_wrapper<ISprite>> arc::MainMenu::getSprites()
+std::vector<std::reference_wrapper<arc::ISprite>> arc::MainMenu::getSprites()
 {
 	std::vector<std::reference_wrapper<ISprite>> wrapper;
 

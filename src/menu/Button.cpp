@@ -7,7 +7,7 @@
 
 #include "Button.hpp"
 
-Button::Button(const std::string &filename) :
+arc::Button::Button(const std::string &filename) :
 	Sprite(filename)
 {
 }

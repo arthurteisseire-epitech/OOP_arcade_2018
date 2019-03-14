@@ -11,9 +11,11 @@
 #include <memory>
 #include "Sprite.hpp"
 
-class Button : public Sprite {
-public:
-	explicit Button(const std::string &filename);
-};
+namespace arc {
+	class Button : public Sprite {
+	public:
+		explicit Button(const std::string &filename);
+	};
+}
 
 #endif

@@ -9,12 +9,12 @@
 #include "Nibbler.hpp"
 #include "Sprite.hpp"
 
-IGame *entryPoint(int &ac, char *av[])
+arc::IGame *entryPoint(int &ac, char *av[])
 {
-	return new Nibbler(ac, av);
+	return new arc::Nibbler(ac, av);
 }
 
-std::vector<std::reference_wrapper<IComponent>> Nibbler::getComponents()
+std::vector<std::reference_wrapper<arc::IComponent>> arc::Nibbler::getComponents() const
 {
 	std::vector<std::reference_wrapper<IComponent>> vec;
 	IComponent *sprite = new Sprite("assets/sample.jpg");
@@ -25,6 +25,6 @@ std::vector<std::reference_wrapper<IComponent>> Nibbler::getComponents()
 	return vec;
 }
 
-Nibbler::Nibbler(int &, char **)
+arc::Nibbler::Nibbler(int &, char **)
 {
 }

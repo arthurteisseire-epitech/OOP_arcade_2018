@@ -8,15 +8,35 @@
 #ifndef ARCADE_ISPRITE_HPP
 #define ARCADE_ISPRITE_HPP
 
-#include <string>
 #include "IComponent.hpp"
 
-class ISprite : public IComponent {
-public:
-	~ISprite() override = default;
-	virtual const std::string &getPath() const = 0;
-	virtual const std::pair<float, float> &getPosition() const = 0;
-	virtual const std::pair<float, float> &getSize() const = 0;
-};
+namespace arc {
+	class ISprite : public IComponent {
+	public:
+
+		/**
+		 * @return the X and Y positions of the sprite between 0.0f and 1.0f
+		 * relative to the entire window
+		 * It's origin should be the upper left corner
+		 */
+		virtual const std::pair<float, float> &getPosition() const = 0;
+
+		/**
+		 * @return the relative texture path
+		 */
+		virtual const std::string &getTextureName() const = 0;
+
+		/**
+		 * @return the X and Y size of the sprite between 0.0f and 1.0f
+		 * relative to the entire window
+		 */
+		virtual const std::pair<float, float> &getSize() const = 0;
+
+		/**
+		 * @return the fallback color when the texture cannot be loaded
+		 */
+		virtual unsigned int getColor() const = 0;
+	};
+}
 
 #endif

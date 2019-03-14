@@ -11,11 +11,13 @@
 #include <vector>
 #include "IComponent.hpp"
 
-class IGame {
-public:
-	virtual ~IGame() = default;
-	virtual std::vector<std::reference_wrapper<IComponent>> getComponents() = 0;
-};
+namespace arc {
+	class IGame {
+	public:
+		virtual ~IGame() = default;
+		virtual std::vector<std::reference_wrapper<IComponent>> getComponents() const = 0;
+	};
+}
 
 
 #endif //IGAME_HPP

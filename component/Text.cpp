@@ -7,29 +7,29 @@
 
 #include "Text.hpp"
 
-Text::Text(const std::string &text, int size, const std::pair<float, float> &pos) :
+arc::Text::Text(const std::string &text, int size, const std::pair<float, float> &pos) :
 	_text(text),
 	_pos(pos),
 	_size(size)
 {
 }
 
-const std::string &Text::getText() const
+const std::string &arc::Text::getText() const
 {
         return _text;
 }
 
-const std::pair<float, float> &Text::getPosition() const
+const std::pair<float, float> &arc::Text::getPosition() const
 {
         return _pos;
 }
 
-const int &Text::getFontSize() const
+const int &arc::Text::getFontSize() const
 {
         return _size;
 }
 
-ComponentType Text::getType() const
+arc::ComponentType arc::Text::getType() const
 {
         return TEXT;
 }

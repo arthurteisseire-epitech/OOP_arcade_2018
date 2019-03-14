@@ -19,12 +19,12 @@ static std::map<Qt::Key, Key> Keys = {
 	{Qt::Key_Right,  RIGHT},
 };
 
-Widget::Widget() :
+arc::Widget::Widget() :
 	_text(nullptr)
 {
 }
 
-void Widget::paintEvent(__attribute((unused)) QPaintEvent *e)
+void arc::Widget::paintEvent(__attribute((unused)) QPaintEvent *e)
 {
 	QPainter painter(this);
 	QPoint spritePos;
@@ -43,7 +43,7 @@ void Widget::paintEvent(__attribute((unused)) QPaintEvent *e)
 	}
 }
 
-bool Widget::processSprite(const ISprite &sprite)
+bool arc::Widget::processSprite(const ISprite &sprite)
 {
 	QPixmap *pixmap;
 	auto spriteSize = sprite.getSize();
@@ -53,7 +53,7 @@ bool Widget::processSprite(const ISprite &sprite)
 		pixmap = _sprites.at(&sprite).get();
 	} catch (const std::out_of_range &e) {
 		pixmap = new QPixmap();
-		if (!pixmap->load(QString::fromStdString(sprite.getPath())))
+		if (!pixmap->load(QString::fromStdString(sprite.getTextureName())))
 			return false;
 		_sprites[&sprite] = std::unique_ptr<QPixmap>(pixmap);
 	}
@@ -63,13 +63,13 @@ bool Widget::processSprite(const ISprite &sprite)
 	return true;
 }
 
-bool Widget::processText(const IText &text)
+bool arc::Widget::processText(const IText &text)
 {
 	_text = &text;
 	return true;
 }
 
-void Widget::keyPressEvent(QKeyEvent *e)
+void arc::Widget::keyPressEvent(QKeyEvent *e)
 {
 	auto qtKey = static_cast<Qt::Key>(e->key());
 
@@ -82,7 +82,7 @@ void Widget::keyPressEvent(QKeyEvent *e)
 	}
 }
 
-void Widget::keyReleaseEvent(QKeyEvent *e)
+void arc::Widget::keyReleaseEvent(QKeyEvent *e)
 {
 	auto qtKey = static_cast<Qt::Key>(e->key());
 
@@ -95,7 +95,7 @@ void Widget::keyReleaseEvent(QKeyEvent *e)
 	}
 }
 
-const std::vector<Key> &Widget::getKeys() const
+const std::vector<Key> &arc::Widget::getKeys() const
 {
 	return _keys;
 }

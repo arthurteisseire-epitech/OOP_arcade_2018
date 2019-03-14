@@ -7,7 +7,7 @@
 
 #include "QtGraphic.hpp"
 
-IGraphic *entryPoint(int &ac, char *av[])
+arc::IGraphic *entryPoint(int &ac, char *av[])
 {
 	return new arc::QtGraphic(ac, av);
 }

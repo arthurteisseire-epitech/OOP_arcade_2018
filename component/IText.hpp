@@ -11,13 +11,15 @@
 #include <string>
 #include "IComponent.hpp"
 
-class IText : public IComponent {
-public:
-	~IText() override = default;
+namespace arc {
+	class IText : public IComponent {
+	public:
+		~IText() override = default;
 
-	virtual const std::string &getText() const = 0;
-	virtual const std::pair<float, float> &getPosition() const = 0;
-	virtual const int &getFontSize() const = 0;
-};
+		virtual const std::string &getText() const = 0;
+		virtual const std::pair<float, float> &getPosition() const = 0;
+		virtual const int &getFontSize() const = 0;
+	};
+}
 
 #endif

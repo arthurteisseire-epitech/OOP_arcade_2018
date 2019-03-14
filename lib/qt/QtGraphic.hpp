@@ -37,6 +37,6 @@ namespace arc {
 	};
 }
 
-extern "C" COMMON_SO IGraphic *entryPoint(int &ac, char *av[]);
+extern "C" COMMON_SO arc::IGraphic *entryPoint(int &ac, char *av[]);
 
 #endif

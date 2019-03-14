@@ -27,7 +27,7 @@ TEST(SharedLibrary, LoadGraphicInstanceError)
         arc::LibraryLoader lib(ac, av);
 
         av[0] = const_cast<char *>(std::string("test").c_str());
-        ASSERT_THROW(lib.loadInstance<IGraphic>("non existent lib"), arc::LibraryLoaderException);
+        ASSERT_THROW(lib.loadInstance<arc::IGraphic>("non existent lib"), arc::LibraryLoaderException);
 }
 
 TEST(SharedLibrary, FindSymWithoutLibError)
