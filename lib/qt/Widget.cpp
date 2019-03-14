@@ -7,15 +7,22 @@
 
 #include <QPainter>
 #include <QtWidgets/QApplication>
+#include <iostream>
 #include "Widget.hpp"
 
 std::map<Qt::Key, arc::Key> arc::Widget::_qKeys = {
 	{Qt::Key_Return, ENTER},
-	{Qt::Key_Escape, ESCAPE},
 	{Qt::Key_Up,     UP},
 	{Qt::Key_Down,   DOWN},
 	{Qt::Key_Left,   LEFT},
 	{Qt::Key_Right,  RIGHT},
+	{Qt::Key_F1,     F1},
+	{Qt::Key_F2,     F2},
+	{Qt::Key_F3,     F3},
+	{Qt::Key_F4,     F4},
+	{Qt::Key_Delete, SUPPR},
+	{Qt::Key_Escape, ESCAPE},
+	{Qt::Key_R,      R},
 };
 
 arc::Widget::Widget() :
@@ -61,6 +68,7 @@ bool arc::Widget::processSprite(const ISprite &sprite)
 	*pixmap = pixmap->scaled(pos.first, pos.second);
 	return true;
 }
+
 bool arc::Widget::processText(const IText &text)
 {
 	_text = &text;
