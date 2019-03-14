@@ -9,11 +9,6 @@
 #include <QtWidgets/QApplication>
 #include "Widget.hpp"
 
-Widget::Widget() :
-	_text(nullptr)
-{
-}
-
 static std::map<Qt::Key, Key> Keys = {
 	{Qt::Key_Return, ENTER},
 	{Qt::Key_Enter,  ENTER},
@@ -23,6 +18,11 @@ static std::map<Qt::Key, Key> Keys = {
 	{Qt::Key_Left,   LEFT},
 	{Qt::Key_Right,  RIGHT},
 };
+
+Widget::Widget() :
+	_text(nullptr)
+{
+}
 
 void Widget::paintEvent(__attribute((unused)) QPaintEvent *e)
 {
@@ -43,7 +43,7 @@ void Widget::paintEvent(__attribute((unused)) QPaintEvent *e)
 	}
 }
 
-void Widget::processSprite(const ISprite &sprite)
+bool Widget::processSprite(const ISprite &sprite)
 {
 	QPixmap *pixmap;
 	auto spriteSize = sprite.getSize();
@@ -52,17 +52,21 @@ void Widget::processSprite(const ISprite &sprite)
 	try {
 		pixmap = _sprites.at(&sprite).get();
 	} catch (const std::out_of_range &e) {
-		pixmap = new QPixmap(QString::fromStdString(sprite.getPath()));
+		pixmap = new QPixmap();
+		if (!pixmap->load(QString::fromStdString(sprite.getPath())))
+			return false;
 		_sprites[&sprite] = std::unique_ptr<QPixmap>(pixmap);
 	}
 	pos.first = (int)(size().width() * spriteSize.first);
 	pos.second = (int)(size().height() * spriteSize.second);
 	*pixmap = pixmap->scaled(pos.first, pos.second);
+	return true;
 }
 
-void Widget::processText(const IText &text)
+bool Widget::processText(const IText &text)
 {
 	_text = &text;
+	return true;
 }
 
 void Widget::keyPressEvent(QKeyEvent *e)

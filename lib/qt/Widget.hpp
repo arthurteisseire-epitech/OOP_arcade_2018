@@ -18,8 +18,8 @@
 class Widget : public QWidget {
 public:
 	Widget();
-	void processSprite(const ISprite &sprite);
-	void processText(const IText &text);
+	bool processSprite(const ISprite &sprite);
+	bool processText(const IText &text);
 	const std::vector<Key> &getKeys() const;
 protected:
 	void paintEvent(QPaintEvent *e) override;

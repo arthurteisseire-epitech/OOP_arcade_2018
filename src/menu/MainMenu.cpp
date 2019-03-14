@@ -22,7 +22,7 @@ arc::MainMenu::MainMenu() :
 	_spriteFocus = std::unique_ptr<Sprite>(new Sprite("assets/focus.png"));
 	_buttons.push_back(std::unique_ptr<Sprite>(new Sprite("assets/sample.jpg")));
 	_buttons.push_back(std::unique_ptr<Sprite>(new Sprite("assets/sample.jpg")));
-	_buttons.push_back(std::unique_ptr<Sprite>(new Sprite("assets/sample.jpg")));
+	_buttons.push_back(std::unique_ptr<Sprite>(new Sprite("assets/sampl.jpg")));
 	setSpritesPosition();
 	setSpritesSize();
 }

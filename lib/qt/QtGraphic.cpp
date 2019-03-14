@@ -19,11 +19,6 @@ arc::QtGraphic::QtGraphic(int &ac, char *av[]) :
 	_widget->show();
 }
 
-void arc::QtGraphic::processSprite(const ISprite &sprite)
-{
-	_widget->processSprite(sprite);
-}
-
 bool arc::QtGraphic::isOpen() const
 {
 	return _widget->isVisible();
@@ -34,9 +29,14 @@ void arc::QtGraphic::draw()
 	_widget->repaint();
 }
 
-const std::vector<Key> &arc::QtGraphic::getKeys() const
+bool arc::QtGraphic::processSprite(const ISprite &sprite)
 {
-        return _widget->getKeys();
+	return _widget->processSprite(sprite);
+}
+
+bool arc::QtGraphic::processText(const IText &text)
+{
+	return _widget->processText(text);
 }
 
 void arc::QtGraphic::processEvents()
@@ -44,7 +44,7 @@ void arc::QtGraphic::processEvents()
 	QApplication::processEvents();
 }
 
-void arc::QtGraphic::processText(const IText &text)
+const std::vector<Key> &arc::QtGraphic::getKeys() const
 {
-	_widget->processText(text);
+        return _widget->getKeys();
 }

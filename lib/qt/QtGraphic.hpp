@@ -25,12 +25,12 @@ namespace arc {
 	class QtGraphic : public IGraphic, public QObject {
 	public:
 		QtGraphic(int &ac, char *av[]);
-		void draw() override;
 		bool isOpen() const override;
-		void processSprite(const ISprite &sprite) override;
-		void processText(const IText &text) override;
-		const std::vector<Key> &getKeys() const override;
+		void draw() override;
+		bool processSprite(const ISprite &sprite) override;
+		bool processText(const IText &text) override;
 		void processEvents() override;
+		const std::vector<Key> &getKeys() const override;
 	private:
 		std::unique_ptr<QApplication> _app;
 		std::unique_ptr<Widget> _widget;
