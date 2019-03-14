@@ -9,7 +9,7 @@ RULES	=	all		\
 		clean		\
 		fclean		\
 		re		\
-		test_run	\
+		tests_run	\
 
 $(RULES):
 	cmake . && $(MAKE) $@
