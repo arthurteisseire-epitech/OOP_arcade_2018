@@ -27,7 +27,6 @@ void arc::QtGraphic::processSprite(const ISprite &sprite)
 
 bool arc::QtGraphic::isOpen() const
 {
-	QApplication::processEvents();
 	return _widget->isVisible();
 }
 
@@ -43,4 +42,10 @@ const std::vector<Key> &arc::QtGraphic::getKeys() const
 void arc::QtGraphic::processEvents()
 {
 	QApplication::processEvents();
+}
+
+void arc::QtGraphic::processText(const IText &text)
+{
+	_widget->processText(text);
+	_widget->repaint();
 }

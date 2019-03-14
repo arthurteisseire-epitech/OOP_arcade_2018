@@ -17,5 +17,4 @@ public:
 	virtual ComponentType getType() const = 0;
 };
 
-
-#endif //ARCADE_ICOMPONENT_HPP
+#endif

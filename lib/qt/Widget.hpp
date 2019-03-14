@@ -11,13 +11,15 @@
 #include <memory>
 #include <QWidget>
 #include <QKeyEvent>
+#include "IText.hpp"
 #include "Key.hpp"
 #include "ISprite.hpp"
 
 class Widget : public QWidget {
 public:
-	Widget() = default;
+	Widget();
 	void processSprite(const ISprite &sprite);
+	void processText(const IText &text);
 	const std::vector<Key> &getKeys() const;
 protected:
 	void paintEvent(QPaintEvent *e) override;
@@ -25,6 +27,8 @@ protected:
 	void keyReleaseEvent(QKeyEvent *e) override;
 private:
 	std::map<const ISprite *, std::unique_ptr<QPixmap>> _sprites;
+	const IText *_text;
 	std::vector<Key> _keys;
 };
+
 #endif

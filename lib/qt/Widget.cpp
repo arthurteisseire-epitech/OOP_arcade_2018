@@ -9,6 +9,11 @@
 #include <QtWidgets/QApplication>
 #include "Widget.hpp"
 
+Widget::Widget() :
+	_text(nullptr)
+{
+}
+
 static std::map<Qt::Key, Key> Keys = {
 	{Qt::Key_Return, ENTER},
 	{Qt::Key_Enter,  ENTER},
@@ -22,13 +27,19 @@ static std::map<Qt::Key, Key> Keys = {
 void Widget::paintEvent(__attribute((unused)) QPaintEvent *e)
 {
 	QPainter painter(this);
-	std::pair<int, int> pos;
+	QPoint spritePos;
+	QPoint textPos;
 
 	for (auto &_sprite : _sprites) {
-		pos.first = (int)(size().width() * _sprite.first->getPosition().first);
-		pos.second = (int)(size().height() * _sprite.first->getPosition().second);
-
-		painter.drawPixmap(pos.first, pos.second, *_sprite.second);
+		spritePos.setX((int)(size().width() * _sprite.first->getPosition().first));
+		spritePos.setY((int)(size().height() * _sprite.first->getPosition().second));
+		painter.drawPixmap(spritePos, *_sprite.second);
+	}
+	if (_text != nullptr) {
+		textPos.setX((int)(size().width() * _text->getPosition().first));
+		textPos.setY((int)(size().height() * _text->getPosition().second));
+		painter.setFont(QFont("arial", _text->getFontSize()));
+		painter.drawText(textPos, QString::fromStdString(_text->getText()));
 	}
 }
 
@@ -47,6 +58,11 @@ void Widget::processSprite(const ISprite &sprite)
 	pos.first = (int)(size().width() * spriteSize.first);
 	pos.second = (int)(size().height() * spriteSize.second);
 	*pixmap = pixmap->scaled(pos.first, pos.second);
+}
+
+void Widget::processText(const IText &text)
+{
+	_text = &text;
 }
 
 void Widget::keyPressEvent(QKeyEvent *e)
