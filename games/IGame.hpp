@@ -16,7 +16,7 @@ namespace arc {
 	public:
 		virtual ~IGame() = default;
 
-		virtual std::vector<std::reference_wrapper<IComponent>> getComponents() = 0;
+		virtual std::vector<std::reference_wrapper<IComponent>> getComponents() const = 0;
 	};
 }
 

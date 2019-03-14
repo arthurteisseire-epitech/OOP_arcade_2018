@@ -31,7 +31,7 @@ add_executable(units ${core} ${tests} ${component} ${games})
 target_link_libraries(units dl Qt5::Widgets gtest gtest_main gcov)
 
 add_executable(${CMAKE_PROJECT_NAME} ${main} ${core} ${component})
-target_link_libraries(${CMAKE_PROJECT_NAME} dl)
+target_link_libraries(${CMAKE_PROJECT_NAME} dl Qt5::Widgets)
 
 add_custom_target(
         tests_run

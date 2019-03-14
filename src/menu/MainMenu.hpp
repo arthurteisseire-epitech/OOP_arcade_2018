@@ -10,17 +10,27 @@
 
 #include <vector>
 #include <memory>
+#include <map>
 #include "ISprite.hpp"
 #include "Sprite.hpp"
+#include "Key.hpp"
 
-class MainMenu {
-public:
-	MainMenu();
-	const std::vector<std::unique_ptr<ISprite>> &getSprites();
-private:
-	void setSpritesPosition();
-	void setSpritesSize();
-	std::vector<std::unique_ptr<ISprite>> _sprites;
-};
+namespace arc {
+	class MainMenu {
+	public:
+		MainMenu();
+		std::vector<std::reference_wrapper<ISprite>> getSprites();
+		void processEvents(const std::vector<Key> &vector);
+	private:
+		void moveFocusDown();
+		void moveFocusUp();
+		void setSpritesPosition();
+		void setSpritesSize();
+		std::vector<std::unique_ptr<Sprite>> _buttons;
+		std::unique_ptr<Sprite> _spriteFocus;
+		size_t _focus;
+		static std::map<Key, void (arc::MainMenu::*)()> _keysMap;
+	};
+}
 
 #endif

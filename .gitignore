@@ -22,10 +22,11 @@ CTestTestfile.cmake
 feature_tests.c
 CMakeCCompilerId.c
 
-# Project
-arcade
-*.so*
-
 # Qt
 lib/qt/Makefile
 .qmake.stash
+
+# Project
+arcade
+*.so*
+Makefile

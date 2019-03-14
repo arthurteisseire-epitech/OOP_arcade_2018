@@ -1,49 +1,50 @@
 /*
 ** EPITECH PROJECT, 2018
-** OOP_arcade_2018
+** arcade
 ** File description:
 ** QtGraphic.cpp
 */
 
 #include "QtGraphic.hpp"
 
-IGraphic *entryPoint(int &ac, char *av[])
+arc::IGraphic *entryPoint(int &ac, char *av[])
 {
-	return new QtGraphic(ac, av);
+	return new arc::QtGraphic(ac, av);
 }
 
-QtGraphic::QtGraphic(int &ac, char *av[]) :
+arc::QtGraphic::QtGraphic(int &ac, char *av[]) :
 	_app(new QApplication(ac, av)),
-	_centralWidget(new Widget()),
-	_window(new QMainWindow()),
-	_button(new QPushButton("Quit", _centralWidget.get()))
+	_widget(new Widget())
 {
-	QObject::connect(_button.get(), &QAbstractButton::clicked, this, [this] {
-		this->_window->setVisible(false);
-	});
-	_window->setCentralWidget(_centralWidget.get());
-	_window->show();
+	_widget->show();
 }
 
-void QtGraphic::processSprite(const ISprite &sprite)
+bool arc::QtGraphic::isOpen() const
 {
-	_app->setActiveWindow(_window.get());
-	_centralWidget->processSprite(sprite);
-	_centralWidget->repaint();
+	return _widget->isVisible();
 }
 
-#include <iostream>
-void QtGraphic::processText(const IText &text)
+void arc::QtGraphic::draw()
 {
-	std::cout << text.getText() << std::endl;
+	_widget->repaint();
 }
 
-bool QtGraphic::isOpen()
+bool arc::QtGraphic::processSprite(const ISprite &sprite)
+{
+	return _widget->processSprite(sprite);
+}
+
+bool arc::QtGraphic::processText(const IText &text)
+{
+	return _widget->processText(text);
+}
+
+void arc::QtGraphic::processEvents()
 {
 	QApplication::processEvents();
-	return _window->isVisible();
 }
 
-void QtGraphic::draw()
+const std::vector<Key> &arc::QtGraphic::getKeys() const
 {
+        return _widget->getKeys();
 }

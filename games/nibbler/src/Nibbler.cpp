@@ -10,7 +10,7 @@
 #include "Sprite.hpp"
 #include "Text.hpp"
 
-IGame *entryPoint(int &ac, char *av[])
+arc::IGame *entryPoint(int &ac, char *av[])
 {
 	return new arc::Nibbler(ac, av);
 }
@@ -19,7 +19,7 @@ arc::Nibbler::Nibbler(int &, char **) : _score(0)
 {
 }
 
-std::vector<std::reference_wrapper<IComponent>> arc::Nibbler::getComponents()
+std::vector<std::reference_wrapper<arc::IComponent>> arc::Nibbler::getComponents() const
 {
 	std::vector<std::reference_wrapper<IComponent>> vec;
 	IComponent *sprite = new Sprite("games/nibbler/assets/snake_head_up.png");

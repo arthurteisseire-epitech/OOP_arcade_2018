@@ -328,6 +328,42 @@ main.s:
 .PHONY : main.s
 
 # target to build an object file
+src/ArgParser.o:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/ArgParser.o
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/ArgParser.o
+.PHONY : src/ArgParser.o
+
+# target to preprocess a source file
+src/ArgParser.i:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/ArgParser.i
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/ArgParser.i
+.PHONY : src/ArgParser.i
+
+# target to generate assembly for a file
+src/ArgParser.s:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/ArgParser.s
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/ArgParser.s
+.PHONY : src/ArgParser.s
+
+# target to build an object file
+src/Core.o:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/Core.o
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/Core.o
+.PHONY : src/Core.o
+
+# target to preprocess a source file
+src/Core.i:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/Core.i
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/Core.i
+.PHONY : src/Core.i
+
+# target to generate assembly for a file
+src/Core.s:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/Core.s
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/Core.s
+.PHONY : src/Core.s
+
+# target to build an object file
 src/Process.o:
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/Process.o
 	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/Process.o
@@ -397,6 +433,24 @@ src/library/LibraryLoaderTest.s:
 .PHONY : src/library/LibraryLoaderTest.s
 
 # target to build an object file
+src/menu/Button.o:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/menu/Button.o
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/menu/Button.o
+.PHONY : src/menu/Button.o
+
+# target to preprocess a source file
+src/menu/Button.i:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/menu/Button.i
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/menu/Button.i
+.PHONY : src/menu/Button.i
+
+# target to generate assembly for a file
+src/menu/Button.s:
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/menu/Button.s
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/menu/Button.s
+.PHONY : src/menu/Button.s
+
+# target to build an object file
 src/menu/MainMenu.o:
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/menu/MainMenu.o
 	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/menu/MainMenu.o
@@ -453,6 +507,12 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... src/ArgParser.o"
+	@echo "... src/ArgParser.i"
+	@echo "... src/ArgParser.s"
+	@echo "... src/Core.o"
+	@echo "... src/Core.i"
+	@echo "... src/Core.s"
 	@echo "... src/Process.o"
 	@echo "... src/Process.i"
 	@echo "... src/Process.s"
@@ -465,6 +525,9 @@ help:
 	@echo "... src/library/LibraryLoaderTest.o"
 	@echo "... src/library/LibraryLoaderTest.i"
 	@echo "... src/library/LibraryLoaderTest.s"
+	@echo "... src/menu/Button.o"
+	@echo "... src/menu/Button.i"
+	@echo "... src/menu/Button.s"
 	@echo "... src/menu/MainMenu.o"
 	@echo "... src/menu/MainMenu.i"
 	@echo "... src/menu/MainMenu.s"

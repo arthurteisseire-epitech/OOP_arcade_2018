@@ -2,20 +2,28 @@
 ** EPITECH PROJECT, 2018
 ** arcade
 ** File description:
-** IComponent.hpp,
+** IComponent.hpp
 */
 
 #ifndef ARCADE_ICOMPONENT_HPP
 #define ARCADE_ICOMPONENT_HPP
 
-enum ComponentType{SPRITE, TEXT, SOUND};
+namespace arc {
+	enum ComponentType {
+		SPRITE,
+		TEXT,
+		SOUND
+	};
 
-class IComponent {
-public:
-	virtual ~IComponent() = default;
+	class IComponent {
+	public:
+		virtual ~IComponent() = default;
 
-	virtual ComponentType getType() const = 0;
-};
+		/**
+		 * @return The corresponding type from the enum ComponentType
+		 */
+		virtual ComponentType getType() const = 0;
+	};
+}
 
-
-#endif //ARCADE_ICOMPONENT_HPP
+#endif
