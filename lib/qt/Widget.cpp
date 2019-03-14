@@ -61,7 +61,6 @@ bool arc::Widget::processSprite(const ISprite &sprite)
 	*pixmap = pixmap->scaled(pos.first, pos.second);
 	return true;
 }
-
 bool arc::Widget::processText(const IText &text)
 {
 	_text = &text;
@@ -70,33 +69,24 @@ bool arc::Widget::processText(const IText &text)
 
 void arc::Widget::keyPressEvent(QKeyEvent *e)
 {
-	processKeys(e, PRESSED);
+	if (e->isAutoRepeat())
+		processKeys(e, HOLD);
+	else
+		processKeys(e, PRESSED);
 }
 
 void arc::Widget::keyReleaseEvent(QKeyEvent *e)
 {
-	if (!e->isAutoRepeat())
-		processKeys(e, RELEASED);
+	processKeys(e, RELEASED);
 }
 
 void arc::Widget::processKeys(const QKeyEvent *e, KeyState state)
 {
 	auto qtKey = static_cast<Qt::Key>(e->key());
+	auto it = _qKeys.find(qtKey);
 
-	cleanKeys();
-	try {
-		Key key = _qKeys.at(qtKey);
-
-		_keys[key] = state;
-	} catch (const std::out_of_range &e) {
-	}
-}
-
-void arc::Widget::cleanKeys()
-{
-	for (auto &it : _keys)
-		if (it.second == PRESSED)
-			it.second = HOLD;
+	if (it != _qKeys.end())
+		_keys[it->second] = state;
 }
 
 std::map<arc::Key, arc::KeyState> arc::Widget::getKeys()

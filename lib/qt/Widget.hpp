@@ -27,13 +27,11 @@ namespace arc {
 		void keyPressEvent(QKeyEvent *e) override;
 		void keyReleaseEvent(QKeyEvent *e) override;
 	private:
-		void cleanKeys();
 		void processKeys(const QKeyEvent *e, arc::KeyState state);
 
 		std::map<const ISprite *, std::unique_ptr<QPixmap>> _sprites;
 		const IText *_text;
 		std::map<Key, KeyState> _keys;
-		std::map<Key, KeyState> _tmpKeys;
 		static std::map<Qt::Key, Key> _qKeys;
 	};
 }
