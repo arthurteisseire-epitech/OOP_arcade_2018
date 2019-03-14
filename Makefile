@@ -1,8 +1,8 @@
 ##
-## EPITECH PROJECT, 2017
-## File Name : Makefile
+## EPITECH PROJECT, 2018
+## arcade
 ## File description:
-## Project Name : linked_lists
+## Makefile
 ##
 
 RULES	=	all		\

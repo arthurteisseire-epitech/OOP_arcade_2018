@@ -17,6 +17,7 @@
 namespace arc {
 	class IGraphic {
 	public:
+		virtual ~IGraphic() = default;
 		virtual void draw() = 0;
 		virtual bool isOpen() const = 0;
 		virtual bool processSprite(const ISprite &sprite) = 0;
