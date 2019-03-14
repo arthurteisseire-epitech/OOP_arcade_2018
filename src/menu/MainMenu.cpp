@@ -5,6 +5,7 @@
 ** MainMenu.cpp
 */
 
+#include <memory>
 #include <algorithm>
 #include <map>
 #include <functional>
@@ -12,7 +13,7 @@
 #include "MainMenu.hpp"
 #include "Button.hpp"
 
-std::map<Key, void (arc::MainMenu::*)()> arc::MainMenu::_keysMap = {
+std::map<arc::Key, void (arc::MainMenu::*)()> arc::MainMenu::_keysMap = {
 	{UP, &arc::MainMenu::moveFocusUp},
 	{DOWN, &arc::MainMenu::moveFocusDown},
 };
@@ -20,10 +21,10 @@ std::map<Key, void (arc::MainMenu::*)()> arc::MainMenu::_keysMap = {
 arc::MainMenu::MainMenu() :
 	_focus(0)
 {
-	_spriteFocus = std::unique_ptr<Sprite>(new Sprite("assets/focus.png"));
-	_buttons.push_back(std::unique_ptr<Button>(new Button("assets/sample.jpg")));
-	_buttons.push_back(std::unique_ptr<Button>(new Button("assets/sample.jpg")));
-	_buttons.push_back(std::unique_ptr<Button>(new Button("assets/sample.jpg")));
+	_spriteFocus = std::make_unique<Sprite>("assets/focus.png");
+	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg"));
+	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg"));
+	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg"));
 	setSpritesPosition();
 	setSpritesSize();
 }
@@ -33,8 +34,8 @@ std::vector<std::reference_wrapper<arc::ISprite>> arc::MainMenu::getSprites()
 	std::vector<std::reference_wrapper<ISprite>> wrapper;
 
 	for (const auto &button : _buttons)
-		wrapper.push_back(*button);
-	wrapper.push_back(*_spriteFocus);
+		wrapper.emplace_back(*button);
+	wrapper.emplace_back(*_spriteFocus);
         return wrapper;
 }
 
@@ -57,11 +58,13 @@ void arc::MainMenu::setSpritesSize()
 	_buttons[2]->setSize(std::pair<float, float>(width, height));
 }
 
-void arc::MainMenu::processEvents(const std::vector<Key> &vector)
+void arc::MainMenu::processEvents(const std::map<Key, KeyState> &map)
 {
-	for (auto &p : _keysMap)
-		if (std::find(vector.begin(), vector.end(), p.first) != vector.end())
+	for (auto &p : _keysMap) {
+		auto it = map.find(p.first);
+		if (it != map.end() && it->second == RELEASED)
 			(this->*p.second)();
+	}
 }
 
 void arc::MainMenu::moveFocusDown()

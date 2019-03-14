@@ -9,9 +9,8 @@
 #include <QtWidgets/QApplication>
 #include "Widget.hpp"
 
-static std::map<Qt::Key, Key> Keys = {
+std::map<Qt::Key, arc::Key> arc::Widget::_qKeys = {
 	{Qt::Key_Return, ENTER},
-	{Qt::Key_Enter,  ENTER},
 	{Qt::Key_Escape, ESCAPE},
 	{Qt::Key_Up,     UP},
 	{Qt::Key_Down,   DOWN},
@@ -71,31 +70,44 @@ bool arc::Widget::processText(const IText &text)
 
 void arc::Widget::keyPressEvent(QKeyEvent *e)
 {
-	auto qtKey = static_cast<Qt::Key>(e->key());
-
-	try {
-		Key key = Keys.at(qtKey);
-
-		if (std::find(_keys.begin(), _keys.end(), key) == _keys.end())
-			_keys.push_back(key);
-	} catch (const std::out_of_range &e) {
-	}
+	processKeys(e, PRESSED);
 }
 
 void arc::Widget::keyReleaseEvent(QKeyEvent *e)
 {
+	if (!e->isAutoRepeat())
+		processKeys(e, RELEASED);
+}
+
+void arc::Widget::processKeys(const QKeyEvent *e, KeyState state)
+{
 	auto qtKey = static_cast<Qt::Key>(e->key());
 
+	cleanKeys();
 	try {
-		auto it = std::find(_keys.begin(), _keys.end(), Keys.at(qtKey));
+		Key key = _qKeys.at(qtKey);
 
-		if (it != _keys.end())
-			_keys.erase(it);
+		_keys[key] = state;
 	} catch (const std::out_of_range &e) {
 	}
 }
 
-const std::vector<Key> &arc::Widget::getKeys() const
+void arc::Widget::cleanKeys()
 {
-	return _keys;
+	for (auto &it : _keys)
+		if (it.second == PRESSED)
+			it.second = HOLD;
+}
+
+std::map<arc::Key, arc::KeyState> arc::Widget::getKeys()
+{
+	auto tmp(_keys);
+
+	auto it = _keys.begin();
+	while (it != _keys.end())
+		if (it->second == RELEASED)
+			_keys.erase(it++);
+		else
+			++it;
+	return tmp;
 }

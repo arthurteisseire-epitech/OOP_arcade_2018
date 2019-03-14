@@ -30,7 +30,7 @@ namespace arc {
 		bool processSprite(const ISprite &sprite) override;
 		bool processText(const IText &text) override;
 		void processEvents() override;
-		const std::vector<Key> &getKeys() const override;
+		std::map<Key, KeyState> getKeys() override;
 	private:
 		std::unique_ptr<QApplication> _app;
 		std::unique_ptr<Widget> _widget;
