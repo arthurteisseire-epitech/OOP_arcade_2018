@@ -7,9 +7,8 @@
 
 #include "Core.hpp"
 
-arc::Core::Core(arc::MainMenu *mainMenu, IGraphic *graphic, IGame *game) :
-	_mainMenu(mainMenu),
-	_graphic(graphic),
-	_game(game)
+arc::Core::Core(IGraphic *graphic) :
+	_mainMenu(new MainMenu()),
+	_graphic(graphic)
 {
 }
