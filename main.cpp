@@ -7,6 +7,7 @@
 
 #include <unistd.h>
 #include <iostream>
+#include "ArgParser.hpp"
 #include "Core.hpp"
 #include "Text.hpp"
 #include "Process.hpp"
@@ -17,13 +18,15 @@
 
 int main(int argc, char *argv[])
 {
+	arc::ArgParser argParser(argc, argv);
+
+	auto core = argParser.createCore();
 	arc::MainMenu mainMenu;
 	arc::LibraryLoader graphicLoader(argc, argv);
 	arc::LibraryLoader gameLoader(argc, argv);
 	Text text("hello", 60, std::pair<float, float>(0.1, 0.1));
 	IGraphic *graphic = nullptr;
 	IGame *game = nullptr;
-	arc::Core core(graphic);
 
 	try {
 		graphic = graphicLoader.loadInstance<IGraphic>("lib/qt/lib_arcade_qt5.so");

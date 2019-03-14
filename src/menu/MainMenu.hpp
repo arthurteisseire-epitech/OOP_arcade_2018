@@ -13,6 +13,7 @@
 #include <map>
 #include "ISprite.hpp"
 #include "Sprite.hpp"
+#include "Key.hpp"
 
 namespace arc {
 	class MainMenu {
