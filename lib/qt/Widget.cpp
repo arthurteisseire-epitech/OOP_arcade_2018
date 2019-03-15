@@ -86,13 +86,17 @@ bool arc::Widget::processText(const IText &text)
 bool arc::Widget::processAudio(const arc::IAudio &audio)
 {
 	QString path(QString::fromStdString(audio.getSoundPath()));
+	QFileInfo file(path);
+	auto player = new QMediaPlayer();
 
 	if (_player.find(&audio) == _player.end()) {
-		_player[&audio] = std::make_unique<QMediaPlayer>();
-		_player[&audio]->setMedia(QUrl::fromLocalFile(QFileInfo(path).absoluteFilePath()));
+		if (!file.exists())
+			return false;
+		player->setMedia(QUrl::fromLocalFile(file.absoluteFilePath()));
+		_player[&audio] = std::unique_ptr<QMediaPlayer>(player);
 	}
-	_player[&audio]->setVolume(audio.getVolume());
-	_player[&audio]->play();
+	player->setVolume(audio.getVolume());
+	player->play();
 	return true;
 }
 
