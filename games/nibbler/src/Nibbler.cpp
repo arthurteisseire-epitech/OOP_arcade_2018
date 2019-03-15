@@ -32,3 +32,8 @@ std::vector<std::reference_wrapper<arc::IComponent>> arc::Nibbler::getComponents
 	vec.emplace_back(*score);
 	return vec;
 }
+
+void arc::Nibbler::update(std::map<arc::Key, arc::KeyState> keys, float deltaTime)
+{
+
+}

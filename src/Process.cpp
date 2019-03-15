@@ -21,3 +21,23 @@ void arc::Process::texts(const std::vector<std::reference_wrapper<IText>> texts,
 		if (!graphic->processText(text.get()))
 			std::cerr << "Process text failed for text: " << text.get().getText() << std::endl;
 }
+
+
+void arc::Process::all(std::vector<std::reference_wrapper<IComponent>> components, IGraphic *graphic)
+{
+	for (auto component : components) {
+		try {
+			arc::Process::any(component, graphic);
+		} catch (...) {
+			std::cerr << "Unknown type: " << component.get().getType() << std::endl;
+		}
+	}
+}
+
+void arc::Process::any(std::reference_wrapper<IComponent> comp, IGraphic *graphic)
+{
+	if (comp.get().getType() == SPRITE)
+		graphic->processSprite(dynamic_cast<ISprite &>(comp.get()));
+	else if (comp.get().getType() == TEXT)
+		graphic->processText(dynamic_cast<IText &>(comp.get()));
+}

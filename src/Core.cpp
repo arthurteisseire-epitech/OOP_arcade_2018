@@ -20,11 +20,15 @@ arc::Core::Core(IGraphic *graphic, IGame *game) :
 #include <iostream>
 int arc::Core::exec()
 {
+	clock_t prog_time = clock();
+	clock_t new_time;
+
 	while (_graphic->isOpen()) {
-		arc::Process::sprites(_mainMenu->getSprites(), _graphic.get());
-		arc::Process::texts(_mainMenu->getTexts(), _graphic.get());
 		_graphic->processEvents();
-		_mainMenu->processEvents(_graphic->getKeys());
+		new_time = clock();
+		_game->update(_graphic->getKeys(), (new_time - prog_time) / CLOCKS_PER_SEC);
+		prog_time = new_time;
+		Process::all(_game->getComponents(), _graphic.get());
 		_graphic->draw();
 		usleep(100);
 	}
