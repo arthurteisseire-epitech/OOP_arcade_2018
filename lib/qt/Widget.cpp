@@ -8,6 +8,7 @@
 #include <QPainter>
 #include <QtWidgets/QApplication>
 #include <iostream>
+#include <QtGui/QFontDatabase>
 #include "Widget.hpp"
 
 std::map<Qt::Key, arc::Key> arc::Widget::_qKeys = {
@@ -39,7 +40,7 @@ void arc::Widget::paintEvent(__attribute((unused)) QPaintEvent *e)
 	for (auto text : _text) {
 		textPos.setX((int)(size().width() * text->getPosition().first));
 		textPos.setY((int)(size().height() * text->getPosition().second));
-		painter.setFont(QFont("arial", text->getFontSize()));
+		painter.setFont(QFont(QString::fromStdString(text->getFontPath()), text->getFontSize()));
 		painter.drawText(textPos, QString::fromStdString(text->getText()));
 	}
 }
@@ -66,8 +67,10 @@ bool arc::Widget::processSprite(const ISprite &sprite)
 
 bool arc::Widget::processText(const IText &text)
 {
-	if (std::find(_text.begin(), _text.end(), &text) == _text.end())
+	if (std::find(_text.begin(), _text.end(), &text) == _text.end()) {
+		QFontDatabase::addApplicationFont(QString::fromStdString(text.getFontPath()));
 		_text.push_back(&text);
+	}
 	return true;
 }
 
