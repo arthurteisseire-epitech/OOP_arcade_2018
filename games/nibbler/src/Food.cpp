@@ -8,7 +8,9 @@
 #include "Food.hpp"
 #include "Snake.hpp"
 
-arc::Food::Food(pos_t position) :
+const unsigned int value = 500;
+
+arc::Food::Food(const pos_t &position) :
 	_pos(position)
 {
 }

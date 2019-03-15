@@ -17,8 +17,9 @@ typedef std::pair<unsigned int, unsigned int> pos_t;
 namespace arc {
 	class Food {
 	public:
-		explicit Food(pos_t position);
+		explicit Food(const pos_t &position);
 
+		static const unsigned int value;
 	protected:
 		pos_t _pos;
 	};
