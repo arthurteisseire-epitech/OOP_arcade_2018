@@ -7,8 +7,8 @@
 
 #include <QPainter>
 #include <QtWidgets/QApplication>
-#include <iostream>
 #include <QtGui/QFontDatabase>
+#include <QtCore/QFileInfo>
 #include "Widget.hpp"
 
 std::map<Qt::Key, arc::Key> arc::Widget::_qKeys = {
@@ -80,6 +80,19 @@ bool arc::Widget::processText(const IText &text)
 		QFontDatabase::addApplicationFont(QString::fromStdString(text.getFontPath()));
 		_text.push_back(&text);
 	}
+	return true;
+}
+
+bool arc::Widget::processAudio(const arc::IAudio &audio)
+{
+	QString path(QString::fromStdString(audio.getSoundPath()));
+
+	if (_player.find(&audio) == _player.end()) {
+		_player[&audio] = std::make_unique<QMediaPlayer>();
+		_player[&audio]->setMedia(QUrl::fromLocalFile(QFileInfo(path).absoluteFilePath()));
+	}
+	_player[&audio]->setVolume(audio.getVolume());
+	_player[&audio]->play();
 	return true;
 }
 

@@ -16,7 +16,6 @@
 
 #include <QtGui>
 #include <QtWidgets>
-#include <QMediaPlayer>
 #include "IGraphic.hpp"
 #include "ISprite.hpp"
 #include "Widget.hpp"
@@ -36,7 +35,6 @@ namespace arc {
 	private:
 		std::unique_ptr<QApplication> _app;
 		std::unique_ptr<Widget> _widget;
-		std::unique_ptr<QMediaPlayer> _player;
 	};
 }
 
