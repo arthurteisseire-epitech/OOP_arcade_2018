@@ -73,10 +73,7 @@ bool arc::Widget::processText(const IText &text)
 
 void arc::Widget::keyPressEvent(QKeyEvent *e)
 {
-	if (e->isAutoRepeat())
-		processKeys(e, HOLD);
-	else
-		processKeys(e, PRESSED);
+	processKeys(e, PRESSED);
 }
 
 void arc::Widget::keyReleaseEvent(QKeyEvent *e)
@@ -93,15 +90,21 @@ void arc::Widget::processKeys(const QKeyEvent *e, KeyState state)
 		_keys[it->second] = state;
 }
 
-std::map<arc::Key, arc::KeyState> arc::Widget::getKeys()
+void arc::Widget::updateKeysState()
 {
-	auto tmp(_keys);
-
 	auto it = _keys.begin();
+
 	while (it != _keys.end())
 		if (it->second == RELEASED)
 			_keys.erase(it++);
-		else
+		else if (it->second == PRESSED) {
+			it->second = HOLD;
 			++it;
-	return tmp;
+		} else
+			++it;
+}
+
+const std::map<arc::Key, arc::KeyState> &arc::Widget::getKeys() const
+{
+	return _keys;
 }

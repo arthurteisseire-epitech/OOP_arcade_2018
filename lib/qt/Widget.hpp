@@ -21,7 +21,8 @@ namespace arc {
 		Widget() = default;
 		bool processSprite(const ISprite &sprite);
 		bool processText(const IText &text);
-		std::map<Key, KeyState> getKeys();
+		const std::map<Key, KeyState> &getKeys() const;
+		void updateKeysState();
 	protected:
 		void paintEvent(QPaintEvent *e) override;
 		void keyPressEvent(QKeyEvent *e) override;

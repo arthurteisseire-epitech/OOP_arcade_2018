@@ -41,10 +41,11 @@ bool arc::QtGraphic::processText(const IText &text)
 
 void arc::QtGraphic::processEvents()
 {
+	_widget->updateKeysState();
 	QApplication::processEvents();
 }
 
-std::map<arc::Key, arc::KeyState> arc::QtGraphic::getKeys()
+const std::map<arc::Key, arc::KeyState> &arc::QtGraphic::getKeys() const
 {
         return _widget->getKeys();
 }
