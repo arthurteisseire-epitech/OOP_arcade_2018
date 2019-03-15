@@ -20,10 +20,10 @@ std::pair<T, T> operator-(const std::pair<T, T> &p1, const std::pair<T, T> &p2)
 }
 
 const std::unordered_map<arc::Snake::Direction, pos_t> arc::Snake::_direction_map = {
-	{UP, {0, -1}},
-	{DOWN, {0, 1}},
-	{RIGHT, {1, 0}},
-	{LEFT, {-1, 0}}
+	{UP,    {0,  -1}},
+	{DOWN,  {0,  1}},
+	{RIGHT, {1,  0}},
+	{LEFT,  {-1, 0}}
 };
 
 arc::Snake::Snake(pos_t start_pos, unsigned int size)
@@ -48,4 +48,12 @@ void arc::Snake::move_body(const arc::Snake::Direction &direction)
 {
 	_body_positions.insert(_body_positions.begin(), _body_positions.front() + _direction_map.at(direction));
 	_body_positions.pop_back();
+}
+
+bool arc::Snake::isFoodNotInSnake(const pos_t &fruit_pos) const
+{
+	for (auto &snake_part : _body_positions)
+		if (snake_part == fruit_pos)
+			return (false);
+	return true;
 }

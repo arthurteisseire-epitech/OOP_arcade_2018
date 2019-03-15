@@ -29,6 +29,7 @@ namespace arc {
 
 		void eat();
 		void move_body(const Direction &direction);
+		bool isFoodNotInSnake(const pos_t &fruit_pos) const;
 	protected:
 		std::pair<unsigned int, unsigned int> find_tail_direction();
 
