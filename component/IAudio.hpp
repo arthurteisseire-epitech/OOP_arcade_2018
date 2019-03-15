@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2019
-** OOP_arcade_2018
+** arcade
 ** File description:
-** Created by abel,
+** IAudio.hpp
 */
 
 #ifndef OOP_ARCADE_2018_I_AUDIO_HPP
