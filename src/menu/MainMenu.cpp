@@ -22,9 +22,9 @@ arc::MainMenu::MainMenu() :
 	_focus(0)
 {
 	_spriteFocus = std::make_unique<Sprite>("assets/focus.png");
-	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg"));
-	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg"));
-	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg"));
+	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", "First"));
+	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", "Second"));
+	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", "Third"));
 	setSpritesPosition();
 	setSpritesSize();
 }
@@ -61,7 +61,7 @@ void arc::MainMenu::moveFocusDown()
 {
 	if (_focus != _buttons.size() - 1) {
 		++_focus;
-		_spriteFocus->moveDown(_buttons[_focus]->getPosition().second - _spriteFocus->getPosition().second);
+		_spriteFocus->moveDown(_buttons[_focus]->getSprite().getPosition().second - _spriteFocus->getPosition().second);
 	}
 }
 
@@ -78,7 +78,16 @@ std::vector<std::reference_wrapper<arc::ISprite>> arc::MainMenu::getSprites() co
 	std::vector<std::reference_wrapper<ISprite>> wrapper;
 
 	for (const auto &button : _buttons)
-		wrapper.emplace_back(*button);
+		wrapper.emplace_back(button->getSprite());
 	wrapper.emplace_back(*_spriteFocus);
+	return wrapper;
+}
+
+std::vector<std::reference_wrapper<arc::IText>> arc::MainMenu::getTexts() const
+{
+	std::vector<std::reference_wrapper<IText>> wrapper;
+
+	for (const auto &button : _buttons)
+		wrapper.emplace_back(button->getText());
 	return wrapper;
 }

@@ -25,7 +25,7 @@ const std::pair<float, float> &arc::Text::getPosition() const
         return _pos;
 }
 
-const int &arc::Text::getFontSize() const
+int arc::Text::getFontSize() const
 {
         return _size;
 }
@@ -38,4 +38,14 @@ arc::ComponentType arc::Text::getType() const
 const std::string &arc::Text::getFontPath() const
 {
 	return _font_path;
+}
+
+void arc::Text::setPosition(const std::pair<float, float> &pos)
+{
+        _pos = pos;
+}
+
+void arc::Text::setSize(int size)
+{
+	_size = size;
 }
