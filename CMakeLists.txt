@@ -10,6 +10,7 @@ set(CMAKE_CXX_COMPILER "g++")
 set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE 1)
 
 find_package(Qt5Widgets)
+find_package(Qt5Multimedia)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 
@@ -31,7 +32,7 @@ add_executable(units ${core} ${tests} ${component} ${games})
 target_link_libraries(units dl Qt5::Widgets gtest gtest_main gcov)
 
 add_executable(${CMAKE_PROJECT_NAME} ${main} ${core} ${component})
-target_link_libraries(${CMAKE_PROJECT_NAME} dl Qt5::Widgets)
+target_link_libraries(${CMAKE_PROJECT_NAME} dl Qt5::Widgets Qt5::Multimedia)
 
 add_custom_target(
         tests_run

@@ -5,6 +5,7 @@
 TEMPLATE = lib
 
 QT += widgets	\
+	multimedia
 
 
 # Directories

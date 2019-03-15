@@ -18,6 +18,7 @@ arc::Core::Core(IGraphic *graphic) :
 
 int arc::Core::exec()
 {
+	_graphic->processAudio(_mainMenu->getAudio());
 	while (_graphic->isOpen()) {
 		arc::Process::sprites(_mainMenu->getSprites(), _graphic.get());
 		arc::Process::texts(_mainMenu->getTexts(), _graphic.get());
