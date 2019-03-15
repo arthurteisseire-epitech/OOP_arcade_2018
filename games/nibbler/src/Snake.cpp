@@ -40,6 +40,7 @@ void arc::Snake::eat()
 std::pair<unsigned int, unsigned int> arc::Snake::find_tail_direction()
 {
 	unsigned long size = _body_positions.size();
+
 	return _body_positions[size - 2] - _body_positions[size - 1];
 }
 

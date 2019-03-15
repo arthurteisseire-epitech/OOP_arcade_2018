@@ -11,13 +11,19 @@
 #include <vector>
 #include <unordered_map>
 
+#ifndef POS_T
+#define POS_T
 typedef std::pair<unsigned int, unsigned int> pos_t;
+#endif
+
 typedef std::vector<pos_t> body_t;
 
 namespace arc {
 	class Snake {
 	public:
-		enum Direction {UP, DOWN, LEFT, RIGHT};
+		enum Direction {
+			UP, DOWN, LEFT, RIGHT
+		};
 
 		explicit Snake(pos_t start_pos, unsigned int size = 4);
 

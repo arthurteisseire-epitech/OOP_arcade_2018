@@ -11,14 +11,20 @@
 
 #include <string>
 #include <vector>
+#include "Snake.hpp"
+#include "Food.hpp"
 
 namespace arc {
 	class Map {
 	public:
 		explicit Map(unsigned int size = 100);
 
-	private:
+		Food generateFood();
+
+	protected:
 		unsigned int _size;
+		Snake _snake;
+		Food _food;
 	};
 }
 
