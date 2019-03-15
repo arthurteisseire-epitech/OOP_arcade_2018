@@ -25,11 +25,6 @@ std::map<Qt::Key, arc::Key> arc::Widget::_qKeys = {
 	{Qt::Key_R,      R},
 };
 
-arc::Widget::Widget() :
-	_text(nullptr)
-{
-}
-
 void arc::Widget::paintEvent(__attribute((unused)) QPaintEvent *e)
 {
 	QPainter painter(this);
@@ -41,11 +36,11 @@ void arc::Widget::paintEvent(__attribute((unused)) QPaintEvent *e)
 		spritePos.setY((int)(size().height() * _sprite.first->getPosition().second));
 		painter.drawPixmap(spritePos, *_sprite.second);
 	}
-	if (_text != nullptr) {
-		textPos.setX((int)(size().width() * _text->getPosition().first));
-		textPos.setY((int)(size().height() * _text->getPosition().second));
-		painter.setFont(QFont("arial", _text->getFontSize()));
-		painter.drawText(textPos, QString::fromStdString(_text->getText()));
+	for (auto text : _text) {
+		textPos.setX((int)(size().width() * text->getPosition().first));
+		textPos.setY((int)(size().height() * text->getPosition().second));
+		painter.setFont(QFont("arial", text->getFontSize()));
+		painter.drawText(textPos, QString::fromStdString(text->getText()));
 	}
 }
 
@@ -71,7 +66,8 @@ bool arc::Widget::processSprite(const ISprite &sprite)
 
 bool arc::Widget::processText(const IText &text)
 {
-	_text = &text;
+	if (std::find(_text.begin(), _text.end(), &text) == _text.end())
+		_text.push_back(&text);
 	return true;
 }
 

@@ -18,7 +18,7 @@
 namespace arc {
 	class Widget : public QWidget {
 	public:
-		Widget();
+		Widget() = default;
 		bool processSprite(const ISprite &sprite);
 		bool processText(const IText &text);
 		std::map<Key, KeyState> getKeys();
@@ -30,7 +30,7 @@ namespace arc {
 		void processKeys(const QKeyEvent *e, arc::KeyState state);
 
 		std::map<const ISprite *, std::unique_ptr<QPixmap>> _sprites;
-		const IText *_text;
+		std::vector<const IText *> _text;
 		std::map<Key, KeyState> _keys;
 		static std::map<Qt::Key, Key> _qKeys;
 	};
