@@ -55,11 +55,14 @@ public:
 	explicit MapTestUtils(unsigned int size = 100) : Map(size)
 	{}
 
-	const SnakeTestUtils *getSnakeUtils() const
+	SnakeTestUtils *getSnakeUtils() const
 	{ return new SnakeTestUtils(_snake); }
 
 	const FoodTestUtils *getFoodUtils() const
 	{ return new FoodTestUtils(_food); }
+
+	unsigned int getSize() const
+	{ return _size; }
 
 };
 
@@ -75,24 +78,23 @@ class PFruitNotInSnake : public qc::Property<MapTestUtils> {
 		MapTestUtils map1 = map;
 
 		map1.generateFood();
-		return (map1.getSnakeUtils()->isFoodNotInSnake(map1.getFoodUtils()->getPos()));
-	}
-
-	void generateInput(size_t n, MapTestUtils &xs) override
-	{
-		unsigned int i;
-
-		qc::generate(n, i);
-		xs = MapTestUtils(i);
+		return (map1.getFoodUtils()->getPos().first < map1.getSize() &&
+			map1.getFoodUtils()->getPos().first < map1.getSize() &&
+			map1.getSnakeUtils()->isFoodNotInSnake(map1.getFoodUtils()->getPos()));
 	}
 };
 
 void generate(size_t n, MapTestUtils &mapTestUtils)
 {
 	unsigned int i;
+	unsigned int l;
 
 	qc::generate(n, i);
+	qc::generate(n, l);
+	l = i != 4 ? l % (i - 4) : 0;
 	mapTestUtils = MapTestUtils(i);
+	for (unsigned int c = 0; c < l; ++c)
+		mapTestUtils.getSnakeUtils()->eat();
 }
 
 TEST(MapTest, GenerateFood)
