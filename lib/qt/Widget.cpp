@@ -45,8 +45,6 @@ void arc::Widget::paintEvent(__attribute((unused)) QPaintEvent *e)
 	}
 }
 
-#include <iostream>
-
 bool arc::Widget::processSprite(const ISprite &sprite)
 {
 	QPixmap *pixmap;
