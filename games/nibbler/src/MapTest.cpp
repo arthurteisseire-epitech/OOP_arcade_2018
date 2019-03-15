@@ -30,7 +30,7 @@ public:
 	{
 		stream << "Snake positions:" << std::endl << "[";
 		for (auto &snake_pos : _body_positions)
-			stream << "(" << snake_pos.first << ", " << snake_pos.second << ")" << std::endl;
+			stream << "(" << snake_pos.first << ", " << snake_pos.second << "), ";
 		return stream << "]" << std::endl;
 	}
 };
@@ -76,11 +76,20 @@ class PFruitNotInSnake : public qc::Property<MapTestUtils> {
 	bool holdsFor(const MapTestUtils &map) override
 	{
 		MapTestUtils map1 = map;
+		bool res;
 
 		map1.generateFood();
-		return (map1.getFoodUtils()->getPos().first < map1.getSize() &&
-			map1.getFoodUtils()->getPos().first < map1.getSize() &&
-			map1.getSnakeUtils()->isFoodNotInSnake(map1.getFoodUtils()->getPos()));
+		unsigned int first = map1.getFoodUtils()->getPos().first;
+		unsigned int second = map1.getFoodUtils()->getPos().second;
+
+		res = first < map1.getSize() && second < map1.getSize() &&
+		      map1.getSnakeUtils()->isFoodNotInSnake(map1.getFoodUtils()->getPos());
+		if (!res) {
+			std::cout << "map size: " << map1.getSize() << " vs FoodPos: (" << first << ", " << second
+				  << ")" << std::endl;
+			map1.getSnakeUtils()->operator<<(std::cout) << std::endl;
+		}
+		return (res);
 	}
 };
 
