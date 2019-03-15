@@ -63,6 +63,7 @@ bool arc::Widget::processSprite(const ISprite &sprite)
 			             (sprite.getColor() & 0x0000ff00) >> 8,
 			             (sprite.getColor() & 0x00ff0000) >> 16,
 			             (sprite.getColor() & 0xff000000) >> 24);
+			delete pixmap;
 			pixmap = new QPixmap(pos.first, pos.second);
 			pixmap->fill(color);
 			ret = false;

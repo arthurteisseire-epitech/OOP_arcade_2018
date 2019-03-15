@@ -23,7 +23,7 @@ arc::MainMenu::MainMenu() :
 {
 	_spriteFocus = std::make_unique<Sprite>("assets/focus.png");
 	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", "First"));
-	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", "Second"));
+	_buttons.push_back(std::make_unique<Button>("assets/saple.jpg", "Second"));
 	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", "Third"));
 	setSpritesSize();
 	setSpritesPosition();
