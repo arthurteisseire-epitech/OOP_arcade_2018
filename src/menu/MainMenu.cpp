@@ -25,8 +25,8 @@ arc::MainMenu::MainMenu() :
 	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", "First"));
 	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", "Second"));
 	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", "Third"));
-	setSpritesPosition();
 	setSpritesSize();
+	setSpritesPosition();
 }
 
 void arc::MainMenu::setSpritesPosition()

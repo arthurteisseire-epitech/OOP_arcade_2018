@@ -15,14 +15,17 @@ arc::Button::Button(const std::string &filename, const std::string &text) :
 
 void arc::Button::setPosition(const std::pair<float, float> &pos)
 {
+	std::pair<float, float> textPos(pos.first + _sprite->getSize().first / 2.0,
+	                                pos.second + _sprite->getSize().second / 2.0);
+
 	_sprite->setPosition(pos);
-	_text->setPosition(pos);
+	_text->setPosition(textPos);
 }
 
 void arc::Button::setSize(const std::pair<float, float> &pos)
 {
 	_sprite->setSize(pos);
-	_text->setSize(10);
+	_text->setSize(40);
 }
 
 const std::pair<float, float> &arc::Button::getPosition() const
@@ -32,12 +35,12 @@ const std::pair<float, float> &arc::Button::getPosition() const
 
 const std::pair<float, float> &arc::Button::getSize() const
 {
-        return _sprite->getSize();
+	return _sprite->getSize();
 }
 
 arc::Sprite &arc::Button::getSprite() const
 {
-        return *_sprite;
+	return *_sprite;
 }
 
 arc::Text &arc::Button::getText() const
