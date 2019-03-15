@@ -25,6 +25,7 @@ namespace arc {
 		MainMenu();
 		std::vector<std::reference_wrapper<ISprite>> getSprites() const;
 		std::vector<std::reference_wrapper<IText>> getTexts() const;
+		std::reference_wrapper<IAudio> getAudio() const;
 		void processEvents(const std::map<Key, KeyState> &map);
 	private:
 		void moveFocusDown();

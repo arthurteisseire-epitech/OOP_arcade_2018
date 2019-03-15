@@ -10,6 +10,7 @@
 
 #include <vector>
 #include <map>
+#include "Audio.hpp"
 #include "Key.hpp"
 #include "ISprite.hpp"
 #include "IText.hpp"
@@ -22,6 +23,7 @@ namespace arc {
 		virtual bool isOpen() const = 0;
 		virtual bool processSprite(const ISprite &sprite) = 0;
 		virtual bool processText(const IText &text) = 0;
+		virtual bool processAudio(const IAudio &audio) = 0;
 		virtual void processEvents() = 0;
 		virtual const std::map<Key, KeyState> &getKeys() const = 0;
 	};

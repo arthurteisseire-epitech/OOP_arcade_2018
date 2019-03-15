@@ -92,3 +92,8 @@ std::vector<std::reference_wrapper<arc::IText>> arc::MainMenu::getTexts() const
 		wrapper.emplace_back(button->getText());
 	return wrapper;
 }
+
+std::reference_wrapper<arc::IAudio> arc::MainMenu::getAudio() const
+{
+        return std::reference_wrapper<IAudio>(*_audio);
+}
