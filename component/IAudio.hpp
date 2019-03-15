@@ -5,8 +5,8 @@
 ** IAudio.hpp
 */
 
-#ifndef OOP_ARCADE_2018_I_AUDIO_HPP
-#define OOP_ARCADE_2018_I_AUDIO_HPP
+#ifndef ARCADE_IAUDIO_HPP
+#define ARCADE_IAUDIO_HPP
 
 #include <string>
 #include "IComponent.hpp"
