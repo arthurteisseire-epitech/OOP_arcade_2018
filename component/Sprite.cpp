@@ -10,7 +10,8 @@
 arc::Sprite::Sprite(const std::string &filename) :
 	_filename(filename),
 	_pos(0, 0),
-	_size(0, 0)
+	_size(0, 0),
+	_color(0xff0000ff)
 {
 }
 
@@ -56,5 +57,5 @@ void arc::Sprite::moveDown(float y)
 
 unsigned int arc::Sprite::getColor() const
 {
-	return 0;
+	return __bswap_32(_color);
 }

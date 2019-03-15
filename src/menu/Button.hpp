@@ -10,11 +10,21 @@
 
 #include <memory>
 #include "Sprite.hpp"
+#include "Text.hpp"
 
 namespace arc {
-	class Button : public Sprite {
+	class Button {
 	public:
-		explicit Button(const std::string &filename);
+		explicit Button(const std::string &filename, const std::string &text = "");
+		void setPosition(const std::pair<float, float> &pos);
+		const std::pair<float, float> &getPosition() const;
+		void setSize(const std::pair<float, float> &pos);
+		const std::pair<float, float> &getSize() const;
+		Text &getText() const;
+		Sprite &getSprite() const;
+	private:
+		std::unique_ptr<Sprite> _sprite;
+		std::unique_ptr<Text> _text;
 	};
 }
 
