@@ -13,13 +13,17 @@
 namespace arc {
 	class Audio : public IAudio {
 	public:
+		explicit Audio(const std::string &path, int volume = 10);
+		~Audio() override = default;
+
+		ComponentType getType() const override;
 		int getVolume() const override;
 		const std::string &getSoundPath() const override;
 		void setVolume(int volume);
 		void setPath(const std::string &path);
 	private:
-		int _volume;
 		std::string _path;
+		int _volume;
 	};
 }
 

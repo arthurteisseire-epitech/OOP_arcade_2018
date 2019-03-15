@@ -22,6 +22,7 @@ arc::MainMenu::MainMenu() :
 	_focus(0)
 {
 	_spriteFocus = std::make_unique<Sprite>("assets/focus.png");
+	_audio = std::make_unique<Audio>("assets/audio/sound.m4a", 10);
 	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", "First"));
 	_buttons.push_back(std::make_unique<Button>("assets/saple.jpg", "Second"));
 	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", "Third"));

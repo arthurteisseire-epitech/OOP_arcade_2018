@@ -15,6 +15,8 @@ namespace arc {
 	class IAudio : public IComponent {
 	public:
 
+		~IAudio() override = default;
+
 		/**
 		 * @return the audio volume between 0 and 100
 		 */

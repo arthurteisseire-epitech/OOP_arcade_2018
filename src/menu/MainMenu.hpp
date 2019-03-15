@@ -17,6 +17,7 @@
 #include "Sprite.hpp"
 #include "Key.hpp"
 #include "Button.hpp"
+#include "Audio.hpp"
 
 namespace arc {
 	class MainMenu {
@@ -30,9 +31,11 @@ namespace arc {
 		void moveFocusUp();
 		void setSpritesPosition();
 		void setSpritesSize();
+
+		size_t _focus;
 		std::vector<std::unique_ptr<Button>> _buttons;
 		std::unique_ptr<Sprite> _spriteFocus;
-		size_t _focus;
+		std::unique_ptr<Audio> _audio;
 		static std::map<Key, void (arc::MainMenu::*)()> _keysMap;
 	};
 }
