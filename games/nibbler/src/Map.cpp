@@ -25,3 +25,10 @@ arc::Food arc::Map::generateFood()
 		generateFood();
 	return _food;
 }
+
+void arc::Map::generateSprites(std::vector<std::reference_wrapper<arc::IComponent>> &vector) const
+{
+	std::vector<std::reference_wrapper<IComponent>> snake_parts = _snake.getParts();
+
+	vector.insert(vector.end(), snake_parts.begin(), snake_parts.end());
+}

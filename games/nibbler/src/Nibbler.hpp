@@ -9,6 +9,7 @@
 #define ARCADE_NIBBLER_HPP
 
 #include "IGame.hpp"
+#include "Map.hpp"
 
 namespace arc {
 	class Nibbler : public IGame {
@@ -19,6 +20,8 @@ namespace arc {
 		void update(std::map<arc::Key, arc::KeyState> keys, float deltaTime) override;
 	private:
 		unsigned int _score;
+		unsigned int _size;
+		Map _map;
 	};
 }
 

@@ -10,7 +10,6 @@
 #include "gtest/gtest.h"
 #include "quickcheck/quickcheck.hh"
 
-//using namespace quickcheck;
 namespace qc = quickcheck;
 
 class SnakeTestUtils : public arc::Snake {
