@@ -30,6 +30,7 @@ namespace arc {
 		std::string _filename;
 		std::pair<float, float> _pos;
 		std::pair<float, float> _size;
+		unsigned int _color;
 	};
 }
 
