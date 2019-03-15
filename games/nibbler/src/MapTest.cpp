@@ -18,14 +18,6 @@ public:
 	explicit SnakeTestUtils(const Snake &snake) : Snake(snake)
 	{}
 
-	bool isFoodNotInSnake(const pos_t &fruit_pos) const
-	{
-		for (auto &snake_part : _body_positions)
-			if (snake_part == fruit_pos)
-				return (false);
-		return true;
-	}
-
 	std::ostream &operator<<(std::ostream &stream) const
 	{
 		stream << "Snake positions:" << std::endl << "[";
@@ -100,6 +92,7 @@ void generate(size_t n, MapTestUtils &mapTestUtils)
 
 	qc::generate(n, i);
 	qc::generate(n, l);
+	i = i < 4 ? 4 : i;
 	l = i != 4 ? l % (i - 4) : 0;
 	mapTestUtils = MapTestUtils(i);
 	for (unsigned int c = 0; c < l; ++c)
@@ -110,5 +103,5 @@ TEST(MapTest, GenerateFood)
 {
 	PFruitNotInSnake pFruitNotInSnake;
 
-	EXPECT_TRUE(pFruitNotInSnake.check());
+	EXPECT_TRUE(pFruitNotInSnake.check(500));
 }

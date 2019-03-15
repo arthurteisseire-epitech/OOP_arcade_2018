@@ -5,6 +5,7 @@
 ** Map.cpp,
 */
 
+#include <random>
 #include "Map.hpp"
 
 arc::Map::Map(unsigned int size) :
@@ -16,5 +17,11 @@ arc::Map::Map(unsigned int size) :
 
 arc::Food arc::Map::generateFood()
 {
+	std::random_device randomDevice;
+	pos_t food_pos = {randomDevice() % _size, randomDevice() % _size};
 
+	_food = Food(food_pos);
+	if (!_snake.isFoodNotInSnake(food_pos))
+		generateFood();
+	return _food;
 }
