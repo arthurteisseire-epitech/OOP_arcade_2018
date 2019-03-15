@@ -8,6 +8,7 @@
 #include <QPainter>
 #include <QtWidgets/QApplication>
 #include <iostream>
+#include <QtGui/QFontDatabase>
 #include "Widget.hpp"
 
 std::map<Qt::Key, arc::Key> arc::Widget::_qKeys = {
@@ -25,11 +26,6 @@ std::map<Qt::Key, arc::Key> arc::Widget::_qKeys = {
 	{Qt::Key_R,      R},
 };
 
-arc::Widget::Widget() :
-	_text(nullptr)
-{
-}
-
 void arc::Widget::paintEvent(__attribute((unused)) QPaintEvent *e)
 {
 	QPainter painter(this);
@@ -41,11 +37,11 @@ void arc::Widget::paintEvent(__attribute((unused)) QPaintEvent *e)
 		spritePos.setY((int)(size().height() * _sprite.first->getPosition().second));
 		painter.drawPixmap(spritePos, *_sprite.second);
 	}
-	if (_text != nullptr) {
-		textPos.setX((int)(size().width() * _text->getPosition().first));
-		textPos.setY((int)(size().height() * _text->getPosition().second));
-		painter.setFont(QFont("arial", _text->getFontSize()));
-		painter.drawText(textPos, QString::fromStdString(_text->getText()));
+	for (auto text : _text) {
+		textPos.setX((int)(size().width() * text->getPosition().first));
+		textPos.setY((int)(size().height() * text->getPosition().second));
+		painter.setFont(QFont(QString::fromStdString(text->getFontPath()), text->getFontSize()));
+		painter.drawText(textPos, QString::fromStdString(text->getText()));
 	}
 }
 
@@ -54,33 +50,42 @@ bool arc::Widget::processSprite(const ISprite &sprite)
 	QPixmap *pixmap;
 	auto spriteSize = sprite.getSize();
 	std::pair<int, int> pos;
+	bool ret = true;
 
+	pos.first = (int)(size().width() * spriteSize.first);
+	pos.second = (int)(size().height() * spriteSize.second);
 	try {
 		pixmap = _sprites.at(&sprite).get();
 	} catch (const std::out_of_range &e) {
-		pixmap = new QPixmap();
-		if (!pixmap->load(QString::fromStdString(sprite.getTextureName())))
-			return false;
+		pixmap = new QPixmap(QString::fromStdString(sprite.getTextureName()));
+		if (pixmap->isNull()) {
+			QColor color((sprite.getColor() & 0x000000ff),
+			             (sprite.getColor() & 0x0000ff00) >> 8,
+			             (sprite.getColor() & 0x00ff0000) >> 16,
+			             (sprite.getColor() & 0xff000000) >> 24);
+			delete pixmap;
+			pixmap = new QPixmap(pos.first, pos.second);
+			pixmap->fill(color);
+			ret = false;
+		}
 		_sprites[&sprite] = std::unique_ptr<QPixmap>(pixmap);
 	}
-	pos.first = (int)(size().width() * spriteSize.first);
-	pos.second = (int)(size().height() * spriteSize.second);
 	*pixmap = pixmap->scaled(pos.first, pos.second);
-	return true;
+	return ret;
 }
 
 bool arc::Widget::processText(const IText &text)
 {
-	_text = &text;
+	if (std::find(_text.begin(), _text.end(), &text) == _text.end()) {
+		QFontDatabase::addApplicationFont(QString::fromStdString(text.getFontPath()));
+		_text.push_back(&text);
+	}
 	return true;
 }
 
 void arc::Widget::keyPressEvent(QKeyEvent *e)
 {
-	if (e->isAutoRepeat())
-		processKeys(e, HOLD);
-	else
-		processKeys(e, PRESSED);
+	processKeys(e, PRESSED);
 }
 
 void arc::Widget::keyReleaseEvent(QKeyEvent *e)
@@ -97,15 +102,21 @@ void arc::Widget::processKeys(const QKeyEvent *e, KeyState state)
 		_keys[it->second] = state;
 }
 
-std::map<arc::Key, arc::KeyState> arc::Widget::getKeys()
+void arc::Widget::updateKeysState()
 {
-	auto tmp(_keys);
-
 	auto it = _keys.begin();
+
 	while (it != _keys.end())
 		if (it->second == RELEASED)
 			_keys.erase(it++);
-		else
+		else if (it->second == PRESSED) {
+			it->second = HOLD;
 			++it;
-	return tmp;
+		} else
+			++it;
+}
+
+const std::map<arc::Key, arc::KeyState> &arc::Widget::getKeys() const
+{
+	return _keys;
 }

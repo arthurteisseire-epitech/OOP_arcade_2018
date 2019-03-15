@@ -18,11 +18,9 @@ arc::Core::Core(IGraphic *graphic) :
 
 int arc::Core::exec()
 {
-	Text text("hello", std::pair<float, float>(0.1, 0.1), 60);
-
 	while (_graphic->isOpen()) {
 		arc::Process::sprites(_mainMenu->getSprites(), _graphic.get());
-		_graphic->processText(text);
+		arc::Process::texts(_mainMenu->getTexts(), _graphic.get());
 		_graphic->processEvents();
 		_mainMenu->processEvents(_graphic->getKeys());
 		_graphic->draw();

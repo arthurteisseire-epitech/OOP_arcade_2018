@@ -31,7 +31,7 @@ namespace arc {
 		bool processSprite(const ISprite &sprite) override;
 		bool processText(const IText &text) override;
 		void processEvents() override;
-		std::map<Key, KeyState> getKeys() override;
+		const std::map<Key, KeyState> &getKeys() const override;
 	private:
 		std::unique_ptr<QApplication> _app;
 		std::unique_ptr<Widget> _widget;

@@ -23,7 +23,7 @@ namespace arc {
 		virtual bool processSprite(const ISprite &sprite) = 0;
 		virtual bool processText(const IText &text) = 0;
 		virtual void processEvents() = 0;
-		virtual std::map<Key, KeyState> getKeys() = 0;
+		virtual const std::map<Key, KeyState> &getKeys() const = 0;
 	};
 }
 
