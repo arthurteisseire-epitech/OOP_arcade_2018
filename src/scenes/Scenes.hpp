@@ -8,6 +8,10 @@
 #ifndef ARCADE_SCENES_HPP
 #define ARCADE_SCENES_HPP
 
+#include <map>
+#include <memory>
+#include "IScene.hpp"
+
 namespace arc {
 	class Scenes {
 	public:
@@ -18,6 +22,7 @@ namespace arc {
 		Scenes();
 		void changeScene(SCENE scene);
 	protected:
+		std::map<SCENE, std::unique_ptr<IScene>> _scenes;
 		SCENE _currScene;
 	};
 }

@@ -11,6 +11,7 @@
 #include <vector>
 #include <memory>
 #include <map>
+#include "IScene.hpp"
 #include "IText.hpp"
 #include "Text.hpp"
 #include "ISprite.hpp"
@@ -20,13 +21,13 @@
 #include "Audio.hpp"
 
 namespace arc {
-	class MainMenu {
+	class MainMenu : public IScene {
 	public:
 		MainMenu();
-		std::vector<std::reference_wrapper<ISprite>> getSprites() const;
-		std::vector<std::reference_wrapper<IText>> getTexts() const;
+		std::vector<std::reference_wrapper<ISprite>> getSprites() const override;
+		std::vector<std::reference_wrapper<IText>> getTexts() const override;
 		std::reference_wrapper<IAudio> getAudio() const;
-		void processEvents(const std::map<Key, KeyState> &map);
+		void processEvents(const std::map<Key, KeyState> &map) override;
 	private:
 		void moveFocusDown();
 		void moveFocusUp();
