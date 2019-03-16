@@ -14,9 +14,11 @@
 namespace arc {
 	class Cursor : public Sprite {
 	public:
-		explicit Cursor(Text *letter);
+		explicit Cursor(Text *focus);
+
+		void changeFocus(Text *newFocus);
 	private:
-		Text *_letter;
+		Text *_focus;
 	};
 }
 

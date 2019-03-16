@@ -7,8 +7,17 @@
 
 #include "Cursor.hpp"
 
-arc::Cursor::Cursor(arc::Text *letter) :
+arc::Cursor::Cursor(Text *focus) :
 	Sprite(""),
-	_letter(letter)
+	_focus(focus)
 {
+	setSize(std::pair<float, float>(0.02, 0.005));
+	setPosition(focus->getPosition());
 }
+
+void arc::Cursor::changeFocus(arc::Text *newFocus)
+{
+	setPosition(newFocus->getPosition());
+	_focus = newFocus;
+}
+
