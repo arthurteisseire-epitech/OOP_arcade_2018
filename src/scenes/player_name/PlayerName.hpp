@@ -8,7 +8,9 @@
 #ifndef ARCADE_PLAYERNAME_HPP
 #define ARCADE_PLAYERNAME_HPP
 
+#include <memory>
 #include "IScene.hpp"
+#include "Text.hpp"
 
 namespace arc {
 	class PlayerName : public IScene {
@@ -18,6 +20,8 @@ namespace arc {
 		std::vector<std::reference_wrapper<IText>> getTexts() const override;
 		std::vector<std::reference_wrapper<IAudio>> getAudios() const override;
 		void processEvents(const std::map<Key, KeyState> &map) override;
+	private:
+		std::vector<std::unique_ptr<Text>> _letters;
 	};
 }
 
