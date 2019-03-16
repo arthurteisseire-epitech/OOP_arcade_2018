@@ -12,7 +12,7 @@
 #include "Process.hpp"
 
 arc::Core::Core(IGraphic *graphic) :
-	_sceneManager(std::make_unique<SceneManager>(new PlayerName())),
+	_sceneManager(std::make_unique<SceneManager>(PLAYER_NAME)),
 	_graphic(std::unique_ptr<IGraphic>(graphic))
 {
 }

@@ -8,14 +8,15 @@
 #include "MainMenu.hpp"
 #include "SceneManager.hpp"
 
-arc::SceneManager::SceneManager(IScene *scene) :
-	_scene(scene)
+arc::SceneManager::SceneManager(SCENE scene) :
+	_factory(),
+	_scene(_factory->create(scene))
 {
 }
 
-void arc::SceneManager::changeScene(IScene *scene)
+void arc::SceneManager::changeScene(SCENE scene)
 {
-	_scene.reset(scene);
+	_scene = _factory->create(scene);
 }
 
 const arc::IScene &arc::SceneManager::currentScene() const
