@@ -10,6 +10,11 @@
 
 namespace arc {
 	class Scenes {
+	public:
+		Scenes();
+		void changeScene(int idx);
+	protected:
+		int _currScene;
 	};
 }
 
