@@ -7,13 +7,13 @@
 
 #include <memory>
 #include "gtest/gtest.h"
-#include "Scenes.hpp"
+#include "SceneManager.hpp"
 #include "MainMenu.hpp"
 
 namespace arc {
-	class ScenesTest : public ::testing::Test, public Scenes {
+	class ScenesTest : public ::testing::Test, public SceneManager {
 	protected:
-		ScenesTest() : Scenes(new MainMenu) {};
+		ScenesTest() : SceneManager(new MainMenu) {};
 		~ScenesTest() override = default;
 	};
 

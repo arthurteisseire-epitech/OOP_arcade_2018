@@ -2,21 +2,21 @@
 ** EPITECH PROJECT, 2018
 ** arcade
 ** File description:
-** Scenes.hpp
+** SceneManager.hpp
 */
 
-#ifndef ARCADE_SCENES_HPP
-#define ARCADE_SCENES_HPP
+#ifndef ARCADE_SCENE_MANAGER_HPP
+#define ARCADE_SCENE_MANAGER_HPP
 
 #include <map>
 #include <memory>
 #include "IScene.hpp"
 
 namespace arc {
-	class Scenes {
+	class SceneManager {
 	public:
-		explicit Scenes(IScene *scene);
-		~Scenes() = default;
+		explicit SceneManager(IScene *scene);
+		~SceneManager() = default;
 
 		void changeScene(IScene *scene);
 		const IScene &currentScene() const;
