@@ -11,19 +11,21 @@
 #include "Process.hpp"
 
 arc::Core::Core(IGraphic *graphic) :
-	_mainMenu(new MainMenu()),
+	_scenes(std::make_unique<Scenes>(new MainMenu())),
 	_graphic(std::unique_ptr<IGraphic>(graphic))
 {
 }
 
 int arc::Core::exec()
 {
-	arc::Process::audios(_mainMenu->getAudios(), _graphic.get());
+	const IScene &mainMenu = _scenes->currentScene();
+
+	arc::Process::audios(mainMenu.getAudios(), _graphic.get());
 	while (_graphic->isOpen()) {
-		arc::Process::sprites(_mainMenu->getSprites(), _graphic.get());
-		arc::Process::texts(_mainMenu->getTexts(), _graphic.get());
+		arc::Process::sprites(mainMenu.getSprites(), _graphic.get());
+		arc::Process::texts(mainMenu.getTexts(), _graphic.get());
 		_graphic->processEvents();
-		_mainMenu->processEvents(_graphic->getKeys());
+		_scenes->processEvents(_graphic->getKeys());
 		_graphic->draw();
 		usleep(100);
 	}

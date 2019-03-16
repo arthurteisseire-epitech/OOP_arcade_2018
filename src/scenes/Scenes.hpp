@@ -19,6 +19,8 @@ namespace arc {
 		~Scenes() = default;
 
 		void changeScene(IScene *scene);
+		const IScene &currentScene() const;
+		void processEvents(const std::map<Key, KeyState> &map);
 	protected:
 		std::unique_ptr<IScene> _scene;
 	};

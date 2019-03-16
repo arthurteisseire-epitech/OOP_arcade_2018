@@ -21,7 +21,6 @@ namespace arc {
 		int exec();
 	private:
 		std::unique_ptr<Scenes> _scenes;
-		std::unique_ptr<arc::MainMenu> _mainMenu;
 		std::unique_ptr<IGraphic> _graphic;
 		std::unique_ptr<IGame> _game;
 	};
