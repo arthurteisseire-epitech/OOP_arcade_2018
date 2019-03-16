@@ -26,7 +26,7 @@ namespace arc {
 		MainMenu();
 		std::vector<std::reference_wrapper<ISprite>> getSprites() const override;
 		std::vector<std::reference_wrapper<IText>> getTexts() const override;
-		std::vector<std::reference_wrapper<IAudio>> getAudios() const;
+		std::vector<std::reference_wrapper<IAudio>> getAudios() const override;
 		void processEvents(const std::map<Key, KeyState> &map) override;
 	private:
 		void moveFocusDown();
