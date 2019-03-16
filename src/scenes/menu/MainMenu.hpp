@@ -26,7 +26,7 @@ namespace arc {
 		MainMenu();
 		std::vector<std::reference_wrapper<ISprite>> getSprites() const override;
 		std::vector<std::reference_wrapper<IText>> getTexts() const override;
-		std::reference_wrapper<IAudio> getAudio() const;
+		std::vector<std::reference_wrapper<IAudio>> getAudios() const;
 		void processEvents(const std::map<Key, KeyState> &map) override;
 	private:
 		void moveFocusDown();
@@ -36,8 +36,8 @@ namespace arc {
 
 		size_t _focus;
 		std::vector<std::unique_ptr<Button>> _buttons;
+		std::vector<std::unique_ptr<Audio>> _audios;
 		std::unique_ptr<Sprite> _spriteFocus;
-		std::unique_ptr<Audio> _audio;
 		static std::map<Key, void (arc::MainMenu::*)()> _keysMap;
 	};
 }

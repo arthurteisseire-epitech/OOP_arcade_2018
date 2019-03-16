@@ -22,7 +22,7 @@ arc::MainMenu::MainMenu() :
 	_focus(0)
 {
 	_spriteFocus = std::make_unique<Sprite>("assets/focus.png");
-	_audio = std::make_unique<Audio>("assets/audio/sound.m4a", 10);
+	_audios.push_back(std::make_unique<Audio>("assets/audio/sound.m4a", 10));
 	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", "First"));
 	_buttons.push_back(std::make_unique<Button>("assets/saple.jpg", "Second"));
 	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", "Third"));
@@ -93,7 +93,11 @@ std::vector<std::reference_wrapper<arc::IText>> arc::MainMenu::getTexts() const
 	return wrapper;
 }
 
-std::reference_wrapper<arc::IAudio> arc::MainMenu::getAudio() const
+std::vector<std::reference_wrapper<arc::IAudio>> arc::MainMenu::getAudios() const
 {
-        return std::reference_wrapper<IAudio>(*_audio);
+	std::vector<std::reference_wrapper<IAudio>> wrapper;
+
+	for (const auto &audio : _audios)
+		wrapper.emplace_back(*audio);
+	return wrapper;
 }
