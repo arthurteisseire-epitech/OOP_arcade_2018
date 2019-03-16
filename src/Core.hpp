@@ -9,6 +9,7 @@
 #define ARCADE_CORE_HPP
 
 #include <memory>
+#include "Scenes.hpp"
 #include "MainMenu.hpp"
 #include "IGraphic.hpp"
 #include "IGame.hpp"
@@ -19,6 +20,7 @@ namespace arc {
 		explicit Core(IGraphic *graphic);
 		int exec();
 	private:
+		std::unique_ptr<Scenes> _scenes;
 		std::unique_ptr<arc::MainMenu> _mainMenu;
 		std::unique_ptr<IGraphic> _graphic;
 		std::unique_ptr<IGame> _game;

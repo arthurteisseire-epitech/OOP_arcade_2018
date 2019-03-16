@@ -8,8 +8,8 @@
 #include "MainMenu.hpp"
 #include "Scenes.hpp"
 
-arc::Scenes::Scenes() :
-	_scene(new MainMenu())
+arc::Scenes::Scenes(IScene *scene) :
+	_scene(scene)
 {
 }
 
