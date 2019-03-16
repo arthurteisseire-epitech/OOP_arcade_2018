@@ -8,6 +8,7 @@
 #ifndef ARCADE_SCENE_HPP
 #define ARCADE_SCENE_HPP
 
+#include <functional>
 #include <vector>
 #include <map>
 #include "ISprite.hpp"

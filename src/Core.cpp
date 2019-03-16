@@ -6,12 +6,13 @@
 */
 
 #include <unistd.h>
+#include "PlayerName.hpp"
 #include "Text.hpp"
 #include "Core.hpp"
 #include "Process.hpp"
 
 arc::Core::Core(IGraphic *graphic) :
-	_sceneManager(std::make_unique<SceneManager>(new MainMenu())),
+	_sceneManager(std::make_unique<SceneManager>(new PlayerName())),
 	_graphic(std::unique_ptr<IGraphic>(graphic))
 {
 }
