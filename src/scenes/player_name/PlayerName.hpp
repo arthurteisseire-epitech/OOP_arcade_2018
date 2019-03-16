@@ -20,10 +20,15 @@ namespace arc {
 		std::vector<std::reference_wrapper<ISprite>> getSprites() const override;
 		std::vector<std::reference_wrapper<IText>> getTexts() const override;
 		std::vector<std::reference_wrapper<IAudio>> getAudios() const override;
-		void processEvents(const std::map<Key, KeyState> &map) override;
+		void processEvents(const std::map<Key, KeyState> &keys) override;
 	private:
+		void moveFocusLeft();
+		void moveFocusRight();
+
 		std::vector<std::unique_ptr<Text>> _letters;
 		std::unique_ptr<Cursor> _cursor;
+		size_t _focus;
+		static std::map<Key, void (arc::PlayerName::*)()> _keysMap;
 	};
 }
 

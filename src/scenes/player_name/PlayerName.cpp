@@ -8,7 +8,13 @@
 #include "Audio.hpp"
 #include "PlayerName.hpp"
 
-arc::PlayerName::PlayerName()
+std::map<arc::Key, void (arc::PlayerName::*)()> arc::PlayerName::_keysMap = {
+	{LEFT, &arc::PlayerName::moveFocusLeft},
+	{RIGHT, &arc::PlayerName::moveFocusRight},
+};
+
+arc::PlayerName::PlayerName() :
+	_focus(0)
 {
 	std::string letter = "A";
 
@@ -41,6 +47,31 @@ std::vector<std::reference_wrapper<arc::IAudio>> arc::PlayerName::getAudios() co
 	return std::vector<std::reference_wrapper<IAudio>>();
 }
 
-void arc::PlayerName::processEvents(const std::map<arc::Key, arc::KeyState> &)
+void arc::PlayerName::processEvents(const std::map<arc::Key, arc::KeyState> &keys)
 {
+	for (auto &key : keys) {
+		auto it = _keysMap.find(key.first);
+		if (it != _keysMap.end() && key.second == RELEASED)
+			(this->*it->second)();
+	}
+}
+
+void arc::PlayerName::moveFocusLeft()
+{
+	auto last = _letters.empty() ? 0 : _letters.size() - 1;
+
+	if (_focus != 0)
+		--_focus;
+	else
+		_focus = last;
+	_cursor->changeFocus(_letters[_focus].get());
+}
+
+void arc::PlayerName::moveFocusRight()
+{
+	if (_focus < _letters.size() - 1)
+		++_focus;
+	else
+		_focus = 0;
+	_cursor->changeFocus(_letters[_focus].get());
 }
