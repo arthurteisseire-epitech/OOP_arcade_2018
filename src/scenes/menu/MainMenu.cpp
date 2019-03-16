@@ -11,7 +11,6 @@
 #include <functional>
 #include "Key.hpp"
 #include "MainMenu.hpp"
-#include "Button.hpp"
 
 std::map<arc::Key, void (arc::MainMenu::*)()> arc::MainMenu::_keysMap = {
 	{UP, &arc::MainMenu::moveFocusUp},

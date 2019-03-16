@@ -14,7 +14,7 @@ find_package(Qt5Multimedia)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 
-include_directories(src/scenes/menu src/scenes src/library src lib/qt lib games component .)
+include_directories(src/scenes/utils src/scenes/menu src/scenes src/library src lib/qt lib games component .)
 
 
 file(GLOB_RECURSE main main.cpp)
