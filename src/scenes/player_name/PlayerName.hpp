@@ -11,6 +11,7 @@
 #include <memory>
 #include "IScene.hpp"
 #include "Text.hpp"
+#include "Cursor.hpp"
 
 namespace arc {
 	class PlayerName : public IScene {
@@ -22,6 +23,7 @@ namespace arc {
 		void processEvents(const std::map<Key, KeyState> &map) override;
 	private:
 		std::vector<std::unique_ptr<Text>> _letters;
+		std::unique_ptr<Cursor> _cursor;
 	};
 }
 
