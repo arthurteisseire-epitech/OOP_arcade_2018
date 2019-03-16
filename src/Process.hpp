@@ -18,6 +18,7 @@ namespace arc {
 	public:
 		static void sprites(std::vector<std::reference_wrapper<ISprite>> sprites, IGraphic *graphic);
 		static void texts(std::vector<std::reference_wrapper<IText>> texts, IGraphic *graphic);
+		static void audios(std::vector<std::reference_wrapper<IAudio>> audios, IGraphic *graphic);
 	};
 }
 #endif
