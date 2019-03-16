@@ -8,12 +8,14 @@
 #include "gtest/gtest.h"
 #include "Scenes.hpp"
 
-class ScenesTest : public ::testing::Test, public arc::Scenes {
-};
+namespace arc {
+	class ScenesTest : public ::testing::Test, public Scenes {
+	};
 
-TEST_F(ScenesTest, changeScene)
-{
-	EXPECT_EQ(_currScene, 0);
-	changeScene(1);
-	EXPECT_EQ(_currScene, 1);
+	TEST_F(ScenesTest, changeScene)
+	{
+		EXPECT_EQ(_currScene, MENU);
+		changeScene(PLAYER_NAME);
+		EXPECT_EQ(_currScene, PLAYER_NAME);
+	}
 }

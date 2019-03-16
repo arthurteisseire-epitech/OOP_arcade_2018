@@ -8,11 +8,11 @@
 #include "Scenes.hpp"
 
 arc::Scenes::Scenes() :
-	_currScene(0)
+	_currScene(MENU)
 {
 }
 
-void arc::Scenes::changeScene(int idx)
+void arc::Scenes::changeScene(SCENE scene)
 {
-	_currScene = idx;
+	_currScene = scene;
 }

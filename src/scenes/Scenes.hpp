@@ -11,10 +11,14 @@
 namespace arc {
 	class Scenes {
 	public:
+		enum SCENE {
+			MENU, PLAYER_NAME
+		};
+
 		Scenes();
-		void changeScene(int idx);
+		void changeScene(SCENE scene);
 	protected:
-		int _currScene;
+		SCENE _currScene;
 	};
 }
 
