@@ -5,14 +5,15 @@
 ** Scenes.cpp
 */
 
+#include "MainMenu.hpp"
 #include "Scenes.hpp"
 
 arc::Scenes::Scenes() :
-	_currScene(MENU)
+	_scene(new MainMenu())
 {
 }
 
-void arc::Scenes::changeScene(SCENE scene)
+void arc::Scenes::changeScene(IScene *scene)
 {
-	_currScene = scene;
+	_scene.reset(scene);
 }

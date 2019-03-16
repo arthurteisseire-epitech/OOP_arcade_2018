@@ -15,15 +15,10 @@
 namespace arc {
 	class Scenes {
 	public:
-		enum SCENE {
-			MENU, PLAYER_NAME
-		};
-
 		Scenes();
-		void changeScene(SCENE scene);
+		void changeScene(IScene *scene);
 	protected:
-		std::map<SCENE, std::unique_ptr<IScene>> _scenes;
-		SCENE _currScene;
+		std::unique_ptr<IScene> _scene;
 	};
 }
 

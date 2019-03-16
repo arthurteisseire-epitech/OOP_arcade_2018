@@ -7,15 +7,14 @@
 
 #include "gtest/gtest.h"
 #include "Scenes.hpp"
+#include "MainMenu.hpp"
 
 namespace arc {
 	class ScenesTest : public ::testing::Test, public Scenes {
 	};
 
-	TEST_F(ScenesTest, changeScene)
+	TEST_F(ScenesTest, checkExistentScene)
 	{
-		EXPECT_EQ(_currScene, MENU);
-		changeScene(PLAYER_NAME);
-		EXPECT_EQ(_currScene, PLAYER_NAME);
+		EXPECT_NE(_scene, nullptr);
 	}
 }
