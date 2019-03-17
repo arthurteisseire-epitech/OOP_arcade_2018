@@ -22,7 +22,7 @@ arc::MainMenu::MainMenu() :
 {
 	_spriteFocus = std::make_unique<Sprite>("assets/focus.png");
 	_audios.push_back(std::make_unique<Audio>("assets/audio/sound.m4a", 10));
-	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", "First"));
+	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", "Player Name"));
 	_buttons.push_back(std::make_unique<Button>("assets/saple.jpg", "Second"));
 	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", "3th"));
 	setSpritesSize();
@@ -113,6 +113,5 @@ std::vector<std::reference_wrapper<arc::IAudio>> arc::MainMenu::getAudios() cons
 
 void arc::MainMenu::action(arc::SceneManager &sceneManager)
 {
-	sceneManager.changeScene(PLAYER_NAME);
-//	_buttons[_focus]->action(sceneManager);
+	_buttons[_focus]->action(sceneManager);
 }
