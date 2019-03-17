@@ -11,9 +11,11 @@
 #include <memory>
 #include <QWidget>
 #include <QKeyEvent>
+#include <QMediaPlayer>
 #include "IText.hpp"
-#include "Key.hpp"
+#include "IAudio.hpp"
 #include "ISprite.hpp"
+#include "Key.hpp"
 
 namespace arc {
 	class Widget : public QWidget {
@@ -21,6 +23,7 @@ namespace arc {
 		Widget() = default;
 		bool processSprite(const ISprite &sprite);
 		bool processText(const IText &text);
+		bool processAudio(const IAudio &audio);
 		const std::map<Key, KeyState> &getKeys() const;
 		void updateKeysState();
 	protected:
@@ -32,6 +35,7 @@ namespace arc {
 
 		std::map<const ISprite *, std::unique_ptr<QPixmap>> _sprites;
 		std::vector<const IText *> _text;
+		std::map<const IAudio *, std::unique_ptr<QMediaPlayer>>_player;
 		std::map<Key, KeyState> _keys;
 		static std::map<Qt::Key, Key> _qKeys;
 	};

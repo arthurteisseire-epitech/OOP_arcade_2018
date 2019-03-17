@@ -39,6 +39,11 @@ bool arc::QtGraphic::processText(const IText &text)
 	return _widget->processText(text);
 }
 
+bool arc::QtGraphic::processAudio(const arc::IAudio &audio)
+{
+	return _widget->processAudio(audio);
+}
+
 void arc::QtGraphic::processEvents()
 {
 	_widget->updateKeysState();

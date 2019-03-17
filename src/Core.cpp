@@ -23,6 +23,7 @@ int arc::Core::exec()
 	clock_t prog_time = clock();
 	clock_t new_time;
 
+	_graphic->processAudio(_mainMenu->getAudio());
 	while (_graphic->isOpen()) {
 		_graphic->processEvents();
 		new_time = clock();

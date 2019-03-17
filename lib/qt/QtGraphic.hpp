@@ -21,7 +21,6 @@
 #include "Widget.hpp"
 #include "Key.hpp"
 
-
 namespace arc {
 	class QtGraphic : public IGraphic, public QObject {
 	public:
@@ -30,6 +29,7 @@ namespace arc {
 		void draw() override;
 		bool processSprite(const ISprite &sprite) override;
 		bool processText(const IText &text) override;
+		bool processAudio(const IAudio &audio) override;
 		void processEvents() override;
 		const std::map<Key, KeyState> &getKeys() const override;
 	private:
