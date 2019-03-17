@@ -26,23 +26,25 @@ std::map<Qt::Key, arc::Key> arc::Widget::_qKeys = {
 	{Qt::Key_R,      R},
 };
 
-void arc::Widget::paintEvent(__attribute((unused)) QPaintEvent *e)
+void arc::Widget::paintEvent(QPaintEvent *)
 {
 	QPainter painter(this);
 	QPoint spritePos;
 	QPoint textPos;
 
-	for (auto &_sprite : _sprites) {
+	for (auto &_sprite : _spritesToDraw) {
 		spritePos.setX((int)(size().width() * _sprite.first->getPosition().first));
 		spritePos.setY((int)(size().height() * _sprite.first->getPosition().second));
-		painter.drawPixmap(spritePos, *_sprite.second);
+		painter.drawPixmap(spritePos, _sprite.second);
 	}
-	for (auto text : _text) {
+	for (auto text : _textsToDraw) {
 		textPos.setX((int)(size().width() * text->getPosition().first));
 		textPos.setY((int)(size().height() * text->getPosition().second));
 		painter.setFont(QFont(QString::fromStdString(text->getFontPath()), text->getFontSize()));
 		painter.drawText(textPos, QString::fromStdString(text->getText()));
 	}
+	_spritesToDraw.clear();
+	_textsToDraw.clear();
 }
 
 bool arc::Widget::processSprite(const ISprite &sprite)
@@ -65,15 +67,17 @@ bool arc::Widget::processSprite(const ISprite &sprite)
 		_sprites.emplace(&sprite, std::unique_ptr<QPixmap>(pixmap));
 	}
 	*pixmap = pixmap->scaled(pos.first, pos.second);
+	_spritesToDraw.emplace(&sprite, *pixmap);
 	return true;
 }
 
 bool arc::Widget::processText(const IText &text)
 {
-	if (std::find(_text.begin(), _text.end(), &text) == _text.end()) {
+	if (std::find(_texts.begin(), _texts.end(), &text) == _texts.end()) {
 		QFontDatabase::addApplicationFont(QString::fromStdString(text.getFontPath()));
-		_text.push_back(&text);
+		_texts.push_back(&text);
 	}
+	_textsToDraw.push_back(&text);
 	return true;
 }
 
