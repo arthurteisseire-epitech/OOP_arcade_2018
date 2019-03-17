@@ -9,7 +9,7 @@
 #include "PlayerName.hpp"
 
 std::map<arc::Key, void (arc::PlayerName::*)()> arc::PlayerName::_keysMap = {
-	{LEFT, &arc::PlayerName::moveFocusLeft},
+	{LEFT,  &arc::PlayerName::moveFocusLeft},
 	{RIGHT, &arc::PlayerName::moveFocusRight},
 };
 
@@ -19,11 +19,8 @@ arc::PlayerName::PlayerName() :
 {
 	std::string letter = "A";
 
-	for (size_t i = 0; i < 8; ++i) {
-		_letters.push_back(std::make_unique<Text>(letter, std::pair<float, float>(i / 10.0, 0.3), 20));
-		letter[0]++;
-	}
-        _cursor = std::make_unique<Cursor>(_letters[0].get());
+	_gridLetters.emplace_back("ABCDEFGH", std::pair<float, float>(0.2, 0.2), 20);
+	_cursor = std::make_unique<Cursor>(_gridLetters[0].getLetter(0));
 }
 
 std::vector<std::reference_wrapper<arc::ISprite>> arc::PlayerName::getSprites() const
@@ -31,15 +28,15 @@ std::vector<std::reference_wrapper<arc::ISprite>> arc::PlayerName::getSprites() 
 	auto wrapper = std::vector<std::reference_wrapper<ISprite>>();
 
 	wrapper.emplace_back(*_cursor);
-        return wrapper;
+	return wrapper;
 }
 
 std::vector<std::reference_wrapper<arc::IText>> arc::PlayerName::getTexts() const
 {
 	auto wrapper = std::vector<std::reference_wrapper<IText>>();
 
-	for (auto &letter : _letters)
-		wrapper.emplace_back(*letter);
+	for (size_t i = 0; i < _gridLetters[0].size(); ++i)
+		wrapper.emplace_back(*_gridLetters[0].getLetter(i));
 	wrapper.emplace_back(*_playerName);
 	return wrapper;
 }
@@ -60,25 +57,25 @@ void arc::PlayerName::processEvents(const std::map<arc::Key, arc::KeyState> &key
 
 void arc::PlayerName::moveFocusLeft()
 {
-	auto last = _letters.empty() ? 0 : _letters.size() - 1;
+	auto last = _gridLetters[0].size() == 0 ? 0 : _gridLetters[0].size() - 1;
 
 	if (_focus != 0)
 		--_focus;
 	else
 		_focus = last;
-	_cursor->changeFocus(_letters[_focus].get());
+	_cursor->changeFocus(_gridLetters[0].getLetter(_focus));
 }
 
 void arc::PlayerName::moveFocusRight()
 {
-	if (_focus < _letters.size() - 1)
+	if (_focus < _gridLetters[0].size() - 1)
 		++_focus;
 	else
 		_focus = 0;
-	_cursor->changeFocus(_letters[_focus].get());
+	_cursor->changeFocus(_gridLetters[0].getLetter(_focus));
 }
 
 void arc::PlayerName::action(arc::SceneManager &)
 {
-	_playerName->setText(_playerName->getText() + _letters[_focus]->getText());
+	_playerName->setText(_playerName->getText() + _gridLetters[0].getLetter(_focus)->getText());
 }

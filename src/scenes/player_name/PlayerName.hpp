@@ -12,6 +12,7 @@
 #include "IScene.hpp"
 #include "Text.hpp"
 #include "Cursor.hpp"
+#include "Row.hpp"
 
 namespace arc {
 	class PlayerName : public IScene {
@@ -27,7 +28,8 @@ namespace arc {
 		void moveFocusRight();
 
 		std::unique_ptr<Text> _playerName;
-		std::vector<std::unique_ptr<Text>> _letters;
+		std::vector<Row> _gridLetters;
+//		std::vector<std::unique_ptr<Text>> _gridLetters;
 		std::unique_ptr<Cursor> _cursor;
 		size_t _focus;
 		static std::map<Key, void (arc::PlayerName::*)()> _keysMap;
