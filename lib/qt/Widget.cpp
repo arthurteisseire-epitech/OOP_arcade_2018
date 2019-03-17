@@ -100,7 +100,8 @@ bool arc::Widget::processAudio(const arc::IAudio &audio)
 
 void arc::Widget::keyPressEvent(QKeyEvent *e)
 {
-	processKeys(e, PRESSED);
+	if (!e->isAutoRepeat())
+		processKeys(e, PRESSED);
 }
 
 void arc::Widget::keyReleaseEvent(QKeyEvent *e)
