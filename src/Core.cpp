@@ -6,30 +6,26 @@
 */
 
 #include <unistd.h>
+#include <iostream>
+#include "PlayerName.hpp"
 #include "Text.hpp"
 #include "Core.hpp"
 #include "Process.hpp"
 
-arc::Core::Core(IGraphic *graphic, IGame *game) :
-	_mainMenu(new MainMenu()),
-	_graphic(std::unique_ptr<IGraphic>(graphic)),
-	_game(std::unique_ptr<IGame>(game))
+arc::Core::Core(IGraphic *graphic) :
+	_sceneManager(std::make_unique<SceneManager>(MENU)),
+	_graphic(std::unique_ptr<IGraphic>(graphic))
 {
 }
 
-#include <iostream>
 int arc::Core::exec()
 {
-	clock_t prog_time = clock();
-	clock_t new_time;
-
-	_graphic->processAudio(_mainMenu->getAudio());
+	arc::Process::audios(_sceneManager->currentScene().getAudios(), _graphic.get());
 	while (_graphic->isOpen()) {
+		_sceneManager->processEvents(_graphic->getKeys());
+		arc::Process::sprites(_sceneManager->currentScene().getSprites(), _graphic.get());
+		arc::Process::texts(_sceneManager->currentScene().getTexts(), _graphic.get());
 		_graphic->processEvents();
-		new_time = clock();
-		_game->update(_graphic->getKeys(), (new_time - prog_time) / CLOCKS_PER_SEC);
-		prog_time = new_time;
-		Process::all(_game->getComponents(), _graphic.get());
 		_graphic->draw();
 		usleep(100);
 	}

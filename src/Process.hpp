@@ -16,10 +16,9 @@
 namespace arc {
 	class Process {
 	public:
-		static void all(std::vector<std::reference_wrapper<IComponent>> components, IGraphic *graphic);
-		static void any(std::reference_wrapper<IComponent> comp, IGraphic *graphic);
-		static void sprites(std::vector<std::reference_wrapper<ISprite>> sprites, IGraphic *graphic);
-		static void texts(std::vector<std::reference_wrapper<IText>> texts, IGraphic *graphic);
+		static void sprites(const std::vector<std::reference_wrapper<ISprite>> &sprites, IGraphic *graphic);
+		static void texts(const std::vector<std::reference_wrapper<IText>> &texts, IGraphic *graphic);
+		static void audios(const std::vector<std::reference_wrapper<IAudio>> &audios, IGraphic *graphic);
 	};
 }
 #endif
