@@ -62,7 +62,7 @@ bool arc::Widget::processSprite(const ISprite &sprite)
 			                    (sprite.getColor() & 0x00ff0000) >> 16,
 			                    (sprite.getColor() & 0xff000000) >> 24));
 		}
-		_sprites[&sprite] = std::unique_ptr<QPixmap>(pixmap);
+		_sprites.emplace(&sprite, std::unique_ptr<QPixmap>(pixmap));
 	}
 	*pixmap = pixmap->scaled(pos.first, pos.second);
 	return true;
