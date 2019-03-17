@@ -23,6 +23,8 @@ namespace arc {
 		std::vector<std::reference_wrapper<IAudio>> getAudios() const override;
 		void processEvents(const std::map<Key, KeyState> &keys) override;
 		void action(SceneManager &sceneManager) override;
+
+		static int FONT_SIZE;
 	private:
 		void moveFocusLeft();
 		void moveFocusRight();
