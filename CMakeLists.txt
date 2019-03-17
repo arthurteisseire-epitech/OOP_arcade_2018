@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.11)
 project(arcade)
 
-add_compile_options(-Wall -Wextra --coverage)
+add_compile_options(-Wall -Wextra --coverage -g)
 set(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} " --coverage")
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_C_COMPILER "gcc")

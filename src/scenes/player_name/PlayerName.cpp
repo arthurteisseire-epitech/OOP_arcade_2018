@@ -75,3 +75,7 @@ void arc::PlayerName::moveFocusRight()
 		_focus = 0;
 	_cursor->changeFocus(_letters[_focus].get());
 }
+
+void arc::PlayerName::action(arc::SceneManager &)
+{
+}

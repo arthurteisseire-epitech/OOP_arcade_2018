@@ -24,9 +24,10 @@ arc::MainMenu::MainMenu() :
 	_audios.push_back(std::make_unique<Audio>("assets/audio/sound.m4a", 10));
 	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", "First"));
 	_buttons.push_back(std::make_unique<Button>("assets/saple.jpg", "Second"));
-	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", "Third"));
+	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", "3th"));
 	setSpritesSize();
 	setSpritesPosition();
+	setButtonsAction();
 }
 
 void arc::MainMenu::setSpritesPosition()
@@ -46,6 +47,15 @@ void arc::MainMenu::setSpritesSize()
 	_buttons[0]->setSize(std::pair<float, float>(width, height));
 	_buttons[1]->setSize(std::pair<float, float>(width, height));
 	_buttons[2]->setSize(std::pair<float, float>(width, height));
+}
+
+void arc::MainMenu::setButtonsAction()
+{
+	_buttons[0]->action = [] (SceneManager &sceneManager) {
+		sceneManager.changeScene(PLAYER_NAME);
+	};
+	_buttons[1]->action = [] (SceneManager &) {};
+	_buttons[2]->action = [] (SceneManager &) {};
 }
 
 void arc::MainMenu::processEvents(const std::map<Key, KeyState> &map)
@@ -99,4 +109,10 @@ std::vector<std::reference_wrapper<arc::IAudio>> arc::MainMenu::getAudios() cons
 	for (const auto &audio : _audios)
 		wrapper.emplace_back(*audio);
 	return wrapper;
+}
+
+void arc::MainMenu::action(arc::SceneManager &sceneManager)
+{
+	sceneManager.changeScene(PLAYER_NAME);
+//	_buttons[_focus]->action(sceneManager);
 }

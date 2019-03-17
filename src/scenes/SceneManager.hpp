@@ -15,6 +15,7 @@
 #include "Scenes.hpp"
 
 namespace arc {
+	class IScene;
 	class SceneManager {
 	public:
 		explicit SceneManager(SCENE scene);
@@ -22,10 +23,11 @@ namespace arc {
 
 		void changeScene(SCENE scene);
 		const IScene &currentScene() const;
-		void processEvents(const std::map<Key, KeyState> &map);
+		void processEvents(const std::map<Key, KeyState> &keys);
 	protected:
 		std::unique_ptr<SceneFactory> _factory;
-		std::unique_ptr<IScene> _scene;
+		std::map<SCENE, std::unique_ptr<IScene>> _scene;
+		SCENE _currScene;
 	};
 }
 

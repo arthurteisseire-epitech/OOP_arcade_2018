@@ -21,6 +21,7 @@ namespace arc {
 		std::vector<std::reference_wrapper<IText>> getTexts() const override;
 		std::vector<std::reference_wrapper<IAudio>> getAudios() const override;
 		void processEvents(const std::map<Key, KeyState> &keys) override;
+		void action(SceneManager &sceneManager) override;
 	private:
 		void moveFocusLeft();
 		void moveFocusRight();

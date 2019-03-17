@@ -10,21 +10,26 @@
 
 arc::SceneManager::SceneManager(SCENE scene) :
 	_factory(),
-	_scene(_factory->create(scene))
+	_currScene(scene)
 {
+	_scene[scene] = _factory->create(scene);
 }
 
 void arc::SceneManager::changeScene(SCENE scene)
 {
-	_scene = _factory->create(scene);
+	_scene[scene] = _factory->create(scene);
+	_currScene = scene;
 }
 
 const arc::IScene &arc::SceneManager::currentScene() const
 {
-        return *_scene;
+	return *_scene.at(_currScene);
 }
 
-void arc::SceneManager::processEvents(const std::map<arc::Key, arc::KeyState> &map)
+void arc::SceneManager::processEvents(const std::map<arc::Key, arc::KeyState> &keys)
 {
-	_scene->processEvents(map);
+	for (auto &key : keys)
+		if (key.first == ENTER && key.second == RELEASED)
+			_scene[_currScene]->action(*this);
+	_scene[_currScene]->processEvents(keys);
 }
