@@ -29,7 +29,7 @@ const arc::IScene &arc::SceneManager::currentScene() const
 void arc::SceneManager::processEvents(const std::map<arc::Key, arc::KeyState> &keys)
 {
 	for (auto &key : keys)
-		if (key.first == ENTER && key.second == RELEASED)
+		if (key.first == ENTER && key.second == PRESSED)
 			_scene[_currScene]->action(*this);
 	_scene[_currScene]->processEvents(keys);
 }
