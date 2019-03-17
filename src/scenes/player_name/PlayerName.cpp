@@ -51,7 +51,7 @@ void arc::PlayerName::processEvents(const std::map<arc::Key, arc::KeyState> &key
 {
 	for (auto &key : keys) {
 		auto it = _keysMap.find(key.first);
-		if (it != _keysMap.end() && key.second == RELEASED)
+		if (it != _keysMap.end() && key.second == PRESSED)
 			(this->*it->second)();
 	}
 }

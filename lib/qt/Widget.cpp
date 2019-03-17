@@ -106,7 +106,8 @@ void arc::Widget::keyPressEvent(QKeyEvent *e)
 
 void arc::Widget::keyReleaseEvent(QKeyEvent *e)
 {
-	processKeys(e, RELEASED);
+	if (!e->isAutoRepeat())
+		processKeys(e, RELEASED);
 }
 
 void arc::Widget::processKeys(const QKeyEvent *e, KeyState state)
