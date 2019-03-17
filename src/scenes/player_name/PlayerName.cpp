@@ -24,7 +24,7 @@ arc::PlayerName::PlayerName() :
 	_gridLetters.emplace_back("ABCDEFGH", std::pair<float, float>(0.1, 0.2), FONT_SIZE);
 	_gridLetters.emplace_back("IJKLMNOP", std::pair<float, float>(0.1, 0.3), FONT_SIZE);
 	_gridLetters.emplace_back("QRSTUVWX", std::pair<float, float>(0.1, 0.4), FONT_SIZE);
-	_gridLetters.emplace_back("YZ_<~", std::pair<float, float>(0.1, 0.5), FONT_SIZE);
+	_gridLetters.emplace_back("YZ    <~", std::pair<float, float>(0.1, 0.5), FONT_SIZE);
 	_cursor = std::make_unique<Cursor>(getFocus());
 }
 
@@ -95,8 +95,8 @@ void arc::PlayerName::action(arc::SceneManager &sceneManager)
 	if (getFocus()->getText() == "~")
 		sceneManager.changeScene(MENU);
 	else if (getFocus()->getText() == "<")
-		_playerName->setText(_playerName->getText().substr(0, _playerName->getText().length() - 1));
-	else
+			_playerName->setText(_playerName->getText().substr(0, _playerName->getText().length() - 1));
+	else if (_playerName->getText().length() < 3 && getFocus()->getText() != " ")
 		_playerName->setText(_playerName->getText() + getFocus()->getText());
 }
 
