@@ -47,23 +47,20 @@ void arc::Widget::paintEvent(__attribute((unused)) QPaintEvent *e)
 
 bool arc::Widget::processSprite(const ISprite &sprite)
 {
-	auto spriteSize = sprite.getSize();
-	std::pair<int, int> pos;
 	auto it = _sprites.find(&sprite);
 	QPixmap *pixmap = it->second.get();
+	std::pair<int, int> pos((int)(size().width() * sprite.getSize().first),
+	                        (int)(size().height() * sprite.getSize().second));
 
-	pos.first = (int)(size().width() * spriteSize.first);
-	pos.second = (int)(size().height() * spriteSize.second);
 	if (it == _sprites.end()) {
 		pixmap = new QPixmap(QString::fromStdString(sprite.getTextureName()));
 		if (pixmap->isNull()) {
-			QColor color((sprite.getColor() & 0x000000ff),
-			             (sprite.getColor() & 0x0000ff00) >> 8,
-			             (sprite.getColor() & 0x00ff0000) >> 16,
-			             (sprite.getColor() & 0xff000000) >> 24);
 			delete pixmap;
 			pixmap = new QPixmap(pos.first, pos.second);
-			pixmap->fill(color);
+			pixmap->fill(QColor((sprite.getColor() & 0x000000ff),
+			                    (sprite.getColor() & 0x0000ff00) >> 8,
+			                    (sprite.getColor() & 0x00ff0000) >> 16,
+			                    (sprite.getColor() & 0xff000000) >> 24));
 		}
 		_sprites[&sprite] = std::unique_ptr<QPixmap>(pixmap);
 	}
