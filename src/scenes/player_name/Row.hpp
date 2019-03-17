@@ -18,7 +18,7 @@ namespace arc {
 	public:
 		explicit Row(const std::string &row, const std::pair<float, float> &pos, int fontSize);
 
-		Text *getLetter(size_t idx) const;
+		Text *getLetter(int idx) const;
 		size_t size() const;
 	private:
 		std::vector<std::unique_ptr<Text>> _letters;

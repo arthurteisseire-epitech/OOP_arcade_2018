@@ -12,14 +12,14 @@ arc::Row::Row(const std::string &row, const std::pair<float, float> &pos, int fo
 	_pos(pos),
 	_fontSize(fontSize)
 {
-	for (size_t i = 0; i < 8; ++i) {
+	for (size_t i = 0; i < row.length(); ++i) {
 		_letters.push_back(std::make_unique<Text>(std::string(1, row[i]),
-		                                          std::pair<float, float>(i / 10.0, 0.3),
-		                                          20));
+		                                          std::pair<float, float>(_pos.first + (i / 10.0), _pos.second),
+		                                          _fontSize));
 	}
 }
 
-arc::Text *arc::Row::getLetter(size_t idx) const
+arc::Text *arc::Row::getLetter(int idx) const
 {
 	return _letters[idx].get();
 }
