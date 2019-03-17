@@ -26,12 +26,13 @@ namespace arc {
 	private:
 		void moveFocusLeft();
 		void moveFocusRight();
+		Text *getFocus() const;
 
 		std::unique_ptr<Text> _playerName;
 		std::vector<Row> _gridLetters;
 //		std::vector<std::unique_ptr<Text>> _gridLetters;
 		std::unique_ptr<Cursor> _cursor;
-		size_t _focus;
+		std::pair<size_t, size_t> _focus;
 		static std::map<Key, void (arc::PlayerName::*)()> _keysMap;
 	};
 }

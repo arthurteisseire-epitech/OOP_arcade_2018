@@ -15,12 +15,12 @@ std::map<arc::Key, void (arc::PlayerName::*)()> arc::PlayerName::_keysMap = {
 
 arc::PlayerName::PlayerName() :
 	_playerName(std::make_unique<Text>("", std::pair<float, float>(0.1, 0.1), 20)),
-	_focus(0)
+	_focus(0, 0)
 {
 	std::string letter = "A";
 
 	_gridLetters.emplace_back("ABCDEFGH", std::pair<float, float>(0.2, 0.2), 20);
-	_cursor = std::make_unique<Cursor>(_gridLetters[0].getLetter(0));
+	_cursor = std::make_unique<Cursor>(getFocus());
 }
 
 std::vector<std::reference_wrapper<arc::ISprite>> arc::PlayerName::getSprites() const
@@ -57,25 +57,30 @@ void arc::PlayerName::processEvents(const std::map<arc::Key, arc::KeyState> &key
 
 void arc::PlayerName::moveFocusLeft()
 {
-	auto last = _gridLetters[0].size() == 0 ? 0 : _gridLetters[0].size() - 1;
+	auto last = _gridLetters[_focus.second].size() == 0 ? 0 : _gridLetters[_focus.second].size() - 1;
 
-	if (_focus != 0)
-		--_focus;
+	if (_focus.first != 0)
+		--_focus.first;
 	else
-		_focus = last;
-	_cursor->changeFocus(_gridLetters[0].getLetter(_focus));
+		_focus.first = last;
+	_cursor->changeFocus(getFocus());
 }
 
 void arc::PlayerName::moveFocusRight()
 {
-	if (_focus < _gridLetters[0].size() - 1)
-		++_focus;
+	if (_focus.first < _gridLetters[0].size() - 1)
+		++_focus.first;
 	else
-		_focus = 0;
-	_cursor->changeFocus(_gridLetters[0].getLetter(_focus));
+		_focus.first = 0;
+	_cursor->changeFocus(getFocus());
 }
 
 void arc::PlayerName::action(arc::SceneManager &)
 {
-	_playerName->setText(_playerName->getText() + _gridLetters[0].getLetter(_focus)->getText());
+	_playerName->setText(_playerName->getText() + getFocus()->getText());
+}
+
+arc::Text *arc::PlayerName::getFocus() const
+{
+        return _gridLetters[_focus.second].getLetter(_focus.first);
 }
