@@ -14,12 +14,13 @@ std::map<arc::Key, void (arc::PlayerName::*)()> arc::PlayerName::_keysMap = {
 };
 
 arc::PlayerName::PlayerName() :
+	_playerName(std::make_unique<Text>("", std::pair<float, float>(0.1, 0.1), 20)),
 	_focus(0)
 {
 	std::string letter = "A";
 
 	for (size_t i = 0; i < 8; ++i) {
-		_letters.push_back(std::make_unique<Text>(letter, std::pair<float, float>(i / 10.0, 0.1), 20));
+		_letters.push_back(std::make_unique<Text>(letter, std::pair<float, float>(i / 10.0, 0.3), 20));
 		letter[0]++;
 	}
         _cursor = std::make_unique<Cursor>(_letters[0].get());
@@ -39,6 +40,7 @@ std::vector<std::reference_wrapper<arc::IText>> arc::PlayerName::getTexts() cons
 
 	for (auto &letter : _letters)
 		wrapper.emplace_back(*letter);
+	wrapper.emplace_back(*_playerName);
 	return wrapper;
 }
 
@@ -78,4 +80,5 @@ void arc::PlayerName::moveFocusRight()
 
 void arc::PlayerName::action(arc::SceneManager &)
 {
+	_playerName->setText(_playerName->getText() + _letters[_focus]->getText());
 }

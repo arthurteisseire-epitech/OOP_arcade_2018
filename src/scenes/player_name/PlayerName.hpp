@@ -26,6 +26,7 @@ namespace arc {
 		void moveFocusLeft();
 		void moveFocusRight();
 
+		std::unique_ptr<Text> _playerName;
 		std::vector<std::unique_ptr<Text>> _letters;
 		std::unique_ptr<Cursor> _cursor;
 		size_t _focus;
