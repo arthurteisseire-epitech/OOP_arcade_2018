@@ -25,6 +25,7 @@ namespace arc {
 
 		void setPosition(const std::pair<float, float> &pos);
 		void setSize(int size);
+		void setText(const std::string &text);
 	private:
 		std::string _text;
 		std::pair<float, float> _pos;
