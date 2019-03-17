@@ -12,9 +12,10 @@
 #include "Core.hpp"
 #include "Process.hpp"
 
-arc::Core::Core(IGraphic *graphic) :
+arc::Core::Core(IGraphic *graphic, IGame *game) :
 	_sceneManager(std::make_unique<SceneManager>(MENU)),
-	_graphic(std::unique_ptr<IGraphic>(graphic))
+	_graphic(std::unique_ptr<IGraphic>(graphic)),
+	_game(game)
 {
 }
 

@@ -98,23 +98,6 @@ bool arc::Widget::processAudio(const arc::IAudio &audio)
 	return true;
 }
 
-bool arc::Widget::processAudio(const arc::IAudio &audio)
-{
-	QString path(QString::fromStdString(audio.getSoundPath()));
-	QFileInfo file(path);
-	auto player = new QMediaPlayer();
-
-	if (_player.find(&audio) == _player.end()) {
-		if (!file.exists())
-			return false;
-		player->setMedia(QUrl::fromLocalFile(file.absoluteFilePath()));
-		_player[&audio] = std::unique_ptr<QMediaPlayer>(player);
-	}
-	player->setVolume(audio.getVolume());
-	player->play();
-	return true;
-}
-
 void arc::Widget::keyPressEvent(QKeyEvent *e)
 {
 	if (!e->isAutoRepeat())
