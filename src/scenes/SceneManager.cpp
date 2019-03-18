@@ -24,17 +24,14 @@ void arc::SceneManager::changeScene(SCENE scene)
 	_currScene = scene;
 }
 
-const arc::IScene &arc::SceneManager::currentScene() const
+arc::IScene &arc::SceneManager::currentScene() const
 {
 	return *_scene.at(_currScene);
 }
 
 void arc::SceneManager::processEvents(const std::map<arc::Key, arc::KeyState> &keys)
 {
-	for (auto &key : keys)
-		if (key.first == ENTER && key.second == PRESSED)
-			_scene[_currScene]->action(*this);
-	_scene[_currScene]->processEvents(keys);
+	_scene.at(_currScene)->processEvents(keys);
 }
 
 int arc::SceneManager::start()
@@ -48,6 +45,10 @@ int arc::SceneManager::start()
 			_graphic->processEvents();
 			_graphic->draw();
 			usleep(100);
+		} else {
+			if (currentScene().nextScene() == NONE)
+				break;
+			changeScene(currentScene().nextScene());
 		}
 	}
 	return 0;

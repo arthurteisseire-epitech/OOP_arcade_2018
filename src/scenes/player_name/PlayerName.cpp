@@ -15,6 +15,7 @@ std::map<arc::Key, void (arc::PlayerName::*)()> arc::PlayerName::_keysMap = {
 	{RIGHT, &arc::PlayerName::moveFocusRight},
 	{UP,    &arc::PlayerName::moveFocusUp},
 	{DOWN,  &arc::PlayerName::moveFocusDown},
+	{ENTER,  &arc::PlayerName::action},
 };
 
 arc::PlayerName::PlayerName() :
@@ -55,6 +56,7 @@ std::vector<std::reference_wrapper<arc::IAudio>> arc::PlayerName::getAudios() co
 
 void arc::PlayerName::processEvents(const std::map<arc::Key, arc::KeyState> &keys)
 {
+	_keys = std::make_unique<std::map<Key, KeyState>>(keys);
 	for (auto &key : keys) {
 		auto it = _keysMap.find(key.first);
 		if (it != _keysMap.end() && key.second == PRESSED)
@@ -90,11 +92,9 @@ void arc::PlayerName::moveFocusDown()
 	_cursor->changeFocus(getFocus());
 }
 
-void arc::PlayerName::action(arc::SceneManager &sceneManager)
+void arc::PlayerName::action()
 {
-	if (getFocus()->getText() == "~")
-		sceneManager.changeScene(MENU);
-	else if (getFocus()->getText() == "<")
+	if (getFocus()->getText() == "<")
 			_playerName->setText(_playerName->getText().substr(0, _playerName->getText().length() - 1));
 	else if (_playerName->getText().length() < 3 && getFocus()->getText() != " ")
 		_playerName->setText(_playerName->getText() + getFocus()->getText());
@@ -113,6 +113,10 @@ bool arc::PlayerName::in(int x, int y) const
 
 arc::SCENE arc::PlayerName::nextScene() const
 {
+	if (_keys) {
+		auto enterKey = _keys->find(ENTER);
+		if (enterKey != _keys->end() && enterKey->second == PRESSED && getFocus()->getText() == "~")
+			return MENU;
+	}
 	return PLAYER_NAME;
 }
-

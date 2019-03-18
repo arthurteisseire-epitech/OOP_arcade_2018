@@ -23,7 +23,7 @@ namespace arc {
 		~SceneManager() = default;
 
 		void changeScene(SCENE scene);
-		const IScene &currentScene() const;
+		IScene &currentScene() const;
 		void processEvents(const std::map<Key, KeyState> &keys);
 		int start();
 	protected:

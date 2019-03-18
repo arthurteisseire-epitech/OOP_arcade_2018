@@ -58,11 +58,12 @@ void arc::MainMenu::setButtonsAction()
 	_buttons[2]->action = [] (SceneManager &) {};
 }
 
-void arc::MainMenu::processEvents(const std::map<Key, KeyState> &map)
+void arc::MainMenu::processEvents(const std::map<Key, KeyState> &keys)
 {
+	_keys = std::make_unique<std::map<Key, KeyState>>(keys);
 	for (auto &p : _keysMap) {
-		auto it = map.find(p.first);
-		if (it != map.end() && it->second == RELEASED)
+		auto it = keys.find(p.first);
+		if (it != keys.end() && it->second == RELEASED)
 			(this->*p.second)();
 	}
 }
@@ -111,12 +112,17 @@ std::vector<std::reference_wrapper<arc::IAudio>> arc::MainMenu::getAudios() cons
 	return wrapper;
 }
 
-void arc::MainMenu::action(arc::SceneManager &sceneManager)
-{
-	_buttons[_focus]->action(sceneManager);
-}
-
 arc::SCENE arc::MainMenu::nextScene() const
 {
-        return MENU;
+	if (_keys) {
+		auto enterKey = _keys->find(ENTER);
+		if (enterKey != _keys->end() && enterKey->second == PRESSED)
+			return PLAYER_NAME;
+	}
+	return MENU;
 }
+
+//void arc::MainMenu::action(arc::SceneManager &sceneManager)
+//{
+//	_buttons[_focus]->action(sceneManager);
+//}

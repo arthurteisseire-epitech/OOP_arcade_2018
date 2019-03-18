@@ -387,22 +387,22 @@ src/library/LibraryLoaderTest.s:
 .PHONY : src/library/LibraryLoaderTest.s
 
 # target to build an object file
-src/scenes/AScene.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/AScene.o
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/AScene.o
-.PHONY : src/scenes/AScene.o
+src/scenes/Scene.o:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/Scene.o
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/Scene.o
+.PHONY : src/scenes/Scene.o
 
 # target to preprocess a source file
-src/scenes/AScene.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/AScene.i
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/AScene.i
-.PHONY : src/scenes/AScene.i
+src/scenes/Scene.i:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/Scene.i
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/Scene.i
+.PHONY : src/scenes/Scene.i
 
 # target to generate assembly for a file
-src/scenes/AScene.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/AScene.s
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/AScene.s
-.PHONY : src/scenes/AScene.s
+src/scenes/Scene.s:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/Scene.s
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/Scene.s
+.PHONY : src/scenes/Scene.s
 
 # target to build an object file
 src/scenes/SceneFactory.o:
@@ -576,9 +576,9 @@ help:
 	@echo "... src/library/LibraryLoaderTest.o"
 	@echo "... src/library/LibraryLoaderTest.i"
 	@echo "... src/library/LibraryLoaderTest.s"
-	@echo "... src/scenes/AScene.o"
-	@echo "... src/scenes/AScene.i"
-	@echo "... src/scenes/AScene.s"
+	@echo "... src/scenes/Scene.o"
+	@echo "... src/scenes/Scene.i"
+	@echo "... src/scenes/Scene.s"
 	@echo "... src/scenes/SceneFactory.o"
 	@echo "... src/scenes/SceneFactory.i"
 	@echo "... src/scenes/SceneFactory.s"

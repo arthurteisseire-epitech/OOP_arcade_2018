@@ -2,8 +2,7 @@
 ** EPITECH PROJECT, 2018
 ** arcade
 ** File description:
-** AScene.cpp
+** Scene.cpp
 */
 
-#include "AScene.hpp"
-
+#include "Scene.hpp"
