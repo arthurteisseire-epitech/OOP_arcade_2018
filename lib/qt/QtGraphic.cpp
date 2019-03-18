@@ -16,6 +16,10 @@ arc::QtGraphic::QtGraphic(int &ac, char *av[]) :
 	_app(new QApplication(ac, av)),
 	_widget(new Widget())
 {
+	QPalette palette;
+	palette.setColor(QPalette::Background, Qt::black);
+	_widget->setAutoFillBackground(true);
+	_widget->setPalette(palette);
 	_widget->show();
 }
 

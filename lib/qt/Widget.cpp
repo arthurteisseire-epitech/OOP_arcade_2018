@@ -50,6 +50,7 @@ void arc::Widget::paintEvent(QPaintEvent *)
 		textPos.ry() += size().height() / 2;
 		painter.setFont(QFont(QString::fromStdString(text->getFontPath()), fontSize));
 		QRect rect(textPos.x(), textPos.y(), size().width(), size().height());
+		painter.setPen(Qt::white);
 		painter.drawText(rect, Qt::AlignCenter, QString::fromStdString(text->getText()));
 	}
 	_spritesToDraw.clear();
