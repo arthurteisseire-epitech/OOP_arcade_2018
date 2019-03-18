@@ -8,21 +8,24 @@
 #include "Audio.hpp"
 #include "PlayerName.hpp"
 
+int arc::PlayerName::FONT_SIZE = 20;
+
 std::map<arc::Key, void (arc::PlayerName::*)()> arc::PlayerName::_keysMap = {
-	{LEFT, &arc::PlayerName::moveFocusLeft},
+	{LEFT,  &arc::PlayerName::moveFocusLeft},
 	{RIGHT, &arc::PlayerName::moveFocusRight},
+	{UP,    &arc::PlayerName::moveFocusUp},
+	{DOWN,  &arc::PlayerName::moveFocusDown},
 };
 
 arc::PlayerName::PlayerName() :
-	_focus(0)
+	_playerName(std::make_unique<Text>("", std::pair<float, float>(0.1, 0.1), FONT_SIZE)),
+	_focus(0, 0)
 {
-	std::string letter = "A";
-
-	for (size_t i = 0; i < 8; ++i) {
-		_letters.push_back(std::make_unique<Text>(letter, std::pair<float, float>(i / 10.0, 0.1), 20));
-		letter[0]++;
-	}
-        _cursor = std::make_unique<Cursor>(_letters[0].get());
+	_gridLetters.emplace_back("ABCDEFGH", std::pair<float, float>(0.1, 0.2), FONT_SIZE);
+	_gridLetters.emplace_back("IJKLMNOP", std::pair<float, float>(0.1, 0.3), FONT_SIZE);
+	_gridLetters.emplace_back("QRSTUVWX", std::pair<float, float>(0.1, 0.4), FONT_SIZE);
+	_gridLetters.emplace_back("YZ    <~", std::pair<float, float>(0.1, 0.5), FONT_SIZE);
+	_cursor = std::make_unique<Cursor>(getFocus());
 }
 
 std::vector<std::reference_wrapper<arc::ISprite>> arc::PlayerName::getSprites() const
@@ -30,15 +33,18 @@ std::vector<std::reference_wrapper<arc::ISprite>> arc::PlayerName::getSprites() 
 	auto wrapper = std::vector<std::reference_wrapper<ISprite>>();
 
 	wrapper.emplace_back(*_cursor);
-        return wrapper;
+	return wrapper;
 }
 
 std::vector<std::reference_wrapper<arc::IText>> arc::PlayerName::getTexts() const
 {
 	auto wrapper = std::vector<std::reference_wrapper<IText>>();
 
-	for (auto &letter : _letters)
-		wrapper.emplace_back(*letter);
+	for (auto &row : _gridLetters) {
+		for (int i = 0; i < (int)row.size(); ++i)
+			wrapper.emplace_back(*row.getLetter(i));
+	}
+	wrapper.emplace_back(*_playerName);
 	return wrapper;
 }
 
@@ -58,24 +64,50 @@ void arc::PlayerName::processEvents(const std::map<arc::Key, arc::KeyState> &key
 
 void arc::PlayerName::moveFocusLeft()
 {
-	auto last = _letters.empty() ? 0 : _letters.size() - 1;
-
-	if (_focus != 0)
-		--_focus;
-	else
-		_focus = last;
-	_cursor->changeFocus(_letters[_focus].get());
+	if (in(_focus.first - 1, _focus.second))
+		--_focus.first;
+	_cursor->changeFocus(getFocus());
 }
 
 void arc::PlayerName::moveFocusRight()
 {
-	if (_focus < _letters.size() - 1)
-		++_focus;
-	else
-		_focus = 0;
-	_cursor->changeFocus(_letters[_focus].get());
+	if (in(_focus.first + 1, _focus.second))
+		++_focus.first;
+	_cursor->changeFocus(getFocus());
 }
 
-void arc::PlayerName::action(arc::SceneManager &)
+void arc::PlayerName::moveFocusUp()
 {
+	if (in(_focus.first, _focus.second - 1))
+		--_focus.second;
+	_cursor->changeFocus(getFocus());
 }
+
+void arc::PlayerName::moveFocusDown()
+{
+	if (in(_focus.first, _focus.second + 1))
+		++_focus.second;
+	_cursor->changeFocus(getFocus());
+}
+
+void arc::PlayerName::action(arc::SceneManager &sceneManager)
+{
+	if (getFocus()->getText() == "~")
+		sceneManager.changeScene(MENU);
+	else if (getFocus()->getText() == "<")
+			_playerName->setText(_playerName->getText().substr(0, _playerName->getText().length() - 1));
+	else if (_playerName->getText().length() < 3 && getFocus()->getText() != " ")
+		_playerName->setText(_playerName->getText() + getFocus()->getText());
+}
+
+arc::Text *arc::PlayerName::getFocus() const
+{
+	return _gridLetters[_focus.second].getLetter(_focus.first);
+}
+
+bool arc::PlayerName::in(int x, int y) const
+{
+	return (y >= 0 && y < (int)_gridLetters.size()) &&
+	       (x >= 0 && x < (int)_gridLetters[y].size());
+}
+

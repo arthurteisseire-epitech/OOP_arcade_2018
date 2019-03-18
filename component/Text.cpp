@@ -49,3 +49,8 @@ void arc::Text::setSize(int size)
 {
 	_size = size;
 }
+
+void arc::Text::setText(const std::string &text)
+{
+	_text = text;
+}
