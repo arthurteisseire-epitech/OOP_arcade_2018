@@ -115,3 +115,8 @@ void arc::MainMenu::action(arc::SceneManager &sceneManager)
 {
 	_buttons[_focus]->action(sceneManager);
 }
+
+arc::SCENE arc::MainMenu::nextScene() const
+{
+        return MENU;
+}

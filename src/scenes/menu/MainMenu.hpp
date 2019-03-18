@@ -29,6 +29,7 @@ namespace arc {
 		std::vector<std::reference_wrapper<IAudio>> getAudios() const override;
 		void processEvents(const std::map<Key, KeyState> &map) override;
 		void action(SceneManager &sceneManager) override;
+		SCENE nextScene() const override;
 	private:
 		void setButtonsAction();
 		void moveFocusDown();

@@ -111,3 +111,8 @@ bool arc::PlayerName::in(int x, int y) const
 	       (x >= 0 && x < (int)_gridLetters[y].size());
 }
 
+arc::SCENE arc::PlayerName::nextScene() const
+{
+	return PLAYER_NAME;
+}
+

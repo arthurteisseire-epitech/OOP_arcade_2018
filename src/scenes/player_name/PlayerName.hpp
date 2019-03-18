@@ -23,8 +23,7 @@ namespace arc {
 		std::vector<std::reference_wrapper<IAudio>> getAudios() const override;
 		void processEvents(const std::map<Key, KeyState> &keys) override;
 		void action(SceneManager &sceneManager) override;
-
-		static int FONT_SIZE;
+		SCENE nextScene() const override;
 	private:
 		void moveFocusLeft();
 		void moveFocusRight();
@@ -38,6 +37,7 @@ namespace arc {
 		std::unique_ptr<Cursor> _cursor;
 		std::pair<int, int> _focus;
 		static std::map<Key, void (arc::PlayerName::*)()> _keysMap;
+		static int FONT_SIZE;
 	};
 }
 

@@ -16,6 +16,7 @@
 #include "IAudio.hpp"
 #include "Key.hpp"
 #include "SceneManager.hpp"
+#include "Scenes.hpp"
 
 namespace arc {
 	class SceneManager;
@@ -27,6 +28,7 @@ namespace arc {
 		virtual std::vector<std::reference_wrapper<IAudio>> getAudios() const = 0;
 		virtual void action(SceneManager &sceneManager) = 0;
 		virtual void processEvents(const std::map<Key, KeyState> &map) = 0;
+		virtual SCENE nextScene() const = 0;
 	};
 }
 

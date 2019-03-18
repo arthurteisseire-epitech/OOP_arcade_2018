@@ -41,12 +41,14 @@ int arc::SceneManager::start()
 {
 	arc::Process::audios(currentScene().getAudios(), _graphic.get());
 	while (_graphic->isOpen()) {
-		processEvents(_graphic->getKeys());
-		arc::Process::sprites(currentScene().getSprites(), _graphic.get());
-		arc::Process::texts(currentScene().getTexts(), _graphic.get());
-		_graphic->processEvents();
-		_graphic->draw();
-		usleep(100);
+		if (currentScene().nextScene() == _currScene) {
+			processEvents(_graphic->getKeys());
+			arc::Process::sprites(currentScene().getSprites(), _graphic.get());
+			arc::Process::texts(currentScene().getTexts(), _graphic.get());
+			_graphic->processEvents();
+			_graphic->draw();
+			usleep(100);
+		}
 	}
 	return 0;
 }
