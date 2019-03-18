@@ -25,7 +25,8 @@ arc::PlayerName::PlayerName() :
 	_gridLetters.emplace_back("ABCDEFGH", std::pair<float, float>(0.1, 0.2), FONT_SIZE);
 	_gridLetters.emplace_back("IJKLMNOP", std::pair<float, float>(0.1, 0.3), FONT_SIZE);
 	_gridLetters.emplace_back("QRSTUVWX", std::pair<float, float>(0.1, 0.4), FONT_SIZE);
-	_gridLetters.emplace_back("YZ    <~", std::pair<float, float>(0.1, 0.5), FONT_SIZE);
+	_gridLetters.emplace_back("YZ", std::pair<float, float>(0.1, 0.5), FONT_SIZE);
+	_gridLetters.emplace_back("<~", std::pair<float, float>(0.1, 0.6), FONT_SIZE);
 	_cursor = std::make_unique<Cursor>(getFocus());
 }
 
@@ -96,7 +97,7 @@ void arc::PlayerName::action()
 {
 	if (getFocus()->getText() == "<")
 			_playerName->setText(_playerName->getText().substr(0, _playerName->getText().length() - 1));
-	else if (_playerName->getText().length() < 3 && getFocus()->getText() != " ")
+	else if (_playerName->getText().length() < 3 && getFocus()->getText() != "~")
 		_playerName->setText(_playerName->getText() + getFocus()->getText());
 }
 
@@ -115,7 +116,10 @@ arc::SCENE arc::PlayerName::nextScene() const
 {
 	if (_keys) {
 		auto enterKey = _keys->find(ENTER);
-		if (enterKey != _keys->end() && enterKey->second == PRESSED && getFocus()->getText() == "~")
+		if (enterKey != _keys->end()
+		&& enterKey->second == PRESSED
+		&& _playerName->getText().length() == 3
+		&& getFocus()->getText() == "~")
 			return MENU;
 	}
 	return PLAYER_NAME;
