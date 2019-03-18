@@ -6,6 +6,7 @@
 */
 
 #include <QPainter>
+#include <QLabel>
 #include <QtWidgets/QApplication>
 #include <QtGui/QFontDatabase>
 #include <QtCore/QFileInfo>
@@ -43,9 +44,13 @@ void arc::Widget::paintEvent(QPaintEvent *)
 		fontSize = std::min(fontSize, text->getFontSize() / (1080 / size().height()));
 
 		textPos.setX((int)(size().width() * text->getPosition().first));
-		textPos.setY((int)(size().height() * text->getPosition().second));
+		textPos.setY((int)(size().height() * text->getPosition().second) - size().height());
+
+		textPos.rx() -= size().width() / 2;
+		textPos.ry() += size().height() / 2;
 		painter.setFont(QFont(QString::fromStdString(text->getFontPath()), fontSize));
-		painter.drawText(textPos, QString::fromStdString(text->getText()));
+		QRect rect(textPos.x(), textPos.y(), size().width(), size().height());
+		painter.drawText(rect, Qt::AlignCenter, QString::fromStdString(text->getText()));
 	}
 	_spritesToDraw.clear();
 	_textsToDraw.clear();
