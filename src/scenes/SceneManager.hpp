@@ -23,7 +23,6 @@ namespace arc {
 
 		void changeScene(SCENE scene);
 		IScene &currentScene() const;
-		void processEvents(const std::map<Key, KeyState> &keys);
 		int start();
 	protected:
 		SCENE _currScene;

@@ -29,17 +29,12 @@ arc::IScene &arc::SceneManager::currentScene() const
 	return *_scene.at(_currScene);
 }
 
-void arc::SceneManager::processEvents(const std::map<arc::Key, arc::KeyState> &keys)
-{
-	_scene.at(_currScene)->processEvents(keys);
-}
-
 int arc::SceneManager::start()
 {
 	arc::Process::audios(currentScene().getAudios(), _graphic.get());
 	while (_graphic->isOpen() && currentScene().nextScene() != NONE) {
 		if (currentScene().nextScene() == _currScene) {
-			processEvents(_graphic->getKeys());
+			currentScene().processEvents(_graphic->getKeys());
 			arc::Process::sprites(currentScene().getSprites(), _graphic.get());
 			arc::Process::texts(currentScene().getTexts(), _graphic.get());
 			_graphic->processEvents();
