@@ -31,6 +31,7 @@ void arc::Widget::paintEvent(QPaintEvent *)
 	QPainter painter(this);
 	QPoint spritePos;
 	QPoint textPos;
+	int fontSize;
 
 	for (auto &_sprite : _spritesToDraw) {
 		spritePos.setX((int)(size().width() * _sprite.first->getPosition().first));
@@ -38,9 +39,12 @@ void arc::Widget::paintEvent(QPaintEvent *)
 		painter.drawPixmap(spritePos, _sprite.second);
 	}
 	for (auto text : _textsToDraw) {
+		fontSize = text->getFontSize() / (1920 / size().width());
+		fontSize = std::min(fontSize, text->getFontSize() / (1080 / size().height()));
+
 		textPos.setX((int)(size().width() * text->getPosition().first));
 		textPos.setY((int)(size().height() * text->getPosition().second));
-		painter.setFont(QFont(QString::fromStdString(text->getFontPath()), text->getFontSize()));
+		painter.setFont(QFont(QString::fromStdString(text->getFontPath()), fontSize));
 		painter.drawText(textPos, QString::fromStdString(text->getText()));
 	}
 	_spritesToDraw.clear();
