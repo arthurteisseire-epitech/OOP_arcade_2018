@@ -13,7 +13,6 @@
 #include "Scenes.hpp"
 
 namespace arc {
-	class IScene;
 	class SceneFactory {
 	public:
 		std::unique_ptr<IScene> create(SCENE scene);

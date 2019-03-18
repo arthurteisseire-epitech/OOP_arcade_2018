@@ -15,11 +15,9 @@
 #include "IText.hpp"
 #include "IAudio.hpp"
 #include "Key.hpp"
-#include "SceneManager.hpp"
 #include "Scenes.hpp"
 
 namespace arc {
-	class SceneManager;
 	class IScene {
 	public:
 		virtual ~IScene() = default;

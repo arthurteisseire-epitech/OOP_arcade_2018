@@ -16,7 +16,6 @@
 #include "Scenes.hpp"
 
 namespace arc {
-	class IScene;
 	class SceneManager {
 	public:
 		explicit SceneManager(SCENE scene, IGraphic *graphic);
