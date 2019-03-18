@@ -33,12 +33,13 @@ namespace arc {
 		Text *getFocus() const;
 
 		std::unique_ptr<std::map<Key, KeyState>> _keys;
-		std::unique_ptr<Text> _playerName;
+		std::unique_ptr<Text> _playerText;
 		std::vector<Row> _gridLetters;
 		std::unique_ptr<Cursor> _cursor;
 		std::pair<int, int> _focus;
-		static const std::map<Key, void (arc::PlayerName::*)()> _keysMap;
 		static const int FONT_SIZE;
+		static const std::string PREFIX;
+		static const std::map<Key, void (arc::PlayerName::*)()> _keysMap;
 	};
 }
 

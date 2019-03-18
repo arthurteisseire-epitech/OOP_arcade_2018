@@ -10,6 +10,8 @@
 
 const int arc::PlayerName::FONT_SIZE = 20;
 
+const std::string arc::PlayerName::PREFIX = "Player Name : ";
+
 const std::map<arc::Key, void (arc::PlayerName::*)()> arc::PlayerName::_keysMap = {
 	{LEFT,  &arc::PlayerName::moveFocusLeft},
 	{RIGHT, &arc::PlayerName::moveFocusRight},
@@ -20,7 +22,8 @@ const std::map<arc::Key, void (arc::PlayerName::*)()> arc::PlayerName::_keysMap 
 
 arc::PlayerName::PlayerName(const std::shared_ptr<PlayerData> &playerData) :
 	Scene(playerData),
-	_playerName(std::make_unique<Text>(_playerData->name, std::pair<float, float>(0.1, 0.1), FONT_SIZE)),
+	_playerText(std::make_unique<Text>(PREFIX + _playerData->name,
+	                                   std::pair<float, float>(0.1, 0.1), FONT_SIZE)),
 	_focus(0, 0)
 {
 	_gridLetters.emplace_back("ABCDEFGH", std::pair<float, float>(0.1, 0.2), FONT_SIZE);
@@ -47,7 +50,7 @@ std::vector<std::reference_wrapper<arc::IText>> arc::PlayerName::getTexts() cons
 		for (int i = 0; i < (int)row.size(); ++i)
 			wrapper.emplace_back(*row.getLetter(i));
 	}
-	wrapper.emplace_back(*_playerName);
+	wrapper.emplace_back(*_playerText);
 	return wrapper;
 }
 
@@ -98,9 +101,9 @@ void arc::PlayerName::action()
 {
 	if (getFocus()->getText() == "<") {
 		_playerData->name = _playerData->name.substr(0, _playerData->name.length() - 1);
-		_playerName->setText(_playerData->name);
+		_playerText->setText(PREFIX + _playerData->name);
 	} else if (_playerData->name.length() < 3 && getFocus()->getText() != "~")
-		_playerName->setText(_playerData->name += getFocus()->getText());
+		_playerText->setText(PREFIX + (_playerData->name += getFocus()->getText()));
 }
 
 arc::Text *arc::PlayerName::getFocus() const
