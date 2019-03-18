@@ -8,9 +8,9 @@
 #include "Audio.hpp"
 #include "PlayerName.hpp"
 
-int arc::PlayerName::FONT_SIZE = 20;
+const int arc::PlayerName::FONT_SIZE = 20;
 
-std::map<arc::Key, void (arc::PlayerName::*)()> arc::PlayerName::_keysMap = {
+const std::map<arc::Key, void (arc::PlayerName::*)()> arc::PlayerName::_keysMap = {
 	{LEFT,  &arc::PlayerName::moveFocusLeft},
 	{RIGHT, &arc::PlayerName::moveFocusRight},
 	{UP,    &arc::PlayerName::moveFocusUp},

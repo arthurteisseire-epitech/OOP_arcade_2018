@@ -37,8 +37,8 @@ namespace arc {
 		std::vector<Row> _gridLetters;
 		std::unique_ptr<Cursor> _cursor;
 		std::pair<int, int> _focus;
-		static std::map<Key, void (arc::PlayerName::*)()> _keysMap;
-		static int FONT_SIZE;
+		static const std::map<Key, void (arc::PlayerName::*)()> _keysMap;
+		static const int FONT_SIZE;
 	};
 }
 
