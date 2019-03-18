@@ -30,7 +30,6 @@ namespace arc {
 		void processEvents(const std::map<Key, KeyState> &keys) override;
 		SCENE nextScene() const override;
 	private:
-		void setButtonsAction();
 		void moveFocusDown();
 		void moveFocusUp();
 		void setSpritesPosition();
