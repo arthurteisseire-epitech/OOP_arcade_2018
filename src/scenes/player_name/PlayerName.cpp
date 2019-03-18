@@ -18,8 +18,9 @@ const std::map<arc::Key, void (arc::PlayerName::*)()> arc::PlayerName::_keysMap 
 	{ENTER, &arc::PlayerName::action},
 };
 
-arc::PlayerName::PlayerName() :
-	_playerName(std::make_unique<Text>("", std::pair<float, float>(0.1, 0.1), FONT_SIZE)),
+arc::PlayerName::PlayerName(const std::shared_ptr<PlayerData> &playerData) :
+	Scene(playerData),
+	_playerName(std::make_unique<Text>(_playerData->name, std::pair<float, float>(0.1, 0.1), FONT_SIZE)),
 	_focus(0, 0)
 {
 	_gridLetters.emplace_back("ABCDEFGH", std::pair<float, float>(0.1, 0.2), FONT_SIZE);
@@ -95,10 +96,11 @@ void arc::PlayerName::moveFocusDown()
 
 void arc::PlayerName::action()
 {
-	if (getFocus()->getText() == "<")
-		_playerName->setText(_playerName->getText().substr(0, _playerName->getText().length() - 1));
-	else if (_playerName->getText().length() < 3 && getFocus()->getText() != "~")
-		_playerName->setText(_playerName->getText() + getFocus()->getText());
+	if (getFocus()->getText() == "<") {
+		_playerData->name = _playerData->name.substr(0, _playerData->name.length() - 1);
+		_playerName->setText(_playerData->name);
+	} else if (_playerData->name.length() < 3 && getFocus()->getText() != "~")
+		_playerName->setText(_playerData->name += getFocus()->getText());
 }
 
 arc::Text *arc::PlayerName::getFocus() const
@@ -118,7 +120,7 @@ arc::SCENE arc::PlayerName::nextScene() const
 		auto enterKey = _keys->find(ENTER);
 		if (enterKey != _keys->end() &&
 		    enterKey->second == PRESSED &&
-		    _playerName->getText().length() == 3 &&
+		    _playerData->name.length() == 3 &&
 		    getFocus()->getText() == "~")
 			return MENU;
 	}

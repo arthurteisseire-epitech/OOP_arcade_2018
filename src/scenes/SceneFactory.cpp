@@ -10,11 +10,11 @@
 #include "SceneFactory.hpp"
 
 arc::SceneFactory::SceneType arc::SceneFactory::_scenesMap = {
-	{MENU,        []() { return std::make_unique<MainMenu>(); }},
-	{PLAYER_NAME, []() { return std::make_unique<PlayerName>(); }},
+	{MENU,        [](const std::shared_ptr<PlayerData> &p) { return std::make_unique<MainMenu>(p); }},
+	{PLAYER_NAME, [](const std::shared_ptr<PlayerData> &p) { return std::make_unique<PlayerName>(p); }},
 };
 
-std::unique_ptr<arc::IScene> arc::SceneFactory::create(SCENE scene)
+std::unique_ptr<arc::IScene> arc::SceneFactory::create(SCENE scene, const std::shared_ptr<PlayerData> &playerData)
 {
-	return _scenesMap[scene]();
+	return _scenesMap[scene](playerData);
 }

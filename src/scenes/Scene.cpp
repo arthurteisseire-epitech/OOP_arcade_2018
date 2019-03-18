@@ -6,3 +6,8 @@
 */
 
 #include "Scene.hpp"
+
+arc::Scene::Scene(const std::shared_ptr<arc::PlayerData> &playerData) :
+	_playerData(playerData)
+{
+}

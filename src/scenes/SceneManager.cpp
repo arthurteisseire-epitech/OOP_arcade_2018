@@ -13,14 +13,15 @@
 arc::SceneManager::SceneManager(arc::SCENE scene, arc::IGraphic *graphic) :
 	_currScene(scene),
 	_graphic(graphic),
-	_factory()
+	_factory(std::make_unique<SceneFactory>()),
+	_playerData(std::make_shared<PlayerData>())
 {
-	_scene[scene] = _factory->create(scene);
+	_scene[scene] = _factory->create(scene, _playerData);
 }
 
 void arc::SceneManager::changeScene(SCENE scene)
 {
-	_scene[scene] = _factory->create(scene);
+	_scene[scene] = _factory->create(scene, _playerData);
 	_currScene = scene;
 }
 

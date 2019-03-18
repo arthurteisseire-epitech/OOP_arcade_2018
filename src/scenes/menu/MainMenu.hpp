@@ -23,7 +23,7 @@
 namespace arc {
 	class MainMenu : public Scene {
 	public:
-		MainMenu();
+		explicit MainMenu(const std::shared_ptr<PlayerData> &playerData);
 		std::vector<std::reference_wrapper<ISprite>> getSprites() const override;
 		std::vector<std::reference_wrapper<IText>> getTexts() const override;
 		std::vector<std::reference_wrapper<IAudio>> getAudios() const override;

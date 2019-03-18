@@ -17,7 +17,8 @@ std::map<arc::Key, void (arc::MainMenu::*)()> arc::MainMenu::_keysMap = {
 	{DOWN, &arc::MainMenu::moveFocusDown},
 };
 
-arc::MainMenu::MainMenu() :
+arc::MainMenu::MainMenu(const std::shared_ptr<PlayerData> &playerData) :
+	Scene(playerData),
 	_focus(0)
 {
 	_spriteFocus = std::make_unique<Sprite>("assets/focus.png");

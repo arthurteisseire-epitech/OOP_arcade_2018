@@ -29,6 +29,7 @@ namespace arc {
 		std::unique_ptr<IGraphic> _graphic;
 		std::unique_ptr<SceneFactory> _factory;
 		std::map<SCENE, std::unique_ptr<IScene>> _scene;
+		std::shared_ptr<PlayerData> _playerData;
 	};
 }
 
