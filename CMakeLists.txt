@@ -33,7 +33,7 @@ file(GLOB_RECURSE lib lib/*.cpp)
 file(GLOB_RECURSE games games/*.cpp)
 list(FILTER games EXCLUDE REGEX ".*Test.cpp$")
 
-add_executable(${CMAKE_PROJECT_NAME} ${main} ${core} ${component})
+add_executable(${CMAKE_PROJECT_NAME} ${main} ${core} ${component} ${games})
 target_link_libraries(${CMAKE_PROJECT_NAME} dl Qt5::Widgets Qt5::Multimedia)
 
 add_custom_target(
@@ -68,9 +68,9 @@ add_custom_target(
 
 enable_testing()
 
-file(GLOB_RECURSE tests src/*Test.cpp)
+file(GLOB_RECURSE tests src/*Test.cpp games/*Test.cpp)
 
-add_executable(units ${core} ${tests} ${component})
+add_executable(units ${core} ${tests} ${component} ${games})
 target_link_libraries(units dl Qt5::Widgets Qt5::Multimedia gtest gtest_main gcov)
 
 add_test(NAME units COMMAND units)

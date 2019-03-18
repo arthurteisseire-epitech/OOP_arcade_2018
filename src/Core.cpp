@@ -24,8 +24,10 @@ int arc::Core::exec()
 	arc::Process::audios(_sceneManager->currentScene().getAudios(), _graphic.get());
 	while (_graphic->isOpen()) {
 		_sceneManager->processEvents(_graphic->getKeys());
-		arc::Process::sprites(_sceneManager->currentScene().getSprites(), _graphic.get());
-		arc::Process::texts(_sceneManager->currentScene().getTexts(), _graphic.get());
+		/*arc::Process::sprites(_sceneManager->currentScene().getSprites(), _graphic.get());
+		arc::Process::texts(_sceneManager->currentScene().getTexts(), _graphic.get());*/
+		_game->update(_graphic->getKeys(), 0.1);
+		arc::Process::all(_game->getComponents(), _graphic.get());
 		_graphic->processEvents();
 		_graphic->draw();
 		usleep(100);
