@@ -37,7 +37,7 @@ void arc::SceneManager::processEvents(const std::map<arc::Key, arc::KeyState> &k
 int arc::SceneManager::start()
 {
 	arc::Process::audios(currentScene().getAudios(), _graphic.get());
-	while (_graphic->isOpen()) {
+	while (_graphic->isOpen() && currentScene().nextScene() != NONE) {
 		if (currentScene().nextScene() == _currScene) {
 			processEvents(_graphic->getKeys());
 			arc::Process::sprites(currentScene().getSprites(), _graphic.get());
@@ -46,8 +46,6 @@ int arc::SceneManager::start()
 			_graphic->draw();
 			usleep(100);
 		} else {
-			if (currentScene().nextScene() == NONE)
-				break;
 			changeScene(currentScene().nextScene());
 		}
 	}
