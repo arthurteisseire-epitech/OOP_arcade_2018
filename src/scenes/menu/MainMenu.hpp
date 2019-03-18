@@ -35,11 +35,12 @@ namespace arc {
 		void setSpritesPosition();
 		void setSpritesSize();
 
-		size_t _focus;
 		std::unique_ptr<std::map<Key, KeyState>> _keys;
 		std::vector<std::unique_ptr<Button>> _buttons;
 		std::vector<std::unique_ptr<Audio>> _audios;
 		std::unique_ptr<Sprite> _spriteFocus;
+		std::unique_ptr<Text> _playerName;
+		size_t _focus;
 		static std::map<Key, void (arc::MainMenu::*)()> _keysMap;
 	};
 }
