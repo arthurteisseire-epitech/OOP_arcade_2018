@@ -15,7 +15,7 @@ std::map<arc::Key, void (arc::PlayerName::*)()> arc::PlayerName::_keysMap = {
 	{RIGHT, &arc::PlayerName::moveFocusRight},
 	{UP,    &arc::PlayerName::moveFocusUp},
 	{DOWN,  &arc::PlayerName::moveFocusDown},
-	{ENTER,  &arc::PlayerName::action},
+	{ENTER, &arc::PlayerName::action},
 };
 
 arc::PlayerName::PlayerName() :
@@ -96,7 +96,7 @@ void arc::PlayerName::moveFocusDown()
 void arc::PlayerName::action()
 {
 	if (getFocus()->getText() == "<")
-			_playerName->setText(_playerName->getText().substr(0, _playerName->getText().length() - 1));
+		_playerName->setText(_playerName->getText().substr(0, _playerName->getText().length() - 1));
 	else if (_playerName->getText().length() < 3 && getFocus()->getText() != "~")
 		_playerName->setText(_playerName->getText() + getFocus()->getText());
 }
@@ -116,10 +116,10 @@ arc::SCENE arc::PlayerName::nextScene() const
 {
 	if (_keys) {
 		auto enterKey = _keys->find(ENTER);
-		if (enterKey != _keys->end()
-		&& enterKey->second == PRESSED
-		&& _playerName->getText().length() == 3
-		&& getFocus()->getText() == "~")
+		if (enterKey != _keys->end() &&
+		    enterKey->second == PRESSED &&
+		    _playerName->getText().length() == 3 &&
+		    getFocus()->getText() == "~")
 			return MENU;
 	}
 	return PLAYER_NAME;
