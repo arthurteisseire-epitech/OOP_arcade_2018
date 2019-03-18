@@ -9,13 +9,13 @@
 #define ARCADE_PLAYERNAME_HPP
 
 #include <memory>
-#include "IScene.hpp"
+#include "AScene.hpp"
 #include "Text.hpp"
 #include "Cursor.hpp"
 #include "Row.hpp"
 
 namespace arc {
-	class PlayerName : public IScene {
+	class PlayerName : public AScene {
 	public:
 		PlayerName();
 		std::vector<std::reference_wrapper<ISprite>> getSprites() const override;

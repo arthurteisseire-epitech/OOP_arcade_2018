@@ -11,7 +11,7 @@
 #include <vector>
 #include <memory>
 #include <map>
-#include "IScene.hpp"
+#include "AScene.hpp"
 #include "IText.hpp"
 #include "Text.hpp"
 #include "ISprite.hpp"
@@ -21,7 +21,7 @@
 #include "Audio.hpp"
 
 namespace arc {
-	class MainMenu : public IScene {
+	class MainMenu : public AScene {
 	public:
 		MainMenu();
 		std::vector<std::reference_wrapper<ISprite>> getSprites() const override;
