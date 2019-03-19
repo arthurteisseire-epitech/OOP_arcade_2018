@@ -50,7 +50,7 @@ void arc::Widget::paintEvent(QPaintEvent *)
 		textPos.ry() += size().height() / 2;
 		painter.setFont(QFont(QString::fromStdString(text->getFontPath()), fontSize));
 		QRect rect(textPos.x(), textPos.y(), size().width(), size().height());
-		painter.setPen(Qt::white);
+		painter.setPen(convertColor(text->getColor()));
 		painter.drawText(rect, Qt::AlignCenter, QString::fromStdString(text->getText()));
 	}
 	_spritesToDraw.clear();
@@ -147,10 +147,8 @@ const std::map<arc::Key, arc::KeyState> &arc::Widget::getKeys() const
 
 QColor arc::Widget::convertColor(unsigned int color)
 {
-	QColor qcolor((color & 0x000000ff),
-	              (color & 0x0000ff00) >> 8,
+	return QColor((color & 0xff000000) >> 24,
 	              (color & 0x00ff0000) >> 16,
-	              (color & 0xff000000) >> 24);
-
-	return qcolor;
+	              (color & 0x0000ff00) >> 8,
+	              (color & 0x000000ff));
 }

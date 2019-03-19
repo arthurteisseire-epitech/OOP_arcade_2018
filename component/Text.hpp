@@ -22,6 +22,8 @@ namespace arc {
 		const std::pair<float, float> &getPosition() const override;
 		const std::string &getFontPath() const override;
 		int getFontSize() const override;
+		unsigned int getColor() const override;
+		void setColor(unsigned int color);
 
 		void setPosition(const std::pair<float, float> &pos);
 		void setSize(int size);
@@ -31,6 +33,7 @@ namespace arc {
 		std::pair<float, float> _pos;
 		std::string _fontPath;
 		int _size;
+		unsigned int _color;
 	};
 }
 

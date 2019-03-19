@@ -11,7 +11,8 @@ arc::Text::Text(const std::string &text, const std::pair<float, float> &pos, int
 	_text(text),
 	_pos(pos),
 	_fontPath(fontPath),
-	_size(size)
+	_size(size),
+	_color(0xffffffff)
 {
 }
 
@@ -53,4 +54,14 @@ void arc::Text::setSize(int size)
 void arc::Text::setText(const std::string &text)
 {
 	_text = text;
+}
+
+unsigned int arc::Text::getColor() const
+{
+	return _color;
+}
+
+void arc::Text::setColor(unsigned int color)
+{
+	_color = color;
 }
