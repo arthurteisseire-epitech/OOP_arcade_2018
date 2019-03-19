@@ -32,6 +32,7 @@ namespace arc {
 		void moveFocusUp();
 		void setSpritesPosition();
 		void setSpritesSize();
+		void fillComponents();
 
 		std::unique_ptr<std::map<Key, KeyState>> _keys;
 		std::vector<std::unique_ptr<Button>> _buttons;
@@ -40,6 +41,7 @@ namespace arc {
 		std::unique_ptr<Text> _playerName;
 		size_t _focus;
 		static std::map<Key, void (arc::MainMenu::*)()> _keysMap;
+		std::vector<std::reference_wrapper<IComponent>> _components;
 	};
 }
 
