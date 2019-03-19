@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2018
 ** arcade
 ** File description:
-** NibblerTest.cpp,
+** NibblerTest.cpp
 */
 
 #include <functional>

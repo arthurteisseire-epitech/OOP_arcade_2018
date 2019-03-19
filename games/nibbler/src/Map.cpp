@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2018
 ** arcade
 ** File description:
-** Map.cpp,
+** Map.cpp
 */
 
 #include <random>
