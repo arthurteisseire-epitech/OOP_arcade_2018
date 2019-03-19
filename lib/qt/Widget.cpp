@@ -50,7 +50,7 @@ void arc::Widget::paintEvent(QPaintEvent *)
 		textPos.ry() += size().height() / 2;
 		painter.setFont(QFont(QString::fromStdString(text->getFontPath()), fontSize));
 		QRect rect(textPos.x(), textPos.y(), size().width(), size().height());
-		painter.setPen(Qt::white);
+		painter.setPen(convertColor(text->getColor()));
 		painter.drawText(rect, Qt::AlignCenter, QString::fromStdString(text->getText()));
 	}
 	_spritesToDraw.clear();
@@ -69,10 +69,7 @@ bool arc::Widget::processSprite(const ISprite &sprite)
 		if (pixmap->isNull()) {
 			delete pixmap;
 			pixmap = new QPixmap(pos.first, pos.second);
-			pixmap->fill(QColor((sprite.getColor() & 0x000000ff),
-			                    (sprite.getColor() & 0x0000ff00) >> 8,
-			                    (sprite.getColor() & 0x00ff0000) >> 16,
-			                    (sprite.getColor() & 0xff000000) >> 24));
+			pixmap->fill(convertColor(sprite.getColor()));
 		}
 		_sprites.emplace(&sprite, std::unique_ptr<QPixmap>(pixmap));
 	}
@@ -146,4 +143,12 @@ void arc::Widget::updateKeysState()
 const std::map<arc::Key, arc::KeyState> &arc::Widget::getKeys() const
 {
 	return _keys;
+}
+
+QColor arc::Widget::convertColor(unsigned int color)
+{
+	return QColor((color & 0xff000000) >> 24,
+	              (color & 0x00ff0000) >> 16,
+	              (color & 0x0000ff00) >> 8,
+	              (color & 0x000000ff));
 }

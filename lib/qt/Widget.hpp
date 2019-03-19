@@ -32,6 +32,7 @@ namespace arc {
 		void keyReleaseEvent(QKeyEvent *e) override;
 	private:
 		void processKeys(const QKeyEvent *e, arc::KeyState state);
+		QColor convertColor(unsigned int color);
 
 		std::map<const ISprite *, std::unique_ptr<QPixmap>> _sprites;
 		std::map<const ISprite *, std::reference_wrapper<QPixmap>> _spritesToDraw;

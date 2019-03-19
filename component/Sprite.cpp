@@ -57,5 +57,5 @@ void arc::Sprite::moveDown(float y)
 
 unsigned int arc::Sprite::getColor() const
 {
-	return __bswap_32(_color);
+	return _color;
 }
