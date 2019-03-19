@@ -11,7 +11,7 @@
 #include <vector>
 #include <memory>
 #include <map>
-#include "IScene.hpp"
+#include "Scene.hpp"
 #include "IText.hpp"
 #include "Text.hpp"
 #include "ISprite.hpp"
@@ -21,25 +21,26 @@
 #include "Audio.hpp"
 
 namespace arc {
-	class MainMenu : public IScene {
+	class MainMenu : public Scene {
 	public:
-		MainMenu();
+		explicit MainMenu(const std::shared_ptr<PlayerData> &playerData);
 		std::vector<std::reference_wrapper<ISprite>> getSprites() const override;
 		std::vector<std::reference_wrapper<IText>> getTexts() const override;
 		std::vector<std::reference_wrapper<IAudio>> getAudios() const override;
-		void processEvents(const std::map<Key, KeyState> &map) override;
-		void action(SceneManager &sceneManager) override;
+		void processEvents(const std::map<Key, KeyState> &keys) override;
+		SCENE nextScene() const override;
 	private:
-		void setButtonsAction();
 		void moveFocusDown();
 		void moveFocusUp();
 		void setSpritesPosition();
 		void setSpritesSize();
 
-		size_t _focus;
+		std::unique_ptr<std::map<Key, KeyState>> _keys;
 		std::vector<std::unique_ptr<Button>> _buttons;
 		std::vector<std::unique_ptr<Audio>> _audios;
 		std::unique_ptr<Sprite> _spriteFocus;
+		std::unique_ptr<Text> _playerName;
+		size_t _focus;
 		static std::map<Key, void (arc::MainMenu::*)()> _keysMap;
 	};
 }

@@ -7,9 +7,10 @@
 
 #include "Button.hpp"
 
-arc::Button::Button(const std::string &filename, const std::string &text) :
+arc::Button::Button(const std::string &filename, SCENE linkedScene, const std::string &text) :
 	_sprite(std::make_unique<Sprite>(filename)),
-	_text(std::make_unique<Text>(text))
+	_text(std::make_unique<Text>(text)),
+	_linkedScene(linkedScene)
 {
 }
 
@@ -46,4 +47,9 @@ arc::Sprite &arc::Button::getSprite() const
 arc::Text &arc::Button::getText() const
 {
 	return *_text;
+}
+
+arc::SCENE arc::Button::getLinkedScene()
+{
+        return _linkedScene;
 }

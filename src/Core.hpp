@@ -17,12 +17,10 @@
 namespace arc {
 	class Core {
 	public:
-		explicit Core(IGraphic *graphic, IGame *game);
+		explicit Core(IGraphic *graphic);
 		int exec();
 	private:
 		std::unique_ptr<SceneManager> _sceneManager;
-		std::unique_ptr<IGraphic> _graphic;
-		std::unique_ptr<IGame> _game;
 	};
 }
 

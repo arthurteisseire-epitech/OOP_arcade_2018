@@ -10,24 +10,26 @@
 
 #include <map>
 #include <memory>
+#include "IGraphic.hpp"
 #include "IScene.hpp"
 #include "SceneFactory.hpp"
 #include "Scenes.hpp"
 
 namespace arc {
-	class IScene;
 	class SceneManager {
 	public:
-		explicit SceneManager(SCENE scene);
+		explicit SceneManager(SCENE scene, IGraphic *graphic);
 		~SceneManager() = default;
 
 		void changeScene(SCENE scene);
-		const IScene &currentScene() const;
-		void processEvents(const std::map<Key, KeyState> &keys);
+		IScene &currentScene() const;
+		int start();
 	protected:
+		SCENE _currScene;
+		std::unique_ptr<IGraphic> _graphic;
 		std::unique_ptr<SceneFactory> _factory;
 		std::map<SCENE, std::unique_ptr<IScene>> _scene;
-		SCENE _currScene;
+		std::shared_ptr<PlayerData> _playerData;
 	};
 }
 

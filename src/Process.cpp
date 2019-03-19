@@ -26,6 +26,7 @@ void arc::Process::audios(const std::vector<std::reference_wrapper<IAudio>> &aud
 		graphic->processAudio(audio.get());
 }
 
+
 void arc::Process::all(const std::vector<std::reference_wrapper<IComponent>> &components, arc::IGraphic *graphic)
 {
 	for (auto &comp : components) {
@@ -33,5 +34,7 @@ void arc::Process::all(const std::vector<std::reference_wrapper<IComponent>> &co
 			graphic->processSprite(dynamic_cast<ISprite&>(comp.get()));
 		else if (comp.get().getType() == TEXT)
 			graphic->processText(dynamic_cast<IText &>(comp.get()));
+		else if (comp.get().getType() == SOUND)
+			graphic->processAudio(dynamic_cast<IAudio &>(comp.get()));
 	}
 }

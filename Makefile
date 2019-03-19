@@ -507,6 +507,42 @@ src/library/LibraryLoaderTest.s:
 .PHONY : src/library/LibraryLoaderTest.s
 
 # target to build an object file
+src/scenes/PlayerData.o:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/PlayerData.o
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/PlayerData.o
+.PHONY : src/scenes/PlayerData.o
+
+# target to preprocess a source file
+src/scenes/PlayerData.i:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/PlayerData.i
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/PlayerData.i
+.PHONY : src/scenes/PlayerData.i
+
+# target to generate assembly for a file
+src/scenes/PlayerData.s:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/PlayerData.s
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/PlayerData.s
+.PHONY : src/scenes/PlayerData.s
+
+# target to build an object file
+src/scenes/Scene.o:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/Scene.o
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/Scene.o
+.PHONY : src/scenes/Scene.o
+
+# target to preprocess a source file
+src/scenes/Scene.i:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/Scene.i
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/Scene.i
+.PHONY : src/scenes/Scene.i
+
+# target to generate assembly for a file
+src/scenes/Scene.s:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/Scene.s
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/Scene.s
+.PHONY : src/scenes/Scene.s
+
+# target to build an object file
 src/scenes/SceneFactory.o:
 	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/SceneFactory.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/SceneFactory.o
@@ -699,6 +735,12 @@ help:
 	@echo "... src/library/LibraryLoaderTest.o"
 	@echo "... src/library/LibraryLoaderTest.i"
 	@echo "... src/library/LibraryLoaderTest.s"
+	@echo "... src/scenes/PlayerData.o"
+	@echo "... src/scenes/PlayerData.i"
+	@echo "... src/scenes/PlayerData.s"
+	@echo "... src/scenes/Scene.o"
+	@echo "... src/scenes/Scene.i"
+	@echo "... src/scenes/Scene.s"
 	@echo "... src/scenes/SceneFactory.o"
 	@echo "... src/scenes/SceneFactory.i"
 	@echo "... src/scenes/SceneFactory.s"

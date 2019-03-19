@@ -17,17 +17,18 @@ std::map<arc::Key, void (arc::MainMenu::*)()> arc::MainMenu::_keysMap = {
 	{DOWN, &arc::MainMenu::moveFocusDown},
 };
 
-arc::MainMenu::MainMenu() :
+arc::MainMenu::MainMenu(const std::shared_ptr<PlayerData> &playerData) :
+	Scene(playerData),
+	_playerName(std::make_unique<Text>("Player Name : " + _playerData->name, std::pair<float, float>(0.1, 0.1), 20)),
 	_focus(0)
 {
 	_spriteFocus = std::make_unique<Sprite>("assets/focus.png");
 	_audios.push_back(std::make_unique<Audio>("assets/audio/sound.m4a", 10));
-	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", "Player Name"));
-	_buttons.push_back(std::make_unique<Button>("assets/saple.jpg", "Second"));
-	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", "3th"));
+	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", PLAYER_NAME, "Player Name"));
+	_buttons.push_back(std::make_unique<Button>("assets/saple.jpg", MENU, "Second"));
+	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", NONE, "Exit"));
 	setSpritesSize();
 	setSpritesPosition();
-	setButtonsAction();
 }
 
 void arc::MainMenu::setSpritesPosition()
@@ -49,20 +50,12 @@ void arc::MainMenu::setSpritesSize()
 	_buttons[2]->setSize(std::pair<float, float>(width, height));
 }
 
-void arc::MainMenu::setButtonsAction()
+void arc::MainMenu::processEvents(const std::map<Key, KeyState> &keys)
 {
-	_buttons[0]->action = [] (SceneManager &sceneManager) {
-		sceneManager.changeScene(PLAYER_NAME);
-	};
-	_buttons[1]->action = [] (SceneManager &) {};
-	_buttons[2]->action = [] (SceneManager &) {};
-}
-
-void arc::MainMenu::processEvents(const std::map<Key, KeyState> &map)
-{
+	_keys = std::make_unique<std::map<Key, KeyState>>(keys);
 	for (auto &p : _keysMap) {
-		auto it = map.find(p.first);
-		if (it != map.end() && it->second == RELEASED)
+		auto it = keys.find(p.first);
+		if (it != keys.end() && it->second == RELEASED)
 			(this->*p.second)();
 	}
 }
@@ -99,6 +92,7 @@ std::vector<std::reference_wrapper<arc::IText>> arc::MainMenu::getTexts() const
 
 	for (const auto &button : _buttons)
 		wrapper.emplace_back(button->getText());
+	wrapper.emplace_back(*_playerName);
 	return wrapper;
 }
 
@@ -111,7 +105,12 @@ std::vector<std::reference_wrapper<arc::IAudio>> arc::MainMenu::getAudios() cons
 	return wrapper;
 }
 
-void arc::MainMenu::action(arc::SceneManager &sceneManager)
+arc::SCENE arc::MainMenu::nextScene() const
 {
-	_buttons[_focus]->action(sceneManager);
+	if (_keys) {
+		auto enterKey = _keys->find(ENTER);
+		if (enterKey != _keys->end() && enterKey->second == PRESSED)
+			return _buttons[_focus]->getLinkedScene();
+	}
+	return MENU;
 }

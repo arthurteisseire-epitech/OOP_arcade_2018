@@ -17,13 +17,10 @@ namespace arc {
 		ArgParser(int &argc, char **argv);
 		arc::Core createCore();
 	private:
-		void loadGraphicLibrary(const std::string &libname);
-		void loadGameLibrary(const std::string &libname);
+		void loadLibrary(const std::string &libname);
 
 		IGraphic *_graphic;
-		IGame *_game;
-		LibraryLoader _graphicLibraryLoader;
-		LibraryLoader _gameLibraryLoader;
+		LibraryLoader _libraryLoader;
 	};
 }
 
