@@ -12,13 +12,11 @@
 #include <unordered_map>
 #include <memory>
 #include "Sprite.hpp"
+#include "Pos.hpp"
 
-#ifndef POS_T
-#define POS_T
-typedef std::pair<unsigned int, unsigned int> pos_t;
-#endif
-
+#ifndef PATH_TO_ASSETS
 #define PATH_TO_ASSETS	"./games/nibbler/assets/sprites/"
+#endif
 
 typedef std::vector<pos_t> body_t;
 
@@ -29,11 +27,11 @@ namespace arc {
 			UP, DOWN, LEFT, RIGHT
 		};
 
-		explicit Snake(pos_t start_pos, unsigned int size = 4);
+		explicit Snake(const pos_t &start_pos, unsigned int size, const pos_t &map_size);
 
 		void eat();
 		void move_body(const Direction &direction);
-		bool isFoodNotInSnake(const pos_t &fruit_pos) const;
+		bool isInSnake(const pos_t &pos) const;
 		std::vector<std::reference_wrapper<IComponent>>	getParts() const;
 	protected:
 		std::pair<unsigned int, unsigned int> find_tail_direction();
@@ -45,7 +43,8 @@ namespace arc {
 //		Direction find_head_direction() const;
 
 	private:
-		void append_sprite(const pos_t &pos_res, std::unique_ptr<arc::Sprite> &actual_sprite);
+		void
+		append_sprite(const pos_t &pos_res, std::unique_ptr<arc::Sprite> &actual_sprite, const pos_t &size);
 	};
 }
 

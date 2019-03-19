@@ -14,9 +14,10 @@ DGAMES	=	../
 SRC		=	$(DSRC)Nibbler.cpp		\
 			$(DSRC)Map.cpp			\
 			$(DSRC)Snake.cpp		\
-			$(DSRC)Food.cpp		\
+			$(DSRC)Food.cpp			\
 			$(DCOMPONENT)Sprite.cpp	\
 			$(DCOMPONENT)Text.cpp	\
+			$(DSRC)MathUtils.cpp	\
 
 INC		=	-I$(DSRC) -I$(DCOMPONENT) -I$(DGAMES)
 

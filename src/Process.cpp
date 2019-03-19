@@ -32,6 +32,6 @@ void arc::Process::all(const std::vector<std::reference_wrapper<IComponent>> &co
 		if (comp.get().getType() == SPRITE)
 			graphic->processSprite(dynamic_cast<ISprite&>(comp.get()));
 		else if (comp.get().getType() == TEXT)
-			graphic->processText(dynamic_cast<IText&>(comp.get()));
+			graphic->processText(dynamic_cast<IText &>(comp.get()));
 	}
 }

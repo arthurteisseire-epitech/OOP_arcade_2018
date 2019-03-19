@@ -21,6 +21,7 @@ include_directories(
         src/scenes
         src/library
         lib/qt
+        games/src
         src lib games component .
 )
 

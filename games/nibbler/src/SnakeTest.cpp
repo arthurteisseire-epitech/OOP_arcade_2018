@@ -11,7 +11,8 @@
 
 class SnakeTest : public ::testing::Test, public arc::Snake {
 public:
-	SnakeTest() : Snake(init_pos, 4) {};
+	SnakeTest() : Snake(init_pos, 4, {30, 30})
+	{};
 
 protected:
 	static const std::pair<unsigned int, unsigned int> init_pos;

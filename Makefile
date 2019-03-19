@@ -267,6 +267,126 @@ component/Text.s:
 .PHONY : component/Text.s
 
 # target to build an object file
+games/nibbler/src/Food.o:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Food.o
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/Food.o
+.PHONY : games/nibbler/src/Food.o
+
+# target to preprocess a source file
+games/nibbler/src/Food.i:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Food.i
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/Food.i
+.PHONY : games/nibbler/src/Food.i
+
+# target to generate assembly for a file
+games/nibbler/src/Food.s:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Food.s
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/Food.s
+.PHONY : games/nibbler/src/Food.s
+
+# target to build an object file
+games/nibbler/src/Map.o:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Map.o
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/Map.o
+.PHONY : games/nibbler/src/Map.o
+
+# target to preprocess a source file
+games/nibbler/src/Map.i:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Map.i
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/Map.i
+.PHONY : games/nibbler/src/Map.i
+
+# target to generate assembly for a file
+games/nibbler/src/Map.s:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Map.s
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/Map.s
+.PHONY : games/nibbler/src/Map.s
+
+# target to build an object file
+games/nibbler/src/MathUtils.o:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/MathUtils.o
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/MathUtils.o
+.PHONY : games/nibbler/src/MathUtils.o
+
+# target to preprocess a source file
+games/nibbler/src/MathUtils.i:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/MathUtils.i
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/MathUtils.i
+.PHONY : games/nibbler/src/MathUtils.i
+
+# target to generate assembly for a file
+games/nibbler/src/MathUtils.s:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/MathUtils.s
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/MathUtils.s
+.PHONY : games/nibbler/src/MathUtils.s
+
+# target to build an object file
+games/nibbler/src/Nibbler.o:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Nibbler.o
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/Nibbler.o
+.PHONY : games/nibbler/src/Nibbler.o
+
+# target to preprocess a source file
+games/nibbler/src/Nibbler.i:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Nibbler.i
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/Nibbler.i
+.PHONY : games/nibbler/src/Nibbler.i
+
+# target to generate assembly for a file
+games/nibbler/src/Nibbler.s:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Nibbler.s
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/Nibbler.s
+.PHONY : games/nibbler/src/Nibbler.s
+
+# target to build an object file
+games/nibbler/src/NibblerTest.o:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/NibblerTest.o
+.PHONY : games/nibbler/src/NibblerTest.o
+
+# target to preprocess a source file
+games/nibbler/src/NibblerTest.i:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/NibblerTest.i
+.PHONY : games/nibbler/src/NibblerTest.i
+
+# target to generate assembly for a file
+games/nibbler/src/NibblerTest.s:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/NibblerTest.s
+.PHONY : games/nibbler/src/NibblerTest.s
+
+# target to build an object file
+games/nibbler/src/Snake.o:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Snake.o
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/Snake.o
+.PHONY : games/nibbler/src/Snake.o
+
+# target to preprocess a source file
+games/nibbler/src/Snake.i:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Snake.i
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/Snake.i
+.PHONY : games/nibbler/src/Snake.i
+
+# target to generate assembly for a file
+games/nibbler/src/Snake.s:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Snake.s
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/Snake.s
+.PHONY : games/nibbler/src/Snake.s
+
+# target to build an object file
+games/nibbler/src/SnakeTest.o:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/SnakeTest.o
+.PHONY : games/nibbler/src/SnakeTest.o
+
+# target to preprocess a source file
+games/nibbler/src/SnakeTest.i:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/SnakeTest.i
+.PHONY : games/nibbler/src/SnakeTest.i
+
+# target to generate assembly for a file
+games/nibbler/src/SnakeTest.s:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/SnakeTest.s
+.PHONY : games/nibbler/src/SnakeTest.s
+
+# target to build an object file
 main.o:
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/main.o
 .PHONY : main.o
@@ -477,6 +597,24 @@ src/scenes/player_name/PlayerName.s:
 .PHONY : src/scenes/player_name/PlayerName.s
 
 # target to build an object file
+src/scenes/player_name/Row.o:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/player_name/Row.o
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/player_name/Row.o
+.PHONY : src/scenes/player_name/Row.o
+
+# target to preprocess a source file
+src/scenes/player_name/Row.i:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/player_name/Row.i
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/player_name/Row.i
+.PHONY : src/scenes/player_name/Row.i
+
+# target to generate assembly for a file
+src/scenes/player_name/Row.s:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/player_name/Row.s
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/player_name/Row.s
+.PHONY : src/scenes/player_name/Row.s
+
+# target to build an object file
 src/scenes/utils/Button.o:
 	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/utils/Button.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/utils/Button.o
@@ -519,6 +657,27 @@ help:
 	@echo "... component/Text.o"
 	@echo "... component/Text.i"
 	@echo "... component/Text.s"
+	@echo "... games/nibbler/src/Food.o"
+	@echo "... games/nibbler/src/Food.i"
+	@echo "... games/nibbler/src/Food.s"
+	@echo "... games/nibbler/src/Map.o"
+	@echo "... games/nibbler/src/Map.i"
+	@echo "... games/nibbler/src/Map.s"
+	@echo "... games/nibbler/src/MathUtils.o"
+	@echo "... games/nibbler/src/MathUtils.i"
+	@echo "... games/nibbler/src/MathUtils.s"
+	@echo "... games/nibbler/src/Nibbler.o"
+	@echo "... games/nibbler/src/Nibbler.i"
+	@echo "... games/nibbler/src/Nibbler.s"
+	@echo "... games/nibbler/src/NibblerTest.o"
+	@echo "... games/nibbler/src/NibblerTest.i"
+	@echo "... games/nibbler/src/NibblerTest.s"
+	@echo "... games/nibbler/src/Snake.o"
+	@echo "... games/nibbler/src/Snake.i"
+	@echo "... games/nibbler/src/Snake.s"
+	@echo "... games/nibbler/src/SnakeTest.o"
+	@echo "... games/nibbler/src/SnakeTest.i"
+	@echo "... games/nibbler/src/SnakeTest.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
@@ -555,6 +714,9 @@ help:
 	@echo "... src/scenes/player_name/PlayerName.o"
 	@echo "... src/scenes/player_name/PlayerName.i"
 	@echo "... src/scenes/player_name/PlayerName.s"
+	@echo "... src/scenes/player_name/Row.o"
+	@echo "... src/scenes/player_name/Row.i"
+	@echo "... src/scenes/player_name/Row.s"
 	@echo "... src/scenes/utils/Button.o"
 	@echo "... src/scenes/utils/Button.i"
 	@echo "... src/scenes/utils/Button.s"

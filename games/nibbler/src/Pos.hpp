@@ -1,0 +1,16 @@
+/*
+** EPITECH PROJECT, 2018
+** arcade
+** File description:
+** Pos.hpp
+*/
+
+#ifndef ARCADE_POS_HPP
+#define ARCADE_POS_HPP
+
+#include <utility>
+
+typedef std::pair<unsigned int, unsigned int> pos_t;
+typedef std::pair<float, float> percent_pos_t;
+
+#endif //ARCADE_POS_HPP

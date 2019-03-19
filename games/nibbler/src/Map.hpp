@@ -18,12 +18,12 @@
 namespace arc {
 	class Map {
 	public:
-		explicit Map(unsigned int size = 100);
+		explicit Map(const pos_t &size = {100, 100});
 
-		Food generateFood();
+		Food &generateFood();
 		void generateSprites(std::vector<std::reference_wrapper<IComponent>> &vector) const;
 	protected:
-		unsigned int _size;
+		pos_t _size;
 		Snake _snake;
 		Food _food;
 	};

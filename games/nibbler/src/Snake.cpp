@@ -7,23 +7,7 @@
 
 #include "Sprite.hpp"
 #include "Snake.hpp"
-
-template<typename T>
-std::pair<T, T> operator+(const std::pair<T, T> &p1, const std::pair<T, T> &p2)
-{
-	return {p1.first + p2.first, p1.second + p2.second};
-}
-
-template<typename T>
-std::pair<T, T> operator-(const std::pair<T, T> &p1, const std::pair<T, T> &p2)
-{
-	return {p1.first - p2.first, p1.second - p2.second};
-}
-
-std::pair<float, float> operator/(const std::pair<unsigned int, unsigned int> &p1, const unsigned int &div)
-{
-	return {(float)p1.first / div, (float)p1.second / div};
-}
+#include "MathUtils.hpp"
 
 const std::unordered_map<arc::Snake::Direction, pos_t> arc::Snake::_direction_map = {
 	{UP,    {0,  -1}},
@@ -40,29 +24,30 @@ const std::unordered_map<arc::Snake::Direction, std::vector<std::string>> arc::S
 };
 
 
-void arc::Snake::append_sprite(const pos_t &pos_res, std::unique_ptr<arc::Sprite> &actual_sprite)
+void arc::Snake::append_sprite(const pos_t &pos_res, std::unique_ptr<arc::Sprite> &actual_sprite, const pos_t &size)
 {
-	actual_sprite->setPosition(pos_res / (pos_res.second * 2));
-	actual_sprite->setSize({1.0 / (pos_res.second * 2), 1.0 / (pos_res.second * 2)});
+	actual_sprite->setPosition(pos_res / size);
+	actual_sprite->setSize(pos_t{1.0, 1.0} / size);
 	_cache_assets.emplace_back(std::move(actual_sprite));
 }
 
-arc::Snake::Snake(pos_t start_pos, unsigned int size)
+#include <iostream>
+arc::Snake::Snake(const pos_t &start_pos, unsigned int size, const pos_t &map_size)
 {
 	pos_t pos_res;
 	std::unique_ptr<Sprite> actual_sprite = std::make_unique<Sprite>(PATH_TO_ASSETS + _snake_assets_map.at(LEFT)[0]);
 
-	append_sprite(start_pos, actual_sprite);
+	append_sprite(start_pos, actual_sprite, map_size);
 	_body_positions.emplace_back(start_pos + pos_t{size - 1, 0});
 	for (unsigned int i = 1; i < size - 1; ++i) {
 		pos_res = start_pos + pos_t{i, 0};
 		_body_positions.emplace_back(pos_res);
 		actual_sprite = std::make_unique<Sprite>(PATH_TO_ASSETS + _snake_assets_map.at(LEFT)[1]);
-		append_sprite(pos_res, actual_sprite);
+		append_sprite(pos_res, actual_sprite, map_size);
 	}
 	_body_positions.emplace_back(start_pos + pos_t{size - 1, 0});
 	actual_sprite = std::make_unique<Sprite>(PATH_TO_ASSETS + _snake_assets_map.at(LEFT)[2]);
-	append_sprite(pos_res + pos_t{1, 0}, actual_sprite);
+	append_sprite(pos_res + pos_t{1, 0}, actual_sprite, map_size);
 }
 
 void arc::Snake::eat()
@@ -83,12 +68,12 @@ void arc::Snake::move_body(const arc::Snake::Direction &direction)
 	_body_positions.pop_back();
 }
 
-bool arc::Snake::isFoodNotInSnake(const pos_t &fruit_pos) const
+bool arc::Snake::isInSnake(const pos_t &pos) const
 {
 	for (auto &snake_part : _body_positions)
-		if (snake_part == fruit_pos)
-			return (false);
-	return true;
+		if (snake_part == pos)
+			return true;
+	return false;
 }
 
 std::vector<std::reference_wrapper<arc::IComponent>> arc::Snake::getParts() const
