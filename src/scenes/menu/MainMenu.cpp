@@ -50,12 +50,12 @@ void arc::MainMenu::setSpritesSize()
 	_buttons[2]->setSize(std::pair<float, float>(width, height));
 }
 
-void arc::MainMenu::processEvents(const std::map<Key, KeyState> &keys)
+void arc::MainMenu::update(const std::map<Key, KeyState> &keys, float deltaTime)
 {
 	_keys = std::make_unique<std::map<Key, KeyState>>(keys);
 	for (auto &p : _keysMap) {
 		auto it = keys.find(p.first);
-		if (it != keys.end() && it->second == RELEASED)
+		if (it != keys.end() && it->second == PRESSED)
 			(this->*p.second)();
 	}
 }
@@ -76,35 +76,6 @@ void arc::MainMenu::moveFocusUp()
 	}
 }
 
-std::vector<std::reference_wrapper<arc::ISprite>> arc::MainMenu::getSprites() const
-{
-	std::vector<std::reference_wrapper<ISprite>> wrapper;
-
-	for (const auto &button : _buttons)
-		wrapper.emplace_back(button->getSprite());
-	wrapper.emplace_back(*_spriteFocus);
-	return wrapper;
-}
-
-std::vector<std::reference_wrapper<arc::IText>> arc::MainMenu::getTexts() const
-{
-	std::vector<std::reference_wrapper<IText>> wrapper;
-
-	for (const auto &button : _buttons)
-		wrapper.emplace_back(button->getText());
-	wrapper.emplace_back(*_playerName);
-	return wrapper;
-}
-
-std::vector<std::reference_wrapper<arc::IAudio>> arc::MainMenu::getAudios() const
-{
-	std::vector<std::reference_wrapper<IAudio>> wrapper;
-
-	for (const auto &audio : _audios)
-		wrapper.emplace_back(*audio);
-	return wrapper;
-}
-
 arc::SCENE arc::MainMenu::nextScene() const
 {
 	if (_keys) {
@@ -113,4 +84,22 @@ arc::SCENE arc::MainMenu::nextScene() const
 			return _buttons[_focus]->getLinkedScene();
 	}
 	return MENU;
+}
+
+std::vector<std::reference_wrapper<arc::IComponent>> arc::MainMenu::getComponents() const
+{
+	std::vector<std::reference_wrapper<IComponent>> wrapper;
+
+	wrapper.reserve(_buttons.size() * 2 + 1 + _audios.size());
+	for (const auto &button : _buttons)
+		wrapper.emplace_back(button->getSprite());
+	wrapper.emplace_back(*_spriteFocus);
+
+	for (const auto &button : _buttons)
+		wrapper.emplace_back(button->getText());
+	wrapper.emplace_back(*_playerName);
+
+	for (const auto &audio : _audios)
+		wrapper.emplace_back(*audio);
+	return wrapper;
 }

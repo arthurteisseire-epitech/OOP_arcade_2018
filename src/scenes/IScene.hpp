@@ -21,10 +21,8 @@ namespace arc {
 	class IScene {
 	public:
 		virtual ~IScene() = default;
-		virtual std::vector<std::reference_wrapper<ISprite>> getSprites() const = 0;
-		virtual std::vector<std::reference_wrapper<IText>> getTexts() const = 0;
-		virtual std::vector<std::reference_wrapper<IAudio>> getAudios() const = 0;
-		virtual void processEvents(const std::map<Key, KeyState> &map) = 0;
+		virtual void update(const std::map<Key, KeyState> &map, float deltaTime) = 0;
+		virtual std::vector<std::reference_wrapper<IComponent>> getComponents() const = 0;
 		virtual SCENE nextScene() const = 0;
 	};
 }

@@ -459,6 +459,24 @@ src/scenes/SceneManager.s:
 .PHONY : src/scenes/SceneManager.s
 
 # target to build an object file
+src/scenes/game/GameScene.o:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/game/GameScene.o
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/game/GameScene.o
+.PHONY : src/scenes/game/GameScene.o
+
+# target to preprocess a source file
+src/scenes/game/GameScene.i:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/game/GameScene.i
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/game/GameScene.i
+.PHONY : src/scenes/game/GameScene.i
+
+# target to generate assembly for a file
+src/scenes/game/GameScene.s:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/game/GameScene.s
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/game/GameScene.s
+.PHONY : src/scenes/game/GameScene.s
+
+# target to build an object file
 src/scenes/menu/MainMenu.o:
 	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/menu/MainMenu.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/menu/MainMenu.o
@@ -606,6 +624,9 @@ help:
 	@echo "... src/scenes/SceneManager.o"
 	@echo "... src/scenes/SceneManager.i"
 	@echo "... src/scenes/SceneManager.s"
+	@echo "... src/scenes/game/GameScene.o"
+	@echo "... src/scenes/game/GameScene.i"
+	@echo "... src/scenes/game/GameScene.s"
 	@echo "... src/scenes/menu/MainMenu.o"
 	@echo "... src/scenes/menu/MainMenu.i"
 	@echo "... src/scenes/menu/MainMenu.s"

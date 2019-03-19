@@ -34,32 +34,7 @@ arc::PlayerName::PlayerName(const std::shared_ptr<PlayerData> &playerData) :
 	_cursor = std::make_unique<Cursor>(getFocus());
 }
 
-std::vector<std::reference_wrapper<arc::ISprite>> arc::PlayerName::getSprites() const
-{
-	auto wrapper = std::vector<std::reference_wrapper<ISprite>>();
-
-	wrapper.emplace_back(*_cursor);
-	return wrapper;
-}
-
-std::vector<std::reference_wrapper<arc::IText>> arc::PlayerName::getTexts() const
-{
-	auto wrapper = std::vector<std::reference_wrapper<IText>>();
-
-	for (auto &row : _gridLetters) {
-		for (int i = 0; i < (int)row.size(); ++i)
-			wrapper.emplace_back(*row.getLetter(i));
-	}
-	wrapper.emplace_back(*_playerText);
-	return wrapper;
-}
-
-std::vector<std::reference_wrapper<arc::IAudio>> arc::PlayerName::getAudios() const
-{
-	return std::vector<std::reference_wrapper<IAudio>>();
-}
-
-void arc::PlayerName::processEvents(const std::map<arc::Key, arc::KeyState> &keys)
+void arc::PlayerName::update(const std::map<Key, KeyState> &keys, float deltaTime)
 {
 	_keys = std::make_unique<std::map<Key, KeyState>>(keys);
 	for (auto &key : keys) {
@@ -128,4 +103,17 @@ arc::SCENE arc::PlayerName::nextScene() const
 			return MENU;
 	}
 	return PLAYER_NAME;
+}
+
+std::vector<std::reference_wrapper<arc::IComponent>> arc::PlayerName::getComponents() const
+{
+	auto wrapper = std::vector<std::reference_wrapper<IComponent>>();
+
+	wrapper.reserve(1 + _gridLetters.size() * _gridLetters[0].size());
+	wrapper.emplace_back(*_cursor);
+	for (auto &row : _gridLetters)
+		for (int i = 0; i < (int)row.size(); ++i)
+			wrapper.emplace_back(*row.getLetter(i));
+	wrapper.emplace_back(*_playerText);
+	return wrapper;
 }

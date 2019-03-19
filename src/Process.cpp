@@ -25,3 +25,18 @@ void arc::Process::audios(const std::vector<std::reference_wrapper<IAudio>> &aud
 	for (auto audio : audios)
 		graphic->processAudio(audio.get());
 }
+<<<<<<< Updated upstream
+=======
+
+void arc::Process::all(const std::vector<std::reference_wrapper<IComponent>> &components, arc::IGraphic *graphic)
+{
+	for (auto &comp : components) {
+		if (comp.get().getType() == SPRITE)
+			graphic->processSprite(dynamic_cast<ISprite&>(comp.get()));
+		else if (comp.get().getType() == TEXT)
+			graphic->processText(dynamic_cast<IText &>(comp.get()));
+		else if (comp.get().getType() == SOUND)
+			graphic->processAudio(dynamic_cast<IAudio &>(comp.get()));
+	}
+}
+>>>>>>> Stashed changes

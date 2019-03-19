@@ -32,12 +32,10 @@ arc::IScene &arc::SceneManager::currentScene() const
 
 int arc::SceneManager::start()
 {
-	arc::Process::audios(currentScene().getAudios(), _graphic.get());
 	while (_graphic->isOpen() && currentScene().nextScene() != NONE) {
 		if (currentScene().nextScene() == _currScene) {
-			currentScene().processEvents(_graphic->getKeys());
-			arc::Process::sprites(currentScene().getSprites(), _graphic.get());
-			arc::Process::texts(currentScene().getTexts(), _graphic.get());
+			currentScene().update(_graphic->getKeys(), 0);
+			Process::all(currentScene().getComponents(), _graphic.get());
 			_graphic->processEvents();
 			_graphic->draw();
 			usleep(100);
