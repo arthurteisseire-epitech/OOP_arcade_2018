@@ -48,4 +48,4 @@ namespace arc {
 	};
 }
 
-#endif //ARCADE_SNAKE_HPP
+#endif

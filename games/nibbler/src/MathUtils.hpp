@@ -20,4 +20,4 @@ std::pair<unsigned int, unsigned int> operator-(const std::pair<unsigned int, un
 std::pair<float, float> operator/(const pos_t &p1, const unsigned int &div);
 
 
-#endif //ARCADE_MATHUTILS_HPP
+#endif

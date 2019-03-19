@@ -29,4 +29,4 @@ namespace arc {
 	};
 }
 
-#endif //ARCADE_MAP_HPP
+#endif

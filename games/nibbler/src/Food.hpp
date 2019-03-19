@@ -33,4 +33,4 @@ namespace arc {
 	};
 }
 
-#endif //ARCADE_FOOD_HPP
+#endif

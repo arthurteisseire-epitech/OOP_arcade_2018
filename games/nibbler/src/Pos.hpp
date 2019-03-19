@@ -13,4 +13,4 @@
 typedef std::pair<unsigned int, unsigned int> pos_t;
 typedef std::pair<float, float> percent_pos_t;
 
-#endif //ARCADE_POS_HPP
+#endif

@@ -34,4 +34,4 @@ namespace arc {
     };
 }
 
-#endif //ARCADE_KEY_HPP
+#endif

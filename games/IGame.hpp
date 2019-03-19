@@ -23,4 +23,4 @@ namespace arc {
 	};
 }
 
-#endif //IGAME_HPP
+#endif
