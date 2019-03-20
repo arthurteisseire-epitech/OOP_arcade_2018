@@ -14,7 +14,9 @@
 namespace arc {
 	struct SharedData {
 		std::string name;
-		IGame *game;
+		IGame *currentGame;
+		std::vector<std::string> games;
+		std::vector<std::string> libs;
 	};
 }
 

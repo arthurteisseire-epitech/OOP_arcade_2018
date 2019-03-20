@@ -14,15 +14,16 @@
 #include "Process.hpp"
 
 arc::Core::Core(IGraphic *graphic, std::unique_ptr<LibraryLoader> libraryLoader) :
-	_playerData(std::make_shared<SharedData>()),
-	_sceneManager(std::make_unique<SceneManager>(MENU, _playerData)),
+	_sharedData(std::make_shared<SharedData>()),
+	_sceneManager(std::make_unique<SceneManager>(MENU, _sharedData)),
 	_graphicLibraryLoader(std::move(libraryLoader)),
 	_gameLibraryLoader(std::make_unique<LibraryLoader>()),
 	_graphic(graphic)
 {
-	auto games = findGamesLibraries();
-
-	_playerData->game = _gameLibraryLoader->loadGameInstance(games[0]);
+	_sharedData->libs = scanLibraries("lib");
+	_sharedData->games = scanLibraries("games");
+	if (!_sharedData->games.empty())
+		_sharedData->currentGame = _gameLibraryLoader->loadGameInstance(_sharedData->games[0]);
 }
 
 int arc::Core::exec()
@@ -45,13 +46,13 @@ void arc::Core::update(const std::map<arc::Key, arc::KeyState> &keys, float delt
 	_sceneManager->currentScene()->update(keys, deltaTime);
 }
 
-std::vector<std::string> arc::Core::findGamesLibraries() const
+std::vector<std::string> arc::Core::scanLibraries(const std::string &libDir) const
 {
-	std::vector<std::string> games;
+	std::vector<std::string> libs;
 	std::regex e("^(.*/)?lib_arcade_.*.so$");
 
-	for (const auto &entry : std::filesystem::directory_iterator("games"))
+	for (const auto &entry : std::filesystem::directory_iterator(libDir))
 		if (std::regex_match(std::string(entry.path()), e))
-			games.emplace_back(entry.path());
-	return games;
+			libs.emplace_back(entry.path());
+	return libs;
 }
