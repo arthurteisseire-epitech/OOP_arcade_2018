@@ -9,6 +9,8 @@
 #define IGAME_HPP
 
 #include <vector>
+#include <map>
+#include "Key.hpp"
 #include "IComponent.hpp"
 
 namespace arc {
@@ -16,6 +18,8 @@ namespace arc {
 	public:
 		virtual ~IGame() = default;
 
+		virtual bool isRunning() const = 0;
+		virtual void update(const std::map<arc::Key, arc::KeyState> &keys, float deltaTime) = 0;
 		virtual std::vector<std::reference_wrapper<IComponent>> getComponents() const = 0;
 	};
 }

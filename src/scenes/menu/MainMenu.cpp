@@ -25,7 +25,7 @@ arc::MainMenu::MainMenu(const std::shared_ptr<PlayerData> &playerData) :
 	_spriteFocus = std::make_unique<Sprite>("assets/focus.png");
 	_audios.push_back(std::make_unique<Audio>("assets/audio/sound.m4a", 10));
 	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", PLAYER_NAME, "Player Name"));
-	_buttons.push_back(std::make_unique<Button>("assets/saple.jpg", MENU, "Second"));
+	_buttons.push_back(std::make_unique<Button>("assets/saple.jpg", GAME, "Play"));
 	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", NONE, "Exit"));
 	setSpritesSize();
 	setSpritesPosition();

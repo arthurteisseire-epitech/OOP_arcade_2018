@@ -12,6 +12,7 @@ namespace arc {
 	enum SCENE {
 		MENU,
 		PLAYER_NAME,
+		GAME,
 		NONE,
 	};
 }
