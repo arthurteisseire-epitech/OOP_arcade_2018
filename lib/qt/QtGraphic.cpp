@@ -7,15 +7,17 @@
 
 #include "QtGraphic.hpp"
 
-arc::IGraphic *entryPoint(int &ac, char *av[])
+arc::IGraphic *entryPoint()
 {
-	return new arc::QtGraphic(ac, av);
+	return new arc::QtGraphic();
 }
 
-arc::QtGraphic::QtGraphic(int &ac, char *av[]) :
-	_app(new QApplication(ac, av)),
-	_widget(new Widget())
+arc::QtGraphic::QtGraphic()
 {
+	_av[0] = strdup("arcade");
+	_app = std::make_unique<QApplication>(_ac, _av);
+	_widget = std::make_unique<Widget>();
+
 	QPalette palette;
 	palette.setColor(QPalette::Background, Qt::black);
 	_widget->setAutoFillBackground(true);

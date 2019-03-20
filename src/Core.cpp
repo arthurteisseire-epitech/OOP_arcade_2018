@@ -14,14 +14,16 @@
 arc::Core::Core(IGraphic *graphic, std::unique_ptr<LibraryLoader> libraryLoader) :
 	_playerData(std::make_shared<PlayerData>()),
 	_sceneManager(std::make_unique<SceneManager>(MENU, _playerData)),
-	_libraryLoader(std::move(libraryLoader)),
+	_graphicLibraryLoader(std::move(libraryLoader)),
+//	_gameLibraryLoader(std::make_unique<LibraryLoader>()),
 	_graphic(graphic)
 {
+//	_playerData->game = _gameLibraryLoader->loadInstance<IGame>("games/nibbler/lib_arcade_nibbler.so");
 }
 
 int arc::Core::exec()
 {
-	clock_t t = 0;
+	clock_t t = clock();
 
 	while (_graphic->isOpen() && _sceneManager->nextScene() != nullptr) {
 		update(_graphic->getKeys(), (float)(clock() - t) / CLOCKS_PER_SEC);

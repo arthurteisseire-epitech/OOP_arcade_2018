@@ -10,10 +10,8 @@
 #include "LibraryLoader.hpp"
 #include "LibraryLoaderException.hpp"
 
-arc::LibraryLoader::LibraryLoader(int &argc, char **argv) :
-	_lib(nullptr),
-	_argc(argc),
-	_argv(argv)
+arc::LibraryLoader::LibraryLoader() :
+	_lib(nullptr)
 {
 }
 
@@ -23,7 +21,7 @@ arc::LibraryLoader::~LibraryLoader()
 		dlclose(_lib);
 }
 
-bool arc::LibraryLoader::check_file_exists(const std::string &name) const
+bool arc::LibraryLoader::checkFileExists(const std::string &name) const
 {
 	struct stat buffer{};
 
@@ -34,7 +32,7 @@ void arc::LibraryLoader::load(const std::string &libname)
 {
 	if (_lib)
 		dlclose(_lib);
-	if (!check_file_exists(libname))
+	if (!checkFileExists(libname))
 		throw LibraryLoaderException(libname + " does not exist");
 	_lib = dlopen(libname.c_str(), RTLD_LAZY);
 	if (!_lib)

@@ -9,7 +9,7 @@
 #include "ArgParser.hpp"
 
 arc::ArgParser::ArgParser(int &argc, char **argv) :
-	_libraryLoader(std::make_unique<LibraryLoader>(argc, argv))
+	_libraryLoader(std::make_unique<LibraryLoader>())
 {
 	if (argc != 2) {
 		std::cerr << "Usage : " << std::endl
