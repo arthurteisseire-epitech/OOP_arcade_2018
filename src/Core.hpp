@@ -23,6 +23,7 @@ namespace arc {
 		IScene *currentScene() const;
 		IScene *nextScene() const;
 
+		std::shared_ptr<PlayerData> _playerData;
 		std::unique_ptr<SceneManager> _sceneManager;
 		std::unique_ptr<LibraryLoader> _libraryLoader;
 		std::unique_ptr<IGraphic> _graphic;

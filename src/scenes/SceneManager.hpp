@@ -19,7 +19,7 @@
 namespace arc {
 	class SceneManager {
 	public:
-		explicit SceneManager(SCENE scene);
+		explicit SceneManager(SCENE scene, const std::shared_ptr<PlayerData> &playerData);
 		~SceneManager() = default;
 
 		void changeScene(SCENE scene);

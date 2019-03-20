@@ -12,7 +12,8 @@
 #include "Process.hpp"
 
 arc::Core::Core(IGraphic *graphic, std::unique_ptr<LibraryLoader> libraryLoader) :
-	_sceneManager(std::make_unique<SceneManager>(MENU)),
+	_playerData(std::make_shared<PlayerData>()),
+	_sceneManager(std::make_unique<SceneManager>(MENU, _playerData)),
 	_libraryLoader(std::move(libraryLoader)),
 	_graphic(graphic)
 {
@@ -37,5 +38,5 @@ arc::IScene *arc::Core::currentScene() const
 
 arc::IScene *arc::Core::nextScene() const
 {
-        return _sceneManager->nextScene();
+	return _sceneManager->nextScene();
 }
