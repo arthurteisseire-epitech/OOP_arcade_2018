@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2018
 ** arcade
 ** File description:
-** PlayerData.hpp
+** SharedData.hpp
 */
 
 #ifndef ARCADE_PLAYERDATA_HPP
@@ -12,7 +12,7 @@
 #include "IGame.hpp"
 
 namespace arc {
-	struct PlayerData {
+	struct SharedData {
 		std::string name;
 		IGame *game;
 	};

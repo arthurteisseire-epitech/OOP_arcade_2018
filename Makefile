@@ -492,24 +492,6 @@ src/library/LibraryLoaderException.s:
 .PHONY : src/library/LibraryLoaderException.s
 
 # target to build an object file
-src/scenes/PlayerData.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/PlayerData.o
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/PlayerData.o
-.PHONY : src/scenes/PlayerData.o
-
-# target to preprocess a source file
-src/scenes/PlayerData.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/PlayerData.i
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/PlayerData.i
-.PHONY : src/scenes/PlayerData.i
-
-# target to generate assembly for a file
-src/scenes/PlayerData.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/PlayerData.s
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/PlayerData.s
-.PHONY : src/scenes/PlayerData.s
-
-# target to build an object file
 src/scenes/Scene.o:
 	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/Scene.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/Scene.o
@@ -562,6 +544,24 @@ src/scenes/SceneManager.s:
 	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/SceneManager.s
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/SceneManager.s
 .PHONY : src/scenes/SceneManager.s
+
+# target to build an object file
+src/scenes/SharedData.o:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/SharedData.o
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/SharedData.o
+.PHONY : src/scenes/SharedData.o
+
+# target to preprocess a source file
+src/scenes/SharedData.i:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/SharedData.i
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/SharedData.i
+.PHONY : src/scenes/SharedData.i
+
+# target to generate assembly for a file
+src/scenes/SharedData.s:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/SharedData.s
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/SharedData.s
+.PHONY : src/scenes/SharedData.s
 
 # target to build an object file
 src/scenes/game/GameScene.o:
@@ -735,9 +735,6 @@ help:
 	@echo "... src/library/LibraryLoaderException.o"
 	@echo "... src/library/LibraryLoaderException.i"
 	@echo "... src/library/LibraryLoaderException.s"
-	@echo "... src/scenes/PlayerData.o"
-	@echo "... src/scenes/PlayerData.i"
-	@echo "... src/scenes/PlayerData.s"
 	@echo "... src/scenes/Scene.o"
 	@echo "... src/scenes/Scene.i"
 	@echo "... src/scenes/Scene.s"
@@ -747,6 +744,9 @@ help:
 	@echo "... src/scenes/SceneManager.o"
 	@echo "... src/scenes/SceneManager.i"
 	@echo "... src/scenes/SceneManager.s"
+	@echo "... src/scenes/SharedData.o"
+	@echo "... src/scenes/SharedData.i"
+	@echo "... src/scenes/SharedData.s"
 	@echo "... src/scenes/game/GameScene.o"
 	@echo "... src/scenes/game/GameScene.i"
 	@echo "... src/scenes/game/GameScene.s"

@@ -17,7 +17,7 @@ std::map<arc::Key, void (arc::MainMenu::*)()> arc::MainMenu::_keysMap = {
 	{DOWN, &arc::MainMenu::moveFocusDown},
 };
 
-arc::MainMenu::MainMenu(const std::shared_ptr<PlayerData> &playerData) :
+arc::MainMenu::MainMenu(const std::shared_ptr<SharedData> &playerData) :
 	Scene(playerData),
 	_playerName(
 		std::make_unique<Text>("Player Name : " + _playerData->name, std::pair<float, float>(0.1, 0.1), 20)),

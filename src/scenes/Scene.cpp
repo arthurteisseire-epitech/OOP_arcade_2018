@@ -7,7 +7,7 @@
 
 #include "Scene.hpp"
 
-arc::Scene::Scene(const std::shared_ptr<arc::PlayerData> &playerData) :
+arc::Scene::Scene(const std::shared_ptr<arc::SharedData> &playerData) :
 	_playerData(playerData)
 {
 }

@@ -17,7 +17,7 @@
 namespace arc {
 	class PlayerName : public Scene {
 	public:
-		explicit PlayerName(const std::shared_ptr<PlayerData> &playerData);
+		explicit PlayerName(const std::shared_ptr<SharedData> &playerData);
 		void update(const std::map<Key, KeyState> &keys, float deltaTime) override;
 		std::vector<std::reference_wrapper<IComponent>> getComponents() const override;
 		SCENE nextScene() const override;

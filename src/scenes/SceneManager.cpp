@@ -9,7 +9,7 @@
 #include "MainMenu.hpp"
 #include "SceneManager.hpp"
 
-arc::SceneManager::SceneManager(SCENE scene, const std::shared_ptr<PlayerData> &playerData) :
+arc::SceneManager::SceneManager(SCENE scene, const std::shared_ptr<SharedData> &playerData) :
 	_currScene(scene),
 	_factory(std::make_unique<SceneFactory>()),
 	_playerData(playerData)

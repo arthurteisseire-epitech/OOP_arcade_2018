@@ -13,7 +13,7 @@
 namespace arc {
 	class GameScene : public Scene {
 	public:
-		explicit GameScene(const std::shared_ptr<PlayerData> &playerData);
+		explicit GameScene(const std::shared_ptr<SharedData> &playerData);
 
 		void update(const std::map<arc::Key, arc::KeyState> &keys, float deltaTime) override;
 		std::vector<std::reference_wrapper<IComponent>> getComponents() const override;

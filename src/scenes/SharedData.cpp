@@ -2,8 +2,8 @@
 ** EPITECH PROJECT, 2018
 ** arcade
 ** File description:
-** PlayerData.cpp
+** SharedData.cpp
 */
 
-#include "PlayerData.hpp"
+#include "SharedData.hpp"
 

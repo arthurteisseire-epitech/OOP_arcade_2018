@@ -19,7 +19,7 @@
 namespace arc {
 	class SceneManager {
 	public:
-		explicit SceneManager(SCENE scene, const std::shared_ptr<PlayerData> &playerData);
+		explicit SceneManager(SCENE scene, const std::shared_ptr<SharedData> &playerData);
 		~SceneManager() = default;
 
 		void changeScene(SCENE scene);
@@ -29,7 +29,7 @@ namespace arc {
 		SCENE _currScene;
 		std::unique_ptr<SceneFactory> _factory;
 		std::map<SCENE, std::unique_ptr<IScene>> _scene;
-		std::shared_ptr<PlayerData> _playerData;
+		std::shared_ptr<SharedData> _playerData;
 	};
 }
 

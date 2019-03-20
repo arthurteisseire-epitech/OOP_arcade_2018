@@ -11,15 +11,15 @@
 #include <memory>
 #include "IScene.hpp"
 #include "Scenes.hpp"
-#include "PlayerData.hpp"
+#include "SharedData.hpp"
 
 namespace arc {
 	class Scene : public IScene {
 	public:
-		explicit Scene(const std::shared_ptr<PlayerData> &playerData);
+		explicit Scene(const std::shared_ptr<SharedData> &playerData);
 		~Scene() override = default;
 	protected:
-		std::shared_ptr<PlayerData> _playerData;
+		std::shared_ptr<SharedData> _playerData;
 	};
 }
 

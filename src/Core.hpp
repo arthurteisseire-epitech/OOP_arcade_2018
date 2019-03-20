@@ -23,7 +23,7 @@ namespace arc {
 		void update(const std::map<Key, KeyState> &keys, float deltaTime);
 		std::vector<std::string> findGamesLibraries() const;
 
-		std::shared_ptr<PlayerData> _playerData;
+		std::shared_ptr<SharedData> _playerData;
 		std::unique_ptr<SceneManager> _sceneManager;
 		std::unique_ptr<LibraryLoader> _graphicLibraryLoader;
 		std::unique_ptr<LibraryLoader> _gameLibraryLoader;

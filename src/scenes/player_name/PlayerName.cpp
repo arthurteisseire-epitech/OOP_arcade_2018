@@ -20,7 +20,7 @@ const std::map<arc::Key, void (arc::PlayerName::*)()> arc::PlayerName::_keysMap 
 	{ENTER, &arc::PlayerName::action},
 };
 
-arc::PlayerName::PlayerName(const std::shared_ptr<PlayerData> &playerData) :
+arc::PlayerName::PlayerName(const std::shared_ptr<SharedData> &playerData) :
 	Scene(playerData),
 	_playerText(std::make_unique<Text>(PREFIX + _playerData->name,
 	                                   std::pair<float, float>(0.1, 0.1), FONT_SIZE)),

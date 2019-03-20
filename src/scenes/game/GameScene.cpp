@@ -7,7 +7,7 @@
 
 #include "GameScene.hpp"
 
-arc::GameScene::GameScene(const std::shared_ptr<arc::PlayerData> &playerData) :
+arc::GameScene::GameScene(const std::shared_ptr<arc::SharedData> &playerData) :
 	Scene(playerData)
 {
 }

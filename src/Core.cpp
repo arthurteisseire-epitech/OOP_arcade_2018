@@ -14,7 +14,7 @@
 #include "Process.hpp"
 
 arc::Core::Core(IGraphic *graphic, std::unique_ptr<LibraryLoader> libraryLoader) :
-	_playerData(std::make_shared<PlayerData>()),
+	_playerData(std::make_shared<SharedData>()),
 	_sceneManager(std::make_unique<SceneManager>(MENU, _playerData)),
 	_graphicLibraryLoader(std::move(libraryLoader)),
 	_gameLibraryLoader(std::make_unique<LibraryLoader>()),
