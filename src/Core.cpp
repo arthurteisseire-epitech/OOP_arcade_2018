@@ -22,7 +22,7 @@ int arc::Core::exec()
 {
 	while (_graphic->isOpen() && nextScene() != nullptr) {
 		currentScene()->update(_graphic->getKeys(), 0);
-		Process::all(currentScene()->getComponents(), _graphic.get());
+		Process::components(currentScene()->getComponents(), _graphic.get());
 		_graphic->processEvents();
 		_graphic->draw();
 		usleep(100);

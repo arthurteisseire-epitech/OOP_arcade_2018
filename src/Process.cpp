@@ -26,7 +26,7 @@ void arc::Process::audios(const std::vector<std::reference_wrapper<IAudio>> &aud
 		graphic->processAudio(audio.get());
 }
 
-void arc::Process::all(const std::vector<std::reference_wrapper<IComponent>> &components, arc::IGraphic *graphic)
+void arc::Process::components(const std::vector<std::reference_wrapper<IComponent>> &components, arc::IGraphic *graphic)
 {
 	for (auto &comp : components) {
 		if (comp.get().getType() == SPRITE)
