@@ -28,6 +28,6 @@ std::vector<std::reference_wrapper<arc::IComponent>> arc::GameScene::getComponen
 arc::SCENE arc::GameScene::nextScene() const
 {
         if (_playerData->game && _playerData->game->isRunning())
-        	return GAME;
-        return MENU;
+	        return GAME;
+	return MENU;
 }
