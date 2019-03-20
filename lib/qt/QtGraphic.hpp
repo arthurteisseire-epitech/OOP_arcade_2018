@@ -40,6 +40,6 @@ namespace arc {
 	};
 }
 
-extern "C" COMMON_SO arc::IGraphic *entryPoint();
+extern "C" COMMON_SO arc::IGraphic *graphicEntryPoint();
 
 #endif

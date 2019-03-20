@@ -11,7 +11,7 @@
 #include "Text.hpp"
 
 #include <iostream>
-arc::IGame *entryPoint(int &ac, char *av[])
+arc::IGame *gameEntryPoint(int &ac, char **av)
 {
 	return new arc::Nibbler(ac, av);
 }

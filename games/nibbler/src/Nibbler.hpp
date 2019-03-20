@@ -26,6 +26,6 @@ namespace arc {
 	};
 }
 
-extern "C" __attribute__((visibility("default"))) arc::IGame *entryPoint(int &ac, char *av[]);
+extern "C" __attribute__((visibility("default"))) arc::IGame *gameEntryPoint(int &ac, char **av);
 
 #endif

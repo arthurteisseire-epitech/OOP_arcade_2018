@@ -23,7 +23,7 @@ arc::ArgParser::ArgParser(int &argc, char **argv) :
 void arc::ArgParser::loadLibrary(const std::string &libname)
 {
 	try {
-		_graphic = _libraryLoader->loadInstance<IGraphic>(libname);
+		_graphic = _libraryLoader->loadGraphicInstance(libname);
 	} catch (arc::LibraryLoaderException &exception) {
 		std::cerr << exception.what() << std::endl;
 		exit(84);

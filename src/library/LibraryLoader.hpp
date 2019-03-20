@@ -9,6 +9,7 @@
 #define ARCADE_LIBRARYLOADER_HPP
 
 #include <string>
+#include "IGame.hpp"
 #include "IGraphic.hpp"
 #include "LibraryLoaderException.hpp"
 
@@ -18,16 +19,8 @@ namespace arc {
 		LibraryLoader();
 		~LibraryLoader();
 
-		template<typename T>
-		T *loadInstance(const std::string &libname)
-		{
-			T *(*instantiate)();
-
-			load(libname);
-			instantiate = (T *(*)())findSym("entryPoint");
-			return instantiate();
-		}
-
+		IGraphic *loadGraphicInstance(const std::string &libname);
+		IGame *loadGameInstance(const std::string &libname);
 	private:
 		bool checkFileExists(const std::string &name) const;
 		void load(const std::string &libname);
