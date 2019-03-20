@@ -20,8 +20,7 @@ namespace arc {
 		explicit Core(IGraphic *graphic, std::unique_ptr<LibraryLoader> libraryLoader);
 		int exec();
 	private:
-		IScene *currentScene() const;
-		IScene *nextScene() const;
+		void update(const std::map<Key, KeyState> &keys, float deltaTime);
 
 		std::shared_ptr<PlayerData> _playerData;
 		std::unique_ptr<SceneManager> _sceneManager;

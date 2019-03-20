@@ -21,9 +21,12 @@ arc::Core::Core(IGraphic *graphic, std::unique_ptr<LibraryLoader> libraryLoader)
 
 int arc::Core::exec()
 {
-	while (_graphic->isOpen() && nextScene() != nullptr) {
-		currentScene()->update(_graphic->getKeys(), 0);
-		Process::components(currentScene()->getComponents(), _graphic.get());
+	clock_t t = 0;
+
+	while (_graphic->isOpen() && _sceneManager->nextScene() != nullptr) {
+		update(_graphic->getKeys(), (float)(clock() - t) / CLOCKS_PER_SEC);
+		t = clock();
+		Process::components(_sceneManager->currentScene()->getComponents(), _graphic.get());
 		_graphic->processEvents();
 		_graphic->draw();
 		usleep(100);
@@ -31,12 +34,7 @@ int arc::Core::exec()
 	return 0;
 }
 
-arc::IScene *arc::Core::currentScene() const
+void arc::Core::update(const std::map<arc::Key, arc::KeyState> &keys, float deltaTime)
 {
-	return _sceneManager->currentScene();
-}
-
-arc::IScene *arc::Core::nextScene() const
-{
-	return _sceneManager->nextScene();
+	_sceneManager->currentScene()->update(keys, deltaTime);
 }

@@ -13,13 +13,14 @@
 #include "MainMenu.hpp"
 
 std::map<arc::Key, void (arc::MainMenu::*)()> arc::MainMenu::_keysMap = {
-	{UP, &arc::MainMenu::moveFocusUp},
+	{UP,   &arc::MainMenu::moveFocusUp},
 	{DOWN, &arc::MainMenu::moveFocusDown},
 };
 
 arc::MainMenu::MainMenu(const std::shared_ptr<PlayerData> &playerData) :
 	Scene(playerData),
-	_playerName(std::make_unique<Text>("Player Name : " + _playerData->name, std::pair<float, float>(0.1, 0.1), 20)),
+	_playerName(
+		std::make_unique<Text>("Player Name : " + _playerData->name, std::pair<float, float>(0.1, 0.1), 20)),
 	_focus(0)
 {
 	_spriteFocus = std::make_unique<Sprite>("assets/focus.png");
@@ -51,7 +52,7 @@ void arc::MainMenu::setSpritesSize()
 	_buttons[2]->setSize(std::pair<float, float>(width, height));
 }
 
-void arc::MainMenu::update(const std::map<Key, KeyState> &keys, float deltaTime)
+void arc::MainMenu::update(const std::map<Key, KeyState> &keys, float)
 {
 	_playerName->setText("Player Name : " + _playerData->name);
 	_keys = std::make_unique<std::map<Key, KeyState>>(keys);
@@ -66,7 +67,8 @@ void arc::MainMenu::moveFocusDown()
 {
 	if (_focus != _buttons.size() - 1) {
 		++_focus;
-		_spriteFocus->moveDown(_buttons[_focus]->getSprite().getPosition().second - _spriteFocus->getPosition().second);
+		_spriteFocus->moveDown(_buttons[_focus]->getSprite().getPosition().second -
+		                       _spriteFocus->getPosition().second);
 	}
 }
 
