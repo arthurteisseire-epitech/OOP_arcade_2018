@@ -17,7 +17,7 @@
 namespace arc {
 	class Core {
 	public:
-		explicit Core(IGraphic *graphic);
+		explicit Core(IGraphic *graphic, std::unique_ptr<LibraryLoader> libraryLoader);
 		int exec();
 	private:
 		std::unique_ptr<SceneManager> _sceneManager;

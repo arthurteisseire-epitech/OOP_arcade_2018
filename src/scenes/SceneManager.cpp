@@ -10,11 +10,12 @@
 #include "MainMenu.hpp"
 #include "SceneManager.hpp"
 
-arc::SceneManager::SceneManager(arc::SCENE scene, arc::IGraphic *graphic) :
+arc::SceneManager::SceneManager(SCENE scene, std::unique_ptr<LibraryLoader> libraryLoader, IGraphic *graphic) :
 	_currScene(scene),
-	_graphic(graphic),
 	_factory(std::make_unique<SceneFactory>()),
-	_playerData(std::make_shared<PlayerData>())
+	_playerData(std::make_shared<PlayerData>()),
+	_libraryLoader(std::move(libraryLoader)),
+	_graphic(graphic)
 {
 	_scene[scene] = _factory->create(scene, _playerData);
 }

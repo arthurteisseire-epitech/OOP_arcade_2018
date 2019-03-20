@@ -9,7 +9,7 @@
 #include "ArgParser.hpp"
 
 arc::ArgParser::ArgParser(int &argc, char **argv) :
-	_libraryLoader(argc, argv)
+	_libraryLoader(std::make_unique<LibraryLoader>(argc, argv))
 {
 	if (argc != 2) {
 		std::cerr << "Usage : " << std::endl
@@ -23,7 +23,7 @@ arc::ArgParser::ArgParser(int &argc, char **argv) :
 void arc::ArgParser::loadLibrary(const std::string &libname)
 {
 	try {
-		_graphic = _libraryLoader.loadInstance<IGraphic>(libname);
+		_graphic = _libraryLoader->loadInstance<IGraphic>(libname);
 	} catch (arc::LibraryLoaderException &exception) {
 		std::cerr << exception.what() << std::endl;
 		exit(84);
@@ -32,5 +32,5 @@ void arc::ArgParser::loadLibrary(const std::string &libname)
 
 arc::Core arc::ArgParser::createCore()
 {
-	return Core(_graphic);
+	return Core(_graphic, std::move(_libraryLoader));
 }
