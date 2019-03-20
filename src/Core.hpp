@@ -24,7 +24,8 @@ namespace arc {
 
 		std::shared_ptr<PlayerData> _playerData;
 		std::unique_ptr<SceneManager> _sceneManager;
-		std::unique_ptr<LibraryLoader> _libraryLoader;
+		std::unique_ptr<LibraryLoader> _graphicLibraryLoader;
+		std::unique_ptr<LibraryLoader> _gameLibraryLoader;
 		std::unique_ptr<IGraphic> _graphic;
 	};
 }

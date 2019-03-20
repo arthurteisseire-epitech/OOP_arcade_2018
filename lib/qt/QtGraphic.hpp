@@ -24,7 +24,7 @@
 namespace arc {
 	class QtGraphic : public IGraphic, public QObject {
 	public:
-		QtGraphic(int &ac, char *av[]);
+		QtGraphic();
 		bool isOpen() const override;
 		void draw() override;
 		bool processSprite(const ISprite &sprite) override;
@@ -35,9 +35,11 @@ namespace arc {
 	private:
 		std::unique_ptr<QApplication> _app;
 		std::unique_ptr<Widget> _widget;
+		int _ac = 1;
+		char *_av[1];
 	};
 }
 
-extern "C" COMMON_SO arc::IGraphic *entryPoint(int &ac, char *av[]);
+extern "C" COMMON_SO arc::IGraphic *entryPoint();
 
 #endif
