@@ -20,7 +20,12 @@ namespace arc {
 		explicit Core(IGraphic *graphic, std::unique_ptr<LibraryLoader> libraryLoader);
 		int exec();
 	private:
+		IScene *currentScene() const;
+		IScene *nextScene() const;
+
 		std::unique_ptr<SceneManager> _sceneManager;
+		std::unique_ptr<LibraryLoader> _libraryLoader;
+		std::unique_ptr<IGraphic> _graphic;
 	};
 }
 
