@@ -6,6 +6,8 @@
 */
 
 #include <unistd.h>
+#include <filesystem>
+#include <regex>
 #include "PlayerName.hpp"
 #include "Text.hpp"
 #include "Core.hpp"
@@ -18,7 +20,9 @@ arc::Core::Core(IGraphic *graphic, std::unique_ptr<LibraryLoader> libraryLoader)
 	_gameLibraryLoader(std::make_unique<LibraryLoader>()),
 	_graphic(graphic)
 {
-	_playerData->game = _gameLibraryLoader->loadGameInstance("games/nibbler/lib_arcade_nibbler.so");
+	auto games = findGamesLibraries();
+
+	_playerData->game = _gameLibraryLoader->loadGameInstance(games[0]);
 }
 
 int arc::Core::exec()
@@ -39,4 +43,15 @@ int arc::Core::exec()
 void arc::Core::update(const std::map<arc::Key, arc::KeyState> &keys, float deltaTime)
 {
 	_sceneManager->currentScene()->update(keys, deltaTime);
+}
+
+std::vector<std::string> arc::Core::findGamesLibraries() const
+{
+	std::vector<std::string> games;
+	std::regex e("^(.*/)?lib_arcade_.*.so$");
+
+	for (const auto &entry : std::filesystem::directory_iterator("games"))
+		if (std::regex_match(std::string(entry.path()), e))
+			games.emplace_back(entry.path());
+	return games;
 }
