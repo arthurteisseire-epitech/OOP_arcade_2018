@@ -39,19 +39,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/Arthamios/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/183.5429.37/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /home/arthur/app/clion/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /home/Arthamios/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/183.5429.37/bin/cmake/linux/bin/cmake -E remove -f
+RM = /home/arthur/app/clion/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/Arthamios/delivery/OOP/OOP_arcade_2018
+CMAKE_SOURCE_DIR = /home/arthur/epitech/2018/OOP/OOP_arcade_2018
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/Arthamios/delivery/OOP/OOP_arcade_2018
+CMAKE_BINARY_DIR = /home/arthur/epitech/2018/OOP/OOP_arcade_2018
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/Arthamios/delivery/OOP/OOP_arcade_2018
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/home/Arthamios/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/183.5429.37/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/home/arthur/app/clion/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target test
 test:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/home/Arthamios/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/183.5429.37/bin/cmake/linux/bin/ctest --force-new-ctest-process $(ARGS)
+	/home/arthur/app/clion/bin/cmake/linux/bin/ctest --force-new-ctest-process $(ARGS)
 .PHONY : test
 
 # Special rule for the target test
@@ -80,8 +80,8 @@ test/fast: test
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/home/arthur/app/clion/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -91,9 +91,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/Arthamios/delivery/OOP/OOP_arcade_2018/CMakeFiles /home/Arthamios/delivery/OOP/OOP_arcade_2018/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/arthur/epitech/2018/OOP/OOP_arcade_2018/CMakeFiles /home/arthur/epitech/2018/OOP/OOP_arcade_2018/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/Arthamios/delivery/OOP/OOP_arcade_2018/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/arthur/epitech/2018/OOP/OOP_arcade_2018/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -579,6 +579,24 @@ src/scenes/SceneManager.s:
 .PHONY : src/scenes/SceneManager.s
 
 # target to build an object file
+src/scenes/game/GameScene.o:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/game/GameScene.o
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/game/GameScene.o
+.PHONY : src/scenes/game/GameScene.o
+
+# target to preprocess a source file
+src/scenes/game/GameScene.i:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/game/GameScene.i
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/game/GameScene.i
+.PHONY : src/scenes/game/GameScene.i
+
+# target to generate assembly for a file
+src/scenes/game/GameScene.s:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/game/GameScene.s
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/game/GameScene.s
+.PHONY : src/scenes/game/GameScene.s
+
+# target to build an object file
 src/scenes/menu/MainMenu.o:
 	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/menu/MainMenu.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/menu/MainMenu.o
@@ -747,6 +765,9 @@ help:
 	@echo "... src/scenes/SceneManager.o"
 	@echo "... src/scenes/SceneManager.i"
 	@echo "... src/scenes/SceneManager.s"
+	@echo "... src/scenes/game/GameScene.o"
+	@echo "... src/scenes/game/GameScene.i"
+	@echo "... src/scenes/game/GameScene.s"
 	@echo "... src/scenes/menu/MainMenu.o"
 	@echo "... src/scenes/menu/MainMenu.i"
 	@echo "... src/scenes/menu/MainMenu.s"

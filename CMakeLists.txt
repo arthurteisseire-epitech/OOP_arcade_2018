@@ -18,11 +18,16 @@ include_directories(
         src/scenes/player_name
         src/scenes/utils
         src/scenes/menu
+        src/scenes/game
         src/scenes
         src/library
+        src
         lib/qt
+        lib
         games/src
-        src lib games component .
+        games
+        component
+        .
 )
 
 file(GLOB_RECURSE main main.cpp)

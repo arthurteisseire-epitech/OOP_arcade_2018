@@ -34,7 +34,12 @@ std::vector<std::reference_wrapper<arc::IComponent>> arc::Nibbler::getComponents
 	return vec;
 }
 
-void arc::Nibbler::update(std::map<arc::Key, arc::KeyState> keys, float deltaTime)
+void arc::Nibbler::update(const std::map<arc::Key, arc::KeyState> &keys, float deltaTime)
 {
 
+}
+
+bool arc::Nibbler::isRunning() const
+{
+	return false;
 }

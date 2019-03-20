@@ -24,16 +24,15 @@ namespace arc {
 	class MainMenu : public Scene {
 	public:
 		explicit MainMenu(const std::shared_ptr<PlayerData> &playerData);
-		std::vector<std::reference_wrapper<ISprite>> getSprites() const override;
-		std::vector<std::reference_wrapper<IText>> getTexts() const override;
-		std::vector<std::reference_wrapper<IAudio>> getAudios() const override;
-		void processEvents(const std::map<Key, KeyState> &keys) override;
+		void update(const std::map<Key, KeyState> &keys, float deltaTime) override;
+		std::vector<std::reference_wrapper<IComponent>> getComponents() const override;
 		SCENE nextScene() const override;
 	private:
 		void moveFocusDown();
 		void moveFocusUp();
 		void setSpritesPosition();
 		void setSpritesSize();
+		void fillComponents();
 
 		std::unique_ptr<std::map<Key, KeyState>> _keys;
 		std::vector<std::unique_ptr<Button>> _buttons;
@@ -42,6 +41,7 @@ namespace arc {
 		std::unique_ptr<Text> _playerName;
 		size_t _focus;
 		static std::map<Key, void (arc::MainMenu::*)()> _keysMap;
+		std::vector<std::reference_wrapper<IComponent>> _components;
 	};
 }
 

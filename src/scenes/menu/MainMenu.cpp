@@ -13,22 +13,24 @@
 #include "MainMenu.hpp"
 
 std::map<arc::Key, void (arc::MainMenu::*)()> arc::MainMenu::_keysMap = {
-	{UP, &arc::MainMenu::moveFocusUp},
+	{UP,   &arc::MainMenu::moveFocusUp},
 	{DOWN, &arc::MainMenu::moveFocusDown},
 };
 
 arc::MainMenu::MainMenu(const std::shared_ptr<PlayerData> &playerData) :
 	Scene(playerData),
-	_playerName(std::make_unique<Text>("Player Name : " + _playerData->name, std::pair<float, float>(0.1, 0.1), 20)),
+	_playerName(
+		std::make_unique<Text>("Player Name : " + _playerData->name, std::pair<float, float>(0.1, 0.1), 20)),
 	_focus(0)
 {
 	_spriteFocus = std::make_unique<Sprite>("assets/focus.png");
 	_audios.push_back(std::make_unique<Audio>("assets/audio/sound.m4a", 10));
 	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", PLAYER_NAME, "Player Name"));
-	_buttons.push_back(std::make_unique<Button>("assets/saple.jpg", MENU, "Second"));
+	_buttons.push_back(std::make_unique<Button>("assets/saple.jpg", GAME, "Play"));
 	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", NONE, "Exit"));
 	setSpritesSize();
 	setSpritesPosition();
+	fillComponents();
 }
 
 void arc::MainMenu::setSpritesPosition()
@@ -50,12 +52,13 @@ void arc::MainMenu::setSpritesSize()
 	_buttons[2]->setSize(std::pair<float, float>(width, height));
 }
 
-void arc::MainMenu::processEvents(const std::map<Key, KeyState> &keys)
+void arc::MainMenu::update(const std::map<Key, KeyState> &keys, float)
 {
+	_playerName->setText("Player Name : " + _playerData->name);
 	_keys = std::make_unique<std::map<Key, KeyState>>(keys);
 	for (auto &p : _keysMap) {
 		auto it = keys.find(p.first);
-		if (it != keys.end() && it->second == RELEASED)
+		if (it != keys.end() && it->second == PRESSED)
 			(this->*p.second)();
 	}
 }
@@ -64,7 +67,8 @@ void arc::MainMenu::moveFocusDown()
 {
 	if (_focus != _buttons.size() - 1) {
 		++_focus;
-		_spriteFocus->moveDown(_buttons[_focus]->getSprite().getPosition().second - _spriteFocus->getPosition().second);
+		_spriteFocus->moveDown(_buttons[_focus]->getSprite().getPosition().second -
+		                       _spriteFocus->getPosition().second);
 	}
 }
 
@@ -76,35 +80,6 @@ void arc::MainMenu::moveFocusUp()
 	}
 }
 
-std::vector<std::reference_wrapper<arc::ISprite>> arc::MainMenu::getSprites() const
-{
-	std::vector<std::reference_wrapper<ISprite>> wrapper;
-
-	for (const auto &button : _buttons)
-		wrapper.emplace_back(button->getSprite());
-	wrapper.emplace_back(*_spriteFocus);
-	return wrapper;
-}
-
-std::vector<std::reference_wrapper<arc::IText>> arc::MainMenu::getTexts() const
-{
-	std::vector<std::reference_wrapper<IText>> wrapper;
-
-	for (const auto &button : _buttons)
-		wrapper.emplace_back(button->getText());
-	wrapper.emplace_back(*_playerName);
-	return wrapper;
-}
-
-std::vector<std::reference_wrapper<arc::IAudio>> arc::MainMenu::getAudios() const
-{
-	std::vector<std::reference_wrapper<IAudio>> wrapper;
-
-	for (const auto &audio : _audios)
-		wrapper.emplace_back(*audio);
-	return wrapper;
-}
-
 arc::SCENE arc::MainMenu::nextScene() const
 {
 	if (_keys) {
@@ -113,4 +88,24 @@ arc::SCENE arc::MainMenu::nextScene() const
 			return _buttons[_focus]->getLinkedScene();
 	}
 	return MENU;
+}
+
+void arc::MainMenu::fillComponents()
+{
+	_components.reserve(this->_buttons.size() * 2 + 1 + this->_audios.size());
+	for (const auto &button : this->_buttons)
+		_components.emplace_back(button->getSprite());
+	_components.emplace_back(*this->_spriteFocus);
+
+	for (const auto &button : this->_buttons)
+		_components.emplace_back(button->getText());
+	_components.emplace_back(*this->_playerName);
+
+	for (const auto &audio : this->_audios)
+		_components.emplace_back(*audio);
+}
+
+std::vector<std::reference_wrapper<arc::IComponent>> arc::MainMenu::getComponents() const
+{
+	return _components;
 }

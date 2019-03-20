@@ -5,45 +5,37 @@
 ** SceneManager.cpp
 */
 
-#include <unistd.h>
 #include "Process.hpp"
 #include "MainMenu.hpp"
 #include "SceneManager.hpp"
 
-arc::SceneManager::SceneManager(arc::SCENE scene, arc::IGraphic *graphic) :
+arc::SceneManager::SceneManager(SCENE scene, const std::shared_ptr<PlayerData> &playerData) :
 	_currScene(scene),
-	_graphic(graphic),
 	_factory(std::make_unique<SceneFactory>()),
-	_playerData(std::make_shared<PlayerData>())
+	_playerData(playerData)
 {
 	_scene[scene] = _factory->create(scene, _playerData);
 }
 
 void arc::SceneManager::changeScene(SCENE scene)
 {
-	_scene[scene] = _factory->create(scene, _playerData);
+	if (_scene.find(scene) == _scene.end())
+		_scene[scene] = _factory->create(scene, _playerData);
 	_currScene = scene;
 }
 
-arc::IScene &arc::SceneManager::currentScene() const
+arc::IScene *arc::SceneManager::currentScene() const
 {
-	return *_scene.at(_currScene);
+	return _scene.at(_currScene).get();
 }
 
-int arc::SceneManager::start()
+arc::IScene *arc::SceneManager::nextScene()
 {
-	arc::Process::audios(currentScene().getAudios(), _graphic.get());
-	while (_graphic->isOpen() && currentScene().nextScene() != NONE) {
-		if (currentScene().nextScene() == _currScene) {
-			currentScene().processEvents(_graphic->getKeys());
-			arc::Process::sprites(currentScene().getSprites(), _graphic.get());
-			arc::Process::texts(currentScene().getTexts(), _graphic.get());
-			_graphic->processEvents();
-			_graphic->draw();
-			usleep(100);
-		} else {
-			changeScene(currentScene().nextScene());
-		}
-	}
-	return 0;
+	SCENE nextScene = currentScene()->nextScene();
+
+	if (nextScene == NONE)
+		return nullptr;
+	if (nextScene != _currScene)
+		changeScene(nextScene);
+	return currentScene();
 }

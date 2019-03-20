@@ -20,7 +20,7 @@ namespace arc {
 		void loadLibrary(const std::string &libname);
 
 		IGraphic *_graphic;
-		LibraryLoader _libraryLoader;
+		std::unique_ptr<LibraryLoader> _libraryLoader;
 	};
 }
 

@@ -10,6 +10,7 @@
 
 #include <map>
 #include <memory>
+#include "LibraryLoader.hpp"
 #include "IGraphic.hpp"
 #include "IScene.hpp"
 #include "SceneFactory.hpp"
@@ -18,15 +19,14 @@
 namespace arc {
 	class SceneManager {
 	public:
-		explicit SceneManager(SCENE scene, IGraphic *graphic);
+		explicit SceneManager(SCENE scene, const std::shared_ptr<PlayerData> &playerData);
 		~SceneManager() = default;
 
 		void changeScene(SCENE scene);
-		IScene &currentScene() const;
-		int start();
+		IScene *currentScene() const;
+		IScene *nextScene();
 	protected:
 		SCENE _currScene;
-		std::unique_ptr<IGraphic> _graphic;
 		std::unique_ptr<SceneFactory> _factory;
 		std::map<SCENE, std::unique_ptr<IScene>> _scene;
 		std::shared_ptr<PlayerData> _playerData;

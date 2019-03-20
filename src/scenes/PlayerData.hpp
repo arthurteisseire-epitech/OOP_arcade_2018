@@ -9,10 +9,12 @@
 #define ARCADE_PLAYERDATA_HPP
 
 #include <string>
+#include "IGame.hpp"
 
 namespace arc {
 	struct PlayerData {
 		std::string name;
+		IGame *game;
 	};
 }
 
