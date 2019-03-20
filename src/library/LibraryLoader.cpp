@@ -52,6 +52,8 @@ arc::IGraphic *arc::LibraryLoader::loadGraphicInstance(const std::string &libnam
 
 	load(libname);
 	instantiate = (IGraphic *(*)())findSym("graphicEntryPoint");
+	if (instantiate == nullptr)
+		throw LibraryLoaderException("Graphical library is needed here");
 	return instantiate();
 }
 
@@ -61,5 +63,7 @@ arc::IGame *arc::LibraryLoader::loadGameInstance(const std::string &libname)
 
 	load(libname);
 	instantiate = (IGame *(*)())findSym("gameEntryPoint");
+	if (instantiate == nullptr)
+		throw LibraryLoaderException("Game library is needed here");
 	return instantiate();
 }
