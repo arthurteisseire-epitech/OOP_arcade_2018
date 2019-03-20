@@ -15,6 +15,8 @@ namespace arc {
 	struct PlayerData {
 		std::string name;
 		IGame *game;
+		std::vector<std::string> games_list;
+		std::vector<std::string> graphics_list;
 	};
 }
 

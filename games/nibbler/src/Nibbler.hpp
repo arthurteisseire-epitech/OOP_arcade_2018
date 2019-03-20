@@ -10,6 +10,7 @@
 
 #include "IGame.hpp"
 #include "Map.hpp"
+#include "PlayerDirection.hpp"
 
 namespace arc {
 	class Nibbler : public IGame {
@@ -20,9 +21,15 @@ namespace arc {
 		void update(const std::map<arc::Key, arc::KeyState> &keys, float deltaTime) override;
 		bool isRunning() const override;
 	private:
+		void updateTime(float time);
+
 		unsigned int _score;
 		unsigned int _size;
 		Map _map;
+		PlayerDirection _lastDir;
+		float _localDeltaTime;
+		static const float _actionTime;
+		void getLastDirection(const std::map<Key, KeyState> &keys);
 	};
 }
 

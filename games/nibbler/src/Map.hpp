@@ -11,6 +11,7 @@
 
 #include <string>
 #include <vector>
+#include <Key.hpp>
 #include "IComponent.hpp"
 #include "Snake.hpp"
 #include "Food.hpp"
@@ -22,6 +23,7 @@ namespace arc {
 
 		Food &generateFood();
 		void generateSprites(std::vector<std::reference_wrapper<IComponent>> &vector) const;
+		void updateSnake(arc::PlayerDirection key);
 	protected:
 		pos_t _size;
 		Snake _snake;

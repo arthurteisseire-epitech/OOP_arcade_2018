@@ -36,3 +36,8 @@ void arc::Map::generateSprites(std::vector<std::reference_wrapper<arc::IComponen
 	vector.insert(vector.end(), snake_parts.begin(), snake_parts.end());
 	vector.emplace_back(_food.getSprite());
 }
+
+void arc::Map::updateSnake(PlayerDirection key)
+{
+	_snake.changeDirection(key);
+}

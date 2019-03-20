@@ -10,16 +10,19 @@
 #include "Sprite.hpp"
 #include "Text.hpp"
 
-#include <iostream>
 arc::IGame *entryPoint(int &ac, char *av[])
 {
 	return new arc::Nibbler(ac, av);
 }
 
+const float arc::Nibbler::_actionTime = 1.0;
+
 arc::Nibbler::Nibbler(int &, char **av) :
 	_score(0),
 	_size(50),
-	_map({_size, _size})
+	_map({_size, _size}),
+	_lastDir(PLAYER_LEFT),
+	_localDeltaTime(0)
 {
 	srand((unsigned int)(unsigned long)(av));
 }
@@ -36,10 +39,30 @@ std::vector<std::reference_wrapper<arc::IComponent>> arc::Nibbler::getComponents
 
 void arc::Nibbler::update(const std::map<arc::Key, arc::KeyState> &keys, float deltaTime)
 {
-
+	getLastDirection(keys);
+	updateTime(deltaTime);
+	if (_localDeltaTime >= _actionTime) {
+		_localDeltaTime = 0;
+		_map.updateSnake(_lastDir);
+	}
 }
 
 bool arc::Nibbler::isRunning() const
 {
-	return false;
+	return true;
+}
+
+void arc::Nibbler::updateTime(float time)
+{
+	_localDeltaTime += time;
+}
+
+void arc::Nibbler::getLastDirection(const std::map<arc::Key, arc::KeyState> &keys)
+{
+	if (keys.find(Key::LEFT) != keys.end() && keys.at(Key::LEFT) == PRESSED)
+		_lastDir = PLAYER_LEFT;
+	else if (keys.find(Key::RIGHT) != keys.end() && keys.at(Key::RIGHT) == PRESSED)
+		_lastDir = PLAYER_RIGHT;
+	else
+		_lastDir = PLAYER_NONE;
 }
