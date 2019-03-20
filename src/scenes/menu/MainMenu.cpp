@@ -53,6 +53,7 @@ void arc::MainMenu::setSpritesSize()
 
 void arc::MainMenu::update(const std::map<Key, KeyState> &keys, float deltaTime)
 {
+	_playerName->setText("Player Name : " + _playerData->name);
 	_keys = std::make_unique<std::map<Key, KeyState>>(keys);
 	for (auto &p : _keysMap) {
 		auto it = keys.find(p.first);

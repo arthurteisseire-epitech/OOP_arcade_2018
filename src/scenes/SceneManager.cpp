@@ -19,7 +19,8 @@ arc::SceneManager::SceneManager(SCENE scene, const std::shared_ptr<PlayerData> &
 
 void arc::SceneManager::changeScene(SCENE scene)
 {
-	_scene[scene] = _factory->create(scene, _playerData);
+	if (_scene.find(scene) == _scene.end())
+		_scene[scene] = _factory->create(scene, _playerData);
 	_currScene = scene;
 }
 
