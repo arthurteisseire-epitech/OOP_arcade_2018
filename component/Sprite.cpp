@@ -7,10 +7,10 @@
 
 #include "Sprite.hpp"
 
-arc::Sprite::Sprite(const std::string &filename) :
+arc::Sprite::Sprite(const std::string &filename, const std::pair<float, float> pos , const std::pair<float, float> size) :
 	_filename(filename),
-	_pos(0, 0),
-	_size(0, 0),
+	_pos(pos),
+	_size(size),
 	_color(0xff0000ff)
 {
 }
