@@ -15,7 +15,7 @@ arc::IGame *gameEntryPoint(int &ac, char **av)
 	return new arc::Nibbler(ac, av);
 }
 
-const float arc::Nibbler::_actionTime = 1.0;
+const float arc::Nibbler::_actionTime = 0.6;
 
 arc::Nibbler::Nibbler(int &, char **av) :
 	_score(0),
