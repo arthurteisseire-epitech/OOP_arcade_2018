@@ -11,10 +11,12 @@
 #include <string>
 #include "ISprite.hpp"
 
-namespace arc {
+namespace arc
+{
 	class Sprite : public ISprite {
 	public:
-		explicit Sprite(const std::string &filename);
+		explicit Sprite(const std::string &filename, const std::pair<float, float> &size = {0, 0},
+				const std::pair<float, float> &pos = {0, 0});
 		~Sprite() override = default;
 
 		ComponentType getType() const final;

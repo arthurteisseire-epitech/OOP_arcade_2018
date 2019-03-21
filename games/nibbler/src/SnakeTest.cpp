@@ -15,83 +15,83 @@ public:
 	{};
 
 protected:
-	static const std::pair<unsigned int, unsigned int> init_pos;
-	static const std::pair<unsigned int, unsigned int> move;
+	static const pos_t init_pos;
+	static const pos_t move;
 
 	void test_move(Snake &snake, Direction direction, pos_t expected_head);
 };
 
-const std::pair<unsigned int, unsigned int> SnakeTest::init_pos = {1, 2};
+const pos_t SnakeTest::init_pos = {1, 2};
 
 TEST_F(SnakeTest, Init)
 {
-	EXPECT_EQ(_body_positions.size(), (size_t)4);
-	EXPECT_EQ(_body_positions[0], init_pos);
-	EXPECT_EQ(_body_positions[1].first, init_pos.first + 1);
-	EXPECT_EQ(_body_positions[1].second, init_pos.second);
-	EXPECT_EQ(_body_positions[2].first, init_pos.first + 2);
-	EXPECT_EQ(_body_positions[2].second, init_pos.second);
-	EXPECT_EQ(_body_positions[3].first, init_pos.first + 3);
-	EXPECT_EQ(_body_positions[3].second, init_pos.second);
+	EXPECT_EQ(_bodyPositions.size(), (size_t)4);
+	EXPECT_EQ(_bodyPositions[0], init_pos);
+	EXPECT_EQ(_bodyPositions[1].first, init_pos.first + 1);
+	EXPECT_EQ(_bodyPositions[1].second, init_pos.second);
+	EXPECT_EQ(_bodyPositions[2].first, init_pos.first + 2);
+	EXPECT_EQ(_bodyPositions[2].second, init_pos.second);
+	EXPECT_EQ(_bodyPositions[3].first, init_pos.first + 3);
+	EXPECT_EQ(_bodyPositions[3].second, init_pos.second);
 }
 
 TEST_F(SnakeTest, Eat)
 {
-	unsigned long length = _body_positions.size();
-	body_t cp = _body_positions;
+	unsigned long length = _bodyPositions.size();
+	body_t cp = _bodyPositions;
 
 	eat();
-	EXPECT_EQ(length + 1, _body_positions.size());
-	EXPECT_EQ(abs((int)(cp.back().first - _body_positions.back().first)), 1);
-	EXPECT_EQ(cp.back().second, _body_positions.back().second);
+	EXPECT_EQ(length + 1, _bodyPositions.size());
+	EXPECT_EQ(abs((int)(cp.back().first - _bodyPositions.back().first)), 1);
+	EXPECT_EQ(cp.back().second, _bodyPositions.back().second);
 }
 
 TEST_F(SnakeTest, FindTailDirection)
 {
-	_body_positions.push_back(pos_t(0, 2));
-	_body_positions.push_back(pos_t(0, 3));
-	EXPECT_EQ(find_tail_direction(), pos_t(0, -1));
+	_bodyPositions.push_back(pos_t(0, 2));
+	_bodyPositions.push_back(pos_t(0, 3));
+	EXPECT_EQ(findTailDirection(), pos_t(0, -1));
 
-	_body_positions.push_back(pos_t(0, 3));
-	_body_positions.push_back(pos_t(0, 2));
-	EXPECT_EQ(find_tail_direction(), pos_t(0, 1));
+	_bodyPositions.push_back(pos_t(0, 3));
+	_bodyPositions.push_back(pos_t(0, 2));
+	EXPECT_EQ(findTailDirection(), pos_t(0, 1));
 
-	_body_positions.push_back(pos_t(2, 0));
-	_body_positions.push_back(pos_t(3, 0));
-	EXPECT_EQ(find_tail_direction(), pos_t(-1, 0));
+	_bodyPositions.push_back(pos_t(2, 0));
+	_bodyPositions.push_back(pos_t(3, 0));
+	EXPECT_EQ(findTailDirection(), pos_t(-1, 0));
 
-	_body_positions.push_back(pos_t(3, 0));
-	_body_positions.push_back(pos_t(2, 0));
-	EXPECT_EQ(find_tail_direction(), pos_t(1, 0));
+	_bodyPositions.push_back(pos_t(3, 0));
+	_bodyPositions.push_back(pos_t(2, 0));
+	EXPECT_EQ(findTailDirection(), pos_t(1, 0));
 }
 
 void SnakeTest::test_move(Snake &snake, Direction direction, pos_t expected_head)
 {
-	body_t pos_list = _body_positions;
+	body_t pos_list = _bodyPositions;
 
-	snake.move_body(direction);
-	EXPECT_EQ(_body_positions.front(), expected_head);
+	snake.moveBody(direction);
+	EXPECT_EQ(_bodyPositions.front(), expected_head);
 	pos_list.pop_back();
 	for (size_t i = 0; i < pos_list.size(); ++i)
-		EXPECT_EQ(pos_list[i], _body_positions[i + 1]);
+		EXPECT_EQ(pos_list[i], _bodyPositions[i + 1]);
 }
 
 TEST_F(SnakeTest, MoveUp)
 {
-	test_move(*this, UP, {_body_positions.front().first, _body_positions.front().second - 1});
+	test_move(*this, UP, {_bodyPositions.front().first, _bodyPositions.front().second - 1});
 }
 
 TEST_F(SnakeTest, MoveRight)
 {
-	test_move(*this, RIGHT, {_body_positions.front().first + 1, _body_positions.front().second});
+	test_move(*this, RIGHT, {_bodyPositions.front().first + 1, _bodyPositions.front().second});
 }
 
 TEST_F(SnakeTest, MoveLeft)
 {
-	test_move(*this, LEFT, {_body_positions.front().first - 1, _body_positions.front().second});
+	test_move(*this, LEFT, {_bodyPositions.front().first - 1, _bodyPositions.front().second});
 }
 
 TEST_F(SnakeTest, MoveDown)
 {
-	test_move(*this, DOWN, {_body_positions.front().first, _body_positions.front().second + 1});
+	test_move(*this, DOWN, {_bodyPositions.front().first, _bodyPositions.front().second + 1});
 }

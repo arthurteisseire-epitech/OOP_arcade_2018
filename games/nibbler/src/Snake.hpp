@@ -13,6 +13,7 @@
 #include <memory>
 #include "Sprite.hpp"
 #include "Pos.hpp"
+#include "PlayerDirection.hpp"
 
 #ifndef PATH_TO_ASSETS
 #define PATH_TO_ASSETS	"./games/nibbler/assets/sprites/"
@@ -27,25 +28,31 @@ namespace arc {
 			UP, DOWN, LEFT, RIGHT
 		};
 
-		explicit Snake(const pos_t &start_pos, unsigned int size, const pos_t &map_size);
+		explicit Snake(const pos_t &startPos, unsigned int size, const pos_t &mapSize);
 
 		void eat();
-		void move_body(const Direction &direction);
+		void moveBody(const arc::Snake::Direction &direction, bool changeDir);
 		bool isInSnake(const pos_t &pos) const;
 		std::vector<std::reference_wrapper<IComponent>>	getParts() const;
+		void changeDirection(arc::PlayerDirection playerDir);
 	protected:
-		std::pair<unsigned int, unsigned int> find_tail_direction();
+		pos_t findTailDirection();
+		Direction findHeadDir();
 
-		body_t _body_positions;
-		static const std::unordered_map<Direction, pos_t> _direction_map;
-		static const std::unordered_map<Direction, std::vector<std::string>> _snake_assets_map;
-		std::vector<std::unique_ptr<IComponent>> _cache_assets;
-//		Direction find_head_direction() const;
+		body_t _bodyPositions;
+		static const std::unordered_map<Direction, pos_t> _directionMap;
+		static const std::unordered_map<Direction, std::vector<std::string>> _snakeAssetsMap;
+		std::vector<std::unique_ptr<IComponent>> _cacheAssets;
 
 	private:
-		void
-		append_sprite(const pos_t &pos_res, std::unique_ptr<arc::Sprite> &actual_sprite, const pos_t &size);
+		void append_sprite(const pos_t &posRes, std::unique_ptr<arc::Sprite> &actualSprite, const pos_t &size);
+
+		pos_t _mapSize;
+		void updateSprites(const Direction &direction, bool changeDir);
 	};
+
+	Snake::Direction operator*(const Snake::Direction &, const PlayerDirection &);
+	std::ostream &operator<<(std::ostream &stream, const Snake::Direction &dir);
 }
 
 #endif

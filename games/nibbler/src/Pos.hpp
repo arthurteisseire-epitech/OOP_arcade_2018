@@ -10,7 +10,7 @@
 
 #include <utility>
 
-typedef std::pair<unsigned int, unsigned int> pos_t;
+typedef std::pair<int, int> pos_t;
 typedef std::pair<float, float> percent_pos_t;
 
 #endif
