@@ -122,19 +122,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named units
-
-# Build rule for target.
-units: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 units
-.PHONY : units
-
-# fast build rule for target.
-units/fast:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/build
-.PHONY : units/fast
-
-#=============================================================================
 # Target rules for targets named arcade
 
 # Build rule for target.
@@ -214,177 +201,123 @@ tests_run/fast:
 
 # target to build an object file
 component/Audio.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/component/Audio.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/component/Audio.o
 .PHONY : component/Audio.o
 
 # target to preprocess a source file
 component/Audio.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/component/Audio.i
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/component/Audio.i
 .PHONY : component/Audio.i
 
 # target to generate assembly for a file
 component/Audio.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/component/Audio.s
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/component/Audio.s
 .PHONY : component/Audio.s
 
 # target to build an object file
 component/Sprite.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/component/Sprite.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/component/Sprite.o
 .PHONY : component/Sprite.o
 
 # target to preprocess a source file
 component/Sprite.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/component/Sprite.i
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/component/Sprite.i
 .PHONY : component/Sprite.i
 
 # target to generate assembly for a file
 component/Sprite.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/component/Sprite.s
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/component/Sprite.s
 .PHONY : component/Sprite.s
 
 # target to build an object file
 component/Text.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/component/Text.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/component/Text.o
 .PHONY : component/Text.o
 
 # target to preprocess a source file
 component/Text.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/component/Text.i
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/component/Text.i
 .PHONY : component/Text.i
 
 # target to generate assembly for a file
 component/Text.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/component/Text.s
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/component/Text.s
 .PHONY : component/Text.s
 
 # target to build an object file
 games/nibbler/src/Food.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Food.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/Food.o
 .PHONY : games/nibbler/src/Food.o
 
 # target to preprocess a source file
 games/nibbler/src/Food.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Food.i
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/Food.i
 .PHONY : games/nibbler/src/Food.i
 
 # target to generate assembly for a file
 games/nibbler/src/Food.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Food.s
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/Food.s
 .PHONY : games/nibbler/src/Food.s
 
 # target to build an object file
 games/nibbler/src/Map.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Map.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/Map.o
 .PHONY : games/nibbler/src/Map.o
 
 # target to preprocess a source file
 games/nibbler/src/Map.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Map.i
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/Map.i
 .PHONY : games/nibbler/src/Map.i
 
 # target to generate assembly for a file
 games/nibbler/src/Map.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Map.s
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/Map.s
 .PHONY : games/nibbler/src/Map.s
 
 # target to build an object file
 games/nibbler/src/MathUtils.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/MathUtils.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/MathUtils.o
 .PHONY : games/nibbler/src/MathUtils.o
 
 # target to preprocess a source file
 games/nibbler/src/MathUtils.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/MathUtils.i
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/MathUtils.i
 .PHONY : games/nibbler/src/MathUtils.i
 
 # target to generate assembly for a file
 games/nibbler/src/MathUtils.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/MathUtils.s
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/MathUtils.s
 .PHONY : games/nibbler/src/MathUtils.s
 
 # target to build an object file
 games/nibbler/src/Nibbler.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Nibbler.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/Nibbler.o
 .PHONY : games/nibbler/src/Nibbler.o
 
 # target to preprocess a source file
 games/nibbler/src/Nibbler.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Nibbler.i
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/Nibbler.i
 .PHONY : games/nibbler/src/Nibbler.i
 
 # target to generate assembly for a file
 games/nibbler/src/Nibbler.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Nibbler.s
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/Nibbler.s
 .PHONY : games/nibbler/src/Nibbler.s
 
 # target to build an object file
-games/nibbler/src/NibblerTest.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/NibblerTest.o
-.PHONY : games/nibbler/src/NibblerTest.o
-
-# target to preprocess a source file
-games/nibbler/src/NibblerTest.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/NibblerTest.i
-.PHONY : games/nibbler/src/NibblerTest.i
-
-# target to generate assembly for a file
-games/nibbler/src/NibblerTest.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/NibblerTest.s
-.PHONY : games/nibbler/src/NibblerTest.s
-
-# target to build an object file
 games/nibbler/src/Snake.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Snake.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/Snake.o
 .PHONY : games/nibbler/src/Snake.o
 
 # target to preprocess a source file
 games/nibbler/src/Snake.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Snake.i
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/Snake.i
 .PHONY : games/nibbler/src/Snake.i
 
 # target to generate assembly for a file
 games/nibbler/src/Snake.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/Snake.s
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/nibbler/src/Snake.s
 .PHONY : games/nibbler/src/Snake.s
-
-# target to build an object file
-games/nibbler/src/SnakeTest.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/SnakeTest.o
-.PHONY : games/nibbler/src/SnakeTest.o
-
-# target to preprocess a source file
-games/nibbler/src/SnakeTest.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/SnakeTest.i
-.PHONY : games/nibbler/src/SnakeTest.i
-
-# target to generate assembly for a file
-games/nibbler/src/SnakeTest.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/nibbler/src/SnakeTest.s
-.PHONY : games/nibbler/src/SnakeTest.s
 
 # target to build an object file
 main.o:
@@ -403,271 +336,226 @@ main.s:
 
 # target to build an object file
 src/ArgParser.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/ArgParser.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/ArgParser.o
 .PHONY : src/ArgParser.o
 
 # target to preprocess a source file
 src/ArgParser.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/ArgParser.i
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/ArgParser.i
 .PHONY : src/ArgParser.i
 
 # target to generate assembly for a file
 src/ArgParser.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/ArgParser.s
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/ArgParser.s
 .PHONY : src/ArgParser.s
 
 # target to build an object file
 src/Core.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/Core.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/Core.o
 .PHONY : src/Core.o
 
 # target to preprocess a source file
 src/Core.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/Core.i
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/Core.i
 .PHONY : src/Core.i
 
 # target to generate assembly for a file
 src/Core.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/Core.s
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/Core.s
 .PHONY : src/Core.s
 
 # target to build an object file
 src/Process.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/Process.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/Process.o
 .PHONY : src/Process.o
 
 # target to preprocess a source file
 src/Process.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/Process.i
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/Process.i
 .PHONY : src/Process.i
 
 # target to generate assembly for a file
 src/Process.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/Process.s
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/Process.s
 .PHONY : src/Process.s
 
 # target to build an object file
 src/library/LibraryLoader.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoader.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoader.o
 .PHONY : src/library/LibraryLoader.o
 
 # target to preprocess a source file
 src/library/LibraryLoader.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoader.i
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoader.i
 .PHONY : src/library/LibraryLoader.i
 
 # target to generate assembly for a file
 src/library/LibraryLoader.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoader.s
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoader.s
 .PHONY : src/library/LibraryLoader.s
 
 # target to build an object file
 src/library/LibraryLoaderException.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoaderException.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoaderException.o
 .PHONY : src/library/LibraryLoaderException.o
 
 # target to preprocess a source file
 src/library/LibraryLoaderException.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoaderException.i
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoaderException.i
 .PHONY : src/library/LibraryLoaderException.i
 
 # target to generate assembly for a file
 src/library/LibraryLoaderException.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoaderException.s
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoaderException.s
 .PHONY : src/library/LibraryLoaderException.s
 
 # target to build an object file
 src/scenes/Scene.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/Scene.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/Scene.o
 .PHONY : src/scenes/Scene.o
 
 # target to preprocess a source file
 src/scenes/Scene.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/Scene.i
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/Scene.i
 .PHONY : src/scenes/Scene.i
 
 # target to generate assembly for a file
 src/scenes/Scene.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/Scene.s
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/Scene.s
 .PHONY : src/scenes/Scene.s
 
 # target to build an object file
 src/scenes/SceneFactory.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/SceneFactory.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/SceneFactory.o
 .PHONY : src/scenes/SceneFactory.o
 
 # target to preprocess a source file
 src/scenes/SceneFactory.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/SceneFactory.i
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/SceneFactory.i
 .PHONY : src/scenes/SceneFactory.i
 
 # target to generate assembly for a file
 src/scenes/SceneFactory.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/SceneFactory.s
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/SceneFactory.s
 .PHONY : src/scenes/SceneFactory.s
 
 # target to build an object file
 src/scenes/SceneManager.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/SceneManager.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/SceneManager.o
 .PHONY : src/scenes/SceneManager.o
 
 # target to preprocess a source file
 src/scenes/SceneManager.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/SceneManager.i
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/SceneManager.i
 .PHONY : src/scenes/SceneManager.i
 
 # target to generate assembly for a file
 src/scenes/SceneManager.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/SceneManager.s
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/SceneManager.s
 .PHONY : src/scenes/SceneManager.s
 
 # target to build an object file
 src/scenes/SharedData.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/SharedData.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/SharedData.o
 .PHONY : src/scenes/SharedData.o
 
 # target to preprocess a source file
 src/scenes/SharedData.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/SharedData.i
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/SharedData.i
 .PHONY : src/scenes/SharedData.i
 
 # target to generate assembly for a file
 src/scenes/SharedData.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/SharedData.s
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/SharedData.s
 .PHONY : src/scenes/SharedData.s
 
 # target to build an object file
 src/scenes/game/GameScene.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/game/GameScene.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/game/GameScene.o
 .PHONY : src/scenes/game/GameScene.o
 
 # target to preprocess a source file
 src/scenes/game/GameScene.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/game/GameScene.i
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/game/GameScene.i
 .PHONY : src/scenes/game/GameScene.i
 
 # target to generate assembly for a file
 src/scenes/game/GameScene.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/game/GameScene.s
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/game/GameScene.s
 .PHONY : src/scenes/game/GameScene.s
 
 # target to build an object file
 src/scenes/menu/MainMenu.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/menu/MainMenu.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/menu/MainMenu.o
 .PHONY : src/scenes/menu/MainMenu.o
 
 # target to preprocess a source file
 src/scenes/menu/MainMenu.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/menu/MainMenu.i
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/menu/MainMenu.i
 .PHONY : src/scenes/menu/MainMenu.i
 
 # target to generate assembly for a file
 src/scenes/menu/MainMenu.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/menu/MainMenu.s
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/menu/MainMenu.s
 .PHONY : src/scenes/menu/MainMenu.s
 
 # target to build an object file
 src/scenes/player_name/Cursor.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/player_name/Cursor.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/player_name/Cursor.o
 .PHONY : src/scenes/player_name/Cursor.o
 
 # target to preprocess a source file
 src/scenes/player_name/Cursor.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/player_name/Cursor.i
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/player_name/Cursor.i
 .PHONY : src/scenes/player_name/Cursor.i
 
 # target to generate assembly for a file
 src/scenes/player_name/Cursor.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/player_name/Cursor.s
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/player_name/Cursor.s
 .PHONY : src/scenes/player_name/Cursor.s
 
 # target to build an object file
 src/scenes/player_name/PlayerName.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/player_name/PlayerName.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/player_name/PlayerName.o
 .PHONY : src/scenes/player_name/PlayerName.o
 
 # target to preprocess a source file
 src/scenes/player_name/PlayerName.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/player_name/PlayerName.i
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/player_name/PlayerName.i
 .PHONY : src/scenes/player_name/PlayerName.i
 
 # target to generate assembly for a file
 src/scenes/player_name/PlayerName.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/player_name/PlayerName.s
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/player_name/PlayerName.s
 .PHONY : src/scenes/player_name/PlayerName.s
 
 # target to build an object file
 src/scenes/player_name/Row.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/player_name/Row.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/player_name/Row.o
 .PHONY : src/scenes/player_name/Row.o
 
 # target to preprocess a source file
 src/scenes/player_name/Row.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/player_name/Row.i
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/player_name/Row.i
 .PHONY : src/scenes/player_name/Row.i
 
 # target to generate assembly for a file
 src/scenes/player_name/Row.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/player_name/Row.s
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/player_name/Row.s
 .PHONY : src/scenes/player_name/Row.s
 
 # target to build an object file
 src/scenes/utils/Button.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/utils/Button.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/utils/Button.o
 .PHONY : src/scenes/utils/Button.o
 
 # target to preprocess a source file
 src/scenes/utils/Button.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/utils/Button.i
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/utils/Button.i
 .PHONY : src/scenes/utils/Button.i
 
 # target to generate assembly for a file
 src/scenes/utils/Button.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/utils/Button.s
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/utils/Button.s
 .PHONY : src/scenes/utils/Button.s
 
@@ -679,7 +567,6 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... test"
-	@echo "... units"
 	@echo "... arcade"
 	@echo "... graphicals"
 	@echo "... re"
@@ -708,15 +595,9 @@ help:
 	@echo "... games/nibbler/src/Nibbler.o"
 	@echo "... games/nibbler/src/Nibbler.i"
 	@echo "... games/nibbler/src/Nibbler.s"
-	@echo "... games/nibbler/src/NibblerTest.o"
-	@echo "... games/nibbler/src/NibblerTest.i"
-	@echo "... games/nibbler/src/NibblerTest.s"
 	@echo "... games/nibbler/src/Snake.o"
 	@echo "... games/nibbler/src/Snake.i"
 	@echo "... games/nibbler/src/Snake.s"
-	@echo "... games/nibbler/src/SnakeTest.o"
-	@echo "... games/nibbler/src/SnakeTest.i"
-	@echo "... games/nibbler/src/SnakeTest.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
