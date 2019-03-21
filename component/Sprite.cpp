@@ -7,7 +7,8 @@
 
 #include "Sprite.hpp"
 
-arc::Sprite::Sprite(const std::string &filename, const std::pair<float, float> pos , const std::pair<float, float> size) :
+arc::Sprite::Sprite(const std::string &filename, const std::pair<float, float> &size, const std::pair<float, float> &pos)
+	:
 	_filename(filename),
 	_pos(pos),
 	_size(size),
