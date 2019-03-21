@@ -21,7 +21,7 @@ arc::Nibbler::Nibbler(int &, char **av) :
 	_score(0),
 	_size(50),
 	_map({_size, _size}),
-	_lastDir(PLAYER_LEFT),
+	_lastDir(PLAYER_NONE),
 	_localDeltaTime(0)
 {
 	srand((unsigned int)(unsigned long)(av));
@@ -44,6 +44,7 @@ void arc::Nibbler::update(const std::map<arc::Key, arc::KeyState> &keys, float d
 	if (_localDeltaTime >= _actionTime) {
 		_localDeltaTime = 0;
 		_map.updateSnake(_lastDir);
+		_lastDir = PLAYER_NONE;
 	}
 }
 
@@ -63,6 +64,4 @@ void arc::Nibbler::getLastDirection(const std::map<arc::Key, arc::KeyState> &key
 		_lastDir = PLAYER_LEFT;
 	else if (keys.find(Key::RIGHT) != keys.end() && keys.at(Key::RIGHT) == PRESSED)
 		_lastDir = PLAYER_RIGHT;
-	else
-		_lastDir = PLAYER_NONE;
 }
