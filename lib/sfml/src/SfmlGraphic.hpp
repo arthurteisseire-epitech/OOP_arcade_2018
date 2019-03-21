@@ -9,6 +9,7 @@
 #define ARCADE_SFMLGRAPHIC_HPP
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
 #include "IGraphic.hpp"
 
 namespace arc {
@@ -23,10 +24,10 @@ namespace arc {
 		void processEvents() override;
 		const std::map<Key, KeyState> &getKeys() const override;
 	private:
-		std::map<Key, KeyState> _keys;
-		sf::RenderWindow _window;
-		sf::Sprite _sprite;
-		sf::Texture _texture;
+		std::unique_ptr<sf::RenderWindow> _window;
+		std::unique_ptr<sf::Sprite> _sprite;
+		std::unique_ptr<sf::Texture> _texture;
+		std::unique_ptr<std::map<Key, KeyState>> _keys;
 	};
 }
 
