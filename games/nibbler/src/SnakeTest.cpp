@@ -15,13 +15,13 @@ public:
 	{};
 
 protected:
-	static const std::pair<unsigned int, unsigned int> init_pos;
-	static const std::pair<unsigned int, unsigned int> move;
+	static const pos_t init_pos;
+	static const pos_t move;
 
 	void test_move(Snake &snake, Direction direction, pos_t expected_head);
 };
 
-const std::pair<unsigned int, unsigned int> SnakeTest::init_pos = {1, 2};
+const pos_t SnakeTest::init_pos = {1, 2};
 
 TEST_F(SnakeTest, Init)
 {

@@ -10,14 +10,12 @@
 
 #include "Pos.hpp"
 
-
 std::pair<float, float> operator/(const pos_t &p1, const pos_t &div);
 
-std::pair<unsigned int, unsigned int> operator+(const std::pair<unsigned int, unsigned int> &p1, const std::pair<unsigned int, unsigned int> &p2);
+pos_t operator+(const pos_t &p1, const pos_t &p2);
 
-std::pair<unsigned int, unsigned int> operator-(const std::pair<unsigned int, unsigned int> &p1, const std::pair<unsigned int, unsigned int> &p2);
+pos_t operator-(const pos_t &p1, const pos_t &p2);
 
 std::pair<float, float> operator/(const pos_t &p1, const unsigned int &div);
-
 
 #endif

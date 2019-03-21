@@ -21,13 +21,13 @@ namespace arc {
 	public:
 		explicit Map(const pos_t &size = {100, 100});
 
-		Food &generateFood();
+		void generateFood();
 		void generateSprites(std::vector<std::reference_wrapper<IComponent>> &vector) const;
 		void updateSnake(arc::PlayerDirection key);
 	protected:
 		pos_t _size;
-		Snake _snake;
-		Food _food;
+		std::unique_ptr<Snake>_snake;
+		std::unique_ptr<Food> _food;
 	};
 }
 
