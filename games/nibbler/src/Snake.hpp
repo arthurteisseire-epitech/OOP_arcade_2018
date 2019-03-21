@@ -31,7 +31,7 @@ namespace arc {
 		explicit Snake(const pos_t &startPos, unsigned int size, const pos_t &mapSize);
 
 		void eat();
-		void moveBody(const Direction &direction);
+		void moveBody(const arc::Snake::Direction &direction, bool changeDir);
 		bool isInSnake(const pos_t &pos) const;
 		std::vector<std::reference_wrapper<IComponent>>	getParts() const;
 		void changeDirection(arc::PlayerDirection playerDir);
@@ -48,6 +48,7 @@ namespace arc {
 		void append_sprite(const pos_t &posRes, std::unique_ptr<arc::Sprite> &actualSprite, const pos_t &size);
 
 		pos_t _mapSize;
+		void updateSprites(const Direction &direction, bool changeDir);
 	};
 
 	Snake::Direction operator*(const Snake::Direction &, const PlayerDirection &);

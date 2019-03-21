@@ -26,7 +26,7 @@ namespace arc {
 		void updateSnake(arc::PlayerDirection key);
 	protected:
 		pos_t _size;
-		std::unique_ptr<Snake>_snake;
+		std::unique_ptr<Snake> _snake;
 		std::unique_ptr<Food> _food;
 	};
 }
