@@ -24,6 +24,9 @@ namespace arc {
 		const std::map<Key, KeyState> &getKeys() const override;
 	private:
 		std::map<Key, KeyState> _keys;
+		sf::RenderWindow _window;
+		sf::Sprite _sprite;
+		sf::Texture _texture;
 	};
 }
 

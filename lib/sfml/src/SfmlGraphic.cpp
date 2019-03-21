@@ -14,11 +14,12 @@ arc::IGraphic *graphicEntryPoint()
 
 arc::SfmlGraphic::SfmlGraphic()
 {
+	_window.create(sf::VideoMode(1920, 1080), "arcade");
 }
 
 bool arc::SfmlGraphic::isOpen() const
 {
-	return false;
+	return true;
 }
 
 void arc::SfmlGraphic::draw()
@@ -27,7 +28,7 @@ void arc::SfmlGraphic::draw()
 
 bool arc::SfmlGraphic::processSprite(const arc::ISprite &sprite)
 {
-	return false;
+	return true;
 }
 
 bool arc::SfmlGraphic::processText(const arc::IText &text)
