@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include <filesystem>
 #include <regex>
+#include <iostream>
 #include "PlayerName.hpp"
 #include "Text.hpp"
 #include "Core.hpp"
@@ -24,6 +25,8 @@ arc::Core::Core(IGraphic *graphic, std::unique_ptr<LibraryLoader> libraryLoader)
 	_sharedData->games = scanLibraries("games");
 	if (!_sharedData->games.empty())
 		_sharedData->currentGame = _gameLibraryLoader->loadGameInstance(_sharedData->games[0]);
+	else
+		std::cerr << "No games were found in ./games" << std::endl;
 }
 
 int arc::Core::exec()
@@ -46,6 +49,7 @@ void arc::Core::update(const std::map<arc::Key, arc::KeyState> &keys, float delt
 	_sceneManager->currentScene()->update(keys, deltaTime);
 }
 
+#include <iostream>
 std::vector<std::string> arc::Core::scanLibraries(const std::string &libDir) const
 {
 	std::vector<std::string> libs;
