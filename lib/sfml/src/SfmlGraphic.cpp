@@ -9,6 +9,21 @@
 
 #include <iostream>
 
+const std::map<sf::Keyboard::Key, arc::Key> arc::SfmlGraphic::_sfmlKeys = {
+	{sf::Keyboard::Return, ENTER},
+	{sf::Keyboard::Up,     UP},
+	{sf::Keyboard::Down,   DOWN},
+	{sf::Keyboard::Left,   LEFT},
+	{sf::Keyboard::Right,  RIGHT},
+	{sf::Keyboard::F1,     F1},
+	{sf::Keyboard::F2,     F2},
+	{sf::Keyboard::F3,     F3},
+	{sf::Keyboard::F4,     F4},
+	{sf::Keyboard::Delete, SUPPR},
+	{sf::Keyboard::Escape, ESCAPE},
+	{sf::Keyboard::R,      R},
+};
+
 arc::IGraphic *graphicEntryPoint()
 {
 	return new arc::SfmlGraphic();
@@ -18,8 +33,7 @@ arc::SfmlGraphic::SfmlGraphic() :
 	_window(std::make_unique<sf::RenderWindow>()),
 	_textures(std::make_unique<std::map<std::string, sf::Texture>>()),
 	_rects(std::make_unique<std::vector<sf::RectangleShape>>()),
-	_fonts(std::make_unique<std::map<std::string, sf::Font>>()),
-	_keys(std::make_unique<std::map<Key, KeyState>>())
+	_fonts(std::make_unique<std::map<std::string, sf::Font>>())
 {
 	_window->create(sf::VideoMode(1920, 1080), "arcade");
 }
@@ -109,14 +123,38 @@ bool arc::SfmlGraphic::processAudio(const arc::IAudio &audio)
 
 void arc::SfmlGraphic::processEvents()
 {
-//	sf::Event event{};
-//
-//	_window.pollEvent(event);
-//	if (event.type == sf::Event::EventType::Closed)
-//		_window.close();
+	sf::Event event;
+
+	updateKeysState();
+	_window->pollEvent(event);
+	processKeys(event, sf::Event::KeyPressed, PRESSED);
+	processKeys(event, sf::Event::KeyReleased, RELEASED);
+}
+
+void arc::SfmlGraphic::processKeys(const sf::Event &event, sf::Event::EventType type, arc::KeyState state)
+{
+	if (event.type == type) {
+		auto it = _sfmlKeys.find(event.key.code);
+		if (it != _sfmlKeys.end())
+			_keys[it->second] = state;
+	}
+}
+
+void arc::SfmlGraphic::updateKeysState()
+{
+	auto it = _keys.begin();
+
+	while (it != _keys.end())
+		if (it->second == RELEASED)
+			_keys.erase(it++);
+		else if (it->second == PRESSED) {
+			it->second = HOLD;
+			++it;
+		} else
+			++it;
 }
 
 const std::map<arc::Key, arc::KeyState> &arc::SfmlGraphic::getKeys() const
 {
-	return *_keys;
+	return _keys;
 }

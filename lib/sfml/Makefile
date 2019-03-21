@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-CC	=	g++
+CC	=	clang++
 DSRC	=	src/
 INC	=	-I$(DSRC) -I.. -I../../component
 
