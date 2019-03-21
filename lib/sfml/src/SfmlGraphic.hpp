@@ -27,6 +27,7 @@ namespace arc {
 		std::unique_ptr<sf::RenderWindow> _window;
 		std::unique_ptr<std::map<std::string, sf::Texture>> _textures;
 		std::unique_ptr<std::vector<sf::RectangleShape>> _rects;
+		std::unique_ptr<std::map<std::string, sf::Font>> _fonts;
 		std::unique_ptr<std::map<Key, KeyState>> _keys;
 	};
 }

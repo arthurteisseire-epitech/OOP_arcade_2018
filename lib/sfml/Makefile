@@ -10,6 +10,7 @@ DSRC	=	src/
 INC	=	-I$(DSRC) -I.. -I../../component
 
 SRC	=	$(DSRC)SfmlGraphic.cpp			\
+		$(DSRC)Window.cpp			\
 
 CXXFLAGS=	-Wall -Wextra $(INC) -shared -fPIC
 LDFLAGS	=	-lsfml-graphics -lsfml-window -lsfml-system
