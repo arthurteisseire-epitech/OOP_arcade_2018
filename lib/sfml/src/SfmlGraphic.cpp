@@ -8,6 +8,7 @@
 #include "SfmlGraphic.hpp"
 
 #include <iostream>
+
 arc::IGraphic *graphicEntryPoint()
 {
 	return new arc::SfmlGraphic();
@@ -24,6 +25,8 @@ arc::SfmlGraphic::SfmlGraphic() :
 		std::cerr << "error loading texture" << std::endl;
 	}
 	_sprite->setTexture(*_texture);
+	_sprite->setScale(_window->getSize().x / _sprite->getLocalBounds().width * 0.1f,
+	                  _window->getSize().y / _sprite->getLocalBounds().height * 0.1f);
 }
 
 bool arc::SfmlGraphic::isOpen() const
