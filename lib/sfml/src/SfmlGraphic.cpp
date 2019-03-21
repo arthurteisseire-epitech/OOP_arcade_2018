@@ -16,17 +16,11 @@ arc::IGraphic *graphicEntryPoint()
 
 arc::SfmlGraphic::SfmlGraphic() :
 	_window(std::make_unique<sf::RenderWindow>()),
-	_sprite(std::make_unique<sf::Sprite>()),
-	_texture(std::make_unique<sf::Texture>()),
+	_textures(std::make_unique<std::map<std::string, sf::Texture>>()),
+	_rects(std::make_unique<std::vector<sf::RectangleShape>>()),
 	_keys(std::make_unique<std::map<Key, KeyState>>())
 {
 	_window->create(sf::VideoMode(1920, 1080), "arcade");
-	if (!_texture->loadFromFile("assets/focus.png")) {
-		std::cerr << "error loading texture" << std::endl;
-	}
-	_sprite->setTexture(*_texture);
-	_sprite->setScale(_window->getSize().x / _sprite->getLocalBounds().width * 0.1f,
-	                  _window->getSize().y / _sprite->getLocalBounds().height * 0.1f);
 }
 
 bool arc::SfmlGraphic::isOpen() const
@@ -37,12 +31,32 @@ bool arc::SfmlGraphic::isOpen() const
 void arc::SfmlGraphic::draw()
 {
 	_window->clear(sf::Color::Black);
-	_window->draw(*_sprite);
+	for (const auto &rect : *_rects)
+		_window->draw(rect);
 	_window->display();
+	_rects->clear();
 }
 
 bool arc::SfmlGraphic::processSprite(const arc::ISprite &sprite)
 {
+	auto rect = sf::RectangleShape(sf::Vector2f(_window->getSize().x * sprite.getSize().first,
+	                                            _window->getSize().y * sprite.getSize().second));
+	auto it = _textures->find(sprite.getTextureName());
+
+	if (it == _textures->end()) {
+		auto t = sf::Texture();
+		if (!t.loadFromFile(sprite.getTextureName())) {
+			rect.setFillColor(sf::Color(sprite.getColor()));
+		} else {
+			_textures->emplace(sprite.getTextureName(), t);
+			rect.setTexture(&_textures->find(sprite.getTextureName())->second);
+		}
+	} else {
+		rect.setTexture(&it->second);
+	}
+	rect.setPosition(_window->getSize().x * sprite.getPosition().first,
+	                 _window->getSize().y * sprite.getPosition().second);
+	_rects->emplace_back(rect);
 	return true;
 }
 

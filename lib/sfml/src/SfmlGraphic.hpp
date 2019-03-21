@@ -25,8 +25,8 @@ namespace arc {
 		const std::map<Key, KeyState> &getKeys() const override;
 	private:
 		std::unique_ptr<sf::RenderWindow> _window;
-		std::unique_ptr<sf::Sprite> _sprite;
-		std::unique_ptr<sf::Texture> _texture;
+		std::unique_ptr<std::map<std::string, sf::Texture>> _textures;
+		std::unique_ptr<std::vector<sf::RectangleShape>> _rects;
 		std::unique_ptr<std::map<Key, KeyState>> _keys;
 	};
 }
