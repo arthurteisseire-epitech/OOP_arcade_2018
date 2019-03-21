@@ -105,7 +105,6 @@ void arc::Snake::changeDirection(arc::PlayerDirection playerDir)
 {
 	Direction snakeDir = findHeadDir();
 
-	std::cout << snakeDir * playerDir << std::endl;
 	moveBody(snakeDir * playerDir, playerDir != PLAYER_NONE);
 }
 
