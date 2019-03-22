@@ -29,90 +29,74 @@ arc::IGraphic *graphicEntryPoint()
 	return new arc::SfmlGraphic();
 }
 
-arc::SfmlGraphic::SfmlGraphic() :
-	_window(std::make_unique<sf::RenderWindow>()),
-	_textures(std::make_unique<std::map<std::string, sf::Texture>>()),
-	_rects(std::make_unique<std::vector<sf::RectangleShape>>()),
-	_fonts(std::make_unique<std::map<std::string, sf::Font>>())
+arc::SfmlGraphic::SfmlGraphic()
 {
-	_window->create(sf::VideoMode(1920, 1080), "arcade");
+	_window.create(sf::VideoMode(1920, 1080), "arcade");
 }
 
 bool arc::SfmlGraphic::isOpen() const
 {
-	return _window->isOpen();
+	return _window.isOpen();
 }
 
 void arc::SfmlGraphic::draw()
 {
-	_window->clear(sf::Color::Black);
-	for (const auto &rect : *_rects)
-		_window->draw(rect);
-	_window->display();
-	_rects->clear();
+	_window.clear(sf::Color::Black);
+	for (const auto &rect : _rects)
+		_window.draw(rect);
+	_window.display();
+	_rects.clear();
 }
 
 bool arc::SfmlGraphic::processSprite(const arc::ISprite &sprite)
 {
-	auto rect = sf::RectangleShape(sf::Vector2f(_window->getSize().x * sprite.getSize().first,
-	                                            _window->getSize().y * sprite.getSize().second));
-	auto it = _textures->find(sprite.getTextureName());
+	auto rect = sf::RectangleShape(sf::Vector2f(_window.getSize().x * sprite.getSize().first,
+	                                            _window.getSize().y * sprite.getSize().second));
+	auto it = _textures.find(sprite.getTextureName());
 
-	if (it == _textures->end()) {
+	rect.setSize(sf::Vector2f(_window.getSize().x * sprite.getSize().first,
+	                          _window.getSize().y * sprite.getSize().second));
+	std::cerr << "width : " << _window.getSize().x << std::endl;
+	std::cerr << "height : " << _window.getSize().y << std::endl;
+	std::cerr << "sprite width : " << sprite.getSize().first << std::endl;
+	std::cerr << "sprite height : " << sprite.getSize().second << std::endl;
+	if (it == _textures.end()) {
 		auto t = sf::Texture();
 		if (!t.loadFromFile(sprite.getTextureName())) {
 			rect.setFillColor(sf::Color(sprite.getColor()));
 		} else {
-			_textures->emplace(sprite.getTextureName(), t);
-			rect.setTexture(&_textures->find(sprite.getTextureName())->second);
+			_textures.emplace(sprite.getTextureName(), t);
+			rect.setTexture(&_textures.find(sprite.getTextureName())->second);
 		}
 	} else {
 		rect.setTexture(&it->second);
 	}
-	rect.setPosition(_window->getSize().x * sprite.getPosition().first,
-	                 _window->getSize().y * sprite.getPosition().second);
-	_rects->emplace_back(rect);
+	rect.setPosition(_window.getSize().x * sprite.getPosition().first,
+	                 _window.getSize().y * sprite.getPosition().second);
+	_rects.emplace_back(rect);
 	return true;
 }
 
 bool arc::SfmlGraphic::processText(const arc::IText &text)
 {
-//	auto font = new sf::Font;
-//	static bool first = true;
-//
-//	if (first) {
-//		std::cerr << "1" << std::endl;
-//		font->loadFromFile(text.getFontPath());
-//		_text->setFont(*font);
-//		_text->setString("hello");
-//		_text->setPosition(10, 10);
-//		_text->setCharacterSize(20);
-//		_text->setColor(sf::Color::White);
-//		first = false;
-//	}
+//	std::cerr << text.getFontPath() << std::endl;
 //	sf::Font font;
 //	sf::Text t;
-//	auto it = _fonts->find(text.getFontPath());
+//	auto it = _fonts.find(text.getFontPath());
 //
-//	std::cerr << "1" << std::endl;
-//	if (it == _fonts->end()) {
-//		std::cerr << "2" << std::endl;
-//		if (!font.loadFromFile(text.getFontPath())) {
+//	if (it == _fonts.end()) {
+//		if (!font.loadFromFile(text.getFontPath()))
 //			return false;
-//		}
-//		_fonts->emplace(text.getFontPath(), font);
-//		t.setFont(_fonts->find(text.getFontPath())->second);
+//		_fonts.emplace(text.getFontPath(), font);
+//		t.setFont(_fonts.find(text.getFontPath())->second);
 //	} else {
 //		t.setFont(it->second);
 //	}
-//	std::cerr << "3" << std::endl;
 //	t.setPosition(text.getPosition().first, text.getPosition().second);
 //	t.setString(text.getText());
 //	t.setCharacterSize(20);
 //	t.setColor(sf::Color(text.getColor()));
-//	std::cerr << "4" << std::endl;
-//	_texts->push_back(t);
-//	std::cerr << "5" << std::endl;
+//	_window.draw(t);
 //	return true;
 }
 
@@ -126,9 +110,12 @@ void arc::SfmlGraphic::processEvents()
 	sf::Event event;
 
 	updateKeysState();
-	_window->pollEvent(event);
+	_window.pollEvent(event);
 	processKeys(event, sf::Event::KeyPressed, PRESSED);
 	processKeys(event, sf::Event::KeyReleased, RELEASED);
+	if (event.type == sf::Event::Closed) {
+		_window.close();
+	}
 }
 
 void arc::SfmlGraphic::processKeys(const sf::Event &event, sf::Event::EventType type, arc::KeyState state)
@@ -158,3 +145,4 @@ const std::map<arc::Key, arc::KeyState> &arc::SfmlGraphic::getKeys() const
 {
 	return _keys;
 }
+
