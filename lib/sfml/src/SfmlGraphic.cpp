@@ -140,3 +140,8 @@ const std::map<arc::Key, arc::KeyState> &arc::SfmlGraphic::getKeys() const
 {
 	return _keys;
 }
+
+std::pair<unsigned, unsigned> arc::SfmlGraphic::getWindowSize() const
+{
+        return {_window.getSize().x, _window.getSize().y};
+}

@@ -32,6 +32,7 @@ namespace arc {
 		bool processAudio(const IAudio &audio) override;
 		void processEvents() override;
 		const std::map<Key, KeyState> &getKeys() const override;
+		std::pair<unsigned, unsigned> getWindowSize() const override;
 	private:
 		std::unique_ptr<QApplication> _app;
 		std::unique_ptr<Widget> _widget;

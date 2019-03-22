@@ -26,7 +26,7 @@ namespace arc {
 		virtual bool processAudio(const IAudio &audio) = 0;
 		virtual void processEvents() = 0;
 		virtual const std::map<Key, KeyState> &getKeys() const = 0;
-//		virtual std::pair<unsigned, unsigned> getWindowSize() const = 0;
+		virtual std::pair<unsigned, unsigned> getWindowSize() const = 0;
 	};
 }
 

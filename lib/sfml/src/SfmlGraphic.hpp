@@ -23,6 +23,7 @@ namespace arc {
 		bool processAudio(const IAudio &audio) override;
 		void processEvents() override;
 		const std::map<Key, KeyState> &getKeys() const override;
+		std::pair<unsigned, unsigned> getWindowSize() const override;
 	private:
 		void updateKeysState();
 		void processKeys(const sf::Event &event, sf::Event::EventType type, arc::KeyState state);
