@@ -40,6 +40,7 @@ void arc::Map::updateSnake(arc::PlayerDirection key, unsigned int &score)
 {
 	_snake->changeDirection(key);
 	if (_snake->isInSnake(_food->getPos())) {
+		_snake->eat();
 		score += Food::value;
 		generateFood();
 	}

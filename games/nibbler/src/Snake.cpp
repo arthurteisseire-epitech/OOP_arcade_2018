@@ -61,7 +61,17 @@ void arc::Snake::append_sprite(const pos_t &posRes, std::unique_ptr<arc::Sprite>
 
 void arc::Snake::eat()
 {
+	const auto tail = dynamic_cast<Sprite *>(_cacheAssets[_bodyPositions.size() - 1].get());
+	const auto neckTail = dynamic_cast<Sprite *>(_cacheAssets[_bodyPositions.size() - 2].get());
+	pos_t tailPosDir = findTailPosDirection();
+	std::pair<float, float> newTailPos = tail->getPosition();
+	std::unique_ptr<IComponent> newTailNeck = std::make_unique<Sprite>(neckTail->getTextureName(), tail->getSize(), tail->getPosition());
+
+	newTailPos.first -= (float)tailPosDir.first / _mapSize.first;
+	newTailPos.second -= (float)tailPosDir.second / _mapSize.second;
 	_bodyPositions.push_back(_bodyPositions.back() - findTailPosDirection());
+	tail->setPosition(newTailPos);
+	_cacheAssets.insert(_cacheAssets.begin() + _bodyPositions.size() - 1, std::move(newTailNeck));
 }
 
 void arc::Snake::moveBody(const Direction &direction, bool changeDir)
