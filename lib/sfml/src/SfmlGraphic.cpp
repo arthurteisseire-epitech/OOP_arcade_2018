@@ -51,12 +51,6 @@ bool arc::SfmlGraphic::processSprite(const arc::ISprite &sprite)
 	                                            _window.getSize().y * sprite.getSize().second));
 	auto it = _textures.find(sprite.getTextureName());
 
-	rect.setSize(sf::Vector2f(_window.getSize().x * sprite.getSize().first,
-	                          _window.getSize().y * sprite.getSize().second));
-	std::cerr << "width : " << _window.getSize().x << std::endl;
-	std::cerr << "height : " << _window.getSize().y << std::endl;
-	std::cerr << "sprite width : " << sprite.getSize().first << std::endl;
-	std::cerr << "sprite height : " << sprite.getSize().second << std::endl;
 	if (it == _textures.end()) {
 		auto t = sf::Texture();
 		if (!t.loadFromFile(sprite.getTextureName())) {
