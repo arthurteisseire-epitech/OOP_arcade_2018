@@ -3,7 +3,7 @@ project(arcade)
 
 add_compile_options(-Wall -Wextra --coverage)
 set(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} " --coverage")
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_C_COMPILER "gcc")
 set(CMAKE_CXX_COMPILER "g++")
 
@@ -40,7 +40,7 @@ file(GLOB_RECURSE games games/*.cpp)
 list(FILTER games EXCLUDE REGEX ".*Test.cpp$")
 
 add_executable(${CMAKE_PROJECT_NAME} ${main} ${core} ${component} ${games})
-target_link_libraries(${CMAKE_PROJECT_NAME} dl Qt5::Widgets Qt5::Multimedia stdc++fs)
+target_link_libraries(${CMAKE_PROJECT_NAME} dl Qt5::Widgets Qt5::Multimedia)
 
 add_custom_target(
         graphicals

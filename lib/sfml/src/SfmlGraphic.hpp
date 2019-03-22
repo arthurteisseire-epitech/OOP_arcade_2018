@@ -29,7 +29,6 @@ namespace arc {
 
 		sf::RenderWindow _window;
 		std::map<std::string, sf::Texture> _textures;
-		std::vector<sf::RectangleShape> _rects;
 		std::map<std::string, sf::Font> _fonts;
 		std::map<Key, KeyState> _keys;
 		static const std::map<sf::Keyboard::Key, Key> _sfmlKeys;

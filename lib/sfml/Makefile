@@ -5,13 +5,13 @@
 ## Makefile
 ##
 
-CC	=	clang++
+CC	=	g++
 DSRC	=	src/
 INC	=	-I$(DSRC) -I.. -I../../component
 
 SRC	=	$(DSRC)SfmlGraphic.cpp			\
 
-CXXFLAGS=	-Wall -Wextra $(INC) -shared -fPIC
+CXXFLAGS=	-Wall -Wextra $(INC) -shared -fPIC -std=c++14
 LDFLAGS	=	-lsfml-graphics -lsfml-window -lsfml-system
 OBJ	=	$(SRC:.cpp=.o)
 NAME	=	lib_arcade_sfml.so

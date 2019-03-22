@@ -20,10 +20,10 @@ arc::Core::Core(IGraphic *graphic, std::unique_ptr<LibraryLoader> libraryLoader)
 	_gameLibraryLoader(std::make_unique<LibraryLoader>()),
 	_graphic(graphic)
 {
-	_sharedData->libs = scanLibraries("lib");
-	_sharedData->games = scanLibraries("games");
-	if (!_sharedData->games.empty())
-		_sharedData->currentGame = _gameLibraryLoader->loadGameInstance(_sharedData->games[0]);
+//	_sharedData->libs = scanLibraries("lib");
+//	_sharedData->games = scanLibraries("games");
+//	if (!_sharedData->games.empty())
+//		_sharedData->currentGame = _gameLibraryLoader->loadGameInstance(_sharedData->games[0]);
 }
 
 int arc::Core::exec()
@@ -48,11 +48,11 @@ void arc::Core::update(const std::map<arc::Key, arc::KeyState> &keys, float delt
 
 std::vector<std::string> arc::Core::scanLibraries(const std::string &libDir) const
 {
-	std::vector<std::string> libs;
-	std::regex e("^(.*/)?lib_arcade_.*.so$");
-
-	for (const auto &entry : std::filesystem::directory_iterator(libDir))
-		if (std::regex_match(std::string(entry.path()), e))
-			libs.emplace_back(entry.path());
-	return libs;
+//	std::vector<std::string> libs;
+//	std::regex e("^(.*/)?lib_arcade_.*.so$");
+//
+//	for (const auto &entry : std::filesystem::directory_iterator(libDir))
+//		if (std::regex_match(std::string(entry.path()), e))
+//			libs.emplace_back(entry.path());
+//	return libs;
 }
