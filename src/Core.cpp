@@ -20,7 +20,7 @@ arc::Core::Core(IGraphic *graphic, std::unique_ptr<LibraryLoader> libraryLoader)
 	_sceneManager(std::make_unique<SceneManager>(MENU, _sharedData)),
 	_graphicLibraryLoader(std::move(libraryLoader)),
 	_gameLibraryLoader(std::make_unique<LibraryLoader>()),
-	_graphic(graphic)
+	_graphic(std::unique_ptr<IGraphic>(graphic))
 {
 	_sharedData->libs = scanLibraries("lib/");
 	_sharedData->games = scanLibraries("games/");
@@ -48,6 +48,13 @@ int arc::Core::exec()
 void arc::Core::update(const std::map<arc::Key, arc::KeyState> &keys, float deltaTime)
 {
 	_sceneManager->currentScene()->update(keys, deltaTime);
+	if (keys.find(F3) != keys.end()) {
+		_graphic = nullptr;
+		_graphic = std::unique_ptr<IGraphic>(_graphicLibraryLoader->loadGraphicInstance(_sharedData->libs[1]));
+	} else if (keys.find(F4) != keys.end()) {
+		_graphic = nullptr;
+		_graphic = std::unique_ptr<IGraphic>(_graphicLibraryLoader->loadGraphicInstance(_sharedData->libs[0]));
+	}
 }
 
 std::vector<std::string> arc::Core::scanLibraries(const std::string &libDir) const
