@@ -61,14 +61,7 @@ void arc::Snake::append_sprite(const pos_t &posRes, std::unique_ptr<arc::Sprite>
 
 void arc::Snake::eat()
 {
-	_bodyPositions.push_back(_bodyPositions.back() - findTailDirection());
-}
-
-pos_t arc::Snake::findTailDirection()
-{
-	unsigned long size = _bodyPositions.size();
-
-	return _bodyPositions[size - 2] - _bodyPositions[size - 1];
+	_bodyPositions.push_back(_bodyPositions.back() - findTailPosDirection());
 }
 
 void arc::Snake::moveBody(const Direction &direction, bool changeDir)
@@ -104,9 +97,6 @@ void arc::Snake::turnHead(const Direction &direction, const std::pair<float, flo
 
 	_cacheAssets[0] = std::make_unique<Sprite>(PATH_TO_ASSETS + _assetsMap.at(direction)[0],
 		pos_t{1.0, 1.0} / _mapSize, headPos);
-//	_cacheAssets[1] = std::make_unique<Sprite>(PATH_TO_ASSETS + findCurveSnake(direction, lastDirection),
-//		pos_t{1.0, 1.0} / _mapSize,
-//		std::pair<float, float>{headPos.first - neckPosChange.first, headPos.second - neckPosChange.second});
 }
 
 const std::string &arc::Snake::findCurveSnake(const Direction &direction, const Direction &lastDirection) const
@@ -138,7 +128,7 @@ void arc::Snake::moveTailToNeck(const Direction &direction, const Direction &las
 
 void arc::Snake::createNewTail()
 {
-	const std::string asset = _assetsMap.at(_directionPosMap.at(findTailDirection()))[2];
+	const std::string asset = _assetsMap.at(_directionPosMap.at(findTailPosDirection()))[2];
 	const Sprite *tail = dynamic_cast<Sprite *>(_cacheAssets[_bodyPositions.size() - 1].get());
 	const std::pair<float, float> pos = tail->getPosition();
 	const std::pair<float, float> size = tail->getSize();
@@ -196,12 +186,20 @@ arc::Snake::Direction arc::Snake::findHeadDir()
 	throw "Snake has his head on part of his body";
 }
 
+pos_t arc::Snake::findTailPosDirection()
+{
+	unsigned long size = _bodyPositions.size();
+
+	return _bodyPositions[size - 2] - _bodyPositions[size - 1];
+}
+
 void arc::Snake::printSnakePos()
 {
 	std::cout << "Sprites:" << std::endl;
 	for (size_t i = 0; i < _bodyPositions.size() ; ++i) {
 		const std::pair<float, float> &pair = dynamic_cast<Sprite *>(_cacheAssets[i].get())->getPosition();
 		std::cout << pair.first << ", " << pair.second << std::endl;
+		std::cout << dynamic_cast<Sprite *>(_cacheAssets[i].get())->getTextureName() << std::endl;
 	}
 	std::cout << "Body:" << std::endl;
 	for (const auto &pair : _bodyPositions)

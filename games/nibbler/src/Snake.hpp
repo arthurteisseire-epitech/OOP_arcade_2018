@@ -37,7 +37,7 @@ namespace arc {
 		std::vector<std::reference_wrapper<IComponent>>	getParts() const;
 		void changeDirection(arc::PlayerDirection playerDir);
 	protected:
-		pos_t findTailDirection();
+		pos_t findTailPosDirection();
 		Direction findHeadDir();
 
 		body_t _bodyPositions;
