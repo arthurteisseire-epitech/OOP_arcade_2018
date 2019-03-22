@@ -33,7 +33,7 @@ namespace arc {
 		void eat();
 		void moveBody(const arc::Snake::Direction &direction, bool changeDir);
 		bool isInSnake(const pos_t &pos) const;
-		std::vector<std::reference_wrapper<IComponent>>	getParts() const;
+		std::vector<std::reference_wrapper<const IComponent>>	getParts() const;
 		void changeDirection(arc::PlayerDirection playerDir);
 	protected:
 		pos_t findTailDirection();
@@ -42,7 +42,7 @@ namespace arc {
 		body_t _bodyPositions;
 		static const std::unordered_map<Direction, pos_t> _directionMap;
 		static const std::unordered_map<Direction, std::vector<std::string>> _snakeAssetsMap;
-		std::vector<std::unique_ptr<IComponent>> _cacheAssets;
+		std::vector<std::unique_ptr<const IComponent>> _cacheAssets;
 
 	private:
 		void append_sprite(const pos_t &posRes, std::unique_ptr<arc::Sprite> &actualSprite, const pos_t &size);

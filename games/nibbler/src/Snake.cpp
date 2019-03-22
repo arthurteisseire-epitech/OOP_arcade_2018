@@ -69,7 +69,7 @@ void arc::Snake::moveBody(const arc::Snake::Direction &direction, bool changeDir
 void arc::Snake::updateSprites(const Direction &direction, bool changeDir)
 {
 	pos_t snakeDirection = _directionMap.at(direction);
-	const std::pair<float, float> &headPos = dynamic_cast<Sprite *>(_cacheAssets[0].get())->getPosition();
+	const std::pair<float, float> &headPos = dynamic_cast<const Sprite *>(_cacheAssets[0].get())->getPosition();
 	std::pair<float, float> newPos = {headPos.first + (float)snakeDirection.first / _mapSize.first,
 		headPos.second + (float)snakeDirection.second / _mapSize.second};
 	std::pair<float, float> tmpPos;
@@ -78,8 +78,8 @@ void arc::Snake::updateSprites(const Direction &direction, bool changeDir)
 		_cacheAssets[0] = std::make_unique<Sprite>(PATH_TO_ASSETS + _snakeAssetsMap.at(direction)[0],
 			pos_t{1.0, 1.0} / _mapSize, headPos);
 	for (size_t i = 0; i < _bodyPositions.size(); ++i) {
-		tmpPos = dynamic_cast<Sprite *>(_cacheAssets[i].get())->getPosition();;
-		dynamic_cast<Sprite *>(_cacheAssets[i].get())->setPosition(newPos);
+		tmpPos = dynamic_cast<const Sprite *>(_cacheAssets[i].get())->getPosition();;
+		const_cast<Sprite *>(dynamic_cast<const Sprite *>(_cacheAssets[i].get()))->setPosition(newPos);
 		newPos = tmpPos;
 	}
 }
@@ -92,11 +92,11 @@ bool arc::Snake::isInSnake(const pos_t &pos) const
 	return false;
 }
 
-std::vector<std::reference_wrapper<arc::IComponent>> arc::Snake::getParts() const
+std::vector<std::reference_wrapper<const arc::IComponent>> arc::Snake::getParts() const
 {
-	std::vector<std::reference_wrapper<IComponent>> vec;
+	std::vector<std::reference_wrapper<const IComponent>> vec;
 
-	for (const std::unique_ptr<IComponent> &asset : _cacheAssets)
+	for (const std::unique_ptr<const IComponent> &asset : _cacheAssets)
 		vec.emplace_back(*asset);
 	return vec;
 }

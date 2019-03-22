@@ -28,9 +28,9 @@ void arc::Map::generateFood()
 	_food->move(food_pos, _size);
 }
 
-void arc::Map::generateSprites(std::vector<std::reference_wrapper<arc::IComponent>> &vector) const
+void arc::Map::generateSprites(std::vector<std::reference_wrapper<const arc::IComponent>> &vector) const
 {
-	std::vector<std::reference_wrapper<IComponent>> snake_parts = _snake->getParts();
+	std::vector<std::reference_wrapper<const IComponent>> snake_parts = _snake->getParts();
 
 	vector.insert(vector.end(), snake_parts.begin(), snake_parts.end());
 	vector.emplace_back(_food->getSprite());

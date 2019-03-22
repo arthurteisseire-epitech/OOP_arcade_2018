@@ -25,7 +25,7 @@ namespace arc {
 	public:
 		explicit MainMenu(const std::shared_ptr<SharedData> &playerData);
 		void update(const std::map<Key, KeyState> &keys, float deltaTime) override;
-		std::vector<std::reference_wrapper<IComponent>> getComponents() const override;
+		std::vector<std::reference_wrapper<const IComponent>> getComponents() const override;
 		SCENE nextScene() const override;
 	private:
 		void moveFocusDown();
@@ -41,7 +41,7 @@ namespace arc {
 		std::unique_ptr<Text> _playerName;
 		size_t _focus;
 		static std::map<Key, void (arc::MainMenu::*)()> _keysMap;
-		std::vector<std::reference_wrapper<IComponent>> _components;
+		std::vector<std::reference_wrapper<const IComponent>> _components;
 	};
 }
 

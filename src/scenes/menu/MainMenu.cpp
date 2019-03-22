@@ -105,7 +105,7 @@ void arc::MainMenu::fillComponents()
 		_components.emplace_back(*audio);
 }
 
-std::vector<std::reference_wrapper<arc::IComponent>> arc::MainMenu::getComponents() const
+std::vector<std::reference_wrapper<const arc::IComponent>> arc::MainMenu::getComponents() const
 {
 	return _components;
 }

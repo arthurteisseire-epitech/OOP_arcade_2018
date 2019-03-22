@@ -18,11 +18,11 @@ void arc::GameScene::update(const std::map<arc::Key, arc::KeyState> &keys, float
 		_playerData->currentGame->update(keys, deltaTime);
 }
 
-std::vector<std::reference_wrapper<arc::IComponent>> arc::GameScene::getComponents() const
+std::vector<std::reference_wrapper<const arc::IComponent>> arc::GameScene::getComponents() const
 {
         if (_playerData->currentGame)
         	return _playerData->currentGame->getComponents();
-        return std::vector<std::reference_wrapper<IComponent>>();
+        return std::vector<std::reference_wrapper<const IComponent>>();
 }
 
 arc::SCENE arc::GameScene::nextScene() const

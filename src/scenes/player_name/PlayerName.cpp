@@ -105,9 +105,9 @@ arc::SCENE arc::PlayerName::nextScene() const
 	return PLAYER_NAME;
 }
 
-std::vector<std::reference_wrapper<arc::IComponent>> arc::PlayerName::getComponents() const
+std::vector<std::reference_wrapper<const arc::IComponent>> arc::PlayerName::getComponents() const
 {
-	auto wrapper = std::vector<std::reference_wrapper<IComponent>>();
+	auto wrapper = std::vector<std::reference_wrapper<const IComponent>>();
 
 	wrapper.reserve(1 + _gridLetters.size() * _gridLetters[0].size());
 	wrapper.emplace_back(*_cursor);
