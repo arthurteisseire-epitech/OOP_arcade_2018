@@ -34,7 +34,7 @@ namespace arc {
 		void eat();
 		void moveBody(const arc::Snake::Direction &direction, bool changeDir);
 		bool isInSnake(const pos_t &pos) const;
-		std::vector<std::reference_wrapper<IComponent>>	getParts() const;
+		std::vector<std::reference_wrapper<const IComponent>>	getParts() const;
 		void changeDirection(arc::PlayerDirection playerDir);
 	protected:
 		pos_t findTailPosDirection();

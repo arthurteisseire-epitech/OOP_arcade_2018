@@ -16,7 +16,7 @@ namespace arc {
 		explicit GameScene(const std::shared_ptr<SharedData> &playerData);
 
 		void update(const std::map<arc::Key, arc::KeyState> &keys, float deltaTime) override;
-		std::vector<std::reference_wrapper<IComponent>> getComponents() const override;
+		std::vector<std::reference_wrapper<const IComponent>> getComponents() const override;
 		SCENE nextScene() const override;
 	};
 }

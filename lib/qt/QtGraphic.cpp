@@ -60,3 +60,8 @@ const std::map<arc::Key, arc::KeyState> &arc::QtGraphic::getKeys() const
 {
         return _widget->getKeys();
 }
+
+std::pair<unsigned, unsigned> arc::QtGraphic::getWindowSize() const
+{
+        return {_widget->width(), _widget->height()};
+}

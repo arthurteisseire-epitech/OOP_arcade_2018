@@ -22,7 +22,7 @@ namespace arc {
 		explicit Map(const pos_t &size = {100, 100});
 
 		void generateFood();
-		void generateSprites(std::vector<std::reference_wrapper<IComponent>> &vector) const;
+		void generateSprites(std::vector<std::reference_wrapper<const IComponent>> &vector) const;
 		void updateSnake(arc::PlayerDirection key);
 	protected:
 		pos_t _size;

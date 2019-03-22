@@ -159,9 +159,9 @@ bool arc::Snake::isInSnake(const pos_t &pos) const
 	return false;
 }
 
-std::vector<std::reference_wrapper<arc::IComponent>> arc::Snake::getParts() const
+std::vector<std::reference_wrapper<const arc::IComponent>> arc::Snake::getParts() const
 {
-	std::vector<std::reference_wrapper<IComponent>> vec;
+	std::vector<std::reference_wrapper<const IComponent>> vec;
 
 	for (const std::unique_ptr<IComponent> &asset : _cacheAssets)
 		vec.emplace_back(*asset);
@@ -197,9 +197,9 @@ void arc::Snake::printSnakePos()
 {
 	std::cout << "Sprites:" << std::endl;
 	for (size_t i = 0; i < _bodyPositions.size() ; ++i) {
-		const std::pair<float, float> &pair = dynamic_cast<Sprite *>(_cacheAssets[i].get())->getPosition();
+		const std::pair<float, float> &pair = dynamic_cast<const Sprite *>(_cacheAssets[i].get())->getPosition();
 		std::cout << pair.first << ", " << pair.second << std::endl;
-		std::cout << dynamic_cast<Sprite *>(_cacheAssets[i].get())->getTextureName() << std::endl;
+		std::cout << dynamic_cast<const Sprite *>(_cacheAssets[i].get())->getTextureName() << std::endl;
 	}
 	std::cout << "Body:" << std::endl;
 	for (const auto &pair : _bodyPositions)

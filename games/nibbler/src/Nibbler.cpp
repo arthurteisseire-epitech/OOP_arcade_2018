@@ -27,17 +27,19 @@ arc::Nibbler::Nibbler(int &, char **av) :
 	srand((unsigned int)(unsigned long)(av));
 }
 
-std::vector<std::reference_wrapper<arc::IComponent>> arc::Nibbler::getComponents() const
+std::vector<std::reference_wrapper<const arc::IComponent>> arc::Nibbler::getComponents() const
 {
-	std::vector<std::reference_wrapper<IComponent>> vec;
-	IComponent *score = new Text(std::string("Score: ") + std::to_string(_score), std::pair<float, float>(0.4, 0.2), 20);
+	std::vector<std::reference_wrapper<const IComponent>> vec;
+	IComponent *score = new Text(std::string("Score: ") + std::to_string(_score), std::pair<float, float>(0.4, 0.2),
+	                             20);
 
 	_map.generateSprites(vec);
 	vec.emplace_back(*score);
 	return vec;
 }
 
-void arc::Nibbler::update(const std::map<arc::Key, arc::KeyState> &keys, float deltaTime)
+void arc::Nibbler::update(const std::map<arc::Key, arc::KeyState> &keys, float deltaTime,
+                          const std::pair<unsigned int, unsigned int> &)
 {
 	getLastDirection(keys);
 	updateTime(deltaTime);

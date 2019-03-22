@@ -17,8 +17,9 @@ namespace arc {
 	public:
 		Nibbler(int &ac, char *av[]);
 
-		std::vector<std::reference_wrapper<IComponent>> getComponents() const override;
-		void update(const std::map<arc::Key, arc::KeyState> &keys, float deltaTime) override;
+		std::vector<std::reference_wrapper<const IComponent>> getComponents() const override;
+		void update(const std::map<arc::Key, arc::KeyState> &keys, float deltaTime,
+		            const std::pair<unsigned int, unsigned int> &windowSize) override;
 		bool isRunning() const override;
 	private:
 		void updateTime(float time);
