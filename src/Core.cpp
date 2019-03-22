@@ -64,8 +64,8 @@ std::vector<std::string> arc::Core::scanLibraries(const std::string &libDir) con
 	struct dirent *ent;
 	DIR *dir = opendir(libDir.c_str());
 
-	if (dir != NULL) {
-		while ((ent = readdir(dir)) != NULL) {
+	if (dir != nullptr) {
+		while ((ent = readdir(dir)) != nullptr) {
 			if (std::regex_match(std::string(ent->d_name), e))
 				libs.emplace_back(libDir + std::string(ent->d_name));
 		}
