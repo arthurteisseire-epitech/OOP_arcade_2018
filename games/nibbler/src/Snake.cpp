@@ -14,27 +14,41 @@
 const std::unordered_map<arc::Snake::Direction, pos_t> arc::Snake::_directionMap = {{UP, {0, -1}}, {DOWN, {0, 1}},
 	{RIGHT, {1, 0}}, {LEFT, {-1, 0}}};
 
-const std::unordered_map<arc::Snake::Direction, std::vector<std::string>> arc::Snake::_snakeAssetsMap = {
+const std::map<pos_t, arc::Snake::Direction> arc::Snake::_directionPosMap = {{{0, -1}, UP}, {{0, 1}, DOWN},
+	{{1, 0}, RIGHT}, {{-1, 0}, LEFT}};
+
+const std::unordered_map<arc::Snake::Direction, std::vector<std::string>> arc::Snake::_assetsMap = {
 	{UP, {"snake_head_up.png", "snake_middle_vertical.png", "snake_tail_up.png"}},
 	{DOWN, {"snake_head_down.png", "snake_middle_vertical.png", "snake_tail_down.png"}},
 	{RIGHT, {"snake_head_right.png", "snake_middle_horizontal.png", "snake_tail_right.png"}},
 	{LEFT, {"snake_head_left.png", "snake_middle_horizontal.png", "snake_tail_left.png"}}};
 
+const std::map<std::pair<arc::Snake::Direction, arc::Snake::Direction>, std::string> arc::Snake::_curvedAssets = {
+	{{DOWN, LEFT}, "snake_middle_down_left.png"},
+	{{DOWN, RIGHT}, "snake_middle_down_right.png"},
+	{{UP, RIGHT}, "snake_middle_up_right.png"},
+	{{UP, LEFT}, "snake_middle_up_left.png"},
+	{{LEFT, UP}, "snake_middle_down_right.png"},
+	{{LEFT, DOWN}, "snake_middle_up_right.png"},
+	{{RIGHT, UP}, "snake_middle_down_left.png"},
+	{{RIGHT, DOWN}, "snake_middle_up_left.png"}
+};
+
 arc::Snake::Snake(const pos_t &startPos, unsigned int size, const pos_t &mapSize) : _mapSize(50, 50)
 {
 	pos_t posRes;
-	std::unique_ptr<Sprite> actualSprite = std::make_unique<Sprite>(PATH_TO_ASSETS + _snakeAssetsMap.at(LEFT)[0]);
+	std::unique_ptr<Sprite> actualSprite = std::make_unique<Sprite>(PATH_TO_ASSETS + _assetsMap.at(LEFT)[0]);
 
 	append_sprite(startPos, actualSprite, mapSize);
-	_bodyPositions.emplace_back(startPos + pos_t{size - 1, 0});
+	_bodyPositions.emplace_back(startPos);
 	for (unsigned int i = 1; i < size - 1; ++i) {
 		posRes = startPos + pos_t{i, 0};
 		_bodyPositions.emplace_back(posRes);
-		actualSprite = std::make_unique<Sprite>(PATH_TO_ASSETS + _snakeAssetsMap.at(LEFT)[1]);
+		actualSprite = std::make_unique<Sprite>(PATH_TO_ASSETS + _assetsMap.at(LEFT)[1]);
 		append_sprite(posRes, actualSprite, mapSize);
 	}
 	_bodyPositions.emplace_back(startPos + pos_t{size - 1, 0});
-	actualSprite = std::make_unique<Sprite>(PATH_TO_ASSETS + _snakeAssetsMap.at(LEFT)[2]);
+	actualSprite = std::make_unique<Sprite>(PATH_TO_ASSETS + _assetsMap.at(LEFT)[2]);
 	append_sprite(posRes + pos_t{1, 0}, actualSprite, mapSize);
 }
 
@@ -57,31 +71,94 @@ pos_t arc::Snake::findTailDirection()
 	return _bodyPositions[size - 2] - _bodyPositions[size - 1];
 }
 
-void arc::Snake::moveBody(const arc::Snake::Direction &direction, bool changeDir)
+void arc::Snake::moveBody(const Direction &direction, bool changeDir)
 {
 	const pos_t &snakeDirection = _directionMap.at(direction);
+	const Direction lastDirection = findHeadDir();
 
 	_bodyPositions.insert(_bodyPositions.begin(), _bodyPositions.front() + snakeDirection);
 	_bodyPositions.pop_back();
-	updateSprites(direction, changeDir);
+	updateSprites(direction, changeDir, lastDirection);
 }
 
-void arc::Snake::updateSprites(const Direction &direction, bool changeDir)
+void arc::Snake::updateSprites(const Direction &direction, bool changeDir, const Direction &lastDirection)
 {
-	pos_t snakeDirection = _directionMap.at(direction);
 	const std::pair<float, float> &headPos = dynamic_cast<Sprite *>(_cacheAssets[0].get())->getPosition();
-	std::pair<float, float> newPos = {headPos.first + (float)snakeDirection.first / _mapSize.first,
-		headPos.second + (float)snakeDirection.second / _mapSize.second};
-	std::pair<float, float> tmpPos;
 
 	if (changeDir)
-		_cacheAssets[0] = std::make_unique<Sprite>(PATH_TO_ASSETS + _snakeAssetsMap.at(direction)[0],
-			pos_t{1.0, 1.0} / _mapSize, headPos);
-	for (size_t i = 0; i < _bodyPositions.size(); ++i) {
-		tmpPos = dynamic_cast<Sprite *>(_cacheAssets[i].get())->getPosition();;
-		dynamic_cast<Sprite *>(_cacheAssets[i].get())->setPosition(newPos);
-		newPos = tmpPos;
-	}
+		turnHead(direction, headPos, lastDirection);
+	updateAllBody(direction, headPos, changeDir, lastDirection);
+}
+
+std::pair<float, float> arc::Snake::findNewPos(const pos_t &snakeDirection, const std::pair<float, float> &headPos) const
+{
+	return {headPos.first + (float)snakeDirection.first / _mapSize.first,
+		headPos.second + (float)snakeDirection.second / _mapSize.second};
+}
+
+void arc::Snake::turnHead(const Direction &direction, const std::pair<float, float> &headPos,
+	const Direction &lastDirection)
+{
+	const std::pair<int, int> neckDir = _directionMap.at(lastDirection);
+	const std::pair<float, float> neckPosChange = {(float)neckDir.first / _mapSize.first, (float)neckDir.second / _mapSize.second};
+
+	_cacheAssets[0] = std::make_unique<Sprite>(PATH_TO_ASSETS + _assetsMap.at(direction)[0],
+		pos_t{1.0, 1.0} / _mapSize, headPos);
+//	_cacheAssets[1] = std::make_unique<Sprite>(PATH_TO_ASSETS + findCurveSnake(direction, lastDirection),
+//		pos_t{1.0, 1.0} / _mapSize,
+//		std::pair<float, float>{headPos.first - neckPosChange.first, headPos.second - neckPosChange.second});
+}
+
+const std::string &arc::Snake::findCurveSnake(const Direction &direction, const Direction &lastDirection) const
+{
+	return _curvedAssets.at({lastDirection, direction});
+}
+
+void arc::Snake::updateAllBody(const Direction &direction, const std::pair<float, float> &headPos, bool changeDir,
+			       const Direction &lastDirection)
+{
+	pos_t snakeDirection = _directionMap.at(direction);
+	const std::pair<float, float> newPos = findNewPos(snakeDirection, headPos);
+	const std::pair<float, float> headPosSaveBecauseItDoesNotWorkOtherwise = headPos;
+	dynamic_cast<arc::Sprite *>(_cacheAssets[0].get())->setPosition(newPos);
+
+	moveTailToNeck(direction, lastDirection, changeDir);
+	createNewTail();
+	dynamic_cast<arc::Sprite *>(_cacheAssets[1].get())->setPosition(headPosSaveBecauseItDoesNotWorkOtherwise);
+}
+
+void arc::Snake::moveTailToNeck(const Direction &direction, const Direction &lastDirection, bool changeDir)
+{
+	std::unique_ptr<arc::IComponent> queueSprite = std::move(_cacheAssets[_bodyPositions.size() - 1]);
+
+	_cacheAssets.erase(_cacheAssets.begin() + _bodyPositions.size() - 1);
+	_cacheAssets.insert(_cacheAssets.begin() + 1, move(queueSprite));
+	createNeckAsset(direction, lastDirection, changeDir);
+}
+
+void arc::Snake::createNewTail()
+{
+	const std::string asset = _assetsMap.at(_directionPosMap.at(findTailDirection()))[2];
+	const Sprite *tail = dynamic_cast<Sprite *>(_cacheAssets[_bodyPositions.size() - 1].get());
+	const std::pair<float, float> pos = tail->getPosition();
+	const std::pair<float, float> size = tail->getSize();
+
+	_cacheAssets[_bodyPositions.size() - 1] = std::make_unique<Sprite>(PATH_TO_ASSETS + asset, size, pos);
+}
+
+void arc::Snake::createNeckAsset(const Direction &direction, const Direction &lastDirection, bool changeDir)
+{
+	std::string spritePath;
+	const Sprite *neckSprite = dynamic_cast<Sprite *>(_cacheAssets[1].get());
+	const std::pair<float, float> pos = neckSprite->getPosition();
+	const std::pair<float, float> size = neckSprite->getSize();
+
+	if (changeDir)
+		spritePath = findCurveSnake(direction, lastDirection);
+	else
+		spritePath = _assetsMap.at(direction)[1];
+	spritePath = PATH_TO_ASSETS + spritePath;
+	_cacheAssets[1] = std::make_unique<Sprite>(spritePath, size, pos);
 }
 
 bool arc::Snake::isInSnake(const pos_t &pos) const
@@ -117,6 +194,18 @@ arc::Snake::Direction arc::Snake::findHeadDir()
 	if (pos_dir.second != 0)
 		return pos_dir.second == 1 ? DOWN : UP;
 	throw "Snake has his head on part of his body";
+}
+
+void arc::Snake::printSnakePos()
+{
+	std::cout << "Sprites:" << std::endl;
+	for (size_t i = 0; i < _bodyPositions.size() ; ++i) {
+		const std::pair<float, float> &pair = dynamic_cast<Sprite *>(_cacheAssets[i].get())->getPosition();
+		std::cout << pair.first << ", " << pair.second << std::endl;
+	}
+	std::cout << "Body:" << std::endl;
+	for (const auto &pair : _bodyPositions)
+		std::cout << pair.first << ", " << pair.second << std::endl;
 }
 
 arc::Snake::Direction arc::operator*(const arc::Snake::Direction &dir1, const arc::PlayerDirection &dir2)
