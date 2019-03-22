@@ -36,7 +36,11 @@ void arc::Map::generateSprites(std::vector<std::reference_wrapper<const arc::ICo
 	vector.emplace_back(_food->getSprite());
 }
 
-void arc::Map::updateSnake(PlayerDirection key)
+void arc::Map::updateSnake(arc::PlayerDirection key, unsigned int &score)
 {
 	_snake->changeDirection(key);
+	if (_snake->isInSnake(_food->getPos())) {
+		score += Food::value;
+		generateFood();
+	}
 }

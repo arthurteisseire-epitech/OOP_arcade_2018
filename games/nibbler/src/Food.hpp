@@ -25,6 +25,7 @@ namespace arc {
 
 		std::reference_wrapper<ISprite> getSprite() const;
 		void move(const pos_t &pos, const pos_t &size);
+		const pos_t &getPos() const {return _pos;};
 
 		static const unsigned int value;
 	protected:

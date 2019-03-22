@@ -9,7 +9,7 @@
 #include "Snake.hpp"
 #include "MathUtils.hpp"
 
-const unsigned int value = 500;
+const unsigned int arc::Food::value = 500;
 
 arc::Food::Food(const pos_t &position, const pos_t &size) :
 	_pos(position),

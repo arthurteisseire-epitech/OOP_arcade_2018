@@ -48,8 +48,7 @@ namespace arc {
 		std::vector<std::unique_ptr<IComponent>> _cacheAssets;
 	private:
 		void append_sprite(const pos_t &posRes, std::unique_ptr<arc::Sprite> &actualSprite, const pos_t &size);
-		void turnHead(const arc::Snake::Direction &direction, const std::pair<float, float> &headPos,
-					      const Direction &lastDirection);
+		void turnHead(const Direction &direction, const std::pair<float, float> &headPos);
 		const std::string &findCurveSnake(const Direction &direction, const Direction &lastDirection) const;
 		std::pair<float, float> findNewPos(const pos_t &snakeDirection, const std::pair<float, float> &headPos) const;
 		void updateAllBody(const Direction &direction, const std::pair<float, float> &headPos, bool changeDir,

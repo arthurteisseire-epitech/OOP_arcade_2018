@@ -45,7 +45,7 @@ void arc::Nibbler::update(const std::map<arc::Key, arc::KeyState> &keys, float d
 	updateTime(deltaTime);
 	if (_localDeltaTime >= _actionTime) {
 		_localDeltaTime = 0;
-		_map.updateSnake(_lastDir);
+		_map.updateSnake(_lastDir, _score);
 		_lastDir = PLAYER_NONE;
 	}
 }

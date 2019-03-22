@@ -79,7 +79,7 @@ void arc::Snake::updateSprites(const Direction &direction, bool changeDir, const
 	const std::pair<float, float> &headPos = dynamic_cast<Sprite *>(_cacheAssets[0].get())->getPosition();
 
 	if (changeDir)
-		turnHead(direction, headPos, lastDirection);
+		turnHead(direction, headPos);
 	updateAllBody(direction, headPos, changeDir, lastDirection);
 }
 
@@ -89,12 +89,8 @@ std::pair<float, float> arc::Snake::findNewPos(const pos_t &snakeDirection, cons
 		headPos.second + (float)snakeDirection.second / _mapSize.second};
 }
 
-void arc::Snake::turnHead(const Direction &direction, const std::pair<float, float> &headPos,
-	const Direction &lastDirection)
+void arc::Snake::turnHead(const Direction &direction, const std::pair<float, float> &headPos)
 {
-	const std::pair<int, int> neckDir = _directionMap.at(lastDirection);
-	const std::pair<float, float> neckPosChange = {(float)neckDir.first / _mapSize.first, (float)neckDir.second / _mapSize.second};
-
 	_cacheAssets[0] = std::make_unique<Sprite>(PATH_TO_ASSETS + _assetsMap.at(direction)[0],
 		pos_t{1.0, 1.0} / _mapSize, headPos);
 }

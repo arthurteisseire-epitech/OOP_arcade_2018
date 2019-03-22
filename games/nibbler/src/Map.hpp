@@ -23,7 +23,7 @@ namespace arc {
 
 		void generateFood();
 		void generateSprites(std::vector<std::reference_wrapper<const IComponent>> &vector) const;
-		void updateSnake(arc::PlayerDirection key);
+		void updateSnake(arc::PlayerDirection key, unsigned int &score);
 	protected:
 		pos_t _size;
 		std::unique_ptr<Snake> _snake;
