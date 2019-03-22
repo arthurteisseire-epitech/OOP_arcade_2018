@@ -12,5 +12,6 @@ RULES	=	all		\
 
 $(RULES):
 	cd qt && qmake && make $@
+	cd sfml && make $@
 
 .PHONY: $(RULES)
