@@ -1,17 +1,24 @@
 ##
-## EPITECH PROJECT, 2017
-## File Name : Makefile
+## EPITECH PROJECT, 2018
+## arcade
 ## File description:
-## Project Name : linked_lists
+## Makefile
 ##
 
-RULES	=	all		\
-		clean		\
-		fclean		\
-		re		\
+all:
+	cd qt && qmake && make install
+	cd sfml && make
 
-$(RULES):
-	cd qt && qmake && make install $@
+fclean:
+	cd qt && qmake && make distclean
+	cd sfml && make fclean
+
+re:
+	cd qt && qmake && make distclean && make
+	cd sfml && make re
+
+clean:
+	cd qt && qmake && make $@
 	cd sfml && make $@
 
-.PHONY: $(RULES)
+.PHONY: all fclean re clean

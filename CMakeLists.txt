@@ -50,7 +50,7 @@ add_custom_target(
 
 add_custom_target(
         games
-        ALL COMMAND make -C nibbler
+        ALL COMMAND make
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/games
 )
 

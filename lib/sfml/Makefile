@@ -11,7 +11,7 @@ INC	=	-I$(DSRC) -I.. -I../../component
 
 SRC	=	$(DSRC)SfmlGraphic.cpp			\
 
-CXXFLAGS=	-Wall -Wextra $(INC) -shared -fPIC -std=c++14
+CXXFLAGS=	-Wall -Wextra $(INC) -shared -fPIC -std=c++14 -O2
 LDFLAGS	=	-lsfml-graphics -lsfml-window -lsfml-system
 OBJ	=	$(SRC:.cpp=.o)
 NAME	=	lib_arcade_sfml.so
@@ -25,7 +25,7 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
-	rm -f $(NAME_UT)
+	rm -f ../$(NAME)
 
 re: fclean all
 
