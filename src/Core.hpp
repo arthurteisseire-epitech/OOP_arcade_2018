@@ -22,7 +22,9 @@ namespace arc {
 	private:
 		void update(const std::map<Key, KeyState> &keys, float deltaTime);
 		std::vector<std::string> scanLibraries(const std::string &libDir) const;
+		void processEvents(const std::map<arc::Key, arc::KeyState> &keys);
 		std::string libPath();
+		void changeLib();
 
 		std::shared_ptr<SharedData> _sharedData;
 		SceneManager _sceneManager;

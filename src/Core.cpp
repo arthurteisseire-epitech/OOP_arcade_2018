@@ -45,16 +45,25 @@ int arc::Core::exec()
 void arc::Core::update(const std::map<arc::Key, arc::KeyState> &keys, float deltaTime)
 {
 	_sceneManager.currentScene()->update(keys, deltaTime);
-	auto key = keys.find(F3);
-	if (key != keys.end() && key->second == RELEASED) {
-		if (_sharedData->libIt + 1 == _sharedData->libs.end())
-			_sharedData->libIt = _sharedData->libs.begin();
-		else
-			++_sharedData->libIt;
-		_graphic = nullptr;
-		_graphic = std::unique_ptr<IGraphic>(
-			_graphicLibraryLoader.loadGraphicInstance(libPath()));
-	}
+	processEvents(keys);
+}
+
+void arc::Core::processEvents(const std::map<arc::Key, arc::KeyState> &keys)
+{
+	auto key = keys.find(arc::F3);
+	if (key != keys.end() && key->second == arc::RELEASED)
+		changeLib();
+}
+
+void arc::Core::changeLib()
+{
+	if (_sharedData->libIt + 1 == _sharedData->libs.end())
+		_sharedData->libIt = _sharedData->libs.begin();
+	else
+		++_sharedData->libIt;
+	_graphic = nullptr;
+	_graphic = std::unique_ptr<arc::IGraphic>(
+		_graphicLibraryLoader.loadGraphicInstance(libPath()));
 }
 
 std::vector<std::string> arc::Core::scanLibraries(const std::string &libDir) const
@@ -78,5 +87,5 @@ std::vector<std::string> arc::Core::scanLibraries(const std::string &libDir) con
 
 std::string arc::Core::libPath()
 {
-        return "lib/lib_arcade_" + *_sharedData->libIt + ".so";
+	return "lib/lib_arcade_" + *_sharedData->libIt + ".so";
 }
