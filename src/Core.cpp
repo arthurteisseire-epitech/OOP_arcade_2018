@@ -16,8 +16,8 @@
 #include "Process.hpp"
 
 const std::map<arc::Key, void (arc::Core::*)()> arc::Core::_keyAction = {
-	{F3, &arc::Core::incGraphicalLib},
-	{F4, &arc::Core::decGraphicalLib}
+	{F3, &arc::Core::decGraphicalLib},
+	{F4, &arc::Core::incGraphicalLib}
 };
 
 arc::Core::Core(const std::string &libname) :
@@ -26,7 +26,7 @@ arc::Core::Core(const std::string &libname) :
 {
 	_sharedData->libs = scanLibraries("lib/");
 	_sharedData->games = scanLibraries("games/");
-	_sharedData->libIt = std::find(_sharedData->libs.begin(), _sharedData->libs.end(), libname);
+        _sharedData->libname = libname;
 	_sharedData->currentGame = _gameLibraryLoader.loadGameInstance(
 		"games/lib_arcade_" + _sharedData->games[0] + ".so");
 	_graphic = std::unique_ptr<IGraphic>(_graphicLibraryLoader.loadGraphicInstance(libPath()));
@@ -64,20 +64,25 @@ void arc::Core::processEvents(const std::map<arc::Key, arc::KeyState> &keys)
 	}
 }
 
-void arc::Core::incGraphicalLib()
+void arc::Core::decGraphicalLib()
 {
-	if (_sharedData->libIt + 1 == _sharedData->libs.end())
-		_sharedData->libIt = _sharedData->libs.begin();
-	else
-		++_sharedData->libIt;
+	_sharedData->libs = scanLibraries("lib/");
+	auto it = std::find(_sharedData->libs.begin(), _sharedData->libs.end(), _sharedData->libname);
+	if (it == _sharedData->libs.begin())
+		it = _sharedData->libs.end();
+        _sharedData->libname = *--it;
 	changeGraphicalLib();
 }
 
-void arc::Core::decGraphicalLib()
+void arc::Core::incGraphicalLib()
 {
-	if (_sharedData->libIt == _sharedData->libs.begin())
-		_sharedData->libIt = _sharedData->libs.end();
-	--_sharedData->libIt;
+	_sharedData->libs = scanLibraries("lib/");
+	auto it = std::find(_sharedData->libs.begin(), _sharedData->libs.end(), _sharedData->libname);
+	if (it + 1 == _sharedData->libs.end())
+		it = _sharedData->libs.begin();
+	else
+		_sharedData->libname = *++it;
+	_sharedData->libname = *it;
 	changeGraphicalLib();
 }
 
@@ -108,5 +113,5 @@ std::vector<std::string> arc::Core::scanLibraries(const std::string &libDir) con
 
 std::string arc::Core::libPath()
 {
-	return "lib/lib_arcade_" + *_sharedData->libIt + ".so";
+	return "lib/lib_arcade_" + _sharedData->libname + ".so";
 }

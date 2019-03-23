@@ -17,7 +17,7 @@ namespace arc {
 		IGame *currentGame;
 		std::vector<std::string> games;
 		std::vector<std::string> libs;
-                std::vector<std::string>::iterator libIt;
+		std::string libname;
 	};
 }
 
