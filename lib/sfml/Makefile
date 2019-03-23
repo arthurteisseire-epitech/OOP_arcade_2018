@@ -18,6 +18,7 @@ NAME	=	lib_arcade_sfml.so
 
 all: $(OBJ)
 	$(CC) -o $(NAME) $(OBJ) $(CXXFLAGS) $(LDFLAGS)
+	cp $(NAME) ..
 
 clean:
 	rm -f $(OBJ)

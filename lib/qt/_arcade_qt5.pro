@@ -14,5 +14,5 @@ HEADERS += QtGraphic.hpp ../IGraphic.hpp ../../component/ISprite.hpp Widget.hpp
 INCLUDEPATH += $$PWD/.. $$PWD/../../component
 DEFINES += ARCADE
 CONFIG += clang++
-target.path = ../../
+target.path = ../
 INSTALLS += target

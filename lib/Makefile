@@ -11,7 +11,7 @@ RULES	=	all		\
 		re		\
 
 $(RULES):
-	cd qt && qmake && make $@
+	cd qt && qmake && make install $@
 	cd sfml && make $@
 
 .PHONY: $(RULES)
