@@ -16,7 +16,8 @@
 #include "Process.hpp"
 
 const std::map<arc::Key, void (arc::Core::*)()> arc::Core::_keyAction = {
-	{F3, &arc::Core::changeLib}
+	{F3, &arc::Core::incGraphicalLib},
+	{F4, &arc::Core::decGraphicalLib}
 };
 
 arc::Core::Core(const std::string &libname) :
@@ -63,12 +64,25 @@ void arc::Core::processEvents(const std::map<arc::Key, arc::KeyState> &keys)
 	}
 }
 
-void arc::Core::changeLib()
+void arc::Core::incGraphicalLib()
 {
 	if (_sharedData->libIt + 1 == _sharedData->libs.end())
 		_sharedData->libIt = _sharedData->libs.begin();
 	else
 		++_sharedData->libIt;
+	changeGraphicalLib();
+}
+
+void arc::Core::decGraphicalLib()
+{
+	if (_sharedData->libIt == _sharedData->libs.begin())
+		_sharedData->libIt = _sharedData->libs.end();
+	--_sharedData->libIt;
+	changeGraphicalLib();
+}
+
+void arc::Core::changeGraphicalLib()
+{
 	_graphic = nullptr;
 	_graphic = std::unique_ptr<arc::IGraphic>(_graphicLibraryLoader.loadGraphicInstance(libPath()));
 }

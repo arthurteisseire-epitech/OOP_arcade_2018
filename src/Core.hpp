@@ -24,7 +24,9 @@ namespace arc {
 		std::vector<std::string> scanLibraries(const std::string &libDir) const;
 		void processEvents(const std::map<arc::Key, arc::KeyState> &keys);
 		std::string libPath();
-		void changeLib();
+		void incGraphicalLib();
+		void decGraphicalLib();
+		void changeGraphicalLib();
 
 		std::shared_ptr<SharedData> _sharedData;
 		SceneManager _sceneManager;
