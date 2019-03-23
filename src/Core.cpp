@@ -7,7 +7,6 @@
 
 #include <unistd.h>
 #include <dirent.h>
-#include <filesystem>
 #include <regex>
 #include <iostream>
 #include "PlayerName.hpp"
