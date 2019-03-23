@@ -15,6 +15,10 @@
 #include "Core.hpp"
 #include "Process.hpp"
 
+const std::map<arc::Key, void (arc::Core::*)()> arc::Core::_keyAction = {
+	{F3, &arc::Core::changeLib}
+};
+
 arc::Core::Core(const std::string &libname) :
 	_sharedData(std::make_shared<SharedData>()),
 	_sceneManager(MENU, _sharedData)
@@ -50,9 +54,13 @@ void arc::Core::update(const std::map<arc::Key, arc::KeyState> &keys, float delt
 
 void arc::Core::processEvents(const std::map<arc::Key, arc::KeyState> &keys)
 {
-	auto key = keys.find(arc::F3);
-	if (key != keys.end() && key->second == arc::RELEASED)
-		changeLib();
+	for (auto &keyAction : _keyAction) {
+		auto key = keys.find(keyAction.first);
+		if (key != keys.end() && key->second == RELEASED) {
+			(this->*keyAction.second)();
+			return;
+		}
+	}
 }
 
 void arc::Core::changeLib()
@@ -62,8 +70,7 @@ void arc::Core::changeLib()
 	else
 		++_sharedData->libIt;
 	_graphic = nullptr;
-	_graphic = std::unique_ptr<arc::IGraphic>(
-		_graphicLibraryLoader.loadGraphicInstance(libPath()));
+	_graphic = std::unique_ptr<arc::IGraphic>(_graphicLibraryLoader.loadGraphicInstance(libPath()));
 }
 
 std::vector<std::string> arc::Core::scanLibraries(const std::string &libDir) const

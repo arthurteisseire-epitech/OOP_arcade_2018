@@ -31,6 +31,7 @@ namespace arc {
 		LibraryLoader _graphicLibraryLoader;
 		LibraryLoader _gameLibraryLoader;
 		std::unique_ptr<IGraphic> _graphic;
+		static const std::map<Key, void (arc::Core::*)()> _keyAction;
 	};
 }
 
