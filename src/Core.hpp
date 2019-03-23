@@ -27,6 +27,7 @@ namespace arc {
 		void decGraphicalLib();
 		void incGraphicalLib();
 		void changeGraphicalLib();
+		void safeChangeGraphicalLib(const std::string &newlib);
 
 		std::shared_ptr<SharedData> _sharedData;
 		SceneManager _sceneManager;

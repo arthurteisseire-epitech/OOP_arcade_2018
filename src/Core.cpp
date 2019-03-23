@@ -26,7 +26,7 @@ arc::Core::Core(const std::string &libname) :
 {
 	_sharedData->libs = scanLibraries("lib/");
 	_sharedData->games = scanLibraries("games/");
-        _sharedData->libname = libname;
+	_sharedData->libname = libname;
 	_sharedData->currentGame = _gameLibraryLoader.loadGameInstance(
 		"games/lib_arcade_" + _sharedData->games[0] + ".so");
 	_graphic = std::unique_ptr<IGraphic>(_graphicLibraryLoader.loadGraphicInstance(libPath()));
@@ -70,8 +70,8 @@ void arc::Core::decGraphicalLib()
 	auto it = std::find(_sharedData->libs.begin(), _sharedData->libs.end(), _sharedData->libname);
 	if (it == _sharedData->libs.begin())
 		it = _sharedData->libs.end();
-        _sharedData->libname = *--it;
-	changeGraphicalLib();
+	--it;
+	safeChangeGraphicalLib(*it);
 }
 
 void arc::Core::incGraphicalLib()
@@ -81,9 +81,16 @@ void arc::Core::incGraphicalLib()
 	if (it + 1 == _sharedData->libs.end())
 		it = _sharedData->libs.begin();
 	else
-		_sharedData->libname = *++it;
-	_sharedData->libname = *it;
-	changeGraphicalLib();
+		++it;
+	safeChangeGraphicalLib(*it);
+}
+
+void arc::Core::safeChangeGraphicalLib(const std::string &newlib)
+{
+	if (!_sharedData->libs.empty() && newlib != _sharedData->libname) {
+		_sharedData->libname = newlib;
+		changeGraphicalLib();
+	}
 }
 
 void arc::Core::changeGraphicalLib()
