@@ -17,16 +17,16 @@
 namespace arc {
 	class Core {
 	public:
-		explicit Core(IGraphic *graphic, std::unique_ptr<LibraryLoader> libraryLoader);
+		explicit Core(const std::string &libname);
 		int exec();
 	private:
 		void update(const std::map<Key, KeyState> &keys, float deltaTime);
 		std::vector<std::string> scanLibraries(const std::string &libDir) const;
 
 		std::shared_ptr<SharedData> _sharedData;
-		std::unique_ptr<SceneManager> _sceneManager;
-		std::unique_ptr<LibraryLoader> _graphicLibraryLoader;
-		std::unique_ptr<LibraryLoader> _gameLibraryLoader;
+		SceneManager _sceneManager;
+		LibraryLoader _graphicLibraryLoader;
+		LibraryLoader _gameLibraryLoader;
 		std::unique_ptr<IGraphic> _graphic;
 	};
 }
