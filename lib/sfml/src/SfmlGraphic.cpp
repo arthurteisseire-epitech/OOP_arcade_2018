@@ -7,8 +7,6 @@
 
 #include "SfmlGraphic.hpp"
 
-#include <iostream>
-
 const std::map<sf::Keyboard::Key, arc::Key> arc::SfmlGraphic::_sfmlKeys = {
 	{sf::Keyboard::Return, ENTER},
 	{sf::Keyboard::Up,     UP},
@@ -85,7 +83,7 @@ bool arc::SfmlGraphic::processText(const arc::IText &text)
 	              text.getPosition().second * _window.getSize().y);
 	t.setString(text.getText());
 	t.setCharacterSize((unsigned)text.getFontSize());
-	t.setColor(sf::Color(text.getColor()));
+	t.setFillColor(sf::Color(text.getColor()));
 
 	sf::FloatRect textRect = t.getLocalBounds();
 	t.setOrigin(textRect.left + textRect.width/2.0f,
@@ -107,9 +105,8 @@ void arc::SfmlGraphic::processEvents()
 	while (_window.pollEvent(event)) {
 		processKeys(event, sf::Event::KeyPressed, PRESSED);
 		processKeys(event, sf::Event::KeyReleased, RELEASED);
-		if (event.type == sf::Event::Closed) {
+		if (event.type == sf::Event::Closed)
 			_window.close();
-		}
 	}
 }
 
@@ -117,8 +114,11 @@ void arc::SfmlGraphic::processKeys(const sf::Event &event, sf::Event::EventType 
 {
 	if (event.type == type) {
 		auto it = _sfmlKeys.find(event.key.code);
-		if (it != _sfmlKeys.end())
-			_keys[it->second] = state;
+		if (it != _sfmlKeys.end()) {
+			auto key = _keys.find(it->second);
+			if (!(key != _keys.end() && state == PRESSED))
+				_keys[it->second] = state;
+		}
 	}
 }
 
