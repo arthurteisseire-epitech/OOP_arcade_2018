@@ -19,13 +19,12 @@ arc::Core::Core(const std::string &libname) :
 	_sharedData(std::make_shared<SharedData>()),
 	_sceneManager(MENU, _sharedData)
 {
-	_graphic = std::unique_ptr<IGraphic>(_graphicLibraryLoader.loadGraphicInstance(libname));
 	_sharedData->libs = scanLibraries("lib/");
 	_sharedData->games = scanLibraries("games/");
-	if (!_sharedData->games.empty())
-		_sharedData->currentGame = _gameLibraryLoader.loadGameInstance(_sharedData->games[0]);
-	else
-		std::cerr << "No games were found in ./games" << std::endl;
+	_sharedData->libIt = std::find(_sharedData->libs.begin(), _sharedData->libs.end(), libname);
+	_sharedData->currentGame = _gameLibraryLoader.loadGameInstance(
+		"games/lib_arcade_" + _sharedData->games[0] + ".so");
+	_graphic = std::unique_ptr<IGraphic>(_graphicLibraryLoader.loadGraphicInstance(libPath()));
 }
 
 int arc::Core::exec()
@@ -46,28 +45,38 @@ int arc::Core::exec()
 void arc::Core::update(const std::map<arc::Key, arc::KeyState> &keys, float deltaTime)
 {
 	_sceneManager.currentScene()->update(keys, deltaTime);
-	if (keys.find(F3) != keys.end()) {
+	auto key = keys.find(F3);
+	if (key != keys.end() && key->second == RELEASED) {
+		if (_sharedData->libIt + 1 == _sharedData->libs.end())
+			_sharedData->libIt = _sharedData->libs.begin();
+		else
+			++_sharedData->libIt;
 		_graphic = nullptr;
-		_graphic = std::unique_ptr<IGraphic>(_graphicLibraryLoader.loadGraphicInstance(_sharedData->libs[1]));
-	} else if (keys.find(F4) != keys.end()) {
-		_graphic = nullptr;
-		_graphic = std::unique_ptr<IGraphic>(_graphicLibraryLoader.loadGraphicInstance(_sharedData->libs[0]));
+		_graphic = std::unique_ptr<IGraphic>(
+			_graphicLibraryLoader.loadGraphicInstance(libPath()));
 	}
 }
 
 std::vector<std::string> arc::Core::scanLibraries(const std::string &libDir) const
 {
 	std::vector<std::string> libs;
-	std::regex e("^(.*/)?lib_arcade_.*.so$");
+	std::regex e("^lib_arcade_(.*)\\.so$");
+	std::smatch m;
 	struct dirent *ent;
 	DIR *dir = opendir(libDir.c_str());
 
 	if (dir != nullptr) {
 		while ((ent = readdir(dir)) != nullptr) {
-			if (std::regex_match(std::string(ent->d_name), e))
-				libs.emplace_back(libDir + std::string(ent->d_name));
+			std::string s = ent->d_name;
+			if (std::regex_search(s, m, e))
+				libs.emplace_back(m[1]);
 		}
-		closedir (dir);
+		closedir(dir);
 	}
 	return libs;
+}
+
+std::string arc::Core::libPath()
+{
+        return "lib/lib_arcade_" + *_sharedData->libIt + ".so";
 }

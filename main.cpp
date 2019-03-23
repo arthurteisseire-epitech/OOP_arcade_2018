@@ -6,23 +6,37 @@
 */
 
 #include <iostream>
+#include <regex>
 #include "Core.hpp"
 
 static bool areArgsValid(int &argc, char **argv)
 {
 	if (argc != 2) {
 		std::cerr << "Usage : " << std::endl
-		          << "\t" << std::string(argv[0]) + " ./lib[graphical_libname].so" << std::endl
+		          << "\t" << std::string(argv[0]) + " lib/lib_arcade_[graphical_libname].so" << std::endl
 		          << std::endl;
 		return false;
 	}
 	return true;
 }
 
+static std::string parseLibname(const std::string &libpath)
+{
+	std::regex e("^(.*/)*lib_arcade_(.*)\\.so$");
+	std::smatch m;
+
+	if (std::regex_search(libpath, m, e))
+		return m[2];
+	return libpath;
+}
+
 static int exec(int argc, char **argv)
 {
+	std::string libname;
+
 	if (areArgsValid(argc, argv)) {
-	        arc::Core core(argv[1]);
+		libname = parseLibname(argv[1]);
+	        arc::Core core(libname);
 	        return core.exec();
         }
 	return 84;
