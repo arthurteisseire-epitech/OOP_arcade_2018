@@ -28,6 +28,7 @@ NAME	=	lib_arcade_nibbler.so
 
 all: $(OBJ)
 	$(CC) -o $(NAME) -shared $(OBJ) $(CXXFLAGS)
+	cp $(NAME) ..
 
 clean:
 	rm -f $(OBJ)

@@ -80,8 +80,8 @@ test/fast: test
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/home/arthur/app/clion/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -402,24 +402,6 @@ games/qix/src/Player.s:
 .PHONY : games/qix/src/Player.s
 
 # target to build an object file
-games/qix/src/Qix.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/qix/src/Qix.o
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/qix/src/Qix.o
-.PHONY : games/qix/src/Qix.o
-
-# target to preprocess a source file
-games/qix/src/Qix.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/qix/src/Qix.i
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/qix/src/Qix.i
-.PHONY : games/qix/src/Qix.i
-
-# target to generate assembly for a file
-games/qix/src/Qix.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/qix/src/Qix.s
-	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/qix/src/Qix.s
-.PHONY : games/qix/src/Qix.s
-
-# target to build an object file
 main.o:
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/main.o
 .PHONY : main.o
@@ -735,9 +717,6 @@ help:
 	@echo "... games/qix/src/Player.o"
 	@echo "... games/qix/src/Player.i"
 	@echo "... games/qix/src/Player.s"
-	@echo "... games/qix/src/Qix.o"
-	@echo "... games/qix/src/Qix.i"
-	@echo "... games/qix/src/Qix.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
