@@ -11,3 +11,8 @@ arc::Player::Player() : _x(0),
                         _y(0)
 {
 }
+
+void arc::Player::moveDown()
+{
+	_y++;
+}

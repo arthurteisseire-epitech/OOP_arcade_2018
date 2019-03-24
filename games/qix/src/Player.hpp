@@ -13,6 +13,8 @@ namespace arc {
 	public:
 		Player();
 	protected:
+		void moveDown();
+
 		int _x;
 		int _y;
 	};
