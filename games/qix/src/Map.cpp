@@ -33,6 +33,11 @@ bool arc::Map::inBorder(const arc::Position &pos) const
 	return in(pos) && _cells[pos.x][pos.y].state() == Cell::BORDER;
 }
 
+bool arc::Map::inWalkable(const arc::Position &pos) const
+{
+	return in(pos) && _cells[pos.x][pos.y].state() == Cell::WALKABLE;
+}
+
 bool arc::Map::in(const arc::Position &pos) const
 {
 	return pos.x >= 0 && pos.y >= 0 && pos.x < _width && pos.y < _height;
