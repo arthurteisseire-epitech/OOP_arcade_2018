@@ -13,9 +13,7 @@
 
 TEST(GetComponents, UselessPleaseDelete)
 {
-	int ac = 3;
-
-	arc::Nibbler nibbler(ac, nullptr);
+	arc::Nibbler nibbler;
 	std::vector<std::reference_wrapper<const arc::IComponent>> components = nibbler.getComponents();
 
 	EXPECT_EQ(components[0].get().getType(), arc::SPRITE);
@@ -25,8 +23,7 @@ TEST(GetComponents, UselessPleaseDelete)
 
 TEST(Nibbler, GetComponentsScore)
 {
-	int ac = 0;
-	arc::Nibbler nibbler(ac, nullptr);
+	arc::Nibbler nibbler;
 	std::vector<std::reference_wrapper<const arc::IComponent>> components = nibbler.getComponents();
 	bool a = false;
 

@@ -15,12 +15,12 @@
 namespace arc {
 	class Nibbler : public IGame {
 	public:
-		Nibbler(int &ac, char *av[]);
+		Nibbler();
 
-		std::vector<std::reference_wrapper<const IComponent>> getComponents() const override;
 		void update(const std::map<arc::Key, arc::KeyState> &keys, float deltaTime,
 		            const std::pair<unsigned int, unsigned int> &windowSize) override;
 		bool isRunning() const override;
+		std::vector<std::reference_wrapper<const IComponent>> getComponents() const override;
 	private:
 		void updateTime(float time);
 
@@ -34,6 +34,6 @@ namespace arc {
 	};
 }
 
-extern "C" __attribute__((visibility("default"))) arc::IGame *gameEntryPoint(int &ac, char **av);
+extern "C" __attribute__((visibility("default"))) arc::IGame *gameEntryPoint();
 
 #endif

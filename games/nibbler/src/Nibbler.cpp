@@ -6,25 +6,26 @@
 */
 
 #include <memory>
+#include <ctime>
 #include "Nibbler.hpp"
 #include "Sprite.hpp"
 #include "Text.hpp"
 
-arc::IGame *gameEntryPoint(int &ac, char **av)
+arc::IGame *gameEntryPoint()
 {
-	return new arc::Nibbler(ac, av);
+	return new arc::Nibbler();
 }
 
 const float arc::Nibbler::_actionTime = 0.6;
 
-arc::Nibbler::Nibbler(int &, char **av) :
+arc::Nibbler::Nibbler() :
 	_score(0),
 	_size(50),
 	_map({_size, _size}),
 	_lastDir(PLAYER_NONE),
 	_localDeltaTime(0)
 {
-	srand((unsigned int)(unsigned long)(av));
+	srand((unsigned)time(nullptr));
 }
 
 std::vector<std::reference_wrapper<const arc::IComponent>> arc::Nibbler::getComponents() const
