@@ -74,7 +74,7 @@ bool arc::Widget::processSprite(const ISprite &sprite)
 		_sprites.emplace(&sprite, std::unique_ptr<QPixmap>(pixmap));
 	}
 	*pixmap = pixmap->scaled(pos.first, pos.second);
-	_spritesToDraw.emplace(&sprite, *pixmap);
+	_spritesToDraw.emplace_back(std::make_pair<const ISprite *, std::reference_wrapper<QPixmap>>(&sprite, *pixmap));
 	return true;
 }
 

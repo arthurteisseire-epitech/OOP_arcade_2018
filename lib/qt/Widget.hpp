@@ -12,6 +12,7 @@
 #include <QWidget>
 #include <QKeyEvent>
 #include <QMediaPlayer>
+#include <unordered_map>
 #include "IText.hpp"
 #include "IAudio.hpp"
 #include "ISprite.hpp"
@@ -35,7 +36,7 @@ namespace arc {
 		QColor convertColor(unsigned int color);
 
 		std::map<const ISprite *, std::unique_ptr<QPixmap>> _sprites;
-		std::map<const ISprite *, std::reference_wrapper<QPixmap>> _spritesToDraw;
+		std::vector<std::pair<const ISprite *, std::reference_wrapper<QPixmap>>> _spritesToDraw;
 		std::vector<const IText *> _texts;
 		std::vector<const IText *> _textsToDraw;
 		std::map<const IAudio *, std::unique_ptr<QMediaPlayer>>_player;
