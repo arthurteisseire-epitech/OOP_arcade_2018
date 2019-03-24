@@ -34,6 +34,14 @@ arc::Map::~Map()
 	_cells.clear();
 }
 
+void arc::Map::transformTrailToBorder()
+{
+	for (auto &row : _cells)
+		for (auto &x : row)
+			if (x.state() == Cell::TRAIL)
+				x.alterState(Cell::BORDER);
+}
+
 void arc::Map::trail(const arc::Position &pos)
 {
 	_cells[pos.y][pos.x].alterState(Cell::TRAIL);
