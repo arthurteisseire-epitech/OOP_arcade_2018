@@ -22,8 +22,7 @@ void arc::Player::move(DIRECTION dir)
 	if (_map.inBorder(_pos + dir)) {
 		_pos += dir;
 		_map.transformTrailToBorder();
-	}
-	if (_map.inWalkable(_pos + dir)) {
+	} else if (_map.inWalkable(_pos + dir)) {
 		_pos += dir;
 		_map.trail(_pos);
 	}
