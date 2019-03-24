@@ -19,6 +19,12 @@ arc::Cell::Cell(arc::Cell::STATE state) : _state(state), _sprite("")
 	_sprite.setColor(_stateColor.find(_state)->second);
 }
 
+void arc::Cell::alterState(arc::Cell::STATE state)
+{
+	_sprite.setColor(_stateColor.find(_state)->second);
+	_state = state;
+}
+
 arc::Cell::STATE arc::Cell::state() const
 {
 	return _state;

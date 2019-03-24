@@ -22,6 +22,8 @@ namespace arc {
 		};
 
 		explicit Cell(STATE state);
+
+		void alterState(STATE state);
 		STATE state() const;
 		Sprite &sprite();
 	protected:
