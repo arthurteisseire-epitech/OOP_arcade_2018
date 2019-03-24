@@ -27,6 +27,7 @@ namespace arc {
 
 		Player _player;
 		Map _map;
+		static const std::map<Key, Player::DIRECTION> _keyDir;
 	};
 }
 
