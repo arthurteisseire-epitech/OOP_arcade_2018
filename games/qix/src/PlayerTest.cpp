@@ -20,17 +20,21 @@ namespace arc {
 
 	TEST_F(PlayerTest, verticalMove)
 	{
+		moveUp();
+		ASSERT_EQ(_y, -1);
+		moveDown();
+		ASSERT_EQ(_y, 0);
 		moveDown();
 		ASSERT_EQ(_y, 1);
-		moveUp();
-		ASSERT_EQ(_y, 0);
 	}
 
 	TEST_F(PlayerTest, horizontalMove)
 	{
+		moveLeft();
+		ASSERT_EQ(_x, -1);
+		moveRight();
+		ASSERT_EQ(_x, 0);
 		moveRight();
 		ASSERT_EQ(_x, 1);
-		moveLeft();
-		ASSERT_EQ(_x, 0);
 	}
 }
