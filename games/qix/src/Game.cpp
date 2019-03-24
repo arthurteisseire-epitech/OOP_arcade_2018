@@ -13,7 +13,7 @@ arc::IGame *gameEntryPoint()
 }
 
 arc::Game::Game() : _player(),
-                    _map(20, 20)
+                    _map(10, 10)
 {
 }
 
@@ -22,6 +22,12 @@ void arc::Game::update(const std::map<arc::Key, arc::KeyState> &keys, float,
 {
 	if (keys.find(UP) != keys.end())
 		movePlayerUp();
+	if (keys.find(DOWN) != keys.end())
+		_player.moveDown();
+	if (keys.find(LEFT) != keys.end())
+		_player.moveLeft();
+	if (keys.find(RIGHT) != keys.end())
+		_player.moveRight();
 }
 
 bool arc::Game::isRunning() const
@@ -31,7 +37,10 @@ bool arc::Game::isRunning() const
 
 std::vector<std::reference_wrapper<const arc::IComponent>> arc::Game::getComponents() const
 {
-	return std::vector<std::reference_wrapper<const arc::IComponent>>();
+	std::vector<std::reference_wrapper<const arc::IComponent>> wrapper;
+
+	wrapper.emplace_back(_player.getSprite());
+	return wrapper;
 }
 
 void arc::Game::movePlayerUp()

@@ -7,11 +7,12 @@
 
 #include "Sprite.hpp"
 
-arc::Sprite::Sprite(const std::string &filename, const std::pair<float, float> &size, const std::pair<float, float> &pos) :
+arc::Sprite::Sprite(const std::string &filename, const std::pair<float, float> &size,
+                    const std::pair<float, float> &pos, unsigned color) :
 	_filename(filename),
 	_pos(pos),
 	_size(size),
-	_color(0xff0000ff)
+	_color(color)
 {
 }
 
@@ -58,4 +59,9 @@ void arc::Sprite::moveDown(float y)
 unsigned int arc::Sprite::getColor() const
 {
 	return _color;
+}
+
+void arc::Sprite::setColor(unsigned color)
+{
+	_color = color;
 }

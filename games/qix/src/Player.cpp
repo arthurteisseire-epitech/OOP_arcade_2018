@@ -7,7 +7,8 @@
 
 #include "Player.hpp"
 
-arc::Player::Player() : _x(0),
+arc::Player::Player() : _sprite("", {0.1, 0.1}, {0, 0}, 0xffffffff),
+			_x(0),
                         _y(0)
 {
 }
@@ -30,4 +31,9 @@ void arc::Player::moveRight()
 void arc::Player::moveLeft()
 {
 	--_x;
+}
+
+const arc::Sprite &arc::Player::getSprite() const
+{
+        return _sprite;
 }

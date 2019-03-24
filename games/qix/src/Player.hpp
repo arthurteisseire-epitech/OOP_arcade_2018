@@ -8,6 +8,8 @@
 #ifndef ARCADE_PLAYER_HPP
 #define ARCADE_PLAYER_HPP
 
+#include "Sprite.hpp"
+
 namespace arc {
 	class Player {
 	public:
@@ -17,7 +19,9 @@ namespace arc {
 		void moveUp();
 		void moveRight();
 		void moveLeft();
+		const Sprite &getSprite() const;
 	protected:
+		Sprite _sprite;
 		int _x;
 		int _y;
 	};
