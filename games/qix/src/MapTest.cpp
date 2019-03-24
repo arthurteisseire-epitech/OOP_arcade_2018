@@ -27,4 +27,19 @@ namespace arc {
 		ASSERT_EQ(static_cast<int>(_cells.size()), 10);
 		ASSERT_EQ(static_cast<int>(_cells[0].size()), 10);
 	}
+
+	TEST_F(MapTest, in)
+	{
+		ASSERT_TRUE(in(Position(0, 0)));
+		ASSERT_TRUE(in(Position(9, 9)));
+	}
+
+	TEST_F(MapTest, out)
+	{
+		ASSERT_FALSE(in(Position(-1, 0)));
+		ASSERT_FALSE(in(Position(0, -1)));
+		ASSERT_FALSE(in(Position(-1, -1)));
+		ASSERT_FALSE(in(Position(10, 0)));
+		ASSERT_FALSE(in(Position(0, 10)));
+	}
 }

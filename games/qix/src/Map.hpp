@@ -9,6 +9,7 @@
 #define ARCADE_MAP_HPP
 
 #include <vector>
+#include "Position.hpp"
 #include "Cell.hpp"
 
 namespace arc {
@@ -19,6 +20,7 @@ namespace arc {
 
 		int width() const;
 		int height() const;
+		bool in(const Position &pos) const;
 	protected:
 		int _width;
 		int _height;

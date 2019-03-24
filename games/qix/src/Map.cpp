@@ -35,3 +35,8 @@ int arc::Map::height() const
 	return _height;
 }
 
+bool arc::Map::in(const arc::Position &pos) const
+{
+	return pos.x >= 0 && pos.y >= 0 && pos.x < _width && pos.y < _height;
+}
+

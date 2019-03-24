@@ -19,7 +19,8 @@ arc::Player::Player(Map &map) : _sprite(""),
 
 void arc::Player::move(DIRECTION dir)
 {
-	_pos += dir;
+	if (_map.in(_pos + dir))
+		_pos += dir;
 	_sprite.setPosition(Converter::PosToPourcent(_pos, _map.width(), _map.height()));
 }
 
