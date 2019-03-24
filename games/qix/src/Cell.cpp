@@ -7,6 +7,11 @@
 
 #include "Cell.hpp"
 
-arc::Cell::Cell() : _state(WALKABLE)
+arc::Cell::Cell(arc::Cell::STATE state) : _state(state)
 {
+}
+
+arc::Cell::STATE arc::Cell::state() const
+{
+	return _state;
 }

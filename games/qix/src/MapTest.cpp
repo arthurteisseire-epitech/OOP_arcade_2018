@@ -42,4 +42,13 @@ namespace arc {
 		ASSERT_FALSE(in(Position(10, 0)));
 		ASSERT_FALSE(in(Position(0, 10)));
 	}
+
+	TEST_F(MapTest, border)
+	{
+		ASSERT_EQ(_cells[1][1].state(), Cell::WALKABLE);
+		ASSERT_EQ(_cells[0][0].state(), Cell::BORDER);
+		ASSERT_EQ(_cells[9][9].state(), Cell::BORDER);
+		ASSERT_EQ(_cells[8][0].state(), Cell::BORDER);
+		ASSERT_EQ(_cells[0][8].state(), Cell::BORDER);
+	}
 }

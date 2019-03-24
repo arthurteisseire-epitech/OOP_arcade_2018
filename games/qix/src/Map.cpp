@@ -16,7 +16,10 @@ arc::Map::Map(int width, int height) : _width(width),
 		_cells.emplace_back(std::vector<Cell>());
 		_cells[y].reserve(static_cast<size_t>(width));
 		for (int x = 0; x < width; ++x)
-			_cells[y].emplace_back(Cell());
+			if (x == 0 || x == width - 1 || y == 0 || y == height - 1)
+				_cells[y].emplace_back(Cell(Cell::BORDER));
+			else
+				_cells[y].emplace_back(Cell(Cell::WALKABLE));
 	}
 }
 

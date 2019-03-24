@@ -11,15 +11,16 @@
 namespace arc {
 	class Cell {
 	public:
-		enum STATES {
+		enum STATE {
 			WALKABLE,
 			NON_WALKABLE,
 			BORDER
 		};
 
-		Cell();
+		Cell(STATE state);
+		STATE state() const;
 	protected:
-		STATES _state;
+		STATE _state;
 	};
 }
 
