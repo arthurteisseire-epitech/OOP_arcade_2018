@@ -23,6 +23,7 @@ namespace arc {
 
 		explicit Cell(STATE state);
 		STATE state() const;
+		Sprite &sprite();
 	protected:
 		STATE _state;
 		Sprite _sprite;

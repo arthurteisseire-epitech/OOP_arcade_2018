@@ -23,3 +23,8 @@ arc::Cell::STATE arc::Cell::state() const
 {
 	return _state;
 }
+
+arc::Sprite &arc::Cell::sprite()
+{
+        return _sprite;
+}

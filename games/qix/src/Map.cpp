@@ -6,6 +6,7 @@
 */
 
 #include "Map.hpp"
+#include "Converter.hpp"
 
 arc::Map::Map(int width, int height) : _width(width),
                                        _height(height),
@@ -15,11 +16,14 @@ arc::Map::Map(int width, int height) : _width(width),
 	for (int y = 0; y < height; ++y) {
 		_cells.emplace_back(std::vector<Cell>());
 		_cells[y].reserve(static_cast<size_t>(width));
-		for (int x = 0; x < width; ++x)
+		for (int x = 0; x < width; ++x) {
 			if (x == 0 || x == width - 1 || y == 0 || y == height - 1)
 				_cells[y].emplace_back(Cell(Cell::BORDER));
 			else
 				_cells[y].emplace_back(Cell(Cell::WALKABLE));
+			_cells[y][x].sprite().setSize(Converter::SizeToPourcent(_width, _height));
+			_cells[y][x].sprite().setPosition(Converter::PosToPourcent({x, y}, _width, _height));
+		}
 	}
 }
 
