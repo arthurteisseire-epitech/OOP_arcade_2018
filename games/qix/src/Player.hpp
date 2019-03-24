@@ -39,6 +39,7 @@ namespace arc {
 	};
 
 	Player::Position &operator+=(Player::Position &pos, Player::DIRECTION dir);
+	Player::Position operator+(const Player::Position &pos, Player::DIRECTION dir);
 	bool operator==(const Player::Position &pos1, const Player::Position &pos2);
 }
 

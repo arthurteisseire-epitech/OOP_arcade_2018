@@ -41,6 +41,14 @@ arc::Player::Position &arc::operator+=(Player::Position &pos, Player::DIRECTION 
 	return pos;
 }
 
+arc::Player::Position arc::operator+(const Player::Position &pos, Player::DIRECTION dir)
+{
+	Player::Position newPos = pos;
+
+	newPos += dir;
+	return newPos;
+}
+
 bool arc::operator==(const Player::Position &pos1, const Player::Position &pos2)
 {
 	return pos1.x == pos2.x && pos1.y == pos2.y;
