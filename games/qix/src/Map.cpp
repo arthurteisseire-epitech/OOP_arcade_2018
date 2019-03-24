@@ -36,17 +36,17 @@ arc::Map::~Map()
 
 void arc::Map::trail(const arc::Position &pos)
 {
-	_cells[pos.x][pos.y].alterState(Cell::TRAIL);
+	_cells[pos.y][pos.x].alterState(Cell::TRAIL);
 }
 
 bool arc::Map::inBorder(const arc::Position &pos) const
 {
-	return in(pos) && _cells[pos.x][pos.y].state() == Cell::BORDER;
+	return in(pos) && _cells[pos.y][pos.x].state() == Cell::BORDER;
 }
 
 bool arc::Map::inWalkable(const arc::Position &pos) const
 {
-	return in(pos) && _cells[pos.x][pos.y].state() == Cell::WALKABLE;
+	return in(pos) && _cells[pos.y][pos.x].state() == Cell::WALKABLE;
 }
 
 bool arc::Map::in(const arc::Position &pos) const

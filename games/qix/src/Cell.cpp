@@ -22,7 +22,7 @@ arc::Cell::Cell(arc::Cell::STATE state) : _state(state), _sprite("")
 
 void arc::Cell::alterState(arc::Cell::STATE state)
 {
-	_sprite.setColor(_stateColor.find(_state)->second);
+	_sprite.setColor(_stateColor.find(state)->second);
 	_state = state;
 }
 
