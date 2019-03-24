@@ -8,15 +8,17 @@
 #ifndef ARCADE_MAP_HPP
 #define ARCADE_MAP_HPP
 
-#include <string>
+#include <vector>
 
 namespace arc {
 	class Map {
 	public:
 		explicit Map(int width, int height);
+		~Map();
 	protected:
 		int _width;
 		int _height;
+		std::vector<int> _cells;
 	};
 }
 
