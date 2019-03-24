@@ -41,7 +41,7 @@ bool arc::Game::isRunning() const
 
 std::vector<std::reference_wrapper<const arc::IComponent>> arc::Game::getComponents() const
 {
-	std::vector<std::reference_wrapper<const arc::IComponent>> wrapper;
+	std::vector<std::reference_wrapper<const arc::IComponent>> wrapper = _map.getSprites();
 
 	wrapper.emplace_back(_player.getSprite());
 	return wrapper;

@@ -24,10 +24,12 @@ namespace arc {
 		bool inBorder(const Position &pos) const;
 		bool inWalkable(const Position &pos) const;
 		void trail(const Position &pos);
+		std::vector<std::reference_wrapper<const IComponent>> getSprites() const;
 	protected:
 		int _width;
 		int _height;
 		std::vector<std::vector<Cell>> _cells;
+		std::vector<std::reference_wrapper<const IComponent>> _sprites;
 	};
 }
 

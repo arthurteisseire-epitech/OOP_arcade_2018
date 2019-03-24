@@ -6,6 +6,7 @@
 */
 
 #include "Cell.hpp"
+#include "Converter.hpp"
 
 const std::map<arc::Cell::STATE, unsigned> arc::Cell::_stateColor = {
 	{WALKABLE,     0xff0000ff},
@@ -30,7 +31,17 @@ arc::Cell::STATE arc::Cell::state() const
 	return _state;
 }
 
-arc::Sprite &arc::Cell::sprite()
+const arc::Sprite &arc::Cell::sprite() const
 {
         return _sprite;
+}
+
+void arc::Cell::setPosition(const std::pair<float, float> &pos)
+{
+	_sprite.setPosition(pos);
+}
+
+void arc::Cell::setSize(const std::pair<float, float> &size)
+{
+	_sprite.setSize(size);
 }

@@ -13,6 +13,7 @@ arc::Map::Map(int width, int height) : _width(width),
                                        _cells()
 {
 	_cells.reserve(static_cast<size_t>(height));
+	_sprites.reserve(static_cast<size_t>(height) * width);
 	for (int y = 0; y < height; ++y) {
 		_cells.emplace_back(std::vector<Cell>());
 		_cells[y].reserve(static_cast<size_t>(width));
@@ -21,8 +22,9 @@ arc::Map::Map(int width, int height) : _width(width),
 				_cells[y].emplace_back(Cell(Cell::BORDER));
 			else
 				_cells[y].emplace_back(Cell(Cell::WALKABLE));
-			_cells[y][x].sprite().setSize(Converter::SizeToPourcent(_width, _height));
-			_cells[y][x].sprite().setPosition(Converter::PosToPourcent({x, y}, _width, _height));
+			_cells[y][x].setSize(Converter::SizeToPourcent(_width, _height));
+			_cells[y][x].setPosition(Converter::PosToPourcent({x, y}, _width, _height));
+			_sprites.emplace_back(_cells[y][x].sprite());
 		}
 	}
 }
@@ -60,5 +62,9 @@ int arc::Map::width() const
 int arc::Map::height() const
 {
 	return _height;
+}
 
+std::vector<std::reference_wrapper<const arc::IComponent>> arc::Map::getSprites() const
+{
+	return _sprites;
 }

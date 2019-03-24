@@ -10,6 +10,7 @@
 
 #include <map>
 #include "Sprite.hpp"
+#include "Position.hpp"
 
 namespace arc {
 	class Cell {
@@ -25,7 +26,9 @@ namespace arc {
 
 		void alterState(STATE state);
 		STATE state() const;
-		Sprite &sprite();
+		const Sprite &sprite() const;
+		void setPosition(const std::pair<float, float> &pos);
+		void setSize(const std::pair<float, float> &size);
 	protected:
 		STATE _state;
 		Sprite _sprite;
