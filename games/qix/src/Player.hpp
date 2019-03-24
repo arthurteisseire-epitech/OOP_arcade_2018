@@ -8,23 +8,36 @@
 #ifndef ARCADE_PLAYER_HPP
 #define ARCADE_PLAYER_HPP
 
+#include <functional>
 #include "Sprite.hpp"
 
 namespace arc {
 	class Player {
 	public:
+		struct Position {
+			Position(int x, int y) : x(x), y(y) {}
+			int x;
+			int y;
+		};
+		enum DIRECTION {
+			UP,
+			DOWN,
+			RIGHT,
+			LEFT
+		};
+
 		Player();
 
-		void moveDown();
-		void moveUp();
-		void moveRight();
-		void moveLeft();
+		void move(DIRECTION dir);
 		const Sprite &getSprite() const;
+
 	protected:
 		Sprite _sprite;
-		int _x;
-		int _y;
+		Position _pos;
 	};
+
+	Player::Position &operator+=(Player::Position &pos, Player::DIRECTION dir);
+	bool operator==(const Player::Position &pos1, const Player::Position &pos2);
 }
 
 #endif

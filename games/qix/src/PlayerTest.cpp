@@ -14,27 +14,26 @@ namespace arc {
 
 	TEST_F(PlayerTest, position)
 	{
-		ASSERT_EQ(_x, 0);
-		ASSERT_EQ(_y, 0);
+		ASSERT_EQ(_pos, Position(0, 0));
 	}
 
 	TEST_F(PlayerTest, verticalMove)
 	{
-		moveUp();
-		ASSERT_EQ(_y, -1);
-		moveDown();
-		ASSERT_EQ(_y, 0);
-		moveDown();
-		ASSERT_EQ(_y, 1);
+		move(UP);
+		ASSERT_EQ(_pos, Position(0, -1));
+		move(DOWN);
+		ASSERT_EQ(_pos, Position(0, 0));
+		move(DOWN);
+		ASSERT_EQ(_pos, Position(0, 1));
 	}
 
 	TEST_F(PlayerTest, horizontalMove)
 	{
-		moveLeft();
-		ASSERT_EQ(_x, -1);
-		moveRight();
-		ASSERT_EQ(_x, 0);
-		moveRight();
-		ASSERT_EQ(_x, 1);
+		move(LEFT);
+		ASSERT_EQ(_pos, Position(-1, 0));
+		move(RIGHT);
+		ASSERT_EQ(_pos, Position(0, 0));
+		move(RIGHT);
+		ASSERT_EQ(_pos, Position(1, 0));
 	}
 }

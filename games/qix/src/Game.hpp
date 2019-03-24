@@ -24,7 +24,6 @@ namespace arc {
 		            const std::pair<unsigned int, unsigned int> &windowSize) override;
 		bool isRunning() const override;
 	protected:
-		void movePlayerUp();
 
 		Player _player;
 		Map _map;

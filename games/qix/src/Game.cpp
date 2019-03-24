@@ -20,14 +20,15 @@ arc::Game::Game() : _player(),
 void arc::Game::update(const std::map<arc::Key, arc::KeyState> &keys, float,
                        const std::pair<unsigned int, unsigned int> &)
 {
-	if (keys.find(UP) != keys.end())
-		movePlayerUp();
-	if (keys.find(DOWN) != keys.end())
-		_player.moveDown();
-	if (keys.find(LEFT) != keys.end())
-		_player.moveLeft();
-	if (keys.find(RIGHT) != keys.end())
-		_player.moveRight();
+	auto key = keys.find(UP);
+	if (key != keys.end() && key->second == PRESSED) {
+		_player.move(Player::UP);
+	}
+
+	key = keys.find(DOWN);
+	if (key != keys.end() && key->second == PRESSED) {
+		_player.move(Player::DOWN);
+	}
 }
 
 bool arc::Game::isRunning() const
@@ -41,9 +42,4 @@ std::vector<std::reference_wrapper<const arc::IComponent>> arc::Game::getCompone
 
 	wrapper.emplace_back(_player.getSprite());
 	return wrapper;
-}
-
-void arc::Game::movePlayerUp()
-{
-	_player.moveUp();
 }
