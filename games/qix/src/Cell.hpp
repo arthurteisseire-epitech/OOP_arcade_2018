@@ -14,6 +14,7 @@ namespace arc {
 		enum STATES {
 			WALKABLE,
 			NON_WALKABLE,
+			BORDER
 		};
 
 		Cell();

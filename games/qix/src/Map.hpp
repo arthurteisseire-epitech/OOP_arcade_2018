@@ -9,6 +9,7 @@
 #define ARCADE_MAP_HPP
 
 #include <vector>
+#include "Cell.hpp"
 
 namespace arc {
 	class Map {
@@ -18,7 +19,7 @@ namespace arc {
 	protected:
 		int _width;
 		int _height;
-		std::vector<int> _cells;
+		std::vector<std::vector<Cell>> _cells;
 	};
 }
 

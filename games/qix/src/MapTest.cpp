@@ -11,7 +11,7 @@
 namespace arc {
 	class MapTest : public Map, public ::testing::Test {
 	public:
-		explicit MapTest() : Map(0, 0)
+		explicit MapTest() : Map(10, 10)
 		{}
 
 		void SetUp(int width, int height)
@@ -22,9 +22,9 @@ namespace arc {
 
 	TEST_F(MapTest, size)
 	{
-		SetUp(10, 10);
 		ASSERT_EQ(_width, 10);
 		ASSERT_EQ(_height, 10);
-		ASSERT_EQ(_cells.size(), 100);
+		ASSERT_EQ(static_cast<int>(_cells.size()), 10);
+		ASSERT_EQ(static_cast<int>(_cells[0].size()), 10);
 	}
 }
