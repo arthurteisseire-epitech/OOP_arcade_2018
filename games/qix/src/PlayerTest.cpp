@@ -25,4 +25,12 @@ namespace arc {
 		moveUp();
 		ASSERT_EQ(_y, 0);
 	}
+
+	TEST_F(PlayerTest, horizontalMove)
+	{
+		moveRight();
+		ASSERT_EQ(_x, 1);
+		moveLeft();
+		ASSERT_EQ(_x, 0);
+	}
 }

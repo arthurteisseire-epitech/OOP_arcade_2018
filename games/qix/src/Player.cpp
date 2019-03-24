@@ -14,10 +14,20 @@ arc::Player::Player() : _x(0),
 
 void arc::Player::moveDown()
 {
-	_y++;
+	++_y;
 }
 
 void arc::Player::moveUp()
 {
-	_y--;
+	--_y;
+}
+
+void arc::Player::moveRight()
+{
+	++_x;
+}
+
+void arc::Player::moveLeft()
+{
+	--_x;
 }

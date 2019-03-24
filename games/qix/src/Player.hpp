@@ -15,6 +15,8 @@ namespace arc {
 	protected:
 		void moveDown();
 		void moveUp();
+		void moveRight();
+		void moveLeft();
 
 		int _x;
 		int _y;
