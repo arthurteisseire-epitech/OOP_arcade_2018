@@ -10,7 +10,11 @@ CC		=	g++
 DSRC	=	src/
 INC		=	-I$(DSRC) -I../../component -I..
 
-SRC		=	$(DSRC)Qix.cpp
+SRC		=	$(DSRC)Game.cpp		\
+			$(DSRC)Player.cpp	\
+			$(DSRC)Map.cpp		\
+			$(DSRC)Cell.cpp		\
+			$(DSRC)Qix.cpp		\
 
 CXXFLAGS	+=  -Wall -Wextra $(INC) -shared -fPIC
 OBJ		=	$(SRC:.cpp=.o)
