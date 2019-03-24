@@ -18,9 +18,11 @@ namespace arc {
 		ASSERT_EQ(_y, 0);
 	}
 
-	TEST_F(PlayerTest, move)
+	TEST_F(PlayerTest, verticalMove)
 	{
 		moveDown();
 		ASSERT_EQ(_y, 1);
+		moveUp();
+		ASSERT_EQ(_y, 0);
 	}
 }

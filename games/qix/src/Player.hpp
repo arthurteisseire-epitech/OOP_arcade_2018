@@ -14,6 +14,7 @@ namespace arc {
 		Player();
 	protected:
 		void moveDown();
+		void moveUp();
 
 		int _x;
 		int _y;

@@ -76,7 +76,7 @@ enable_testing()
 
 file(GLOB_RECURSE tests src/*Test.cpp games/*Test.cpp)
 
-#add_executable(units ${core} ${tests} ${component} ${games})
-#target_link_libraries(units dl Qt5::Widgets Qt5::Multimedia gtest gtest_main gcov)
+add_executable(units ${core} ${tests} ${component} ${games})
+target_link_libraries(units dl Qt5::Widgets Qt5::Multimedia gtest gtest_main gcov)
 
 add_test(NAME units COMMAND units)

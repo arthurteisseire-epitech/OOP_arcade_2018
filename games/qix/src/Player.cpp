@@ -16,3 +16,8 @@ void arc::Player::moveDown()
 {
 	_y++;
 }
+
+void arc::Player::moveUp()
+{
+	_y--;
+}
