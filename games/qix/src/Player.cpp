@@ -6,6 +6,7 @@
 */
 
 #include "Player.hpp"
+#include "Converter.hpp"
 
 arc::Player::Player() : _sprite("", {0.1, 0.1}, {0, 0}, 0xffffffff),
                         _pos({0, 0})
@@ -15,6 +16,7 @@ arc::Player::Player() : _sprite("", {0.1, 0.1}, {0, 0}, 0xffffffff),
 void arc::Player::move(DIRECTION dir)
 {
 	_pos += dir;
+	_sprite.setPosition(Converter::PosToPourcent(_pos, 10, 10));
 }
 
 const arc::Sprite &arc::Player::getSprite() const
