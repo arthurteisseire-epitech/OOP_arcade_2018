@@ -28,6 +28,11 @@ arc::Map::~Map()
 	_cells.clear();
 }
 
+void arc::Map::trail(const arc::Position &pos)
+{
+	_cells[pos.x][pos.y] = Cell(Cell::TRAIL);
+}
+
 bool arc::Map::inBorder(const arc::Position &pos) const
 {
 	return in(pos) && _cells[pos.x][pos.y].state() == Cell::BORDER;

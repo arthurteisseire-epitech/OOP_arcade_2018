@@ -13,8 +13,9 @@ namespace arc {
 	public:
 		enum STATE {
 			WALKABLE,
-			NON_WALKABLE,
-			BORDER
+			BORDER,
+			TRAIL,
+			NON_WALKABLE
 		};
 
 		Cell(STATE state);

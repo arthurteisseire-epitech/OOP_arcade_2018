@@ -23,6 +23,7 @@ namespace arc {
 		bool in(const Position &pos) const;
 		bool inBorder(const Position &pos) const;
 		bool inWalkable(const Position &pos) const;
+		void trail(const Position &pos);
 	protected:
 		int _width;
 		int _height;
