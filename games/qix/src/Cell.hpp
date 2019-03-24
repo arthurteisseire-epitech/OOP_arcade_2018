@@ -8,6 +8,9 @@
 #ifndef ARCADE_CELL_HPP
 #define ARCADE_CELL_HPP
 
+#include <map>
+#include "Sprite.hpp"
+
 namespace arc {
 	class Cell {
 	public:
@@ -18,10 +21,12 @@ namespace arc {
 			NON_WALKABLE
 		};
 
-		Cell(STATE state);
+		explicit Cell(STATE state);
 		STATE state() const;
 	protected:
 		STATE _state;
+		Sprite _sprite;
+		static const std::map<STATE, unsigned> _stateColor;
 	};
 }
 
