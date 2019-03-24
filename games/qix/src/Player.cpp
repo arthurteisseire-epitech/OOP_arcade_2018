@@ -12,8 +12,8 @@ arc::Player::Player(Map &map) : _sprite(""),
                                 _pos({0, 0}),
                                 _map(map)
 {
-	_sprite.setSize({_map.width() / 1000.0f, _map.height() / 1000.0f});
 	_sprite.setPosition({0, 0});
+	_sprite.setSize(Converter::SizeToPourcent(_map.width(), _map.height()));
 	_sprite.setColor(0xffffffff);
 }
 

@@ -20,4 +20,15 @@ namespace arc {
 		expected = {0.0, 0.05};
 		ASSERT_EQ(pos, expected);
 	}
+
+	TEST(ConverterTest, sizeToPourcent)
+	{
+		auto pos = Converter::SizeToPourcent(10, 10);
+		std::pair<float, float> expected = {0.1, 0.1};
+		ASSERT_EQ(pos, expected);
+
+		pos = Converter::SizeToPourcent(20, 20);
+		expected = {0.05, 0.05};
+		ASSERT_EQ(pos, expected);
+	}
 }
