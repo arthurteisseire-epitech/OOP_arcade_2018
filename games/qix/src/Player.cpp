@@ -22,8 +22,8 @@ void arc::Player::move(DIRECTION dir)
 	if (_map.inBorder(_pos + dir))
 		_pos += dir;
 	if (_map.inWalkable(_pos + dir)) {
-		_map.trail(_pos);
 		_pos += dir;
+		_map.trail(_pos);
 	}
 	_sprite.setPosition(Converter::PosToPourcent(_pos, _map.width(), _map.height()));
 }
