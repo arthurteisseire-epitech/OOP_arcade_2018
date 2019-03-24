@@ -50,26 +50,26 @@ TEST_F(SnakeTest, FindTailDirection)
 {
 	_bodyPositions.push_back(pos_t(0, 2));
 	_bodyPositions.push_back(pos_t(0, 3));
-	EXPECT_EQ(findTailDirection(), pos_t(0, -1));
+	EXPECT_EQ(findTailPosDirection(), pos_t(0, -1));
 
 	_bodyPositions.push_back(pos_t(0, 3));
 	_bodyPositions.push_back(pos_t(0, 2));
-	EXPECT_EQ(findTailDirection(), pos_t(0, 1));
+	EXPECT_EQ(findTailPosDirection(), pos_t(0, 1));
 
 	_bodyPositions.push_back(pos_t(2, 0));
 	_bodyPositions.push_back(pos_t(3, 0));
-	EXPECT_EQ(findTailDirection(), pos_t(-1, 0));
+	EXPECT_EQ(findTailPosDirection(), pos_t(-1, 0));
 
 	_bodyPositions.push_back(pos_t(3, 0));
 	_bodyPositions.push_back(pos_t(2, 0));
-	EXPECT_EQ(findTailDirection(), pos_t(1, 0));
+	EXPECT_EQ(findTailPosDirection(), pos_t(1, 0));
 }
 
 void SnakeTest::test_move(Snake &snake, Direction direction, pos_t expected_head)
 {
 	body_t pos_list = _bodyPositions;
 
-	snake.moveBody(direction);
+	snake.moveBody(direction, true);
 	EXPECT_EQ(_bodyPositions.front(), expected_head);
 	pos_list.pop_back();
 	for (size_t i = 0; i < pos_list.size(); ++i)
