@@ -25,3 +25,13 @@ arc::Map::~Map()
 	_cells.clear();
 }
 
+int arc::Map::width() const
+{
+	return _width;
+}
+
+int arc::Map::height() const
+{
+	return _height;
+}
+

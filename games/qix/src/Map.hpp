@@ -16,6 +16,9 @@ namespace arc {
 	public:
 		explicit Map(int width, int height);
 		~Map();
+
+		int width() const;
+		int height() const;
 	protected:
 		int _width;
 		int _height;

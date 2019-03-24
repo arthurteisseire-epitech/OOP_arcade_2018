@@ -8,15 +8,19 @@
 #include "Player.hpp"
 #include "Converter.hpp"
 
-arc::Player::Player() : _sprite("", {0.1, 0.1}, {0, 0}, 0xffffffff),
-                        _pos({0, 0})
+arc::Player::Player(Map &map) : _sprite(""),
+                                _pos({0, 0}),
+                                _map(map)
 {
+	_sprite.setSize({_map.width() / 1000.0f, _map.height() / 1000.0f});
+	_sprite.setPosition({0, 0});
+	_sprite.setColor(0xffffffff);
 }
 
 void arc::Player::move(DIRECTION dir)
 {
 	_pos += dir;
-	_sprite.setPosition(Converter::PosToPourcent(_pos, 10, 10));
+	_sprite.setPosition(Converter::PosToPourcent(_pos, _map.width(), _map.height()));
 }
 
 const arc::Sprite &arc::Player::getSprite() const

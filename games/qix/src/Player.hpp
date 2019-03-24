@@ -10,6 +10,7 @@
 
 #include <functional>
 #include "Sprite.hpp"
+#include "Map.hpp"
 
 namespace arc {
 	class Player {
@@ -26,7 +27,7 @@ namespace arc {
 			LEFT
 		};
 
-		Player();
+		explicit Player(Map &map);
 
 		void move(DIRECTION dir);
 		const Sprite &getSprite() const;
@@ -34,6 +35,7 @@ namespace arc {
 	protected:
 		Sprite _sprite;
 		Position _pos;
+		Map &_map;
 	};
 
 	Player::Position &operator+=(Player::Position &pos, Player::DIRECTION dir);

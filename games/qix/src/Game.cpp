@@ -19,8 +19,8 @@ arc::IGame *gameEntryPoint()
 	return new arc::Game();
 }
 
-arc::Game::Game() : _player(),
-                    _map(10, 10)
+arc::Game::Game() : _map(30, 30),
+                    _player(_map)
 {
 }
 

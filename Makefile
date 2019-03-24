@@ -402,21 +402,6 @@ games/qix/src/Player.s:
 .PHONY : games/qix/src/Player.s
 
 # target to build an object file
-games/qix/src/PlayerTest.o:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/qix/src/PlayerTest.o
-.PHONY : games/qix/src/PlayerTest.o
-
-# target to preprocess a source file
-games/qix/src/PlayerTest.i:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/qix/src/PlayerTest.i
-.PHONY : games/qix/src/PlayerTest.i
-
-# target to generate assembly for a file
-games/qix/src/PlayerTest.s:
-	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/qix/src/PlayerTest.s
-.PHONY : games/qix/src/PlayerTest.s
-
-# target to build an object file
 games/qix/src/Qix.o:
 	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/games/qix/src/Qix.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/games/qix/src/Qix.o
@@ -750,9 +735,6 @@ help:
 	@echo "... games/qix/src/Player.o"
 	@echo "... games/qix/src/Player.i"
 	@echo "... games/qix/src/Player.s"
-	@echo "... games/qix/src/PlayerTest.o"
-	@echo "... games/qix/src/PlayerTest.i"
-	@echo "... games/qix/src/PlayerTest.s"
 	@echo "... games/qix/src/Qix.o"
 	@echo "... games/qix/src/Qix.i"
 	@echo "... games/qix/src/Qix.s"

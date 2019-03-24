@@ -25,8 +25,8 @@ namespace arc {
 		bool isRunning() const override;
 	protected:
 
-		Player _player;
 		Map _map;
+		Player _player;
 		static const std::map<Key, Player::DIRECTION> _keyDir;
 	};
 }
