@@ -16,6 +16,7 @@ SRC		=	$(DSRC)Game.cpp			\
 			$(DSRC)Map.cpp			\
 			$(DSRC)Cell.cpp			\
 			$(DSRC)Qix.cpp			\
+			$(DSRC)Converter.cpp		\
 			$(DCOMPONENT)Sprite.cpp		\
 
 CXXFLAGS	+=  -Wall -Wextra $(INC) -shared -fPIC
