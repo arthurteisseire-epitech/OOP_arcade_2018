@@ -9,17 +9,13 @@
 #define ARCADE_PLAYER_HPP
 
 #include <functional>
+#include "Position.hpp"
 #include "Sprite.hpp"
 #include "Map.hpp"
 
 namespace arc {
 	class Player {
 	public:
-		struct Position {
-			Position(int x, int y) : x(x), y(y) {}
-			int x;
-			int y;
-		};
 		enum DIRECTION {
 			UP,
 			DOWN,
@@ -38,9 +34,9 @@ namespace arc {
 		Map &_map;
 	};
 
-	Player::Position &operator+=(Player::Position &pos, Player::DIRECTION dir);
-	Player::Position operator+(const Player::Position &pos, Player::DIRECTION dir);
-	bool operator==(const Player::Position &pos1, const Player::Position &pos2);
+	Position &operator+=(Position &pos, Player::DIRECTION dir);
+	Position operator+(const Position &pos, Player::DIRECTION dir);
+	bool operator==(const Position &pos1, const Position &pos2);
 }
 
 #endif

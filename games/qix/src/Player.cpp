@@ -28,7 +28,7 @@ const arc::Sprite &arc::Player::getSprite() const
 	return _sprite;
 }
 
-arc::Player::Position &arc::operator+=(Player::Position &pos, Player::DIRECTION dir)
+arc::Position &arc::operator+=(Position &pos, Player::DIRECTION dir)
 {
 	if (dir == Player::UP)
 		--pos.y;
@@ -41,15 +41,15 @@ arc::Player::Position &arc::operator+=(Player::Position &pos, Player::DIRECTION 
 	return pos;
 }
 
-arc::Player::Position arc::operator+(const Player::Position &pos, Player::DIRECTION dir)
+arc::Position arc::operator+(const Position &pos, Player::DIRECTION dir)
 {
-	Player::Position newPos = pos;
+	Position newPos = pos;
 
 	newPos += dir;
 	return newPos;
 }
 
-bool arc::operator==(const Player::Position &pos1, const Player::Position &pos2)
+bool arc::operator==(const Position &pos1, const Position &pos2)
 {
 	return pos1.x == pos2.x && pos1.y == pos2.y;
 }
