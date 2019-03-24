@@ -37,7 +37,7 @@ void arc::Widget::paintEvent(QPaintEvent *)
 	for (auto &_sprite : _spritesToDraw) {
 		spritePos.setX((int)(size().width() * _sprite.first->getPosition().first));
 		spritePos.setY((int)(size().height() * _sprite.first->getPosition().second));
-		painter.drawPixmap(spritePos, _sprite.second);
+		painter.drawPixmap(spritePos, *_sprite.second);
 	}
 	for (auto text : _textsToDraw) {
 		fontSize = text->getFontSize() / (1920 / size().width());
@@ -59,22 +59,19 @@ void arc::Widget::paintEvent(QPaintEvent *)
 
 bool arc::Widget::processSprite(const ISprite &sprite)
 {
-	auto it = _sprites.find(&sprite);
-	QPixmap *pixmap = it->second.get();
+	QPixmap *pixmap;
 	std::pair<int, int> pos((int)(size().width() * sprite.getSize().first),
 	                        (int)(size().height() * sprite.getSize().second));
 
-	if (it == _sprites.end()) {
-		pixmap = new QPixmap(QString::fromStdString(sprite.getTextureName()));
-		if (pixmap->isNull()) {
-			delete pixmap;
-			pixmap = new QPixmap(pos.first, pos.second);
-			pixmap->fill(convertColor(sprite.getColor()));
-		}
-		_sprites.emplace(&sprite, std::unique_ptr<QPixmap>(pixmap));
+	pixmap = new QPixmap(QString::fromStdString(sprite.getTextureName()));
+	if (pixmap->isNull()) {
+		delete pixmap;
+		pixmap = new QPixmap(pos.first, pos.second);
+		pixmap->fill(convertColor(sprite.getColor()));
 	}
 	*pixmap = pixmap->scaled(pos.first, pos.second);
-	_spritesToDraw.emplace_back(std::make_pair<const ISprite *, std::reference_wrapper<QPixmap>>(&sprite, *pixmap));
+	_spritesToDraw.emplace_back(
+		std::make_pair<const ISprite *, std::unique_ptr<QPixmap>>(&sprite, std::unique_ptr<QPixmap>(pixmap)));
 	return true;
 }
 
