@@ -19,6 +19,7 @@ const std::map<arc::Key, void (arc::Core::*)()> arc::Core::_keyAction = {
 	{F4,     &arc::Core::incGraphicalLib},
 	{ESCAPE, &arc::Core::backToMenu},
 	{SUPPR,  &arc::Core::exit},
+	{R,      &arc::Core::reloadGame},
 };
 
 arc::Core::Core(const std::string &libname) :
@@ -132,4 +133,11 @@ void arc::Core::backToMenu()
 void arc::Core::exit()
 {
 	_sceneManager.changeScene(EXIT);
+}
+
+void arc::Core::reloadGame()
+{
+	delete _sharedData->currentGame;
+	_sharedData->currentGame = _gameLibraryLoader.loadGameInstance(
+		"games/lib_arcade_" + _sharedData->games[0] + ".so");
 }

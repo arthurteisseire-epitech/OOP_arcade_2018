@@ -25,6 +25,7 @@ namespace arc {
 		void processEvents(const std::map<arc::Key, arc::KeyState> &keys);
 		void backToMenu();
 		void exit();
+		void reloadGame();
 		std::string libPath();
 		void decGraphicalLib();
 		void incGraphicalLib();
