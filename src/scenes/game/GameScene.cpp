@@ -25,7 +25,7 @@ std::vector<std::reference_wrapper<const arc::IComponent>> arc::GameScene::getCo
         return std::vector<std::reference_wrapper<const IComponent>>();
 }
 
-arc::SCENE arc::GameScene::nextScene() const
+arc::SCENE arc::GameScene::nextScene(const std::map<Key, KeyState> &) const
 {
         if (_playerData->currentGame && _playerData->currentGame->isRunning())
 	        return GAME;

@@ -34,9 +34,8 @@ arc::PlayerName::PlayerName(const std::shared_ptr<SharedData> &playerData) :
 	_cursor = std::make_unique<Cursor>(getFocus());
 }
 
-void arc::PlayerName::update(const std::map<Key, KeyState> &keys, float deltaTime)
+void arc::PlayerName::update(const std::map<Key, KeyState> &keys, float)
 {
-	_keys = std::make_unique<std::map<Key, KeyState>>(keys);
 	for (auto &key : keys) {
 		auto it = _keysMap.find(key.first);
 		if (it != _keysMap.end() && key.second == PRESSED)
@@ -92,16 +91,14 @@ bool arc::PlayerName::in(int x, int y) const
 	       (x >= 0 && x < (int)_gridLetters[y].size());
 }
 
-arc::SCENE arc::PlayerName::nextScene() const
+arc::SCENE arc::PlayerName::nextScene(const std::map<Key, KeyState> &keys) const
 {
-	if (_keys) {
-		auto enterKey = _keys->find(ENTER);
-		if (enterKey != _keys->end() &&
-		    enterKey->second == PRESSED &&
-		    _playerData->name.length() == 3 &&
-		    getFocus()->getText() == "~")
-			return MENU;
-	}
+	auto enterKey = keys.find(ENTER);
+	if (enterKey != keys.end() &&
+	    enterKey->second == PRESSED &&
+	    _playerData->name.length() == 3 &&
+	    getFocus()->getText() == "~")
+		return MENU;
 	return PLAYER_NAME;
 }
 

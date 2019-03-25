@@ -17,7 +17,7 @@ namespace arc {
 
 		void update(const std::map<arc::Key, arc::KeyState> &keys, float deltaTime) override;
 		std::vector<std::reference_wrapper<const IComponent>> getComponents() const override;
-		SCENE nextScene() const override;
+		arc::SCENE nextScene(const std::map<Key, KeyState> &keys) const override;
 	};
 }
 

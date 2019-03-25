@@ -29,9 +29,9 @@ arc::IScene *arc::SceneManager::currentScene() const
 	return _scene.at(_currScene).get();
 }
 
-arc::IScene *arc::SceneManager::nextScene()
+arc::IScene *arc::SceneManager::nextScene(const std::map<Key, KeyState> &keys)
 {
-	SCENE nextScene = currentScene()->nextScene();
+	SCENE nextScene = currentScene()->nextScene(keys);
 
 	if (nextScene == NONE)
 		return nullptr;

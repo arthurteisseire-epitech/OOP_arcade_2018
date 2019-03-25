@@ -55,7 +55,6 @@ void arc::MainMenu::setSpritesSize()
 void arc::MainMenu::update(const std::map<Key, KeyState> &keys, float)
 {
 	_playerName->setText("Player Name : " + _playerData->name);
-	_keys = std::make_unique<std::map<Key, KeyState>>(keys);
 	for (auto &p : _keysMap) {
 		auto it = keys.find(p.first);
 		if (it != keys.end() && it->second == PRESSED)
@@ -80,13 +79,11 @@ void arc::MainMenu::moveFocusUp()
 	}
 }
 
-arc::SCENE arc::MainMenu::nextScene() const
+arc::SCENE arc::MainMenu::nextScene(const std::map<Key, KeyState> &keys) const
 {
-	if (_keys) {
-		auto enterKey = _keys->find(ENTER);
-		if (enterKey != _keys->end() && enterKey->second == PRESSED)
-			return _buttons[_focus]->getLinkedScene();
-	}
+	auto enterKey = keys.find(ENTER);
+	if (enterKey != keys.end() && enterKey->second == PRESSED)
+		return _buttons[_focus]->getLinkedScene();
 	return MENU;
 }
 

@@ -15,8 +15,9 @@
 #include "Process.hpp"
 
 const std::map<arc::Key, void (arc::Core::*)()> arc::Core::_keyAction = {
-	{F3, &arc::Core::decGraphicalLib},
-	{F4, &arc::Core::incGraphicalLib}
+	{F3,     &arc::Core::decGraphicalLib},
+	{F4,     &arc::Core::incGraphicalLib},
+	{ESCAPE, &arc::Core::backToMenu},
 };
 
 arc::Core::Core(const std::string &libname) :
@@ -35,7 +36,7 @@ int arc::Core::exec()
 {
 	clock_t t = clock();
 
-	while (_graphic->isOpen() && _sceneManager.nextScene() != nullptr) {
+	while (_graphic->isOpen() && _sceneManager.nextScene(_graphic->getKeys()) != nullptr) {
 		update(_graphic->getKeys(), (float)(clock() - t) / CLOCKS_PER_SEC);
 		t = clock();
 		Process::components(_sceneManager.currentScene()->getComponents(), _graphic.get());
@@ -120,4 +121,9 @@ std::vector<std::string> arc::Core::scanLibraries(const std::string &libDir) con
 std::string arc::Core::libPath()
 {
 	return "lib/lib_arcade_" + _sharedData->libname + ".so";
+}
+
+void arc::Core::backToMenu()
+{
+	_sceneManager.changeScene(MENU);
 }

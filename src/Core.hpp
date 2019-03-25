@@ -23,6 +23,7 @@ namespace arc {
 		void update(const std::map<Key, KeyState> &keys, float deltaTime);
 		std::vector<std::string> scanLibraries(const std::string &libDir) const;
 		void processEvents(const std::map<arc::Key, arc::KeyState> &keys);
+		void backToMenu();
 		std::string libPath();
 		void decGraphicalLib();
 		void incGraphicalLib();
