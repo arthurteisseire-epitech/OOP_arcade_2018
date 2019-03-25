@@ -80,8 +80,8 @@ test/fast: test
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/home/arthur/app/clion/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -561,6 +561,24 @@ src/scenes/SharedData.s:
 .PHONY : src/scenes/SharedData.s
 
 # target to build an object file
+src/scenes/exit/ExitScene.o:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/exit/ExitScene.o
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/exit/ExitScene.o
+.PHONY : src/scenes/exit/ExitScene.o
+
+# target to preprocess a source file
+src/scenes/exit/ExitScene.i:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/exit/ExitScene.i
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/exit/ExitScene.i
+.PHONY : src/scenes/exit/ExitScene.i
+
+# target to generate assembly for a file
+src/scenes/exit/ExitScene.s:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/exit/ExitScene.s
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/exit/ExitScene.s
+.PHONY : src/scenes/exit/ExitScene.s
+
+# target to build an object file
 src/scenes/game/GameScene.o:
 	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/scenes/game/GameScene.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/scenes/game/GameScene.o
@@ -744,6 +762,9 @@ help:
 	@echo "... src/scenes/SharedData.o"
 	@echo "... src/scenes/SharedData.i"
 	@echo "... src/scenes/SharedData.s"
+	@echo "... src/scenes/exit/ExitScene.o"
+	@echo "... src/scenes/exit/ExitScene.i"
+	@echo "... src/scenes/exit/ExitScene.s"
 	@echo "... src/scenes/game/GameScene.o"
 	@echo "... src/scenes/game/GameScene.i"
 	@echo "... src/scenes/game/GameScene.s"

@@ -19,6 +19,7 @@ include_directories(
         src/scenes/utils
         src/scenes/menu
         src/scenes/game
+        src/scenes/exit
         src/scenes
         src/library
         src

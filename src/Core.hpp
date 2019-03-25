@@ -24,6 +24,7 @@ namespace arc {
 		std::vector<std::string> scanLibraries(const std::string &libDir) const;
 		void processEvents(const std::map<arc::Key, arc::KeyState> &keys);
 		void backToMenu();
+		void exit();
 		std::string libPath();
 		void decGraphicalLib();
 		void incGraphicalLib();

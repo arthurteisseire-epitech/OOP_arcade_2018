@@ -33,7 +33,7 @@ arc::IScene *arc::SceneManager::nextScene(const std::map<Key, KeyState> &keys)
 {
 	SCENE nextScene = currentScene()->nextScene(keys);
 
-	if (nextScene == NONE)
+	if (nextScene == EXIT)
 		return nullptr;
 	if (nextScene != _currScene)
 		changeScene(nextScene);

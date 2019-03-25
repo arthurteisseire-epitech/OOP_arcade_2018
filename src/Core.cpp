@@ -18,6 +18,7 @@ const std::map<arc::Key, void (arc::Core::*)()> arc::Core::_keyAction = {
 	{F3,     &arc::Core::decGraphicalLib},
 	{F4,     &arc::Core::incGraphicalLib},
 	{ESCAPE, &arc::Core::backToMenu},
+	{SUPPR,  &arc::Core::exit},
 };
 
 arc::Core::Core(const std::string &libname) :
@@ -126,4 +127,9 @@ std::string arc::Core::libPath()
 void arc::Core::backToMenu()
 {
 	_sceneManager.changeScene(MENU);
+}
+
+void arc::Core::exit()
+{
+	_sceneManager.changeScene(EXIT);
 }
