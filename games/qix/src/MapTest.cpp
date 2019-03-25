@@ -13,11 +13,6 @@ namespace arc {
 	public:
 		explicit MapTest() : Map(10, 10)
 		{}
-
-		void SetUp(int width, int height)
-		{
-			static_cast<Map &>(*this) = Map(width, height);
-		}
 	};
 
 	TEST_F(MapTest, size)
