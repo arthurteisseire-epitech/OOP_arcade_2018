@@ -14,7 +14,7 @@ fclean:
 	cd sfml && make fclean
 
 re:
-	cd qt && qmake && make distclean && make
+	cd qt && qmake && make distclean && qmake && make
 	cd sfml && make re
 
 clean:

@@ -30,13 +30,13 @@ std::map<Qt::Key, arc::Key> arc::Widget::_qKeys = {
 void arc::Widget::paintEvent(QPaintEvent *)
 {
 	QPainter painter(this);
-	QPoint spritePos;
-	QPoint textPos;
+	QPointF spritePos;
+	QPointF textPos;
 	int fontSize;
 
 	for (auto &_sprite : _spritesToDraw) {
-		spritePos.setX((int)(size().width() * _sprite.first->getPosition().first));
-		spritePos.setY((int)(size().height() * _sprite.first->getPosition().second));
+		spritePos.setX(size().width() * _sprite.first->getPosition().first);
+		spritePos.setY(size().height() * _sprite.first->getPosition().second);
 		painter.drawPixmap(spritePos, *_sprite.second);
 	}
 	for (auto text : _textsToDraw) {
@@ -46,10 +46,10 @@ void arc::Widget::paintEvent(QPaintEvent *)
 		textPos.setX((int)(size().width() * text->getPosition().first));
 		textPos.setY((int)(size().height() * text->getPosition().second) - size().height());
 
-		textPos.rx() -= size().width() / 2;
-		textPos.ry() += size().height() / 2;
+		textPos.rx() -= size().width() / 2.0f;
+		textPos.ry() += size().height() / 2.0f;
 		painter.setFont(QFont(QString::fromStdString(text->getFontPath()), fontSize));
-		QRect rect(textPos.x(), textPos.y(), size().width(), size().height());
+		QRectF rect(textPos.x(), textPos.y(), size().width(), size().height());
 		painter.setPen(convertColor(text->getColor()));
 		painter.drawText(rect, Qt::AlignCenter, QString::fromStdString(text->getText()));
 	}
