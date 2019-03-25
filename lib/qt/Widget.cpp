@@ -43,8 +43,8 @@ void arc::Widget::paintEvent(QPaintEvent *)
 		fontSize = text->getFontSize() / (1920 / size().width());
 		fontSize = std::min(fontSize, text->getFontSize() / (1080 / size().height()));
 
-		textPos.setX((int)(size().width() * text->getPosition().first));
-		textPos.setY((int)(size().height() * text->getPosition().second) - size().height());
+		textPos.setX(size().width() * text->getPosition().first);
+		textPos.setY(size().height() * text->getPosition().second - size().height());
 
 		textPos.rx() -= size().width() / 2.0f;
 		textPos.ry() += size().height() / 2.0f;
