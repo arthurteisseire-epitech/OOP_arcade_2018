@@ -20,7 +20,7 @@ namespace arc {
 		explicit PlayerName(const std::shared_ptr<SharedData> &playerData);
 		void update(const std::map<Key, KeyState> &keys, float deltaTime) override;
 		std::vector<std::reference_wrapper<const IComponent>> getComponents() const override;
-		SCENE nextScene() const override;
+		arc::SCENE nextScene(const std::map<Key, KeyState> &keys) const override;
 	private:
 		void moveFocusLeft();
 		void moveFocusRight();
@@ -30,7 +30,6 @@ namespace arc {
 		bool in(int x, int y) const;
 		Text *getFocus() const;
 
-		std::unique_ptr<std::map<Key, KeyState>> _keys;
 		std::unique_ptr<Text> _playerText;
 		std::vector<Row> _gridLetters;
 		std::unique_ptr<Cursor> _cursor;

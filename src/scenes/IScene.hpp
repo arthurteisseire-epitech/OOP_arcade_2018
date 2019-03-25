@@ -23,7 +23,7 @@ namespace arc {
 		virtual ~IScene() = default;
 		virtual void update(const std::map<Key, KeyState> &map, float deltaTime) = 0;
 		virtual std::vector<std::reference_wrapper<const IComponent>> getComponents() const = 0;
-		virtual SCENE nextScene() const = 0;
+		virtual arc::SCENE nextScene(const std::map<Key, KeyState> &keys) const = 0;
 	};
 }
 

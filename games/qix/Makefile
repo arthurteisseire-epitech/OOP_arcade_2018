@@ -7,24 +7,22 @@
 
 CC		=	g++
 
-DSRC	=	./src/
+DSRC	=	src/
 DCOMPONENT	=	../../component/
-DGAMES	=	../
+INC		=	-I$(DSRC) -I$(DCOMPONENT) -I..
 
-SRC		=	$(DSRC)Nibbler.cpp		\
+SRC		=	$(DSRC)Game.cpp			\
+			$(DSRC)Player.cpp		\
 			$(DSRC)Map.cpp			\
-			$(DSRC)Snake.cpp		\
-			$(DSRC)Food.cpp			\
-			$(DCOMPONENT)Sprite.cpp	\
-			$(DCOMPONENT)Text.cpp	\
-			$(DSRC)MathUtils.cpp	\
+			$(DSRC)Cell.cpp			\
+			$(DSRC)Qix.cpp			\
+			$(DSRC)Converter.cpp		\
+			$(DCOMPONENT)Sprite.cpp		\
 
-INC		=	-I$(DSRC) -I$(DCOMPONENT) -I$(DGAMES)
-
-CXXFLAGS	+=  -Wall -Wextra $(INC) -fPIC
+CXXFLAGS	+=  -Wall -Wextra $(INC) -shared -fPIC
 OBJ		=	$(SRC:.cpp=.o)
 
-NAME	=	lib_arcade_nibbler.so
+NAME	=	lib_arcade_qix.so
 
 all: $(OBJ)
 	$(CC) -o $(NAME) -shared $(OBJ) $(CXXFLAGS)

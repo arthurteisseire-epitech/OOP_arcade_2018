@@ -2,18 +2,20 @@
 ** EPITECH PROJECT, 2018
 ** arcade
 ** File description:
-** GameScene.hpp
+** ExitScene.hpp
 */
 
-#ifndef ARCADE_GAMESCENE_HPP
-#define ARCADE_GAMESCENE_HPP
+#ifndef ARCADE_EXITSCENE_HPP
+#define ARCADE_EXITSCENE_HPP
 
+#include <memory>
+#include "SharedData.hpp"
 #include "Scene.hpp"
 
 namespace arc {
-	class GameScene : public Scene {
+	class ExitScene : public Scene {
 	public:
-		explicit GameScene(const std::shared_ptr<SharedData> &playerData);
+		explicit ExitScene(const std::shared_ptr<SharedData> &playerData);
 
 		void update(const std::map<arc::Key, arc::KeyState> &keys, float deltaTime) override;
 		std::vector<std::reference_wrapper<const IComponent>> getComponents() const override;

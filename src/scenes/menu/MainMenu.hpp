@@ -26,7 +26,7 @@ namespace arc {
 		explicit MainMenu(const std::shared_ptr<SharedData> &playerData);
 		void update(const std::map<Key, KeyState> &keys, float deltaTime) override;
 		std::vector<std::reference_wrapper<const IComponent>> getComponents() const override;
-		SCENE nextScene() const override;
+		arc::SCENE nextScene(const std::map<Key, KeyState> &keys) const override;
 	private:
 		void moveFocusDown();
 		void moveFocusUp();
@@ -34,7 +34,6 @@ namespace arc {
 		void setSpritesSize();
 		void fillComponents();
 
-		std::unique_ptr<std::map<Key, KeyState>> _keys;
 		std::vector<std::unique_ptr<Button>> _buttons;
 		std::vector<std::unique_ptr<Audio>> _audios;
 		std::unique_ptr<Sprite> _spriteFocus;

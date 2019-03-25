@@ -13,7 +13,7 @@ namespace arc {
 		MENU,
 		PLAYER_NAME,
 		GAME,
-		NONE,
+		EXIT,
 	};
 }
 

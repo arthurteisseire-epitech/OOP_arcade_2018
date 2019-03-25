@@ -30,26 +30,26 @@ std::map<Qt::Key, arc::Key> arc::Widget::_qKeys = {
 void arc::Widget::paintEvent(QPaintEvent *)
 {
 	QPainter painter(this);
-	QPoint spritePos;
-	QPoint textPos;
+	QPointF spritePos;
+	QPointF textPos;
 	int fontSize;
 
 	for (auto &_sprite : _spritesToDraw) {
-		spritePos.setX((int)(size().width() * _sprite.first->getPosition().first));
-		spritePos.setY((int)(size().height() * _sprite.first->getPosition().second));
-		painter.drawPixmap(spritePos, _sprite.second);
+		spritePos.setX(size().width() * _sprite.first->getPosition().first);
+		spritePos.setY(size().height() * _sprite.first->getPosition().second);
+		painter.drawPixmap(spritePos, *_sprite.second);
 	}
 	for (auto text : _textsToDraw) {
 		fontSize = text->getFontSize() / (1920 / size().width());
 		fontSize = std::min(fontSize, text->getFontSize() / (1080 / size().height()));
 
-		textPos.setX((int)(size().width() * text->getPosition().first));
-		textPos.setY((int)(size().height() * text->getPosition().second) - size().height());
+		textPos.setX(size().width() * text->getPosition().first);
+		textPos.setY(size().height() * text->getPosition().second - size().height());
 
-		textPos.rx() -= size().width() / 2;
-		textPos.ry() += size().height() / 2;
+		textPos.rx() -= size().width() / 2.0f;
+		textPos.ry() += size().height() / 2.0f;
 		painter.setFont(QFont(QString::fromStdString(text->getFontPath()), fontSize));
-		QRect rect(textPos.x(), textPos.y(), size().width(), size().height());
+		QRectF rect(textPos.x(), textPos.y(), size().width(), size().height());
 		painter.setPen(convertColor(text->getColor()));
 		painter.drawText(rect, Qt::AlignCenter, QString::fromStdString(text->getText()));
 	}
@@ -59,22 +59,19 @@ void arc::Widget::paintEvent(QPaintEvent *)
 
 bool arc::Widget::processSprite(const ISprite &sprite)
 {
-	auto it = _sprites.find(&sprite);
-	QPixmap *pixmap = it->second.get();
+	QPixmap *pixmap;
 	std::pair<int, int> pos((int)(size().width() * sprite.getSize().first),
 	                        (int)(size().height() * sprite.getSize().second));
 
-	if (it == _sprites.end()) {
-		pixmap = new QPixmap(QString::fromStdString(sprite.getTextureName()));
-		if (pixmap->isNull()) {
-			delete pixmap;
-			pixmap = new QPixmap(pos.first, pos.second);
-			pixmap->fill(convertColor(sprite.getColor()));
-		}
-		_sprites.emplace(&sprite, std::unique_ptr<QPixmap>(pixmap));
+	pixmap = new QPixmap(QString::fromStdString(sprite.getTextureName()));
+	if (pixmap->isNull()) {
+		delete pixmap;
+		pixmap = new QPixmap(pos.first, pos.second);
+		pixmap->fill(convertColor(sprite.getColor()));
 	}
 	*pixmap = pixmap->scaled(pos.first, pos.second);
-	_spritesToDraw.emplace(&sprite, *pixmap);
+	_spritesToDraw.emplace_back(
+		std::make_pair<const ISprite *, std::unique_ptr<QPixmap>>(&sprite, std::unique_ptr<QPixmap>(pixmap)));
 	return true;
 }
 

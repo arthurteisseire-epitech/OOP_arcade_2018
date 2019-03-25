@@ -20,14 +20,14 @@ std::map<arc::Key, void (arc::MainMenu::*)()> arc::MainMenu::_keysMap = {
 arc::MainMenu::MainMenu(const std::shared_ptr<SharedData> &playerData) :
 	Scene(playerData),
 	_playerName(
-		std::make_unique<Text>("Player Name : " + _playerData->name, std::pair<float, float>(0.1, 0.1), 20)),
+		std::make_unique<Text>("Player Name : " + _playerData->playerName, std::pair<float, float>(0.1, 0.1), 20)),
 	_focus(0)
 {
 	_spriteFocus = std::make_unique<Sprite>("assets/focus.png");
 	_audios.push_back(std::make_unique<Audio>("assets/audio/sound.m4a", 10));
 	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", PLAYER_NAME, "Player Name"));
 	_buttons.push_back(std::make_unique<Button>("assets/saple.jpg", GAME, "Play"));
-	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", NONE, "Exit"));
+	_buttons.push_back(std::make_unique<Button>("assets/sample.jpg", EXIT, "Exit"));
 	setSpritesSize();
 	setSpritesPosition();
 	fillComponents();
@@ -54,8 +54,7 @@ void arc::MainMenu::setSpritesSize()
 
 void arc::MainMenu::update(const std::map<Key, KeyState> &keys, float)
 {
-	_playerName->setText("Player Name : " + _playerData->name);
-	_keys = std::make_unique<std::map<Key, KeyState>>(keys);
+	_playerName->setText("Player Name : " + _playerData->playerName);
 	for (auto &p : _keysMap) {
 		auto it = keys.find(p.first);
 		if (it != keys.end() && it->second == PRESSED)
@@ -80,13 +79,11 @@ void arc::MainMenu::moveFocusUp()
 	}
 }
 
-arc::SCENE arc::MainMenu::nextScene() const
+arc::SCENE arc::MainMenu::nextScene(const std::map<Key, KeyState> &keys) const
 {
-	if (_keys) {
-		auto enterKey = _keys->find(ENTER);
-		if (enterKey != _keys->end() && enterKey->second == PRESSED)
-			return _buttons[_focus]->getLinkedScene();
-	}
+	auto enterKey = keys.find(ENTER);
+	if (enterKey != keys.end() && enterKey->second == PRESSED)
+		return _buttons[_focus]->getLinkedScene();
 	return MENU;
 }
 

@@ -19,6 +19,7 @@ include_directories(
         src/scenes/utils
         src/scenes/menu
         src/scenes/game
+        src/scenes/exit
         src/scenes
         src/library
         src
@@ -36,7 +37,7 @@ file(GLOB_RECURSE component component/*.cpp)
 list(FILTER core EXCLUDE REGEX ".*Test.cpp$")
 
 file(GLOB_RECURSE lib lib/*.cpp)
-file(GLOB_RECURSE games games/*.cpp)
+file(GLOB_RECURSE games games/qix/*.cpp)
 list(FILTER games EXCLUDE REGEX ".*Test.cpp$")
 
 add_executable(${CMAKE_PROJECT_NAME} ${main} ${core} ${component} ${games})
@@ -50,7 +51,7 @@ add_custom_target(
 
 add_custom_target(
         games
-        ALL COMMAND make -C nibbler
+        ALL COMMAND make
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/games
 )
 
@@ -74,9 +75,9 @@ add_custom_target(
 
 enable_testing()
 
-file(GLOB_RECURSE tests src/*Test.cpp games/*Test.cpp)
+file(GLOB_RECURSE tests src/*Test.cpp games/qix/*Test.cpp)
 
-#add_executable(units ${core} ${tests} ${component} ${games})
-#target_link_libraries(units dl Qt5::Widgets Qt5::Multimedia gtest gtest_main gcov)
+add_executable(units ${core} ${tests} ${component} ${games})
+target_link_libraries(units dl Qt5::Widgets Qt5::Multimedia gtest gtest_main gcov)
 
 add_test(NAME units COMMAND units)

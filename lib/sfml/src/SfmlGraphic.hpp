@@ -29,7 +29,7 @@ namespace arc {
 		void processKeys(const sf::Event &event, sf::Event::EventType type, arc::KeyState state);
 
 		sf::RenderWindow _window;
-		std::map<std::string, sf::Texture> _textures;
+		std::map<std::string, std::pair<sf::Texture, bool>> _textures;
 		std::map<std::string, sf::Font> _fonts;
 		std::map<Key, KeyState> _keys;
 		static const std::map<sf::Keyboard::Key, Key> _sfmlKeys;

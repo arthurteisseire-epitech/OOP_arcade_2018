@@ -24,7 +24,7 @@ namespace arc {
 
 		void changeScene(SCENE scene);
 		IScene *currentScene() const;
-		IScene *nextScene();
+		arc::IScene *nextScene(const std::map<Key, KeyState> &keys);
 	protected:
 		SCENE _currScene;
 		std::unique_ptr<SceneFactory> _factory;

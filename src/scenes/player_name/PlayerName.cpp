@@ -22,7 +22,7 @@ const std::map<arc::Key, void (arc::PlayerName::*)()> arc::PlayerName::_keysMap 
 
 arc::PlayerName::PlayerName(const std::shared_ptr<SharedData> &playerData) :
 	Scene(playerData),
-	_playerText(std::make_unique<Text>(PREFIX + _playerData->name,
+	_playerText(std::make_unique<Text>(PREFIX + _playerData->playerName,
 	                                   std::pair<float, float>(0.1, 0.1), FONT_SIZE)),
 	_focus(0, 0)
 {
@@ -34,9 +34,8 @@ arc::PlayerName::PlayerName(const std::shared_ptr<SharedData> &playerData) :
 	_cursor = std::make_unique<Cursor>(getFocus());
 }
 
-void arc::PlayerName::update(const std::map<Key, KeyState> &keys, float deltaTime)
+void arc::PlayerName::update(const std::map<Key, KeyState> &keys, float)
 {
-	_keys = std::make_unique<std::map<Key, KeyState>>(keys);
 	for (auto &key : keys) {
 		auto it = _keysMap.find(key.first);
 		if (it != _keysMap.end() && key.second == PRESSED)
@@ -75,10 +74,10 @@ void arc::PlayerName::moveFocusDown()
 void arc::PlayerName::action()
 {
 	if (getFocus()->getText() == "<") {
-		_playerData->name = _playerData->name.substr(0, _playerData->name.length() - 1);
-		_playerText->setText(PREFIX + _playerData->name);
-	} else if (_playerData->name.length() < 3 && getFocus()->getText() != "~")
-		_playerText->setText(PREFIX + (_playerData->name += getFocus()->getText()));
+		_playerData->playerName = _playerData->playerName.substr(0, _playerData->playerName.length() - 1);
+		_playerText->setText(PREFIX + _playerData->playerName);
+	} else if (_playerData->playerName.length() < 3 && getFocus()->getText() != "~")
+		_playerText->setText(PREFIX + (_playerData->playerName += getFocus()->getText()));
 }
 
 arc::Text *arc::PlayerName::getFocus() const
@@ -92,16 +91,14 @@ bool arc::PlayerName::in(int x, int y) const
 	       (x >= 0 && x < (int)_gridLetters[y].size());
 }
 
-arc::SCENE arc::PlayerName::nextScene() const
+arc::SCENE arc::PlayerName::nextScene(const std::map<Key, KeyState> &keys) const
 {
-	if (_keys) {
-		auto enterKey = _keys->find(ENTER);
-		if (enterKey != _keys->end() &&
-		    enterKey->second == PRESSED &&
-		    _playerData->name.length() == 3 &&
-		    getFocus()->getText() == "~")
-			return MENU;
-	}
+	auto enterKey = keys.find(ENTER);
+	if (enterKey != keys.end() &&
+	    enterKey->second == PRESSED &&
+	    _playerData->playerName.length() == 3 &&
+	    getFocus()->getText() == "~")
+		return MENU;
 	return PLAYER_NAME;
 }
 
