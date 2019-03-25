@@ -13,7 +13,7 @@
 
 namespace arc {
 	struct SharedData {
-		std::string name;
+		std::string playerName;
 		IGame *currentGame;
 		std::vector<std::string> games;
 		std::vector<std::string> libs;

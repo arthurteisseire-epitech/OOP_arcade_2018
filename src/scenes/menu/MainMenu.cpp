@@ -20,7 +20,7 @@ std::map<arc::Key, void (arc::MainMenu::*)()> arc::MainMenu::_keysMap = {
 arc::MainMenu::MainMenu(const std::shared_ptr<SharedData> &playerData) :
 	Scene(playerData),
 	_playerName(
-		std::make_unique<Text>("Player Name : " + _playerData->name, std::pair<float, float>(0.1, 0.1), 20)),
+		std::make_unique<Text>("Player Name : " + _playerData->playerName, std::pair<float, float>(0.1, 0.1), 20)),
 	_focus(0)
 {
 	_spriteFocus = std::make_unique<Sprite>("assets/focus.png");
@@ -54,7 +54,7 @@ void arc::MainMenu::setSpritesSize()
 
 void arc::MainMenu::update(const std::map<Key, KeyState> &keys, float)
 {
-	_playerName->setText("Player Name : " + _playerData->name);
+	_playerName->setText("Player Name : " + _playerData->playerName);
 	for (auto &p : _keysMap) {
 		auto it = keys.find(p.first);
 		if (it != keys.end() && it->second == PRESSED)
