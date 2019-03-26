@@ -80,8 +80,8 @@ test/fast: test
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/home/arthur/app/clion/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -453,6 +453,24 @@ src/Process.s:
 .PHONY : src/Process.s
 
 # target to build an object file
+src/library/LibraryChanger.o:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryChanger.o
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryChanger.o
+.PHONY : src/library/LibraryChanger.o
+
+# target to preprocess a source file
+src/library/LibraryChanger.i:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryChanger.i
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryChanger.i
+.PHONY : src/library/LibraryChanger.i
+
+# target to generate assembly for a file
+src/library/LibraryChanger.s:
+	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryChanger.s
+	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryChanger.s
+.PHONY : src/library/LibraryChanger.s
+
+# target to build an object file
 src/library/LibraryLoader.o:
 	$(MAKE) -f CMakeFiles/units.dir/build.make CMakeFiles/units.dir/src/library/LibraryLoader.o
 	$(MAKE) -f CMakeFiles/arcade.dir/build.make CMakeFiles/arcade.dir/src/library/LibraryLoader.o
@@ -744,6 +762,9 @@ help:
 	@echo "... src/Process.o"
 	@echo "... src/Process.i"
 	@echo "... src/Process.s"
+	@echo "... src/library/LibraryChanger.o"
+	@echo "... src/library/LibraryChanger.i"
+	@echo "... src/library/LibraryChanger.s"
 	@echo "... src/library/LibraryLoader.o"
 	@echo "... src/library/LibraryLoader.i"
 	@echo "... src/library/LibraryLoader.s"
