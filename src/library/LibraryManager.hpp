@@ -8,11 +8,14 @@
 #ifndef ARCADE_LIBRARYMANAGER_HPP
 #define ARCADE_LIBRARYMANAGER_HPP
 
+#include <dirent.h>
 #include <string>
 #include <vector>
 #include <memory>
 #include <iostream>
-#include "LibraryChanger.hpp"
+#include <regex>
+#include "LibraryLoader.hpp"
+#include "LibraryLoaderException.hpp"
 
 namespace arc {
 	template<typename T>
@@ -27,8 +30,10 @@ namespace arc {
 		const std::vector<std::string> &getLibsName();
 		const std::string &getCurrentLibname();
 	private:
+		void scanDir();
 		void safeChangeLib(const std::string &newlib);
 		void changeLib();
+		std::string libPath();
 
 		T *_instance;
 		LibraryLoader _loader;
@@ -44,28 +49,37 @@ namespace arc {
 		_libDir(libDir),
 		_entryPoint(entryPoint)
 	{
-		_libs = LibraryChanger::scanLibraries(_libDir);
+		scanDir();
 		if (_libs.empty())
 			throw LibraryLoaderException("No valid .so found in " + libDir);
 		if (libname.empty())
 			_libname = _libs[0];
 		else
 			_libname = libname;
-		_instance = _loader.loadInstance<T>(LibraryChanger::libPath(_libDir, _libname), _entryPoint);
+		_instance = _loader.loadInstance<T>(libPath(), _entryPoint);
 	}
 
 	template<typename T>
 	void LibraryManager<T>::prevLib()
 	{
-		std::string newLib = LibraryChanger::prevLib(_libs, _libname, _libDir);
-		safeChangeLib(newLib);
+		scanDir();
+		auto it = std::find(_libs.begin(), _libs.end(), _libname);
+		if (it + 1 == _libs.end())
+			it = _libs.begin();
+		else
+			++it;
+		safeChangeLib(*it);
 	}
 
 	template<typename T>
 	void LibraryManager<T>::nextLib()
 	{
-		std::string newLib = LibraryChanger::nextLib(_libs, _libname, _libDir);
-		safeChangeLib(newLib);
+		scanDir();
+		auto it = std::find(_libs.begin(), _libs.end(), _libname);
+		if (it == _libs.begin())
+			it = _libs.end();
+		--it;
+		safeChangeLib(*it);
 	}
 
 	template<typename T>
@@ -81,7 +95,7 @@ namespace arc {
 	void LibraryManager<T>::changeLib()
 	{
 		delete _instance;
-		_instance = _loader.loadInstance<T>(LibraryChanger::libPath(_libDir, _libname), _entryPoint);
+		_instance = _loader.loadInstance<T>(libPath(), _entryPoint);
 	}
 
 	template<typename T>
@@ -100,6 +114,31 @@ namespace arc {
 	const std::string &LibraryManager<T>::getCurrentLibname()
 	{
 		return _libname;
+	}
+
+	template<typename T>
+	void LibraryManager<T>::scanDir()
+	{
+		std::regex e("^lib_arcade_(.*)\\.so$");
+		std::smatch m;
+		struct dirent *ent;
+		DIR *dir = opendir(_libDir.c_str());
+
+		_libs.clear();
+		if (dir != nullptr) {
+			while ((ent = readdir(dir)) != nullptr) {
+				std::string s = ent->d_name;
+				if (std::regex_search(s, m, e))
+				_libs.emplace_back(m[1]);
+			}
+			closedir(dir);
+		}
+	}
+
+	template<typename T>
+	std::string LibraryManager<T>::libPath()
+	{
+		return _libDir + "lib_arcade_" + _libname + ".so";
 	}
 }
 

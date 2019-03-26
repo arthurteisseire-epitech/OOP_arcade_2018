@@ -6,7 +6,6 @@
 */
 
 #include <unistd.h>
-#include "LibraryChanger.hpp"
 #include "PlayerName.hpp"
 #include "Text.hpp"
 #include "Core.hpp"
