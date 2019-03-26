@@ -30,11 +30,10 @@ const std::map<arc::Key, void (arc::Core::*)()> arc::Core::_keyAction = {
 
 arc::Core::Core(const std::string &libname) :
 	_sharedData(std::make_shared<SharedData>()),
-	_sceneManager(MENU, _sharedData)
+	_sceneManager(MENU, _sharedData),
+	_gameManager(GAME_DIR, GAME_ENTRY_POINT),
+	_graphicManager(GRAPHIC_DIR, GRAPHIC_ENTRY_POINT, libname)
 {
-	_gameManager = new LibraryManager<IGame>(GAME_DIR, GAME_ENTRY_POINT);
-	_graphicManager = new LibraryManager<IGraphic>(GRAPHIC_DIR, GRAPHIC_ENTRY_POINT, libname);
-
 	updateSharedData();
 }
 
@@ -42,13 +41,13 @@ int arc::Core::exec()
 {
 	clock_t t = clock();
 
-	while (_graphicManager->getInstance()->isOpen() &&
-	       _sceneManager.nextScene(_graphicManager->getInstance()->getKeys()) != nullptr) {
-		update(_graphicManager->getInstance()->getKeys(), (float)(clock() - t) / CLOCKS_PER_SEC);
+	while (_graphicManager.getInstance()->isOpen() &&
+	       _sceneManager.nextScene(_graphicManager.getInstance()->getKeys()) != nullptr) {
+		update(_graphicManager.getInstance()->getKeys(), (float)(clock() - t) / CLOCKS_PER_SEC);
 		t = clock();
-		Process::components(_sceneManager.currentScene()->getComponents(), _graphicManager->getInstance());
-		_graphicManager->getInstance()->processEvents();
-		_graphicManager->getInstance()->draw();
+		Process::components(_sceneManager.currentScene()->getComponents(), _graphicManager.getInstance());
+		_graphicManager.getInstance()->processEvents();
+		_graphicManager.getInstance()->draw();
 		usleep(100);
 	}
 	return 0;
@@ -74,24 +73,24 @@ void arc::Core::processEvents(const std::map<arc::Key, arc::KeyState> &keys)
 
 void arc::Core::prevGraphicalLib()
 {
-	_graphicManager->prevLib();
+	_graphicManager.prevLib();
 }
 
 void arc::Core::nextGraphicalLib()
 {
-	_graphicManager->nextLib();
+	_graphicManager.nextLib();
 }
 
 void arc::Core::prevGameLib()
 {
-	_gameManager->prevLib();
-	_sharedData->currentGame = _gameManager->getInstance();
+	_gameManager.prevLib();
+	_sharedData->currentGame = _gameManager.getInstance();
 }
 
 void arc::Core::nextGameLib()
 {
-	_gameManager->nextLib();
-	_sharedData->currentGame = _gameManager->getInstance();
+	_gameManager.nextLib();
+	_sharedData->currentGame = _gameManager.getInstance();
 }
 
 void arc::Core::backToMenu()
@@ -106,17 +105,14 @@ void arc::Core::exit()
 
 void arc::Core::reloadGame()
 {
-//	delete _sharedData->currentGame;
-//	_sharedData->currentGame = _gameLibraryLoader.loadGameInstance(
-//		LibraryChanger::libPath(GAME_DIR, _sharedData->gameName));
 }
 
 void arc::Core::updateSharedData()
 {
-	_sharedData->games = _gameManager->getLibsName();
-	_sharedData->gameName = _gameManager->getCurrentLibname();
-	_sharedData->currentGame = _gameManager->getInstance();
+	_sharedData->games = _gameManager.getLibsName();
+	_sharedData->gameName = _gameManager.getCurrentLibname();
+	_sharedData->currentGame = _gameManager.getInstance();
 
-	_sharedData->libs = _graphicManager->getLibsName();
-	_sharedData->libname = _graphicManager->getCurrentLibname();
+	_sharedData->libs = _graphicManager.getLibsName();
+	_sharedData->libname = _graphicManager.getCurrentLibname();
 }

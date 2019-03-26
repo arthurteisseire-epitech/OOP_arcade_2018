@@ -36,8 +36,9 @@ namespace arc {
 
 		std::shared_ptr<SharedData> _sharedData;
 		SceneManager _sceneManager;
-		LibraryManager<IGraphic> *_graphicManager;
-		LibraryManager<IGame> *_gameManager;
+		LibraryManager<IGame> _gameManager;
+		LibraryManager<IGraphic> _graphicManager;
+
 		static const std::map<Key, void (arc::Core::*)()> _keyAction;
 		static const std::string GRAPHIC_DIR;
 		static const std::string GAME_DIR;
