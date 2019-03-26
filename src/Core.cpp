@@ -35,19 +35,15 @@ arc::Core::Core(const std::string &libname) :
 	_gameManager = new LibraryManager<IGame>(GAME_DIR, GAME_ENTRY_POINT);
 	_graphicManager = new LibraryManager<IGraphic>(GRAPHIC_DIR, GRAPHIC_ENTRY_POINT, libname);
 
-	_sharedData->games = _gameManager->getLibsName();
-	_sharedData->gameName = _gameManager->getCurrentLibname();
-	_sharedData->currentGame = _gameManager->getInstance();
-
-	_sharedData->libs = _graphicManager->getLibsName();
-	_sharedData->libname = _graphicManager->getCurrentLibname();
+	updateSharedData();
 }
 
 int arc::Core::exec()
 {
 	clock_t t = clock();
 
-	while (_graphicManager->getInstance()->isOpen() && _sceneManager.nextScene(_graphicManager->getInstance()->getKeys()) != nullptr) {
+	while (_graphicManager->getInstance()->isOpen() &&
+	       _sceneManager.nextScene(_graphicManager->getInstance()->getKeys()) != nullptr) {
 		update(_graphicManager->getInstance()->getKeys(), (float)(clock() - t) / CLOCKS_PER_SEC);
 		t = clock();
 		Process::components(_sceneManager.currentScene()->getComponents(), _graphicManager->getInstance());
@@ -70,10 +66,7 @@ void arc::Core::processEvents(const std::map<arc::Key, arc::KeyState> &keys)
 		auto key = keys.find(keyAction.first);
 		if (key != keys.end() && key->second == RELEASED) {
 			(this->*keyAction.second)();
-			_sharedData->libs = _graphicManager->getLibsName();
-			_sharedData->libname = _graphicManager->getCurrentLibname();
-			_sharedData->games = _gameManager->getLibsName();
-			_sharedData->gameName = _gameManager->getCurrentLibname();
+			updateSharedData();
 			return;
 		}
 	}
@@ -116,4 +109,14 @@ void arc::Core::reloadGame()
 //	delete _sharedData->currentGame;
 //	_sharedData->currentGame = _gameLibraryLoader.loadGameInstance(
 //		LibraryChanger::libPath(GAME_DIR, _sharedData->gameName));
+}
+
+void arc::Core::updateSharedData()
+{
+	_sharedData->games = _gameManager->getLibsName();
+	_sharedData->gameName = _gameManager->getCurrentLibname();
+	_sharedData->currentGame = _gameManager->getInstance();
+
+	_sharedData->libs = _graphicManager->getLibsName();
+	_sharedData->libname = _graphicManager->getCurrentLibname();
 }

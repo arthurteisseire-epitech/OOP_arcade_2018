@@ -24,11 +24,11 @@ namespace arc {
 	private:
 		void update(const std::map<Key, KeyState> &keys, float deltaTime);
 		void processEvents(const std::map<arc::Key, arc::KeyState> &keys);
+		void updateSharedData();
 
 		void backToMenu();
 		void exit();
 		void reloadGame();
-
 		void prevGraphicalLib();
 		void nextGraphicalLib();
 		void prevGameLib();
