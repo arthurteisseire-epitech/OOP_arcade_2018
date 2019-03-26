@@ -29,6 +29,7 @@ namespace arc {
 		void prevGraphicalLib();
 		void nextGraphicalLib();
 		void changeGraphicalLib();
+
 		void safeChangeGraphicalLib(const std::string &newlib);
 
 		std::shared_ptr<SharedData> _sharedData;
@@ -38,6 +39,7 @@ namespace arc {
 		std::unique_ptr<IGraphic> _graphic;
 		static const std::map<Key, void (arc::Core::*)()> _keyAction;
 		static const std::string GRAPHIC_DIR;
+		static const std::string GAME_DIR;
 	};
 }
 

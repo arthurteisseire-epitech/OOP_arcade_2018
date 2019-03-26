@@ -16,6 +16,7 @@
 #include "Process.hpp"
 
 const std::string arc::Core::GRAPHIC_DIR = "lib/";
+const std::string arc::Core::GAME_DIR = "games/";
 
 const std::map<arc::Key, void (arc::Core::*)()> arc::Core::_keyAction = {
 	{F3,     &arc::Core::prevGraphicalLib},
@@ -30,10 +31,11 @@ arc::Core::Core(const std::string &libname) :
 	_sceneManager(MENU, _sharedData)
 {
 	_sharedData->libs = LibraryChanger::scanLibraries(GRAPHIC_DIR);
-	_sharedData->games = LibraryChanger::scanLibraries("games/");
+	_sharedData->games = LibraryChanger::scanLibraries(GAME_DIR);
 	_sharedData->libname = libname;
+	_sharedData->gameName = _sharedData->games[0];
 	_sharedData->currentGame = _gameLibraryLoader.loadGameInstance(
-		"games/lib_arcade_" + _sharedData->games[0] + ".so");
+		LibraryChanger::libPath(GAME_DIR, _sharedData->gameName));
 	_graphic = std::unique_ptr<IGraphic>(_graphicLibraryLoader.loadGraphicInstance(
 		LibraryChanger::libPath(GRAPHIC_DIR, _sharedData->libname)));
 }
@@ -112,5 +114,5 @@ void arc::Core::reloadGame()
 {
 	delete _sharedData->currentGame;
 	_sharedData->currentGame = _gameLibraryLoader.loadGameInstance(
-		"games/lib_arcade_" + _sharedData->games[0] + ".so");
+		LibraryChanger::libPath(GAME_DIR, _sharedData->gameName));
 }
