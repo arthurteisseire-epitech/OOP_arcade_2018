@@ -32,27 +32,25 @@ arc::Core::Core(const std::string &libname) :
 	_sharedData(std::make_shared<SharedData>()),
 	_sceneManager(MENU, _sharedData)
 {
-	_sharedData->libs = LibraryChanger::scanLibraries(GRAPHIC_DIR);
-	_sharedData->libname = libname;
-	_sharedData->games = LibraryChanger::scanLibraries(GAME_DIR);
-	_sharedData->gameName = _sharedData->games[0];
-	_graphicManager = new LibraryManager<IGraphic>(_sharedData->libs, _sharedData->libname,
-	                                               GRAPHIC_DIR, GRAPHIC_ENTRY_POINT);
-	_gameManager = new LibraryManager<IGame>(_sharedData->games, _sharedData->gameName,
-	                                         GAME_DIR, GAME_ENTRY_POINT);
-	_sharedData->currentGame = _gameManager->instance();
+	_graphicManager = new LibraryManager<IGraphic>(GRAPHIC_DIR, GRAPHIC_ENTRY_POINT, libname);
+	_gameManager = new LibraryManager<IGame>(GAME_DIR, GAME_ENTRY_POINT);
+	_sharedData->libs = _graphicManager->getLibsName();
+	_sharedData->libname = _graphicManager->getCurrentLibname();
+	_sharedData->games = _gameManager->getLibsName();
+	_sharedData->gameName = _gameManager->getCurrentLibname();
+	_sharedData->currentGame = _gameManager->getInstance();
 }
 
 int arc::Core::exec()
 {
 	clock_t t = clock();
 
-	while (_graphicManager->instance()->isOpen() && _sceneManager.nextScene(_graphicManager->instance()->getKeys()) != nullptr) {
-		update(_graphicManager->instance()->getKeys(), (float)(clock() - t) / CLOCKS_PER_SEC);
+	while (_graphicManager->getInstance()->isOpen() && _sceneManager.nextScene(_graphicManager->getInstance()->getKeys()) != nullptr) {
+		update(_graphicManager->getInstance()->getKeys(), (float)(clock() - t) / CLOCKS_PER_SEC);
 		t = clock();
-		Process::components(_sceneManager.currentScene()->getComponents(), _graphicManager->instance());
-		_graphicManager->instance()->processEvents();
-		_graphicManager->instance()->draw();
+		Process::components(_sceneManager.currentScene()->getComponents(), _graphicManager->getInstance());
+		_graphicManager->getInstance()->processEvents();
+		_graphicManager->getInstance()->draw();
 		usleep(100);
 	}
 	return 0;
@@ -70,6 +68,10 @@ void arc::Core::processEvents(const std::map<arc::Key, arc::KeyState> &keys)
 		auto key = keys.find(keyAction.first);
 		if (key != keys.end() && key->second == RELEASED) {
 			(this->*keyAction.second)();
+			_sharedData->libs = _graphicManager->getLibsName();
+			_sharedData->libname = _graphicManager->getCurrentLibname();
+			_sharedData->games = _gameManager->getLibsName();
+			_sharedData->gameName = _gameManager->getCurrentLibname();
 			return;
 		}
 	}
@@ -88,13 +90,13 @@ void arc::Core::nextGraphicalLib()
 void arc::Core::prevGameLib()
 {
 	_gameManager->prevLib();
-	_sharedData->currentGame = _gameManager->instance();
+	_sharedData->currentGame = _gameManager->getInstance();
 }
 
 void arc::Core::nextGameLib()
 {
 	_gameManager->nextLib();
-	_sharedData->currentGame = _gameManager->instance();
+	_sharedData->currentGame = _gameManager->getInstance();
 }
 
 void arc::Core::backToMenu()

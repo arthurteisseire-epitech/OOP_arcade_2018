@@ -17,32 +17,37 @@ namespace arc {
 	template<typename T>
 	class LibraryManager {
 	public:
-		explicit LibraryManager(std::vector<std::string> &libs, std::string &libname,
-		                        const std::string &libDir, const std::string &entryPoint);
+		explicit LibraryManager(const std::string &libDir, const std::string &entryPoint,
+		                        const std::string &libname = "");
 
 		void prevLib();
 		void nextLib();
-		T *instance();
+		T *getInstance();
+		const std::vector<std::string> &getLibsName();
+		const std::string &getCurrentLibname();
 	private:
 		void safeChangeLib(const std::string &newlib);
 		void changeLib();
 
 		T *_instance;
 		LibraryLoader _loader;
-		std::vector<std::string> &_libs;
-		std::string &_libname;
+		std::vector<std::string> _libs;
+		std::string _libname;
 		const std::string &_libDir;
 		const std::string &_entryPoint;
 	};
 
 	template<typename T>
-	LibraryManager<T>::LibraryManager(std::vector<std::string> &libs, std::string &libname,
-	                                  const std::string &libDir, const std::string &entryPoint) :
-		_libs(libs),
-		_libname(libname),
+	LibraryManager<T>::LibraryManager(const std::string &libDir, const std::string &entryPoint,
+	                                  const std::string &libname) :
 		_libDir(libDir),
 		_entryPoint(entryPoint)
 	{
+		_libs = LibraryChanger::scanLibraries(_libDir);
+		if (libname.empty())
+			_libname = _libs[0];
+		else
+			_libname = libname;
 		_instance = _loader.loadInstance<T>(LibraryChanger::libPath(_libDir, _libname), _entryPoint);
 	}
 
@@ -72,14 +77,26 @@ namespace arc {
 	template<typename T>
 	void LibraryManager<T>::changeLib()
 	{
-                delete _instance;
+		delete _instance;
 		_instance = _loader.loadInstance<T>(LibraryChanger::libPath(_libDir, _libname), _entryPoint);
 	}
 
 	template<typename T>
-	T *LibraryManager<T>::instance()
+	T *LibraryManager<T>::getInstance()
 	{
-                return _instance;
+		return _instance;
+	}
+
+	template<typename T>
+	const std::vector<std::string> &LibraryManager<T>::getLibsName()
+	{
+                return _libs;
+	}
+
+	template<typename T>
+	const std::string &LibraryManager<T>::getCurrentLibname()
+	{
+		return _libname;
 	}
 }
 
