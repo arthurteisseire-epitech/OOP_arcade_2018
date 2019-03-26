@@ -18,7 +18,10 @@
 const std::string arc::Core::GRAPHIC_DIR = "lib/";
 const std::string arc::Core::GAME_DIR = "games/";
 
+
 const std::map<arc::Key, void (arc::Core::*)()> arc::Core::_keyAction = {
+	{F1,     &arc::Core::prevGameLib},
+	{F2,     &arc::Core::nextGameLib},
 	{F3,     &arc::Core::prevGraphicalLib},
 	{F4,     &arc::Core::nextGraphicalLib},
 	{ESCAPE, &arc::Core::backToMenu},
@@ -98,6 +101,34 @@ void arc::Core::changeGraphicalLib()
 
 	_graphic = nullptr;
 	_graphic = std::unique_ptr<arc::IGraphic>(_graphicLibraryLoader.loadGraphicInstance(libPath));
+}
+
+void arc::Core::prevGameLib()
+{
+	std::string newLib = LibraryChanger::prevLib(_sharedData->games, _sharedData->gameName, GAME_DIR);
+	safeChangeGameLib(newLib);
+}
+
+void arc::Core::nextGameLib()
+{
+	std::string newLib = LibraryChanger::nextLib(_sharedData->games, _sharedData->gameName, GAME_DIR);
+	safeChangeGameLib(newLib);
+}
+
+void arc::Core::safeChangeGameLib(const std::string &newlib)
+{
+	if (!_sharedData->games.empty() && newlib != _sharedData->gameName) {
+		_sharedData->gameName = newlib;
+		changeGameLib();
+	}
+}
+
+void arc::Core::changeGameLib()
+{
+	std::string libPath = LibraryChanger::libPath(GAME_DIR, _sharedData->gameName);
+
+	delete _sharedData->currentGame;
+	_sharedData->currentGame = _gameLibraryLoader.loadGameInstance(libPath);
 }
 
 void arc::Core::backToMenu()

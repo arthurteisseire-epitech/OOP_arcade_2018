@@ -28,9 +28,13 @@ namespace arc {
 		void reloadGame();
 		void prevGraphicalLib();
 		void nextGraphicalLib();
+		void safeChangeGraphicalLib(const std::string &newlib);
 		void changeGraphicalLib();
 
-		void safeChangeGraphicalLib(const std::string &newlib);
+		void prevGameLib();
+		void nextGameLib();
+		void safeChangeGameLib(const std::string &newlib);
+		void changeGameLib();
 
 		std::shared_ptr<SharedData> _sharedData;
 		SceneManager _sceneManager;
