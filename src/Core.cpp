@@ -84,13 +84,11 @@ void arc::Core::nextGraphicalLib()
 void arc::Core::prevGameLib()
 {
 	_gameManager.prevLib();
-	_sharedData->currentGame = _gameManager.getInstance();
 }
 
 void arc::Core::nextGameLib()
 {
 	_gameManager.nextLib();
-	_sharedData->currentGame = _gameManager.getInstance();
 }
 
 void arc::Core::backToMenu()
