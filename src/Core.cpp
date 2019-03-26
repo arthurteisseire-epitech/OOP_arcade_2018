@@ -32,13 +32,15 @@ arc::Core::Core(const std::string &libname) :
 	_sharedData(std::make_shared<SharedData>()),
 	_sceneManager(MENU, _sharedData)
 {
-	_graphicManager = new LibraryManager<IGraphic>(GRAPHIC_DIR, GRAPHIC_ENTRY_POINT, libname);
 	_gameManager = new LibraryManager<IGame>(GAME_DIR, GAME_ENTRY_POINT);
-	_sharedData->libs = _graphicManager->getLibsName();
-	_sharedData->libname = _graphicManager->getCurrentLibname();
+	_graphicManager = new LibraryManager<IGraphic>(GRAPHIC_DIR, GRAPHIC_ENTRY_POINT, libname);
+
 	_sharedData->games = _gameManager->getLibsName();
 	_sharedData->gameName = _gameManager->getCurrentLibname();
 	_sharedData->currentGame = _gameManager->getInstance();
+
+	_sharedData->libs = _graphicManager->getLibsName();
+	_sharedData->libname = _graphicManager->getCurrentLibname();
 }
 
 int arc::Core::exec()

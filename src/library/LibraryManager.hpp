@@ -11,6 +11,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <iostream>
 #include "LibraryChanger.hpp"
 
 namespace arc {
@@ -44,6 +45,8 @@ namespace arc {
 		_entryPoint(entryPoint)
 	{
 		_libs = LibraryChanger::scanLibraries(_libDir);
+		if (_libs.empty())
+			throw LibraryLoaderException("No valid .so found in " + libDir);
 		if (libname.empty())
 			_libname = _libs[0];
 		else
