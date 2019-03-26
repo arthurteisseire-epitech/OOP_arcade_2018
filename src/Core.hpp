@@ -10,6 +10,7 @@
 
 
 #include <memory>
+#include "LibraryManager.hpp"
 #include "SceneManager.hpp"
 #include "MainMenu.hpp"
 #include "IGraphic.hpp"
@@ -23,27 +24,25 @@ namespace arc {
 	private:
 		void update(const std::map<Key, KeyState> &keys, float deltaTime);
 		void processEvents(const std::map<arc::Key, arc::KeyState> &keys);
+
 		void backToMenu();
 		void exit();
 		void reloadGame();
+
 		void prevGraphicalLib();
 		void nextGraphicalLib();
-		void safeChangeGraphicalLib(const std::string &newlib);
-		void changeGraphicalLib();
-
 		void prevGameLib();
 		void nextGameLib();
-		void safeChangeGameLib(const std::string &newlib);
-		void changeGameLib();
 
 		std::shared_ptr<SharedData> _sharedData;
 		SceneManager _sceneManager;
-		LibraryLoader _graphicLibraryLoader;
-		LibraryLoader _gameLibraryLoader;
-		std::unique_ptr<IGraphic> _graphic;
+		LibraryManager<IGraphic> *_graphicManager;
+		LibraryManager<IGame> *_gameManager;
 		static const std::map<Key, void (arc::Core::*)()> _keyAction;
 		static const std::string GRAPHIC_DIR;
 		static const std::string GAME_DIR;
+		static const std::string GRAPHIC_ENTRY_POINT;
+		static const std::string GAME_ENTRY_POINT;
 	};
 }
 

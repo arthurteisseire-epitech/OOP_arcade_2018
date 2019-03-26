@@ -19,8 +19,8 @@ namespace arc {
 		LibraryLoader();
 		~LibraryLoader();
 
-		IGraphic *loadGraphicInstance(const std::string &libname);
-		IGame *loadGameInstance(const std::string &libname);
+		template <typename T>
+		T *loadInstance(const std::string &libname, const std::string &entryPoint);
 	private:
 		bool checkFileExists(const std::string &name) const;
 		void load(const std::string &libname);
@@ -28,6 +28,18 @@ namespace arc {
 
 		void *_lib;
 	};
+
+	template<typename T>
+	T *arc::LibraryLoader::loadInstance(const std::string &libname, const std::string &entryPoint)
+	{
+		T *(*instantiate)();
+
+		load(libname);
+		instantiate = (T *(*)())findSym(entryPoint);
+		if (instantiate == nullptr)
+			throw LibraryLoaderException("wrong entry point");
+		return instantiate();
+	}
 }
 
 #endif
