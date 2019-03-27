@@ -102,6 +102,7 @@ void arc::Core::exit()
 
 void arc::Core::reloadGame()
 {
+	_gameManager.reload();
 }
 
 void arc::Core::updateSharedData()
