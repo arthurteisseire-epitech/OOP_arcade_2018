@@ -56,8 +56,10 @@ bool arc::CacaGraphic::isOpen() const
 bool arc::CacaGraphic::processSprite(const arc::ISprite &sprite)
 {
 	Imlib_Image image = imlib_load_image(sprite.getTextureName().c_str());
-	if (image == nullptr)
+	if (image == nullptr) {
+		std::cerr << "imlib_load_image: Cannot load" << sprite.getTextureName().c_str() << std::endl;
 		return false;
+	}
 	imlib_context_set_image(image);
 
 	caca_dither_bitmap(_cv,
