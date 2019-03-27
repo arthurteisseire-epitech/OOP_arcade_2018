@@ -45,25 +45,3 @@ void *arc::LibraryLoader::findSym(const std::string &symname)
 		throw LibraryLoaderException("No library loaded yet, can't load any symbol");
 	return dlsym(_lib, symname.c_str());
 }
-
-arc::IGraphic *arc::LibraryLoader::loadGraphicInstance(const std::string &libname)
-{
-	IGraphic *(*instantiate)();
-
-	load(libname);
-	instantiate = (IGraphic *(*)())findSym("graphicEntryPoint");
-	if (instantiate == nullptr)
-		throw LibraryLoaderException("Graphical library is needed here");
-	return instantiate();
-}
-
-arc::IGame *arc::LibraryLoader::loadGameInstance(const std::string &libname)
-{
-	IGame *(*instantiate)();
-
-	load(libname);
-	instantiate = (IGame *(*)())findSym("gameEntryPoint");
-	if (instantiate == nullptr)
-		throw LibraryLoaderException("Game library is needed here");
-	return instantiate();
-}

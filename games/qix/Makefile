@@ -15,7 +15,6 @@ SRC		=	$(DSRC)Game.cpp			\
 			$(DSRC)Player.cpp		\
 			$(DSRC)Map.cpp			\
 			$(DSRC)Cell.cpp			\
-			$(DSRC)Qix.cpp			\
 			$(DSRC)Converter.cpp		\
 			$(DCOMPONENT)Sprite.cpp		\
 

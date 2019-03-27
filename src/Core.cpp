@@ -6,17 +6,22 @@
 */
 
 #include <unistd.h>
-#include <dirent.h>
-#include <regex>
-#include <iostream>
 #include "PlayerName.hpp"
 #include "Text.hpp"
 #include "Core.hpp"
 #include "Process.hpp"
 
+const std::string arc::Core::GRAPHIC_DIR = "lib/";
+const std::string arc::Core::GAME_DIR = "games/";
+
+const std::string arc::Core::GRAPHIC_ENTRY_POINT = "graphicEntryPoint";
+const std::string arc::Core::GAME_ENTRY_POINT = "gameEntryPoint";
+
 const std::map<arc::Key, void (arc::Core::*)()> arc::Core::_keyAction = {
-	{F3,     &arc::Core::decGraphicalLib},
-	{F4,     &arc::Core::incGraphicalLib},
+	{F1,     &arc::Core::prevGameLib},
+	{F2,     &arc::Core::nextGameLib},
+	{F3,     &arc::Core::prevGraphicalLib},
+	{F4,     &arc::Core::nextGraphicalLib},
 	{ESCAPE, &arc::Core::backToMenu},
 	{SUPPR,  &arc::Core::exit},
 	{R,      &arc::Core::reloadGame},
@@ -24,26 +29,24 @@ const std::map<arc::Key, void (arc::Core::*)()> arc::Core::_keyAction = {
 
 arc::Core::Core(const std::string &libname) :
 	_sharedData(std::make_shared<SharedData>()),
-	_sceneManager(MENU, _sharedData)
+	_sceneManager(MENU, _sharedData),
+	_gameManager(GAME_DIR, GAME_ENTRY_POINT),
+	_graphicManager(GRAPHIC_DIR, GRAPHIC_ENTRY_POINT, libname)
 {
-	_sharedData->libs = scanLibraries("lib/");
-	_sharedData->games = scanLibraries("games/");
-	_sharedData->libname = libname;
-	_sharedData->currentGame = _gameLibraryLoader.loadGameInstance(
-		"games/lib_arcade_" + _sharedData->games[0] + ".so");
-	_graphic = std::unique_ptr<IGraphic>(_graphicLibraryLoader.loadGraphicInstance(libPath()));
+	updateSharedData();
 }
 
 int arc::Core::exec()
 {
 	clock_t t = clock();
 
-	while (_graphic->isOpen() && _sceneManager.nextScene(_graphic->getKeys()) != nullptr) {
-		update(_graphic->getKeys(), (float)(clock() - t) / CLOCKS_PER_SEC);
+	while (_graphicManager.getInstance()->isOpen() &&
+	       _sceneManager.nextScene(_graphicManager.getInstance()->getKeys()) != nullptr) {
+		update(_graphicManager.getInstance()->getKeys(), (float)(clock() - t) / CLOCKS_PER_SEC);
 		t = clock();
-		Process::components(_sceneManager.currentScene()->getComponents(), _graphic.get());
-		_graphic->processEvents();
-		_graphic->draw();
+		Process::components(_sceneManager.currentScene()->getComponents(), _graphicManager.getInstance());
+		_graphicManager.getInstance()->processEvents();
+		_graphicManager.getInstance()->draw();
 		usleep(100);
 	}
 	return 0;
@@ -61,68 +64,30 @@ void arc::Core::processEvents(const std::map<arc::Key, arc::KeyState> &keys)
 		auto key = keys.find(keyAction.first);
 		if (key != keys.end() && key->second == RELEASED) {
 			(this->*keyAction.second)();
+			updateSharedData();
 			return;
 		}
 	}
 }
 
-void arc::Core::decGraphicalLib()
+void arc::Core::prevGraphicalLib()
 {
-	_sharedData->libs = scanLibraries("lib/");
-	auto it = std::find(_sharedData->libs.begin(), _sharedData->libs.end(), _sharedData->libname);
-	if (it == _sharedData->libs.begin())
-		it = _sharedData->libs.end();
-	--it;
-	safeChangeGraphicalLib(*it);
+	_graphicManager.prevLib();
 }
 
-void arc::Core::incGraphicalLib()
+void arc::Core::nextGraphicalLib()
 {
-	_sharedData->libs = scanLibraries("lib/");
-	auto it = std::find(_sharedData->libs.begin(), _sharedData->libs.end(), _sharedData->libname);
-	if (it + 1 == _sharedData->libs.end())
-		it = _sharedData->libs.begin();
-	else
-		++it;
-	safeChangeGraphicalLib(*it);
+	_graphicManager.nextLib();
 }
 
-void arc::Core::safeChangeGraphicalLib(const std::string &newlib)
+void arc::Core::prevGameLib()
 {
-	if (!_sharedData->libs.empty() && newlib != _sharedData->libname) {
-		_sharedData->libname = newlib;
-		changeGraphicalLib();
-	}
+	_gameManager.prevLib();
 }
 
-void arc::Core::changeGraphicalLib()
+void arc::Core::nextGameLib()
 {
-	_graphic = nullptr;
-	_graphic = std::unique_ptr<arc::IGraphic>(_graphicLibraryLoader.loadGraphicInstance(libPath()));
-}
-
-std::vector<std::string> arc::Core::scanLibraries(const std::string &libDir) const
-{
-	std::vector<std::string> libs;
-	std::regex e("^lib_arcade_(.*)\\.so$");
-	std::smatch m;
-	struct dirent *ent;
-	DIR *dir = opendir(libDir.c_str());
-
-	if (dir != nullptr) {
-		while ((ent = readdir(dir)) != nullptr) {
-			std::string s = ent->d_name;
-			if (std::regex_search(s, m, e))
-				libs.emplace_back(m[1]);
-		}
-		closedir(dir);
-	}
-	return libs;
-}
-
-std::string arc::Core::libPath()
-{
-	return "lib/lib_arcade_" + _sharedData->libname + ".so";
+	_gameManager.nextLib();
 }
 
 void arc::Core::backToMenu()
@@ -137,7 +102,14 @@ void arc::Core::exit()
 
 void arc::Core::reloadGame()
 {
-	delete _sharedData->currentGame;
-	_sharedData->currentGame = _gameLibraryLoader.loadGameInstance(
-		"games/lib_arcade_" + _sharedData->games[0] + ".so");
+}
+
+void arc::Core::updateSharedData()
+{
+	_sharedData->games = _gameManager.getLibsName();
+	_sharedData->gameName = _gameManager.getCurrentLibname();
+	_sharedData->currentGame = _gameManager.getInstance();
+
+	_sharedData->libs = _graphicManager.getLibsName();
+	_sharedData->libname = _graphicManager.getCurrentLibname();
 }
