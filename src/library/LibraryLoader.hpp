@@ -9,8 +9,6 @@
 #define ARCADE_LIBRARYLOADER_HPP
 
 #include <string>
-#include "IGame.hpp"
-#include "IGraphic.hpp"
 #include "LibraryLoaderException.hpp"
 
 namespace arc {
