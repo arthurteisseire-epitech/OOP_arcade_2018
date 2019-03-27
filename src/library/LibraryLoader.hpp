@@ -21,6 +21,8 @@ namespace arc {
 
 		template <typename T>
 		T *loadInstance(const std::string &libname, const std::string &entryPoint);
+		template <typename T>
+		T *reloadInstance(const std::string &entryPoint);
 	private:
 		bool checkFileExists(const std::string &name) const;
 		void load(const std::string &libname);
@@ -35,6 +37,17 @@ namespace arc {
 		T *(*instantiate)();
 
 		load(libname);
+		instantiate = (T *(*)())findSym(entryPoint);
+		if (instantiate == nullptr)
+			throw LibraryLoaderException("wrong entry point");
+		return instantiate();
+	}
+
+	template<typename T>
+	T *arc::LibraryLoader::reloadInstance(const std::string &entryPoint)
+	{
+		T *(*instantiate)();
+
 		instantiate = (T *(*)())findSym(entryPoint);
 		if (instantiate == nullptr)
 			throw LibraryLoaderException("wrong entry point");

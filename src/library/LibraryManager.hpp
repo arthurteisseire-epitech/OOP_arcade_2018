@@ -27,6 +27,7 @@ namespace arc {
 		void prevLib();
 		void nextLib();
 		T *getInstance();
+		void reload();
 		const std::vector<std::string> &getLibsName();
 		const std::string &getCurrentLibname();
 	private:
@@ -96,6 +97,13 @@ namespace arc {
 	{
 		delete _instance;
 		_instance = _loader.loadInstance<T>(libPath(), _entryPoint);
+	}
+
+	template<typename T>
+	void LibraryManager<T>::reload()
+	{
+		delete _instance;
+		_instance = _loader.reloadInstance<T>(_entryPoint);
 	}
 
 	template<typename T>
