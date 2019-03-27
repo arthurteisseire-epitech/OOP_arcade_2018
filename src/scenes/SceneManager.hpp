@@ -10,6 +10,7 @@
 
 #include <map>
 #include <memory>
+#include "LibraryManager.hpp"
 #include "LibraryLoader.hpp"
 #include "IGraphic.hpp"
 #include "IScene.hpp"
@@ -24,7 +25,7 @@ namespace arc {
 
 		void changeScene(SCENE scene);
 		IScene *currentScene() const;
-		arc::IScene *nextScene(const std::map<Key, KeyState> &keys);
+		arc::IScene *nextScene(const std::map<Key, KeyState> &keys, LibraryManager<IGame> &gameManager);
 	protected:
 		SCENE _currScene;
 		std::unique_ptr<SceneFactory> _factory;

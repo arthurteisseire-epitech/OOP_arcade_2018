@@ -36,8 +36,8 @@ namespace arc {
 		void changeLib();
 		std::string libPath();
 
-		T *_instance;
 		LibraryLoader _loader;
+		std::unique_ptr<T> _instance;
 		std::vector<std::string> _libs;
 		std::string _libname;
 		const std::string &_libDir;
@@ -57,7 +57,7 @@ namespace arc {
 			_libname = _libs[0];
 		else
 			_libname = libname;
-		_instance = _loader.loadInstance<T>(libPath(), _entryPoint);
+		_instance = std::unique_ptr<T>(_loader.loadInstance<T>(libPath(), _entryPoint));
 	}
 
 	template<typename T>
@@ -95,21 +95,21 @@ namespace arc {
 	template<typename T>
 	void LibraryManager<T>::changeLib()
 	{
-		delete _instance;
-		_instance = _loader.loadInstance<T>(libPath(), _entryPoint);
+		_instance = nullptr;
+		_instance = std::unique_ptr<T>(_loader.loadInstance<T>(libPath(), _entryPoint));
 	}
 
 	template<typename T>
 	void LibraryManager<T>::reload()
 	{
-		delete _instance;
-		_instance = _loader.reloadInstance<T>(_entryPoint);
+		_instance = nullptr;
+		_instance = std::unique_ptr<T>(_loader.reloadInstance<T>(_entryPoint));
 	}
 
 	template<typename T>
 	T *LibraryManager<T>::getInstance()
 	{
-		return _instance;
+		return _instance.get();
 	}
 
 	template<typename T>
