@@ -34,25 +34,27 @@ const std::map<std::pair<arc::Snake::Direction, arc::Snake::Direction>, std::str
 	{{RIGHT, DOWN}, "snake_middle_up_left.png"}
 };
 
-arc::Snake::Snake(const pos_t &startPos, unsigned int size, const pos_t &mapSize) : _mapSize(50, 50)
+arc::Snake::Snake(const pos_t &startPos, unsigned int size, const pos_t &mapSize) :
+	_mapSize(50, 50),
+	_isDead(false)
 {
 	pos_t posRes;
 	std::unique_ptr<Sprite> actualSprite = std::make_unique<Sprite>(PATH_TO_ASSETS + _assetsMap.at(LEFT)[0]);
 
-	append_sprite(startPos, actualSprite, mapSize);
+	appendSprite(startPos, actualSprite, mapSize);
 	_bodyPositions.emplace_back(startPos);
 	for (unsigned int i = 1; i < size - 1; ++i) {
 		posRes = startPos + pos_t{i, 0};
 		_bodyPositions.emplace_back(posRes);
 		actualSprite = std::make_unique<Sprite>(PATH_TO_ASSETS + _assetsMap.at(LEFT)[1]);
-		append_sprite(posRes, actualSprite, mapSize);
+		appendSprite(posRes, actualSprite, mapSize);
 	}
 	_bodyPositions.emplace_back(startPos + pos_t{size - 1, 0});
 	actualSprite = std::make_unique<Sprite>(PATH_TO_ASSETS + _assetsMap.at(LEFT)[2]);
-	append_sprite(posRes + pos_t{1, 0}, actualSprite, mapSize);
+	appendSprite(posRes + pos_t{1, 0}, actualSprite, mapSize);
 }
 
-void arc::Snake::append_sprite(const pos_t &posRes, std::unique_ptr<arc::Sprite> &actualSprite, const pos_t &size)
+void arc::Snake::appendSprite(const pos_t &posRes, std::unique_ptr<arc::Sprite> &actualSprite, const pos_t &size)
 {
 	actualSprite->setPosition(posRes / size);
 	actualSprite->setSize(pos_t{1.0, 1.0} / size);
@@ -77,10 +79,13 @@ void arc::Snake::eat()
 void arc::Snake::moveBody(const Direction &direction, bool changeDir)
 {
 	const pos_t &snakeDirection = _directionMap.at(direction);
+	const pos_t resPos = _bodyPositions.front() + snakeDirection;
 	const Direction lastDirection = findHeadDir();
 
-	_bodyPositions.insert(_bodyPositions.begin(), _bodyPositions.front() + snakeDirection);
 	_bodyPositions.pop_back();
+	if (isInSnake(resPos) || resPos.first < 0 || resPos.first >= _mapSize.first || resPos.second < 0 || resPos.second >= _mapSize.second)
+		_isDead = true;
+	_bodyPositions.insert(_bodyPositions.begin(), _bodyPositions.front() + snakeDirection);
 	updateSprites(direction, changeDir, lastDirection);
 }
 
@@ -159,8 +164,8 @@ void arc::Snake::createNeckAsset(const Direction &direction, const Direction &la
 
 bool arc::Snake::isInSnake(const pos_t &pos) const
 {
-	for (auto &snake_part : _bodyPositions)
-		if (snake_part == pos)
+	for (auto &snakePart : _bodyPositions)
+		if (snakePart == pos)
 			return true;
 	return false;
 }
@@ -210,6 +215,16 @@ void arc::Snake::printSnakePos()
 	std::cout << "Body:" << std::endl;
 	for (const auto &pair : _bodyPositions)
 		std::cout << pair.first << ", " << pair.second << std::endl;
+}
+
+unsigned int arc::Snake::size() const
+{
+	return static_cast<unsigned int>(_bodyPositions.size());
+}
+
+bool arc::Snake::isDead() const
+{
+	return _isDead;
 }
 
 arc::Snake::Direction arc::operator*(const arc::Snake::Direction &dir1, const arc::PlayerDirection &dir2)

@@ -36,6 +36,8 @@ namespace arc {
 		bool isInSnake(const pos_t &pos) const;
 		std::vector<std::reference_wrapper<const IComponent>>	getParts() const;
 		void changeDirection(arc::PlayerDirection playerDir);
+		unsigned int size() const;
+		bool isDead() const;
 	protected:
 		pos_t findTailPosDirection();
 		Direction findHeadDir();
@@ -47,7 +49,7 @@ namespace arc {
 		static const std::map<std::pair<Direction, Direction>, std::string> _curvedAssets;
 		std::vector<std::unique_ptr<IComponent>> _cacheAssets;
 	private:
-		void append_sprite(const pos_t &posRes, std::unique_ptr<arc::Sprite> &actualSprite, const pos_t &size);
+		void appendSprite(const pos_t &posRes, std::unique_ptr<arc::Sprite> &actualSprite, const pos_t &size);
 		void turnHead(const Direction &direction, const std::pair<float, float> &headPos);
 		const std::string &findCurveSnake(const Direction &direction, const Direction &lastDirection) const;
 		std::pair<float, float> findNewPos(const pos_t &snakeDirection, const std::pair<float, float> &headPos) const;
@@ -60,6 +62,7 @@ namespace arc {
 		void printSnakePos();
 
 		pos_t _mapSize;
+		bool _isDead;
 	};
 
 	Snake::Direction operator*(const Snake::Direction &, const PlayerDirection &);

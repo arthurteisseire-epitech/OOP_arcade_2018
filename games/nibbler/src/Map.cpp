@@ -10,7 +10,7 @@
 #include "Map.hpp"
 
 #include <iostream>
-arc::Map::Map(const pos_t &size) :
+arc::Map::Map(const std::pair<unsigned int, unsigned int> &size) :
 	_size(size),
 	_snake(std::make_unique<Snake>(size / 2, 4, size)),
 	_food(std::make_unique<Food>(pos_t{0, 0}, _size))
@@ -44,4 +44,14 @@ void arc::Map::updateSnake(arc::PlayerDirection key, unsigned int &score)
 		score += Food::value;
 		generateFood();
 	}
+}
+
+bool arc::Map::isFull() const
+{
+	return _snake->size() >= _size.first * _size.second;
+}
+
+bool arc::Map::isSnakeDead() const
+{
+	return _snake->isDead();
 }

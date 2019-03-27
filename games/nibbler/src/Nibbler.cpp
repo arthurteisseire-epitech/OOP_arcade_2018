@@ -53,7 +53,7 @@ void arc::Nibbler::update(const std::map<arc::Key, arc::KeyState> &keys, float d
 
 bool arc::Nibbler::isRunning() const
 {
-	return true;
+	return !_map.isFull() && !_map.isSnakeDead();
 }
 
 void arc::Nibbler::updateTime(float time)
