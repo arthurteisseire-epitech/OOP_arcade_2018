@@ -24,7 +24,7 @@ OBJ		=	$(SRC:.cpp=.o)
 NAME	=	lib_arcade_qix.so
 
 all: $(OBJ)
-	$(CC) -o $(NAME) -shared $(OBJ) $(CXXFLAGS)
+	$(CC) -o $(NAME) $(OBJ) $(CXXFLAGS)
 	cp $(NAME) ..
 
 clean:
