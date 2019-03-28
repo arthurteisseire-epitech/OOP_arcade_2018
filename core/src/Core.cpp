@@ -103,8 +103,8 @@ void arc::Core::reloadGame()
 float arc::Core::calcDeltaTime() const
 {
 	timespec time{};
-	static float currentTime;
 	static float lastFrame;
+	float currentTime;
 	float deltaTime;
 
 	clock_gettime(CLOCK_MONOTONIC, &time);
