@@ -19,6 +19,7 @@ namespace arc {
 		std::string gameName;
 		std::vector<std::string> libs;
 		std::string libname;
+		std::pair<float, float> winSize;
 	};
 }
 

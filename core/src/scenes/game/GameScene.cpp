@@ -15,7 +15,7 @@ arc::GameScene::GameScene(const std::shared_ptr<arc::SharedData> &playerData) :
 void arc::GameScene::update(const std::map<arc::Key, arc::KeyState> &keys, float deltaTime)
 {
 	if (_playerData->currentGame)
-		_playerData->currentGame->update(keys, deltaTime, {0, 0});
+		_playerData->currentGame->update(keys, deltaTime, _playerData->winSize);
 }
 
 std::vector<std::reference_wrapper<const arc::IComponent>> arc::GameScene::getComponents() const
