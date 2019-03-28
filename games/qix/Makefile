@@ -15,8 +15,10 @@ SRC		=	$(DSRC)Game.cpp			\
 			$(DSRC)Player.cpp		\
 			$(DSRC)Map.cpp			\
 			$(DSRC)Cell.cpp			\
-			$(DSRC)Converter.cpp		\
-			$(DCOMPONENT)Sprite.cpp		\
+			$(DSRC)Converter.cpp	\
+			$(DSRC)Position.cpp		\
+			$(DSRC)Qix.cpp		\
+			$(DCOMPONENT)Sprite.cpp	\
 
 CXXFLAGS	+=  -Wall -Wextra $(INC) -shared -fPIC
 OBJ		=	$(SRC:.cpp=.o)
