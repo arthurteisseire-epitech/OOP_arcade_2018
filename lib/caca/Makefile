@@ -21,6 +21,8 @@ $(NAME):	$(OBJ)
 	g++ -shared -o $(NAME) $(OBJ) $(CXXFLAGS)
 	cp $(NAME) ..
 
+all:	$(NAME)
+
 clean:
 	rm -f $(OBJ)
 
