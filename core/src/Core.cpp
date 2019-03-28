@@ -49,6 +49,7 @@ int arc::Core::exec()
 
 void arc::Core::update(const std::map<arc::Key, arc::KeyState> &keys, float deltaTime)
 {
+	_sharedData->winSize = _graphicManager.getInstance()->getWindowSize();
 	_sceneManager.currentScene()->update(keys, deltaTime);
 	processEvents(keys);
 }
@@ -122,4 +123,5 @@ void arc::Core::updateSharedData()
 
 	_sharedData->libs = _graphicManager.getLibsName();
 	_sharedData->libname = _graphicManager.getCurrentLibname();
+	_sharedData->winSize = _graphicManager.getInstance()->getWindowSize();
 }
