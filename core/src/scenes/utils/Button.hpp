@@ -23,7 +23,7 @@ namespace arc {
 		const std::pair<float, float> &getSize() const;
 		Text &getText() const;
 		Sprite &getSprite() const;
-		SCENE getLinkedScene();
+		SCENE getLinkedScene() const;
 	private:
 		std::unique_ptr<Sprite> _sprite;
 		std::unique_ptr<Text> _text;

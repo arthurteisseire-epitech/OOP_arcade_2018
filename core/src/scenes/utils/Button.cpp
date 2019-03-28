@@ -49,7 +49,7 @@ arc::Text &arc::Button::getText() const
 	return *_text;
 }
 
-arc::SCENE arc::Button::getLinkedScene()
+arc::SCENE arc::Button::getLinkedScene() const
 {
         return _linkedScene;
 }
