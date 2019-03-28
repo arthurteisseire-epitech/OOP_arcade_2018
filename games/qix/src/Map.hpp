@@ -20,9 +20,10 @@ namespace arc {
 		~Map();
 
 		Position dimension() const;
-		bool in(const Position &pos) const;
-		bool inBorder(const Position &pos) const;
-		bool inWalkable(const Position &pos) const;
+		bool isIn(const Position &pos) const;
+		bool isInBorders(const Position &pos) const;
+		bool isInNoBorders(const Position &pos) const;
+		bool isInWalkable(const Position &pos) const;
 		void trail(const Position &pos);
 		void transformTrailToBorder();
 		std::vector<std::reference_wrapper<const IComponent>> getSprites() const;
