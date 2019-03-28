@@ -110,7 +110,7 @@ void arc::CacaGraphic::processKey(arc::KeyState keyState, caca_event_t event)
 	if (it != _cKeys.end()) {
 		auto key = _Keys.find(it->second);
 		if (!(key != _Keys.end() && keyState == PRESSED))
-			_Keys[it->second] = PRESSED;
+			_Keys[it->second] = keyState;
 	}
 }
 

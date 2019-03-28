@@ -17,8 +17,9 @@ NAME	=	lib_arcade_caca.so
 
 $(NAME):	$(OBJ)
 	g++ -shared -o $(NAME) $(OBJ) $(CXXFLAGS)
+	cp $(NAME) ..
 
-all:	$(NAME)aa
+all:	$(NAME)
 
 clean:
 	rm -f $(OBJ)
