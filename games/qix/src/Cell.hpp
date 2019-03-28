@@ -20,7 +20,8 @@ namespace arc {
 			BORDER,
 			TRAIL,
 			NON_WALKABLE,
-			QIX
+			QIX,
+			TMP
 		};
 
 		explicit Cell(STATE state);

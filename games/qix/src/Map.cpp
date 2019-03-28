@@ -12,26 +12,31 @@
 arc::Map::Map(const Position &dimension) :
 	_dimension(dimension),
 	_cells(),
-	_qix(Cell::QIX)
+	_qix(initQix())
 {
-	std::random_device randomDevice;
-	Position qixPos(abs(randomDevice() % _dimension.x - 2) + 1, abs(randomDevice() % _dimension.y - 2) + 1);
-
 	_cells.reserve(static_cast<size_t>(_dimension.x));
 	_sprites.reserve(static_cast<size_t>(_dimension.x) * _dimension.y);
 	for (unsigned int y = 0; y < _dimension.x; ++y) {
 		_cells.emplace_back(std::vector<Cell>());
 		_cells[y].reserve(static_cast<size_t>(_dimension.y));
 		for (unsigned int x = 0; x < _dimension.y; ++x)
-			fillCells(Position(x, y), qixPos);
+			fillCells(Position(x, y));
 	}
 }
 
-void arc::Map::fillCells(const Position &pos, const Position &qixPosition)
+arc::Qix arc::Map::initQix()
+{
+	std::random_device randomDevice;
+	Position qixPos(abs(randomDevice() % _dimension.x - 2) + 1, abs(randomDevice() % _dimension.y - 2) + 1);
+
+	return Qix(qixPos);
+}
+
+void arc::Map::fillCells(const Position &pos)
 {
 	if (pos.x == 0 || pos.x == _dimension.x - 1 || pos.y == 0 || pos.y == _dimension.y - 1)
 		_cells[pos.y].emplace_back(Cell(Cell::BORDER));
-	else if (pos == qixPosition)
+	else if (pos == _qix.position())
 		_cells[pos.y].emplace_back(Cell(Cell::QIX));
 	else
 		_cells[pos.y].emplace_back(Cell(Cell::WALKABLE));
@@ -47,10 +52,92 @@ arc::Map::~Map()
 
 void arc::Map::transformTrailToBorder()
 {
-	for (auto &row : _cells)
-		for (auto &x : row)
-			if (x.state() == Cell::TRAIL)
-				x.alterState(Cell::BORDER);
+	static Position lastPos(0, 0);
+	Position startOfNonQixZone(0, 0);
+
+	_cells[lastPos.y][lastPos.x].alterState(Cell::WALKABLE);
+	for (unsigned int y = 0; y < _cells.size(); ++y)
+		for (unsigned int x = 0; x < _cells[y].size(); ++x)
+			if (_cells[y][x].state() == Cell::TRAIL) {
+				_cells[y][x].alterState(Cell::BORDER);
+				if (startOfNonQixZone == Position(0, 0))
+					startOfNonQixZone = findNonQixZone(Position{x, y});
+			}
+	std::cout << startOfNonQixZone << std::endl;
+	if (startOfNonQixZone != Position(0, 0) && startOfNonQixZone.x < _dimension.x && startOfNonQixZone.y < _dimension.y) {
+		_cells[startOfNonQixZone.y][startOfNonQixZone.x].alterState(Cell::TRAIL);
+		lastPos = startOfNonQixZone;
+	}
+}
+
+arc::Position arc::Map::findNonQixZone(const Position &pos)
+{
+	Position posToLook(0, 0);
+	Position oppositePos(0, 0);
+
+	findPosToLook(&posToLook, &oppositePos, pos);
+	if (isQixInZone(posToLook))
+		return oppositePos;
+	return posToLook;
+}
+
+void arc::Map::findPosToLook(Position *posToLook, Position *oppositePos, const Position &currPos) const
+{
+	if (tryPosition(currPos + Position(1, 0), posToLook, oppositePos, currPos - Position(1, 0)))
+		return;
+	if (tryPosition(currPos - Position(1, 0), posToLook, oppositePos, currPos + Position(1, 0)))
+		return;
+	if (tryPosition(currPos + Position(0, 1), posToLook, oppositePos, currPos - Position(0, 1)))
+		return;
+	if (tryPosition(currPos - Position(0, 1), posToLook, oppositePos, currPos + Position(0, 1)))
+		return;
+	*oppositePos = currPos;
+	*posToLook = currPos;
+}
+
+bool arc::Map::isQixInZone(const arc::Position &position)
+{
+	bool res = tryAllZonePositions(position);
+
+	for (auto &_cell : _cells)
+		for (auto &x : _cell)
+			if (x.state() == Cell::TMP)
+				x.alterState(Cell::WALKABLE);
+	std::cout << (res ? "TRUE" : "FALSE") << std::endl;
+	return res;
+}
+
+bool arc::Map::tryAllZonePositions(const arc::Position &position)
+{
+	if (position == _qix.position())
+		return true;
+	_cells[position.y][position.x].alterState(Cell::TMP);
+	if (_cells[position.y + 1][position.x].state() == Cell::WALKABLE || _cells[position.y + 1][position.x].state() == Cell::QIX)
+		 if (tryAllZonePositions({position.x, position.y + 1}))
+			 return true;
+	if (_cells[position.y - 1][position.x].state() == Cell::WALKABLE || _cells[position.y - 1][position.x].state() == Cell::QIX)
+		if (tryAllZonePositions({position.x, position.y - 1}))
+			return true;
+	if (_cells[position.y][position.x + 1].state() == Cell::WALKABLE || _cells[position.y][position.x + 1].state() == Cell::QIX)
+		if (tryAllZonePositions({position.x + 1, position.y}))
+			return true;
+	if (_cells[position.y][position.x - 1].state() == Cell::WALKABLE || _cells[position.y][position.x - 1].state() == Cell::QIX)
+		if (tryAllZonePositions({position.x - 1, position.y}))
+			return true;
+	return false;
+}
+
+bool arc::Map::tryPosition(const Position posToTry, Position *posToLook, Position *oppositePos,
+			   const Position oppositePosToTry) const
+{
+	if (!(posToTry.x > 0 && posToTry.x < _dimension.x && posToTry.y > 0 && posToTry.y < _dimension.y))
+		return false;
+	if (_cells[posToTry.y][posToTry.x].state() == arc::Cell::WALKABLE) {
+		*posToLook = posToTry;
+		*oppositePos = oppositePosToTry;
+		return true;
+	}
+	return false;
 }
 
 void arc::Map::trail(const arc::Position &pos)

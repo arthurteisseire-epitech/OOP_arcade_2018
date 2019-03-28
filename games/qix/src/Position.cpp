@@ -7,6 +7,11 @@
 
 #include "Position.hpp"
 
+arc::Position::Position(unsigned int x_, unsigned int y_) :
+	x(x_),
+	y(y_)
+{
+}
 
 std::ostream &arc::operator<<(std::ostream &ostream, const arc::Position &pos)
 {
@@ -20,5 +25,10 @@ arc::Position arc::Position::operator+(const Position &pos) const
 
 arc::Position arc::Position::operator-(const Position &pos) const
 {
-	return {pos.x - x, pos.y - y};
+	return {x - pos.x, y - pos.y};
+}
+
+bool arc::Position::operator!=(const Position &pos) const
+{
+	return pos.x != x || pos.y != y;
 }

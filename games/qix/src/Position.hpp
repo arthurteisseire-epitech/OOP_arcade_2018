@@ -12,12 +12,13 @@
 
 namespace arc {
 	struct Position {
-		Position(unsigned int x, unsigned int y) : x(x), y(y) {}
+		Position(unsigned int x, unsigned int y);
 		unsigned int x;
 		unsigned int y;
 
 		Position operator+(const Position &pos) const;
 		Position operator-(const Position &pos) const;
+		bool operator!=(const Position &pos) const;
 	};
 
 	std::ostream &operator<<(std::ostream &ostream, const arc::Position &pos);

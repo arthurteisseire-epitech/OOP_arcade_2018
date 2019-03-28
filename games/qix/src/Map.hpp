@@ -11,6 +11,7 @@
 #include <vector>
 #include "Position.hpp"
 #include "Cell.hpp"
+#include "Qix.hpp"
 
 namespace arc {
 	class Map {
@@ -30,10 +31,17 @@ namespace arc {
 		const Position _dimension;
 		std::vector<std::vector<Cell>> _cells;
 		std::vector<std::reference_wrapper<const IComponent>> _sprites;
-		Cell _qix;
+		Qix _qix;
 
 	private:
-		void fillCells(const Position &pos, const Position &qixPosition);
+		Qix initQix();
+		void fillCells(const Position &pos);
+		Position findNonQixZone(const Position &pos);
+		bool tryPosition(Position posToTry, Position *posToLook, Position *oppositePos,
+			Position oppositePosToTry) const;
+		void findPosToLook(Position *posToLook, Position *oppositePos, const Position &currPos) const;
+		bool isQixInZone(const Position &position);
+		bool tryAllZonePositions(const Position &position);
 	};
 }
 
