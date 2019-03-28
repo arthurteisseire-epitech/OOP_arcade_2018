@@ -5,11 +5,10 @@
 ** Map.cpp
 */
 
+#include <random>
 #include "Map.hpp"
 #include "Converter.hpp"
-#include <random>
 
-#include <iostream>
 arc::Map::Map(const Position &dimension) :
 	_dimension(dimension),
 	_cells(),
