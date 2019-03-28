@@ -28,6 +28,7 @@ namespace arc {
 		std::vector<std::reference_wrapper<const IComponent>> getComponents() const override;
 		arc::SCENE nextScene(const std::map<Key, KeyState> &keys) const override;
 	private:
+		void initTexts();
 		void moveFocusDown();
 		void moveFocusUp();
 		void setSpritesPosition();

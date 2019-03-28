@@ -23,14 +23,30 @@ arc::MainMenu::MainMenu(const std::shared_ptr<SharedData> &playerData) :
 	_spriteFocus("assets/focus.png"),
 	_focus(0)
 {
-	_texts.emplace_back("Current game : " + _playerData->gameName, std::make_pair<float, float>(0.1, 0.9), 20);
-	_texts.emplace_back("Current graphical lib : " + _playerData->libname, std::make_pair<float, float>(0.9, 0.9), 20);
+	initTexts();
 	_audios.emplace_back("assets/audio/sound.m4a", 10);
 	_buttons.emplace_back("assets/sample.jpg", PLAYER_NAME, "Player Name");
 	_buttons.emplace_back("assets/saple.jpg", GAME, "Play");
 	_buttons.emplace_back("assets/sample.jpg", EXIT, "Exit");
 	setSpritesSize();
 	setSpritesPosition();
+}
+
+void arc::MainMenu::setTextsString()
+{
+	_texts.clear();
+	_texts.emplace_back("Games : ", std::make_pair<float, float>(0.06, 0.85), 20);
+	for (size_t i = 0; i < _playerData->games.size(); ++i) {
+		std::string isCurrent = _playerData->games[i] == _playerData->gameName ? " <-" : "";
+		_texts.emplace_back(_playerData->games[i] + isCurrent,
+		                    std::make_pair<float, float>(0.17, (i / 50.0f) + 0.85), 20);
+	}
+	_texts.emplace_back("Graphics : ", std::make_pair<float, float>(0.76, 0.85), 20);
+	for (size_t i = 0; i < _playerData->libs.size(); ++i) {
+		std::string isCurrent = _playerData->libs[i] == _playerData->libname ? " <-" : "";
+		_texts.emplace_back(_playerData->libs[i] + isCurrent,
+		                    std::make_pair<float, float>(0.87, (i / 50.0f) + 0.85), 20);
+	}
 }
 
 void arc::MainMenu::setSpritesPosition()
@@ -55,8 +71,7 @@ void arc::MainMenu::setSpritesSize()
 void arc::MainMenu::update(const std::map<Key, KeyState> &keys, float)
 {
 	_playerName.setText("Player Name : " + _playerData->playerName);
-	_texts[0].setText("Current game : " + _playerData->gameName);
-	_texts[1].setText("Current graphical lib : " + _playerData->libname);
+	setTextsString();
 	for (auto &p : _keysMap) {
 		auto it = keys.find(p.first);
 		if (it != keys.end() && it->second == PRESSED)
@@ -69,7 +84,7 @@ void arc::MainMenu::moveFocusDown()
 	if (_focus != _buttons.size() - 1) {
 		++_focus;
 		_spriteFocus.moveDown(_buttons[_focus].getSprite().getPosition().second -
-		                       _spriteFocus.getPosition().second);
+		                      _spriteFocus.getPosition().second);
 	}
 }
 
