@@ -30,4 +30,3 @@ lib/qt/Makefile
 # Project
 arcade
 *.so*
-./Makefile

@@ -15,14 +15,14 @@ find_package(Qt5Multimedia)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 
 include_directories(
-        src/scenes/player_name
-        src/scenes/utils
-        src/scenes/menu
-        src/scenes/game
-        src/scenes/exit
-        src/scenes
-        src/library
-        src
+        core/src/scenes/player_name
+        core/src/scenes/utils
+        core/src/scenes/menu
+        core/src/scenes/game
+        core/src/scenes/exit
+        core/src/scenes
+        core/src/library
+        core/src
         lib/qt
         lib
         games/src
@@ -32,7 +32,7 @@ include_directories(
 )
 
 file(GLOB_RECURSE main main.cpp)
-file(GLOB_RECURSE core src/*.cpp)
+file(GLOB_RECURSE core core/*.cpp)
 file(GLOB_RECURSE component component/*.cpp)
 list(FILTER core EXCLUDE REGEX ".*Test.cpp$")
 
@@ -75,7 +75,7 @@ add_custom_target(
 
 enable_testing()
 
-file(GLOB_RECURSE tests src/*Test.cpp games/qix/*Test.cpp)
+file(GLOB_RECURSE tests core/*Test.cpp games/qix/*Test.cpp)
 
 add_executable(units ${core} ${tests} ${component} ${games})
 target_link_libraries(units dl Qt5::Widgets Qt5::Multimedia gtest gtest_main gcov)

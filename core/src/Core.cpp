@@ -5,7 +5,6 @@
 ** Core.cpp
 */
 
-#include <unistd.h>
 #include "PlayerName.hpp"
 #include "Text.hpp"
 #include "Core.hpp"
@@ -41,13 +40,12 @@ int arc::Core::exec()
 	clock_t t = clock();
 
 	while (_graphicManager.getInstance()->isOpen() &&
-	       _sceneManager.nextScene(_graphicManager.getInstance()->getKeys()) != nullptr) {
+	       _sceneManager.nextScene(_graphicManager.getInstance()->getKeys(), _gameManager) != nullptr) {
 		update(_graphicManager.getInstance()->getKeys(), (float)(clock() - t) / CLOCKS_PER_SEC);
 		t = clock();
 		Process::components(_sceneManager.currentScene()->getComponents(), _graphicManager.getInstance());
 		_graphicManager.getInstance()->processEvents();
 		_graphicManager.getInstance()->draw();
-		usleep(100);
 	}
 	return 0;
 }
@@ -102,6 +100,7 @@ void arc::Core::exit()
 
 void arc::Core::reloadGame()
 {
+	_gameManager.reload();
 }
 
 void arc::Core::updateSharedData()
