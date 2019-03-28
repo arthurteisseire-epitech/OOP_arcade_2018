@@ -23,7 +23,6 @@ arc::MainMenu::MainMenu(const std::shared_ptr<SharedData> &playerData) :
 	_spriteFocus("assets/focus.png"),
 	_focus(0)
 {
-	initTexts();
 	_audios.emplace_back("assets/audio/sound.m4a", 10);
 	_buttons.emplace_back("assets/sample.jpg", PLAYER_NAME, "Player Name");
 	_buttons.emplace_back("assets/saple.jpg", GAME, "Play");
