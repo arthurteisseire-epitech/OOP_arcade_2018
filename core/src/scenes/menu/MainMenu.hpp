@@ -33,6 +33,7 @@ namespace arc {
 		void setSpritesPosition();
 		void setSpritesSize();
 
+		std::vector<Text> _texts;
 		std::vector<Button> _buttons;
 		std::vector<Audio> _audios;
 		Text _playerName;

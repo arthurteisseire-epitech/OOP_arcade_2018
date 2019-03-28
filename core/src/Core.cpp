@@ -37,12 +37,9 @@ arc::Core::Core(const std::string &libname) :
 
 int arc::Core::exec()
 {
-	clock_t t = clock();
-
 	while (_graphicManager.getInstance()->isOpen() &&
 	       _sceneManager.nextScene(_graphicManager.getInstance()->getKeys(), _gameManager) != nullptr) {
-		update(_graphicManager.getInstance()->getKeys(), (float)(clock() - t) / CLOCKS_PER_SEC);
-		t = clock();
+		update(_graphicManager.getInstance()->getKeys(), calcDeltaTime());
 		Process::components(_sceneManager.currentScene()->getComponents(), _graphicManager.getInstance());
 		_graphicManager.getInstance()->processEvents();
 		_graphicManager.getInstance()->draw();
@@ -101,6 +98,20 @@ void arc::Core::exit()
 void arc::Core::reloadGame()
 {
 	_gameManager.reload();
+}
+
+float arc::Core::calcDeltaTime() const
+{
+	timespec time{};
+	static float currentTime;
+	static float lastFrame;
+	float deltaTime;
+
+	clock_gettime(CLOCK_MONOTONIC, &time);
+	currentTime = float(time.tv_sec) + float(time.tv_nsec) / 1000000000.0f;
+	deltaTime = currentTime - lastFrame;
+	lastFrame = currentTime;
+	return deltaTime;
 }
 
 void arc::Core::updateSharedData()
