@@ -23,6 +23,8 @@ arc::MainMenu::MainMenu(const std::shared_ptr<SharedData> &playerData) :
 	_spriteFocus("assets/focus.png"),
 	_focus(0)
 {
+	_texts.emplace_back(_playerData->gameName, std::make_pair<float, float>(0.1, 0.9), 20);
+	_texts.emplace_back(_playerData->libname, std::make_pair<float, float>(0.9, 0.9), 20);
 	_audios.emplace_back("assets/audio/sound.m4a", 10);
 	_buttons.emplace_back("assets/sample.jpg", PLAYER_NAME, "Player Name");
 	_buttons.emplace_back("assets/saple.jpg", GAME, "Play");
@@ -53,6 +55,8 @@ void arc::MainMenu::setSpritesSize()
 void arc::MainMenu::update(const std::map<Key, KeyState> &keys, float)
 {
 	_playerName.setText("Player Name : " + _playerData->playerName);
+	_texts[0].setText(_playerData->gameName);
+	_texts[1].setText(_playerData->libname);
 	for (auto &p : _keysMap) {
 		auto it = keys.find(p.first);
 		if (it != keys.end() && it->second == PRESSED)
@@ -89,7 +93,7 @@ std::vector<std::reference_wrapper<const arc::IComponent>> arc::MainMenu::getCom
 {
 	std::vector<std::reference_wrapper<const arc::IComponent>> wrapper;
 
-	wrapper.reserve(_buttons.size() * 2 + 1 + _audios.size());
+	wrapper.reserve(_buttons.size() * 2 + 1 + _audios.size() + _texts.size());
 	for (const auto &button : _buttons)
 		wrapper.emplace_back(button.getSprite());
 	wrapper.emplace_back(_spriteFocus);
@@ -100,5 +104,8 @@ std::vector<std::reference_wrapper<const arc::IComponent>> arc::MainMenu::getCom
 
 	for (const auto &audio : _audios)
 		wrapper.emplace_back(audio);
+
+	for (const auto &text : _texts)
+		wrapper.emplace_back(text);
 	return wrapper;
 }

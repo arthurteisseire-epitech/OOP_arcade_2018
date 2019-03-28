@@ -33,6 +33,7 @@ namespace arc {
 		void nextGraphicalLib();
 		void prevGameLib();
 		void nextGameLib();
+		float calcDeltaTime() const;
 
 		std::shared_ptr<SharedData> _sharedData;
 		SceneManager _sceneManager;
