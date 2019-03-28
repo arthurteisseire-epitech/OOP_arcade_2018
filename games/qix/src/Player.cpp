@@ -8,12 +8,13 @@
 #include "Player.hpp"
 #include "Converter.hpp"
 
-arc::Player::Player(Map &map) : _sprite(""),
-                                _pos({0, 0}),
-                                _map(map)
+arc::Player::Player(Map &map) :
+	_sprite(""),
+        _pos({0, 0}),
+        _map(map)
 {
 	_sprite.setPosition({0, 0});
-	_sprite.setSize(Converter::SizeToPourcent(_map.width(), _map.height()));
+	_sprite.setSize(Converter::SizeToPercent(_map.dimension()));
 	_sprite.setColor(0xffffffff);
 }
 
@@ -26,7 +27,7 @@ void arc::Player::move(DIRECTION dir)
 		_pos += dir;
 		_map.trail(_pos);
 	}
-	_sprite.setPosition(Converter::PosToPourcent(_pos, _map.width(), _map.height()));
+	_sprite.setPosition(Converter::PosToPercent(_pos, _map.dimension()));
 }
 
 const arc::Sprite &arc::Player::getSprite() const

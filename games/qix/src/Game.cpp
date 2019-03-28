@@ -7,25 +7,27 @@
 
 #include "Game.hpp"
 
-const std::map<arc::Key, arc::Player::DIRECTION> arc::Game::_keyDir = {
+const std::map<arc::Key, arc::Player::DIRECTION> arc::Game::_keyDir =
+	{
 	{UP, Player::UP},
 	{DOWN, Player::DOWN},
 	{LEFT, Player::LEFT},
-	{RIGHT, Player::RIGHT},
-};
+	{RIGHT, Player::RIGHT}
+	};
 
 arc::IGame *gameEntryPoint()
 {
 	return new arc::Game();
 }
 
-arc::Game::Game() : _map(30, 30),
-                    _player(_map)
+arc::Game::Game() :
+	_map({30, 30}),
+	_player(_map)
 {
 }
 
 void arc::Game::update(const std::map<arc::Key, arc::KeyState> &keys, float,
-                       const std::pair<unsigned int, unsigned int> &)
+		       const std::pair<unsigned int, unsigned int> &)
 {
 	for (const auto &keyDir : _keyDir) {
 		auto key = keys.find(keyDir.first);

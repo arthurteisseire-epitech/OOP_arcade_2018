@@ -14,8 +14,8 @@
 namespace arc {
 	class Converter {
 	public:
-		static std::pair<float, float> PosToPourcent(arc::Position pos, int width, int height);
-		static std::pair<float, float> SizeToPourcent(int width, int height);
+		static std::pair<float, float> PosToPercent(const Position &pos, const Position &dimension);
+		static std::pair<float, float> SizeToPercent(const Position &dimension);
 	};
 }
 

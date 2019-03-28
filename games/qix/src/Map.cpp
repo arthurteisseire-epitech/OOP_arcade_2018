@@ -8,25 +8,35 @@
 #include "Map.hpp"
 #include "Converter.hpp"
 
-arc::Map::Map(int width, int height) : _width(width),
-                                       _height(height),
-                                       _cells()
+arc::Map::Map(const Position &dimension) :
+	_dimension(dimension),
+	_cells(),
+	_qix(Cell::QIX)
 {
-	_cells.reserve(static_cast<size_t>(height));
-	_sprites.reserve(static_cast<size_t>(height) * width);
-	for (int y = 0; y < height; ++y) {
+	srand((unsigned int)(unsigned long)&_qix);
+	Position qixPos(rand() % _dimension.x - 2 + 1, rand() % _dimension.y - 2 + 1);
+
+	_cells.reserve(static_cast<size_t>(_dimension.x));
+	_sprites.reserve(static_cast<size_t>(_dimension.x) * _dimension.y);
+	for (unsigned int y = 0; y < _dimension.x; ++y) {
 		_cells.emplace_back(std::vector<Cell>());
-		_cells[y].reserve(static_cast<size_t>(width));
-		for (int x = 0; x < width; ++x) {
-			if (x == 0 || x == width - 1 || y == 0 || y == height - 1)
-				_cells[y].emplace_back(Cell(Cell::BORDER));
-			else
-				_cells[y].emplace_back(Cell(Cell::WALKABLE));
-			_cells[y][x].setSize(Converter::SizeToPourcent(_width, _height));
-			_cells[y][x].setPosition(Converter::PosToPourcent({x, y}, _width, _height));
-			_sprites.emplace_back(_cells[y][x].sprite());
-		}
+		_cells[y].reserve(static_cast<size_t>(_dimension.y));
+		for (unsigned int x = 0; x < _dimension.y; ++x)
+			fillCells(Position(x, y), qixPos);
 	}
+}
+
+void arc::Map::fillCells(const Position &pos, const Position &qixPosition)
+{
+	if (pos.x == 0 || pos.x == _dimension.x - 1 || pos.y == 0 || pos.y == _dimension.y - 1)
+		_cells[pos.y].emplace_back(Cell(Cell::BORDER));
+	else if (pos == qixPosition)
+		_cells[pos.y].emplace_back(Cell(Cell::QIX));
+	else
+		_cells[pos.y].emplace_back(Cell(Cell::WALKABLE));
+	_cells[pos.y][pos.x].setSize(Converter::SizeToPercent(_dimension));
+	_cells[pos.y][pos.x].setPosition(Converter::PosToPercent({pos.x, pos.y}, _dimension));
+	_sprites.emplace_back(_cells[pos.y][pos.x].sprite());
 }
 
 arc::Map::~Map()
@@ -59,20 +69,15 @@ bool arc::Map::inWalkable(const arc::Position &pos) const
 
 bool arc::Map::in(const arc::Position &pos) const
 {
-	return pos.x >= 0 && pos.y >= 0 && pos.x < _width && pos.y < _height;
-}
-
-int arc::Map::width() const
-{
-	return _width;
-}
-
-int arc::Map::height() const
-{
-	return _height;
+	return pos.x < _dimension.x && pos.y < _dimension.y;
 }
 
 std::vector<std::reference_wrapper<const arc::IComponent>> arc::Map::getSprites() const
 {
 	return _sprites;
+}
+
+arc::Position arc::Map::dimension() const
+{
+	return _dimension;
 }

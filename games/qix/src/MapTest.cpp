@@ -11,14 +11,14 @@
 namespace arc {
 	class MapTest : public Map, public ::testing::Test {
 	public:
-		explicit MapTest() : Map(10, 10)
+		explicit MapTest() : Map({10, 10})
 		{}
 	};
 
 	TEST_F(MapTest, size)
 	{
-		ASSERT_EQ(_width, 10);
-		ASSERT_EQ(_height, 10);
+		ASSERT_EQ(_dimension.x, 10);
+		ASSERT_EQ(_dimension.y, 10);
 		ASSERT_EQ(static_cast<int>(_cells.size()), 10);
 		ASSERT_EQ(static_cast<int>(_cells[0].size()), 10);
 	}
