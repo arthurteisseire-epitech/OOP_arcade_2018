@@ -32,7 +32,6 @@ namespace arc {
 		void moveFocusUp();
 		void setSpritesPosition();
 		void setSpritesSize();
-		void fillComponents();
 
 		std::vector<Button> _buttons;
 		std::vector<Audio> _audios;
@@ -40,7 +39,6 @@ namespace arc {
 		Sprite _spriteFocus;
 		size_t _focus;
 		static std::map<Key, void (arc::MainMenu::*)()> _keysMap;
-		std::vector<std::reference_wrapper<const IComponent>> _components;
 	};
 }
 

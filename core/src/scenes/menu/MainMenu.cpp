@@ -29,7 +29,6 @@ arc::MainMenu::MainMenu(const std::shared_ptr<SharedData> &playerData) :
 	_buttons.emplace_back("assets/sample.jpg", EXIT, "Exit");
 	setSpritesSize();
 	setSpritesPosition();
-	fillComponents();
 }
 
 void arc::MainMenu::setSpritesPosition()
@@ -86,22 +85,20 @@ arc::SCENE arc::MainMenu::nextScene(const std::map<Key, KeyState> &keys) const
 	return MENU;
 }
 
-void arc::MainMenu::fillComponents()
-{
-	_components.reserve(_buttons.size() * 2 + 1 + _audios.size());
-	for (const auto &button : _buttons)
-		_components.emplace_back(button.getSprite());
-	_components.emplace_back(_spriteFocus);
-
-	for (const auto &button : _buttons)
-		_components.emplace_back(button.getText());
-	_components.emplace_back(_playerName);
-
-	for (const auto &audio : _audios)
-		_components.emplace_back(audio);
-}
-
 std::vector<std::reference_wrapper<const arc::IComponent>> arc::MainMenu::getComponents() const
 {
-	return _components;
+	std::vector<std::reference_wrapper<const arc::IComponent>> wrapper;
+
+	wrapper.reserve(_buttons.size() * 2 + 1 + _audios.size());
+	for (const auto &button : _buttons)
+		wrapper.emplace_back(button.getSprite());
+	wrapper.emplace_back(_spriteFocus);
+
+	for (const auto &button : _buttons)
+		wrapper.emplace_back(button.getText());
+	wrapper.emplace_back(_playerName);
+
+	for (const auto &audio : _audios)
+		wrapper.emplace_back(audio);
+	return wrapper;
 }
