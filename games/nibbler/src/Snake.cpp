@@ -56,20 +56,26 @@ void arc::Snake::appendSprite(const pos_t &posRes, std::unique_ptr<arc::Sprite> 
 	_cacheAssets.emplace_back(std::move(actualSprite));
 }
 
-void arc::Snake::eat()
+std::pair<float, float> arc::Snake::findNewTailPosition(const Sprite *tail) const
 {
-	const auto tail = dynamic_cast<Sprite *>(_cacheAssets[_bodyPositions.size() - 1].get());
-	const auto neckTail = dynamic_cast<Sprite *>(_cacheAssets[_bodyPositions.size() - 2].get());
-	pos_t tailPosDir = findTailPosDirection();
+	const pos_t tailPosDir = findTailPosDirection();
 	std::pair<float, float> newTailPos = tail->getPosition();
-	std::unique_ptr<IComponent> newTailNeck = std::make_unique<Sprite>(neckTail->getTextureName(), tail->getSize(),
-		tail->getPosition());
 
 	newTailPos.first -= (float)tailPosDir.first / _mapSize.first;
 	newTailPos.second -= (float)tailPosDir.second / _mapSize.second;
+	return newTailPos;
+}
+
+void arc::Snake::eat()
+{
+	const auto tail = dynamic_cast<Sprite *>(_cacheAssets[_bodyPositions.size() - 1].get());
+	const auto tailNeck = dynamic_cast<Sprite *>(_cacheAssets[_bodyPositions.size() - 2].get());
+	std::unique_ptr<IComponent> newTailNeck = std::make_unique<Sprite>(tailNeck->getTextureName(), tail->getSize(),
+		tail->getPosition());
+
 	_bodyPositions.push_back(_bodyPositions.back() - findTailPosDirection());
-	tail->setPosition(newTailPos);
-	_cacheAssets.insert(_cacheAssets.begin() + _bodyPositions.size() - 1, std::move(newTailNeck));
+	tail->setPosition(findNewTailPosition(tail));
+	_cacheAssets.insert(_cacheAssets.begin() + _bodyPositions.size() - 2, std::move(newTailNeck));
 }
 
 void arc::Snake::moveBody(const Direction &direction, bool changeDir)
@@ -98,12 +104,8 @@ void arc::Snake::updateSprites(const Direction &direction, bool changeDir, const
 std::pair<float, float> arc::Snake::findNewPos(const pos_t &snakeDirection,
 					       const std::pair<float, float> &headPos) const
 {
-	return {headPos.first +
-	(float)snakeDirection.first
-	/ _mapSize.first,
-		headPos.second +
-		(float)snakeDirection.second
-		/ _mapSize.second};
+	return {headPos.first + (float)snakeDirection.first / _mapSize.first,
+		headPos.second + (float)snakeDirection.second / _mapSize.second};
 }
 
 void arc::Snake::turnHead(const Direction &direction, const std::pair<float, float> &headPos)
@@ -199,7 +201,7 @@ arc::Snake::Direction arc::Snake::findHeadDir()
 	throw "Snake has his head on part of his body";
 }
 
-pos_t arc::Snake::findTailPosDirection()
+pos_t arc::Snake::findTailPosDirection() const
 {
 	unsigned long size = _bodyPositions.size();
 

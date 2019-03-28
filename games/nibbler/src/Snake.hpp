@@ -39,7 +39,7 @@ namespace arc {
 		unsigned int size() const;
 		bool isDead() const;
 	protected:
-		pos_t findTailPosDirection();
+		pos_t findTailPosDirection() const;
 		Direction findHeadDir();
 
 		body_t _bodyPositions;
@@ -60,6 +60,7 @@ namespace arc {
 		void updateSprites(const Direction &direction, bool changeDir, const Direction &lastDirection);
 		void createNewTail();
 		void printSnakePos();
+		std::pair<float, float> findNewTailPosition(const Sprite *) const;
 
 		const pos_t &_mapSize;
 		bool _isDead;
