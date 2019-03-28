@@ -61,7 +61,7 @@ void arc::Map::transformTrailToBorder()
 				if (startOfNonQixZone == Position(0, 0) && x != 0 && x != _dimension.x && y != 0 && y != _dimension.y)
 					startOfNonQixZone = findNonQixZone(Position{x, y});
 			}
-	if (startOfNonQixZone != Position(0, 0))
+	if (startOfNonQixZone.x > 0 && startOfNonQixZone.x < _dimension.x && startOfNonQixZone.y > 0 && startOfNonQixZone.y < _dimension.y)
 		fillZone(startOfNonQixZone);
 }
 
