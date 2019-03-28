@@ -42,6 +42,7 @@ namespace arc {
 		void findPosToLook(Position *posToLook, Position *oppositePos, const Position &currPos) const;
 		bool isQixInZone(const Position &position);
 		bool tryAllZonePositions(const Position &position);
+		void fillZone(const Position &position);
 	};
 }
 
