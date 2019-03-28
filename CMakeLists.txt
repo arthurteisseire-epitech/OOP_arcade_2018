@@ -15,14 +15,14 @@ find_package(Qt5Multimedia)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 
 include_directories(
-        core/scenes/player_name
-        core/scenes/utils
-        core/scenes/menu
-        core/scenes/game
-        core/scenes/exit
-        core/scenes
-        core/library
-        core
+        core/src/scenes/player_name
+        core/src/scenes/utils
+        core/src/scenes/menu
+        core/src/scenes/game
+        core/src/scenes/exit
+        core/src/scenes
+        core/src/library
+        core/src
         lib/qt
         lib
         games/src
