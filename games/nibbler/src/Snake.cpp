@@ -84,7 +84,6 @@ void arc::Snake::moveBody(const Direction &direction, bool changeDir)
 		_isDead = true;
 	_bodyPositions.insert(_bodyPositions.begin(), resPos);
 	updateSprites(direction, changeDir, lastDirection);
-	printSnakePos();
 }
 
 void arc::Snake::updateSprites(const Direction &direction, bool changeDir, const Direction &lastDirection)
@@ -109,10 +108,8 @@ std::pair<float, float> arc::Snake::findNewPos(const pos_t &snakeDirection,
 
 void arc::Snake::turnHead(const Direction &direction, const std::pair<float, float> &headPos)
 {
-	Sprite *sprite = new Sprite(PATH_TO_ASSETS + _assetsMap.at(direction)[0],
+	_cacheAssets[0] = std::make_unique<Sprite>(PATH_TO_ASSETS + _assetsMap.at(direction)[0],
 		pos_t{1.0, 1.0} / _mapSize, headPos);
-	_cacheAssets.erase(_cacheAssets.begin());
-	_cacheAssets.insert(_cacheAssets.begin(), std::unique_ptr<Sprite>(sprite));
 }
 
 const std::string &arc::Snake::findCurveSnake(const Direction &direction, const Direction &lastDirection) const
