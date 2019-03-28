@@ -7,14 +7,16 @@
 
 #include "Map.hpp"
 #include "Converter.hpp"
+#include <random>
 
+#include <iostream>
 arc::Map::Map(const Position &dimension) :
 	_dimension(dimension),
 	_cells(),
 	_qix(Cell::QIX)
 {
-	srand((unsigned int)(unsigned long)&_qix);
-	Position qixPos(rand() % _dimension.x - 2 + 1, rand() % _dimension.y - 2 + 1);
+	std::random_device randomDevice;
+	Position qixPos(abs(randomDevice() % _dimension.x - 2) + 1, abs(randomDevice() % _dimension.y - 2) + 1);
 
 	_cells.reserve(static_cast<size_t>(_dimension.x));
 	_sprites.reserve(static_cast<size_t>(_dimension.x) * _dimension.y);
