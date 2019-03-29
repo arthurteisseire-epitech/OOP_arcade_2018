@@ -19,7 +19,7 @@ std::map<arc::Key, void (arc::MainMenu::*)()> arc::MainMenu::_keysMap = {
 
 arc::MainMenu::MainMenu(const std::shared_ptr<SharedData> &playerData) :
 	Scene(playerData),
-	_playerName("Player Name : " + _playerData->playerName, std::pair<float, float>(0.1, 0.1), 20),
+	_playerName("Player Name : " + _playerData->playerName, {0.5, 0.9}, 30),
 	_spriteFocus("assets/sprites/focus.png"),
 	_logo("assets/sprites/logo.png", {0.8, 0.2}, {0.1, 0.1}),
 	_focus(0)
@@ -39,13 +39,13 @@ void arc::MainMenu::setTextsString()
 	for (size_t i = 0; i < _playerData->games.size(); ++i) {
 		std::string isCurrent = _playerData->games[i] == _playerData->gameName ? " <-" : "";
 		_texts.emplace_back(_playerData->games[i] + isCurrent,
-		                    std::make_pair<float, float>(0.17, (i / 50.0f) + 0.85), 20);
+		                    std::make_pair<float, float>(0.13, (i / 50.0f) + 0.85), 20);
 	}
-	_texts.emplace_back("Graphics : ", std::make_pair<float, float>(0.76, 0.85), 20);
+	_texts.emplace_back("Graphics : ", std::make_pair<float, float>(0.85, 0.85), 20);
 	for (size_t i = 0; i < _playerData->libs.size(); ++i) {
 		std::string isCurrent = _playerData->libs[i] == _playerData->libname ? " <-" : "";
 		_texts.emplace_back(_playerData->libs[i] + isCurrent,
-		                    std::make_pair<float, float>(0.87, (i / 50.0f) + 0.85), 20);
+		                    std::make_pair<float, float>(0.92, (i / 50.0f) + 0.85), 20);
 	}
 }
 
