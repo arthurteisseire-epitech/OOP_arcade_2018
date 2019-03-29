@@ -59,7 +59,7 @@ void arc::Map::transformTrailToBorder()
 			if (_cells[y][x].state() == Cell::TRAIL) {
 				_cells[y][x].alterState(Cell::BORDER);
 				startOfNonQixZone = findNonQixZone(Position{x, y});
-				if (isInNoBorders(startOfNonQixZone) /*&& _cells[startOfNonQixZone.y][startOfNonQixZone.x].state() == Cell::WALKABLE*/)
+				if (isInNoBorders(startOfNonQixZone))
 					fillZone(startOfNonQixZone);
 			}
 }
