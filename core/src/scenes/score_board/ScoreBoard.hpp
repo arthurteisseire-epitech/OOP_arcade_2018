@@ -21,7 +21,7 @@ namespace arc {
 	private:
 		void createTexts();
 
-		std::map<int, std::pair<std::string, std::string>> _rows;
+		std::vector<std::pair<int, std::pair<std::string, std::string>>> _rows;
 		std::vector<Text> _gameNames;
 		std::vector<Text> _playerNames;
 		std::vector<Text> _scores;

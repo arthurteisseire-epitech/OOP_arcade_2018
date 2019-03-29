@@ -21,10 +21,10 @@ void arc::Score::write(const std::string &gameName, const std::string &playerNam
 	file.close();
 }
 
-std::map<int, std::pair<std::string, std::string>> arc::Score::read()
+std::vector<std::pair<int, std::pair<std::string, std::string>>> arc::Score::read()
 {
 	std::ifstream file(FILENAME);
-	std::map<int, std::pair<std::string, std::string>> scores;
+	std::vector<std::pair<int, std::pair<std::string, std::string>>> scores;
 	std::string line;
 
 	if (!file.fail())
@@ -33,10 +33,10 @@ std::map<int, std::pair<std::string, std::string>> arc::Score::read()
 	return scores;
 }
 
-void arc::Score::addRow(std::map<int, std::pair<std::string, std::string>> &scores, std::string &line)
+void arc::Score::addRow(std::vector<std::pair<int, std::pair<std::string, std::string>>> &scores, std::string &line)
 {
 	try {
-		scores.emplace(arc::Score::nextRow(line));
+		scores.emplace_back(arc::Score::nextRow(line));
 	} catch (const std::exception &e) {
 	}
 }

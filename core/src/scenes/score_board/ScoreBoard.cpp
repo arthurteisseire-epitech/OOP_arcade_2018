@@ -45,9 +45,9 @@ void arc::ScoreBoard::createTexts()
 	float y = 0.3f;
 
 	for (const auto &row : _rows) {
-		_gameNames.emplace_back(row.second.first, std::pair<float, float>(0.3, y), 30);
-		_playerNames.emplace_back(row.second.second, std::pair<float, float>(0.6, y), 30);
-		_scores.emplace_back(std::to_string(row.first), std::pair<float, float>(0.8, y), 30);
+		_gameNames.emplace_back(row.second.first, std::pair<float, float>(0.2, y), 30);
+		_playerNames.emplace_back(row.second.second, std::pair<float, float>(0.3, y), 30);
+		_scores.emplace_back(std::to_string(row.first), std::pair<float, float>(0.5, y), 30);
 		y += 0.05;
 	}
 }
