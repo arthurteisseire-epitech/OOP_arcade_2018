@@ -19,7 +19,7 @@ std::map<arc::Key, void (arc::MainMenu::*)()> arc::MainMenu::_keysMap = {
 
 arc::MainMenu::MainMenu(const std::shared_ptr<SharedData> &playerData) :
 	Scene(playerData),
-	_playerName("Player Name : " + _playerData->playerName, {0.5, 0.85}, 30),
+	_playerName("Player Name : " + _sharedData->playerName, {0.5, 0.85}, 30),
 	_spriteFocus("assets/sprites/focus.png"),
 	_logo("assets/sprites/logo.png", {0.8, 0.2}, {0.1, 0.1}),
 	_focus(0)
@@ -36,15 +36,15 @@ void arc::MainMenu::setTextsString()
 {
 	_texts.clear();
 	_texts.emplace_back("Games : ", std::make_pair<float, float>(0.06, 0.85), 20);
-	for (size_t i = 0; i < _playerData->games.size(); ++i) {
-		std::string isCurrent = _playerData->games[i] == _playerData->gameName ? " <-" : "";
-		_texts.emplace_back(_playerData->games[i] + isCurrent,
+	for (size_t i = 0; i < _sharedData->games.size(); ++i) {
+		std::string isCurrent = _sharedData->games[i] == _sharedData->gameName ? " <-" : "";
+		_texts.emplace_back(_sharedData->games[i] + isCurrent,
 		                    std::make_pair<float, float>(0.16, (i / 50.0f) + 0.85), 20);
 	}
 	_texts.emplace_back("Graphics : ", std::make_pair<float, float>(0.82, 0.85), 20);
-	for (size_t i = 0; i < _playerData->libs.size(); ++i) {
-		std::string isCurrent = _playerData->libs[i] == _playerData->libname ? " <-" : "";
-		_texts.emplace_back(_playerData->libs[i] + isCurrent,
+	for (size_t i = 0; i < _sharedData->libs.size(); ++i) {
+		std::string isCurrent = _sharedData->libs[i] == _sharedData->libname ? " <-" : "";
+		_texts.emplace_back(_sharedData->libs[i] + isCurrent,
 		                    std::make_pair<float, float>(0.92, (i / 50.0f) + 0.85), 20);
 	}
 }
@@ -72,7 +72,7 @@ void arc::MainMenu::setSpritesSize()
 
 void arc::MainMenu::update(const std::map<Key, KeyState> &keys, float)
 {
-	_playerName.setText("Player Name : " + _playerData->playerName);
+	_playerName.setText("Player Name : " + _sharedData->playerName);
 	setTextsString();
 	for (auto &p : _keysMap) {
 		auto it = keys.find(p.first);
