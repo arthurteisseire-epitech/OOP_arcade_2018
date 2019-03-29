@@ -51,14 +51,19 @@ void arc::CacaGraphic::draw()
 
 bool arc::CacaGraphic::isOpen() const
 {
+	if (!_isOpen) {
+		caca_free_display(_dp);
+		caca_free_canvas(_cv);
+	}
 	return _isOpen;
 }
+
 
 bool arc::CacaGraphic::processSprite(const arc::ISprite &sprite)
 {
 	Imlib_Image image = imlib_load_image(sprite.getTextureName().c_str());
 	if (image == nullptr) {
-		std::cerr << "imlib_load_image: Cannot load " << sprite.getTextureName().c_str() << std::endl;
+		std::cerr << "imlib_load_image: Cannot load \"" << sprite.getTextureName().c_str()  << "\""<< std::endl;
 		return false;
 	}
 	imlib_context_set_image(image);
@@ -107,7 +112,9 @@ void arc::CacaGraphic::processEvents()
 
 void arc::CacaGraphic::processKey(arc::KeyState keyState, caca_event_t event)
 {
-	auto it = _cKeys.find((caca_key)caca_get_event_key_ch(&event));
+	auto key = (caca_key)caca_get_event_key_ch(&event);
+	auto it = _cKeys.find(key);
+
 	if (it != _cKeys.end()) {
 		auto key = _Keys.find(it->second);
 		if (!(key != _Keys.end() && keyState == PRESSED))
