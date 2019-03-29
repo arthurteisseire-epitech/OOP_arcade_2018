@@ -19,6 +19,7 @@ include_directories(
         core/src/scenes/utils
         core/src/scenes/menu
         core/src/scenes/game
+        core/src/scenes/score_board
         core/src/scenes/exit
         core/src/scenes
         core/src/library
@@ -73,11 +74,12 @@ add_custom_target(
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-enable_testing()
-
-file(GLOB_RECURSE tests core/*Test.cpp games/qix/*Test.cpp)
-
-add_executable(units ${core} ${tests} ${component} ${games})
-target_link_libraries(units dl Qt5::Widgets Qt5::Multimedia gtest gtest_main gcov)
-
-add_test(NAME units COMMAND units)
+#enable_testing()
+#
+#file(GLOB_RECURSE tests core/*Test.cpp games/qix/*Test.cpp)
+#
+#add_executable(units ${core} ${tests} ${component} ${games})
+#target_link_libraries(units dl Qt5::Widgets Qt5::Multimedia gtest gtest_main gcov)
+#
+#add_test(NAME units COMMAND units)
+#

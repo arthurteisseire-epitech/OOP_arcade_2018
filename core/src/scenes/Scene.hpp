@@ -19,7 +19,7 @@ namespace arc {
 		explicit Scene(const std::shared_ptr<SharedData> &playerData);
 		~Scene() override = default;
 	protected:
-		std::shared_ptr<SharedData> _playerData;
+		std::shared_ptr<SharedData> _sharedData;
 	};
 }
 

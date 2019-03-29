@@ -32,6 +32,7 @@ arc::Core::Core(const std::string &libname) :
 	_gameManager(GAME_DIR, GAME_ENTRY_POINT),
 	_graphicManager(GRAPHIC_DIR, GRAPHIC_ENTRY_POINT, libname)
 {
+	_sharedData->playerName = "AAA";
 	updateSharedData();
 }
 
