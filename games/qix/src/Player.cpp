@@ -21,18 +21,21 @@ arc::Player::Player(Map &map) :
 void arc::Player::move(DIRECTION dir)
 {
 	if (_map.isInBorders(_pos + dir + dir)) {
-		_pos += dir;
-		if (!_map.isInBorders(_pos))
-			_map.trail(_pos);
-		_pos += dir;
+		moveInDirection(dir);
 		_map.transformTrailToBorder();
 	} else if (_map.isInWalkable(_pos + dir) && _map.isInWalkable(_pos + dir + dir)) {
-		_pos += dir;
-		_map.trail(_pos);
-		_pos += dir;
+		moveInDirection(dir);
 		_map.trail(_pos);
 	}
 	_sprite.setPosition(Converter::PosToPercent(_pos, _map.dimension()));
+}
+
+void arc::Player::moveInDirection(const arc::Player::DIRECTION &dir)
+{
+	_pos += dir;
+	if (!_map.isInBorders(_pos))
+		_map.trail(_pos);
+	_pos += dir;
 }
 
 const arc::Sprite &arc::Player::getSprite() const
