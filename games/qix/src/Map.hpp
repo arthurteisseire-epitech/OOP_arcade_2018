@@ -24,6 +24,7 @@ namespace arc {
 		bool isInBorders(const Position &pos) const;
 		bool isInNoBorders(const Position &pos) const;
 		bool isInWalkable(const Position &pos) const;
+		bool isNextToWalkable(const Position &pos) const;
 		void trail(const Position &pos);
 		void transformTrailToBorder();
 		std::vector<std::reference_wrapper<const IComponent>> getSprites() const;

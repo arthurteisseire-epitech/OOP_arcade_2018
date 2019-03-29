@@ -20,6 +20,8 @@ arc::Player::Player(Map &map) :
 
 void arc::Player::move(DIRECTION dir)
 {
+	if (!_map.isNextToWalkable(_pos + dir + dir))
+		return;
 	if (_map.isInBorders(_pos + dir + dir) && (_map.isInWalkable(_pos + dir) || _map.isInBorders(_pos + dir))) {
 		moveInDirection(dir);
 		_map.transformTrailToBorder();

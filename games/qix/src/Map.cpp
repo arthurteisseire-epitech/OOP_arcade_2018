@@ -179,6 +179,26 @@ bool arc::Map::isIn(const arc::Position &pos) const
 	return pos.x < _dimension.x && pos.y < _dimension.y;
 }
 
+bool arc::Map::isNextToWalkable(const Position &pos) const
+{
+	if (isIn({pos.y + 1, pos.x}) && _cells[pos.y + 1][pos.x].state() == Cell::WALKABLE)
+		return true;
+	if (isIn({pos.y - 1, pos.x}) && _cells[pos.y - 1][pos.x].state() == Cell::WALKABLE)
+		return true;
+	if (isIn({pos.y, pos.x + 1}) && _cells[pos.y][pos.x + 1].state() == Cell::WALKABLE)
+		return true;
+	if (isIn({pos.y, pos.x - 1}) && _cells[pos.y][pos.x - 1].state() == Cell::WALKABLE)
+		return true;
+
+	if (isIn({pos.y + 1, pos.x + 1}) && _cells[pos.y + 1][pos.x + 1].state() == Cell::WALKABLE)
+		return true;
+	if (isIn({pos.y - 1, pos.x - 1}) && _cells[pos.y - 1][pos.x - 1].state() == Cell::WALKABLE)
+		return true;
+	if (isIn({pos.y - 1, pos.x + 1}) && _cells[pos.y - 1][pos.x + 1].state() == Cell::WALKABLE)
+		return true;
+	return isIn({pos.y + 1, pos.x - 1}) && _cells[pos.y + 1][pos.x - 1].state() == Cell::WALKABLE;
+}
+
 std::vector<std::reference_wrapper<const arc::IComponent>> arc::Map::getSprites() const
 {
 	return _sprites;
