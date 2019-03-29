@@ -14,7 +14,7 @@ namespace arc {
 	class Text : public IText {
 	public:
 		explicit Text(const std::string &text = "", const std::pair<float, float> &pos = {0.0, 0.0},
-		              int size = 1, const std::string &fontPath = "assets/fonts/default_font.ttf");
+		              int size = 1, const std::string &fontPath = "assets/fonts/arcade.ttf");
 		~Text() override = default;
 
 		ComponentType getType() const final;
