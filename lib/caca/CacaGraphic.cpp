@@ -31,7 +31,7 @@ arc::IGraphic *graphicEntryPoint()
 }
 
 arc::CacaGraphic::CacaGraphic() :
-	_cv(caca_create_canvas(160, 80)),
+	_cv(caca_create_canvas(180, 80)),
 	_dp(caca_create_display(_cv)),
 	_isOpen(true)
 {
@@ -65,10 +65,10 @@ bool arc::CacaGraphic::processSprite(const arc::ISprite &sprite)
 
 
 	caca_dither_bitmap(_cv,
-		(int)(sprite.getPosition().first * imlib_image_get_width()),
-		(int)(sprite.getPosition().second * imlib_image_get_height()),
-		(int)(sprite.getSize().first / 4 * imlib_image_get_width()),
-		(int)(sprite.getSize().second / 4 * imlib_image_get_height()),
+		(int)(sprite.getPosition().first * imlib_image_get_width()) ? : 1 ,
+		(int)(sprite.getPosition().second * imlib_image_get_height()) ? : 1,
+		(int)(sprite.getSize().first * imlib_image_get_width()) / 3 ? : 1 ,
+		(int)(sprite.getSize().second * imlib_image_get_height()) / 3 ? : 1,
 		caca_create_dither(32, imlib_image_get_width(), imlib_image_get_height(), 4 * imlib_image_get_width(), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000),
 		imlib_image_get_data_for_reading_only()
 		);
