@@ -41,7 +41,7 @@ namespace arc {
 		void fillCells(const Position &pos);
 		Position findNonQixZone(const Position &pos);
 		bool tryPosition(Position posToTry, Position *posToLook, Position *oppositePos,
-			Position oppositePosToTry) const;
+		                 Position oppositePosToTry) const;
 		void findPosToLook(Position *posToLook, Position *oppositePos, const Position &currPos) const;
 		bool isQixInZone(const Position &position);
 		bool tryAllZonePositions(const Position &position);

@@ -10,8 +10,8 @@
 
 arc::Player::Player(Map &map) :
 	_sprite(""),
-        _pos({0, 0}),
-        _map(map)
+	_pos({0, 0}),
+	_map(map)
 {
 	_sprite.setPosition({0, 0});
 	_sprite.setSize(Converter::SizeToPercent(_map.dimension()));

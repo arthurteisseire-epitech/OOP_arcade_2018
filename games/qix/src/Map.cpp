@@ -112,23 +112,27 @@ bool arc::Map::tryAllZonePositions(const arc::Position &position)
 	if (position == _qix.position())
 		return true;
 	_cells[position.y][position.x].alterState(Cell::TMP);
-	if (_cells[position.y + 1][position.x].state() == Cell::WALKABLE || _cells[position.y + 1][position.x].state() == Cell::QIX)
+	if (_cells[position.y + 1][position.x].state() == Cell::WALKABLE ||
+	    _cells[position.y + 1][position.x].state() == Cell::QIX)
 		if (tryAllZonePositions({position.x, position.y + 1}))
 			return true;
-	if (_cells[position.y - 1][position.x].state() == Cell::WALKABLE || _cells[position.y - 1][position.x].state() == Cell::QIX)
+	if (_cells[position.y - 1][position.x].state() == Cell::WALKABLE ||
+	    _cells[position.y - 1][position.x].state() == Cell::QIX)
 		if (tryAllZonePositions({position.x, position.y - 1}))
 			return true;
-	if (_cells[position.y][position.x + 1].state() == Cell::WALKABLE || _cells[position.y][position.x + 1].state() == Cell::QIX)
+	if (_cells[position.y][position.x + 1].state() == Cell::WALKABLE ||
+	    _cells[position.y][position.x + 1].state() == Cell::QIX)
 		if (tryAllZonePositions({position.x + 1, position.y}))
 			return true;
-	if (_cells[position.y][position.x - 1].state() == Cell::WALKABLE || _cells[position.y][position.x - 1].state() == Cell::QIX)
+	if (_cells[position.y][position.x - 1].state() == Cell::WALKABLE ||
+	    _cells[position.y][position.x - 1].state() == Cell::QIX)
 		if (tryAllZonePositions({position.x - 1, position.y}))
 			return true;
 	return false;
 }
 
 bool arc::Map::tryPosition(const Position posToTry, Position *posToLook, Position *oppositePos,
-			   const Position oppositePosToTry) const
+                           const Position oppositePosToTry) const
 {
 	if (!(posToTry.x > 0 && posToTry.x < _dimension.x && posToTry.y > 0 && posToTry.y < _dimension.y))
 		return false;
@@ -145,7 +149,7 @@ void arc::Map::fillZone(const arc::Position &position)
 	if (_cells[position.y][position.x].state() == Cell::WALKABLE)
 		_cells[position.y][position.x].alterState(Cell::NON_WALKABLE);
 	if (_cells[position.y + 1][position.x].state() == Cell::WALKABLE)
-		 fillZone({position.x, position.y + 1});
+		fillZone({position.x, position.y + 1});
 	if (_cells[position.y - 1][position.x].state() == Cell::WALKABLE)
 		fillZone({position.x, position.y - 1});
 	if (_cells[position.y][position.x + 1].state() == Cell::WALKABLE)

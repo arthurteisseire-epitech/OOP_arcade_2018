@@ -9,10 +9,10 @@
 
 const std::map<arc::Key, arc::Player::DIRECTION> arc::Game::_keyDir =
 	{
-	{UP, Player::UP},
-	{DOWN, Player::DOWN},
-	{LEFT, Player::LEFT},
-	{RIGHT, Player::RIGHT}
+		{UP,    Player::UP},
+		{DOWN,  Player::DOWN},
+		{LEFT,  Player::LEFT},
+		{RIGHT, Player::RIGHT}
 	};
 
 arc::IGame *gameEntryPoint()
@@ -27,7 +27,7 @@ arc::Game::Game() :
 }
 
 void arc::Game::update(const std::map<arc::Key, arc::KeyState> &keys, float dTime,
-		       const std::pair<unsigned int, unsigned int> &)
+                       const std::pair<unsigned int, unsigned int> &)
 {
 	static float locDTime = 0;
 
@@ -44,7 +44,8 @@ void arc::Game::update(const std::map<arc::Key, arc::KeyState> &keys, float dTim
 	}
 }
 
-void arc::Game::handleHold(float dTime, float &locDTime, const std::pair<const arc::Key, arc::Player::DIRECTION> &keyDir)
+void
+arc::Game::handleHold(float dTime, float &locDTime, const std::pair<const arc::Key, arc::Player::DIRECTION> &keyDir)
 {
 	locDTime += dTime;
 	if (locDTime > 0.2) {

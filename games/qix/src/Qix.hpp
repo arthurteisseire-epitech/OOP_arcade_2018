@@ -10,8 +10,7 @@
 
 #include "Position.hpp"
 
-namespace arc
-{
+namespace arc {
 	class Qix {
 	public:
 		explicit Qix(const Position &pos);

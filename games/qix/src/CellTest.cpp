@@ -11,7 +11,8 @@
 namespace arc {
 	class CellTest : public Cell, public ::testing::Test {
 	public:
-		CellTest() : Cell(WALKABLE) {}
+		CellTest() : Cell(WALKABLE)
+		{}
 	};
 
 	TEST_F(CellTest, state)

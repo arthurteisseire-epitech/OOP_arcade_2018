@@ -31,7 +31,8 @@ namespace arc {
 		static const std::map<Key, Player::DIRECTION> _keyDir;
 
 	private:
-		void handleHold(float dTime, float &locDTime, const std::pair<const arc::Key, arc::Player::DIRECTION> &keyDir);
+		void handleHold(float dTime, float &locDTime,
+		                const std::pair<const arc::Key, arc::Player::DIRECTION> &keyDir);
 	};
 }
 
