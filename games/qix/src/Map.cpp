@@ -58,11 +58,10 @@ void arc::Map::transformTrailToBorder()
 		for (unsigned int x = 0; x < _cells[y].size(); ++x)
 			if (_cells[y][x].state() == Cell::TRAIL) {
 				_cells[y][x].alterState(Cell::BORDER);
-				if (startOfNonQixZone == Position(0, 0))
-					startOfNonQixZone = findNonQixZone(Position{x, y});
+				startOfNonQixZone = findNonQixZone(Position{x, y});
+				if (isInNoBorders(startOfNonQixZone))
+					fillZone(startOfNonQixZone);
 			}
-	if (isInNoBorders(startOfNonQixZone))
-		fillZone(startOfNonQixZone);
 }
 
 arc::Position arc::Map::findNonQixZone(const Position &pos)
@@ -164,7 +163,7 @@ bool arc::Map::isInBorders(const arc::Position &pos) const
 
 bool arc::Map::isInNoBorders(const arc::Position &pos) const
 {
-	return isIn(pos) && _cells[pos.y][pos.x].state() != Cell::BORDER;
+	return isIn(pos) && _cells[pos.y][pos.x].state() != Cell::BORDER && _cells[pos.y][pos.x].state() != Cell::TRAIL;
 }
 
 bool arc::Map::isInWalkable(const arc::Position &pos) const
