@@ -26,7 +26,7 @@ arc::MainMenu::MainMenu(const std::shared_ptr<SharedData> &playerData) :
 {
 	_buttons.emplace_back("", GAME, "Play", 0x00aacfff);
 	_buttons.emplace_back("", PLAYER_NAME, "Player Name", 0x00aacfff);
-	_buttons.emplace_back("", EXIT, "ScoreBoard", 0x00aacfff);
+	_buttons.emplace_back("", SCOREBOARD, "ScoreBoard", 0x00aacfff);
 	_buttons.emplace_back("", EXIT, "Exit", 0x00aacfff);
 	setSpritesSize();
 	setSpritesPosition();

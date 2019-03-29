@@ -19,6 +19,7 @@ include_directories(
         core/src/scenes/utils
         core/src/scenes/menu
         core/src/scenes/game
+        core/src/scenes/score_board
         core/src/scenes/exit
         core/src/scenes
         core/src/library
