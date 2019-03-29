@@ -9,7 +9,8 @@
 #include "ScoreBoard.hpp"
 
 arc::ScoreBoard::ScoreBoard(const std::shared_ptr<arc::SharedData> &playerData) :
-	Scene(playerData)
+	Scene(playerData),
+	_header("SCORE BOARD", {0.5, 0.1}, 50)
 {
 	_rows = Score::read();
 	createTexts();
@@ -23,6 +24,7 @@ std::vector<std::reference_wrapper<const arc::IComponent>> arc::ScoreBoard::getC
 {
 	std::vector<std::reference_wrapper<const arc::IComponent>> wrapper;
 
+	wrapper.reserve(_gameNames.size() + _playerNames.size() + _scores.size() + 1);
 	for (const auto &gameName : _gameNames)
 		wrapper.emplace_back(gameName);
 
@@ -32,6 +34,7 @@ std::vector<std::reference_wrapper<const arc::IComponent>> arc::ScoreBoard::getC
 	for (const auto &score : _scores)
 		wrapper.emplace_back(score);
 
+	wrapper.emplace_back(_header);
 	return wrapper;
 }
 

@@ -21,6 +21,7 @@ namespace arc {
 	private:
 		void createTexts();
 
+		Text _header;
 		std::vector<std::pair<int, std::pair<std::string, std::string>>> _rows;
 		std::vector<Text> _gameNames;
 		std::vector<Text> _playerNames;
