@@ -20,13 +20,14 @@ std::map<arc::Key, void (arc::MainMenu::*)()> arc::MainMenu::_keysMap = {
 arc::MainMenu::MainMenu(const std::shared_ptr<SharedData> &playerData) :
 	Scene(playerData),
 	_playerName("Player Name : " + _playerData->playerName, std::pair<float, float>(0.1, 0.1), 20),
-	_spriteFocus("assets/focus.png"),
+	_spriteFocus("assets/sprites/focus.png"),
+	_logo("assets/sprites/logo.png", {0.8, 0.2}, {0.1, 0.1}),
 	_focus(0)
 {
-	_audios.emplace_back("assets/audio/sound.m4a", 10);
-	_buttons.emplace_back("assets/sample.jpg", PLAYER_NAME, "Player Name");
-	_buttons.emplace_back("assets/saple.jpg", GAME, "Play");
-	_buttons.emplace_back("assets/sample.jpg", EXIT, "Exit");
+	_buttons.emplace_back("assets/sprites/sample.jpg", PLAYER_NAME, "Player Name");
+	_buttons.emplace_back("assets/sprites/saple.jpg", GAME, "Play");
+	_buttons.emplace_back("assets/sprites/sample.jpg", EXIT, "ScoreBoard");
+	_buttons.emplace_back("assets/sprites/sample.jpg", EXIT, "Exit");
 	setSpritesSize();
 	setSpritesPosition();
 }
@@ -50,21 +51,23 @@ void arc::MainMenu::setTextsString()
 
 void arc::MainMenu::setSpritesPosition()
 {
-	_spriteFocus.setPosition(std::pair<float, float>(0.05, 0.2));
-	_buttons[0].setPosition(std::pair<float, float>(0.2, 0.2));
-	_buttons[1].setPosition(std::pair<float, float>(0.2, 0.4));
+	_spriteFocus.setPosition(std::pair<float, float>(0.05, 0.4));
+	_buttons[0].setPosition(std::pair<float, float>(0.2, 0.4));
+	_buttons[1].setPosition(std::pair<float, float>(0.2, 0.5));
 	_buttons[2].setPosition(std::pair<float, float>(0.2, 0.6));
+	_buttons[3].setPosition(std::pair<float, float>(0.2, 0.7));
 }
 
 void arc::MainMenu::setSpritesSize()
 {
 	float width = 0.6;
-	float height = 0.1;
+	float height = 0.05;
 
 	_spriteFocus.setSize(std::pair<float, float>(0.15, height));
 	_buttons[0].setSize(std::pair<float, float>(width, height));
 	_buttons[1].setSize(std::pair<float, float>(width, height));
 	_buttons[2].setSize(std::pair<float, float>(width, height));
+	_buttons[3].setSize(std::pair<float, float>(width, height));
 }
 
 void arc::MainMenu::update(const std::map<Key, KeyState> &keys, float)
@@ -107,17 +110,15 @@ std::vector<std::reference_wrapper<const arc::IComponent>> arc::MainMenu::getCom
 {
 	std::vector<std::reference_wrapper<const arc::IComponent>> wrapper;
 
-	wrapper.reserve(_buttons.size() * 2 + 1 + _audios.size() + _texts.size());
+	wrapper.reserve(_buttons.size() * 2 + 2 + _texts.size());
 	for (const auto &button : _buttons)
 		wrapper.emplace_back(button.getSprite());
 	wrapper.emplace_back(_spriteFocus);
+	wrapper.emplace_back(_logo);
 
 	for (const auto &button : _buttons)
 		wrapper.emplace_back(button.getText());
 	wrapper.emplace_back(_playerName);
-
-	for (const auto &audio : _audios)
-		wrapper.emplace_back(audio);
 
 	for (const auto &text : _texts)
 		wrapper.emplace_back(text);

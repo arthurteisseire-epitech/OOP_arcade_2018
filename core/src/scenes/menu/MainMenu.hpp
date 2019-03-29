@@ -36,9 +36,9 @@ namespace arc {
 
 		std::vector<Text> _texts;
 		std::vector<Button> _buttons;
-		std::vector<Audio> _audios;
 		Text _playerName;
 		Sprite _spriteFocus;
+		Sprite _logo;
 		size_t _focus;
 		static std::map<Key, void (arc::MainMenu::*)()> _keysMap;
 	};
