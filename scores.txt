@@ -1,0 +1,3 @@
+nibbler AAA 0
+nibbler AAA 0
+nibbler ZZZ 0
