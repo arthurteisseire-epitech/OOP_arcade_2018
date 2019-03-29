@@ -140,7 +140,7 @@ bool arc::Map::tryPosition(const Position posToTry, Position *posToLook, Positio
 
 void arc::Map::fillZone(const arc::Position &position)
 {
-	_cells[position.y][position.x].alterState(Cell::BORDER);
+	_cells[position.y][position.x].alterState(Cell::NON_WALKABLE);
 	if (_cells[position.y + 1][position.x].state() == Cell::WALKABLE)
 		 fillZone({position.x, position.y + 1});
 	if (_cells[position.y - 1][position.x].state() == Cell::WALKABLE)

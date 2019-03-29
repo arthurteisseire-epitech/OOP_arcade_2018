@@ -21,7 +21,7 @@ arc::IGame *gameEntryPoint()
 }
 
 arc::Game::Game() :
-	_map({30, 30}),
+	_map({31, 31}),
 	_player(_map)
 {
 }
