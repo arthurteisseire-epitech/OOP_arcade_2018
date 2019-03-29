@@ -30,9 +30,10 @@ arc::IGraphic *graphicEntryPoint()
 	return new arc::CacaGraphic();
 }
 
-arc::CacaGraphic::CacaGraphic():_cv(caca_create_canvas(160, 30)),
-		_dp(caca_create_display(_cv)),
-		_isOpen(true)
+arc::CacaGraphic::CacaGraphic() :
+	_cv(caca_create_canvas(160, 30)),
+	_dp(caca_create_display(_cv)),
+	_isOpen(true)
 {
 
 	caca_create_display(_cv);
@@ -114,7 +115,7 @@ void arc::CacaGraphic::processKey(arc::KeyState keyState, caca_event_t event)
 	if (it != _cKeys.end()) {
 		auto key = _Keys.find(it->second);
 		if (!(key != _Keys.end() && keyState == PRESSED))
-			_Keys[it->second] = PRESSED;
+			_Keys[it->second] = keyState;
 	}
 }
 

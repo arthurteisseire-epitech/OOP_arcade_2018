@@ -15,8 +15,10 @@ SRC		=	$(DSRC)Game.cpp			\
 			$(DSRC)Player.cpp		\
 			$(DSRC)Map.cpp			\
 			$(DSRC)Cell.cpp			\
-			$(DSRC)Converter.cpp		\
-			$(DCOMPONENT)Sprite.cpp		\
+			$(DSRC)Converter.cpp	\
+			$(DSRC)Position.cpp		\
+			$(DSRC)Qix.cpp		\
+			$(DCOMPONENT)Sprite.cpp	\
 
 CXXFLAGS	+=  -Wall -Wextra $(INC) -shared -fPIC
 OBJ		=	$(SRC:.cpp=.o)
@@ -24,7 +26,7 @@ OBJ		=	$(SRC:.cpp=.o)
 NAME	=	lib_arcade_qix.so
 
 all: $(OBJ)
-	$(CC) -o $(NAME) -shared $(OBJ) $(CXXFLAGS)
+	$(CC) -o $(NAME) $(OBJ) $(CXXFLAGS)
 	cp $(NAME) ..
 
 clean:

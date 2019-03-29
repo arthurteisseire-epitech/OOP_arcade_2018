@@ -32,6 +32,9 @@ namespace arc {
 		Sprite _sprite;
 		Position _pos;
 		Map &_map;
+
+	private:
+		void moveInDirection(const arc::Player::DIRECTION &dir);
 	};
 
 	Position &operator+=(Position &pos, Player::DIRECTION dir);

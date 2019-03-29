@@ -31,7 +31,7 @@ arc::Nibbler::Nibbler() :
 std::vector<std::reference_wrapper<const arc::IComponent>> arc::Nibbler::getComponents() const
 {
 	std::vector<std::reference_wrapper<const IComponent>> vec;
-	IComponent *score = new Text(std::string("Score: ") + std::to_string(_score), std::pair<float, float>(0.4, 0.2),
+	IComponent *score = new Text(std::string("Score: ") + std::to_string(_score), std::pair<float, float>(0.1, 0.2),
 	                             20);
 
 	_map.generateSprites(vec);
@@ -53,7 +53,7 @@ void arc::Nibbler::update(const std::map<arc::Key, arc::KeyState> &keys, float d
 
 bool arc::Nibbler::isRunning() const
 {
-	return !_map.isFull() && !_map.isSnakeDead();
+	return !_map.isSnakeDead() && !_map.isFull();
 }
 
 void arc::Nibbler::updateTime(float time)
@@ -67,4 +67,9 @@ void arc::Nibbler::getLastDirection(const std::map<arc::Key, arc::KeyState> &key
 		_lastDir = PLAYER_LEFT;
 	else if (keys.find(Key::RIGHT) != keys.end() && keys.at(Key::RIGHT) == PRESSED)
 		_lastDir = PLAYER_RIGHT;
+}
+
+int arc::Nibbler::getScore() const
+{
+        return _score;
 }

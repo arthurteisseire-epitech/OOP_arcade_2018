@@ -15,10 +15,11 @@ CXXFLAGS	=	-I. -I./../ -I../../component  -Wall -Wextra -W -fPIC -lcaca -lImlib2
 
 NAME	=	lib_arcade_caca.so
 
+all:	$(NAME)
+
 $(NAME):	$(OBJ)
 	g++ -shared -o $(NAME) $(OBJ) $(CXXFLAGS)
-
-all:	$(NAME)aa
+	cp $(NAME) ..
 
 clean:
 	rm -f $(OBJ)

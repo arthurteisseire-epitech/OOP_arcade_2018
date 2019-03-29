@@ -19,7 +19,7 @@
 namespace arc {
 	class Map {
 	public:
-		explicit Map(const std::pair<unsigned int, unsigned int> &size = {100, 100});
+		explicit Map(const pos_t &size = {10, 10});
 
 		void generateFood();
 		void generateSprites(std::vector<std::reference_wrapper<const IComponent>> &vector) const;
@@ -27,7 +27,7 @@ namespace arc {
 		bool isFull() const;
 		bool isSnakeDead() const;
 	protected:
-		std::pair<unsigned int, unsigned int> _size;
+		const pos_t _size;
 		std::unique_ptr<Snake> _snake;
 		std::unique_ptr<Food> _food;
 	};

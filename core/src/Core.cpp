@@ -5,7 +5,6 @@
 ** Core.cpp
 */
 
-#include <unistd.h>
 #include "PlayerName.hpp"
 #include "Text.hpp"
 #include "Core.hpp"
@@ -33,27 +32,25 @@ arc::Core::Core(const std::string &libname) :
 	_gameManager(GAME_DIR, GAME_ENTRY_POINT),
 	_graphicManager(GRAPHIC_DIR, GRAPHIC_ENTRY_POINT, libname)
 {
+	_sharedData->playerName = "AAA";
 	updateSharedData();
 }
 
 int arc::Core::exec()
 {
-	clock_t t = clock();
-
 	while (_graphicManager.getInstance()->isOpen() &&
-	       _sceneManager.nextScene(_graphicManager.getInstance()->getKeys()) != nullptr) {
-		update(_graphicManager.getInstance()->getKeys(), (float)(clock() - t) / CLOCKS_PER_SEC);
-		t = clock();
+	       _sceneManager.nextScene(_graphicManager.getInstance()->getKeys(), _gameManager) != nullptr) {
+		update(_graphicManager.getInstance()->getKeys(), calcDeltaTime());
 		Process::components(_sceneManager.currentScene()->getComponents(), _graphicManager.getInstance());
 		_graphicManager.getInstance()->processEvents();
 		_graphicManager.getInstance()->draw();
-		usleep(100);
 	}
 	return 0;
 }
 
 void arc::Core::update(const std::map<arc::Key, arc::KeyState> &keys, float deltaTime)
 {
+	_sharedData->winSize = _graphicManager.getInstance()->getWindowSize();
 	_sceneManager.currentScene()->update(keys, deltaTime);
 	processEvents(keys);
 }
@@ -105,6 +102,20 @@ void arc::Core::reloadGame()
 	_gameManager.reload();
 }
 
+float arc::Core::calcDeltaTime() const
+{
+	timespec time{};
+	static float lastFrame;
+	float currentTime;
+	float deltaTime;
+
+	clock_gettime(CLOCK_MONOTONIC, &time);
+	currentTime = float(time.tv_sec) + float(time.tv_nsec) / 1000000000.0f;
+	deltaTime = currentTime - lastFrame;
+	lastFrame = currentTime;
+	return deltaTime;
+}
+
 void arc::Core::updateSharedData()
 {
 	_sharedData->games = _gameManager.getLibsName();
@@ -113,4 +124,5 @@ void arc::Core::updateSharedData()
 
 	_sharedData->libs = _graphicManager.getLibsName();
 	_sharedData->libname = _graphicManager.getCurrentLibname();
+	_sharedData->winSize = _graphicManager.getInstance()->getWindowSize();
 }

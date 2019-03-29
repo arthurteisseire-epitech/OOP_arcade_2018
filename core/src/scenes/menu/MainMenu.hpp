@@ -28,19 +28,19 @@ namespace arc {
 		std::vector<std::reference_wrapper<const IComponent>> getComponents() const override;
 		arc::SCENE nextScene(const std::map<Key, KeyState> &keys) const override;
 	private:
+		void setTextsString();
 		void moveFocusDown();
 		void moveFocusUp();
 		void setSpritesPosition();
 		void setSpritesSize();
-		void fillComponents();
 
-		std::vector<std::unique_ptr<Button>> _buttons;
-		std::vector<std::unique_ptr<Audio>> _audios;
-		std::unique_ptr<Sprite> _spriteFocus;
-		std::unique_ptr<Text> _playerName;
+		std::vector<Text> _texts;
+		std::vector<Button> _buttons;
+		Text _playerName;
+		Sprite _spriteFocus;
+		Sprite _logo;
 		size_t _focus;
 		static std::map<Key, void (arc::MainMenu::*)()> _keysMap;
-		std::vector<std::reference_wrapper<const IComponent>> _components;
 	};
 }
 

@@ -13,6 +13,7 @@
 namespace arc {
 	class ISprite : public IComponent {
 	public:
+		~ISprite() override = default;
 
 		/**
 		 * @return the X and Y positions of the sprite between 0.0f and 1.0f
