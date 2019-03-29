@@ -59,7 +59,7 @@ void arc::Map::transformTrailToBorder()
 			if (_cells[y][x].state() == Cell::TRAIL) {
 				_cells[y][x].alterState(Cell::BORDER);
 				startOfNonQixZone = findNonQixZone(Position{x, y});
-				if (isInNoBorders(startOfNonQixZone))
+				if (isInNoBorders(startOfNonQixZone) /*&& _cells[startOfNonQixZone.y][startOfNonQixZone.x].state() == Cell::WALKABLE*/)
 					fillZone(startOfNonQixZone);
 			}
 }
@@ -70,6 +70,8 @@ arc::Position arc::Map::findNonQixZone(const Position &pos)
 	Position oppositePos(0, 0);
 
 	findPosToLook(&posToLook, &oppositePos, pos);
+	if (_cells[posToLook.y][posToLook.x].state() != Cell::WALKABLE)
+		return posToLook;
 	if (isQixInZone(posToLook)) {
 		if (!isInNoBorders(oppositePos))
 			return {0, 0};
@@ -140,7 +142,8 @@ bool arc::Map::tryPosition(const Position posToTry, Position *posToLook, Positio
 
 void arc::Map::fillZone(const arc::Position &position)
 {
-	_cells[position.y][position.x].alterState(Cell::NON_WALKABLE);
+	if (_cells[position.y][position.x].state() == Cell::WALKABLE)
+		_cells[position.y][position.x].alterState(Cell::NON_WALKABLE);
 	if (_cells[position.y + 1][position.x].state() == Cell::WALKABLE)
 		 fillZone({position.x, position.y + 1});
 	if (_cells[position.y - 1][position.x].state() == Cell::WALKABLE)
