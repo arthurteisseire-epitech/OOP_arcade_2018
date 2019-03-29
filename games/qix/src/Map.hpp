@@ -28,6 +28,7 @@ namespace arc {
 		void trail(const Position &pos);
 		void transformTrailToBorder();
 		std::vector<std::reference_wrapper<const IComponent>> getSprites() const;
+		int findPercentCovered() const;
 
 	protected:
 		const Position _dimension;

@@ -208,3 +208,14 @@ arc::Position arc::Map::dimension() const
 {
 	return _dimension;
 }
+
+int arc::Map::findPercentCovered() const
+{
+	unsigned int possessedArea = 0;
+
+	for (auto &raw : _cells)
+		for (auto &x : raw)
+			if (x.state() == Cell::NON_WALKABLE)
+				++possessedArea;
+	return possessedArea * 100 / (_dimension.x * _dimension.y);
+}

@@ -55,7 +55,7 @@ void arc::Game::handleHold(float dTime, float &locDTime, const std::pair<const a
 
 bool arc::Game::isRunning() const
 {
-	return true;
+	return _map.findPercentCovered() <= 75;
 }
 
 std::vector<std::reference_wrapper<const arc::IComponent>> arc::Game::getComponents() const
@@ -68,5 +68,5 @@ std::vector<std::reference_wrapper<const arc::IComponent>> arc::Game::getCompone
 
 int arc::Game::getScore() const
 {
-	return 0;
+	return _map.findPercentCovered();
 }
