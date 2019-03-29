@@ -48,3 +48,8 @@ std::vector<std::reference_wrapper<const arc::IComponent>> arc::Game::getCompone
 	wrapper.emplace_back(_player.getSprite());
 	return wrapper;
 }
+
+int arc::Game::getScore() const
+{
+	return 0;
+}

@@ -21,6 +21,7 @@ namespace arc {
 		            const std::pair<unsigned int, unsigned int> &windowSize) override;
 		bool isRunning() const override;
 		std::vector<std::reference_wrapper<const IComponent>> getComponents() const override;
+		int getScore() const override;
 	private:
 		void updateTime(float time);
 

@@ -68,3 +68,8 @@ void arc::Nibbler::getLastDirection(const std::map<arc::Key, arc::KeyState> &key
 	else if (keys.find(Key::RIGHT) != keys.end() && keys.at(Key::RIGHT) == PRESSED)
 		_lastDir = PLAYER_RIGHT;
 }
+
+int arc::Nibbler::getScore() const
+{
+        return _score;
+}

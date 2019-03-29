@@ -22,6 +22,7 @@ namespace arc {
 		virtual void update(const std::map<arc::Key, arc::KeyState> &keys, float deltaTime,
 		                    const std::pair<unsigned int, unsigned int> &windowSize) = 0;
 		virtual std::vector<std::reference_wrapper<const IComponent>> getComponents() const = 0;
+		virtual int getScore() const = 0;
 	};
 }
 
