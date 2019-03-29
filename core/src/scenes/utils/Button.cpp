@@ -7,11 +7,13 @@
 
 #include "Button.hpp"
 
-arc::Button::Button(const std::string &filename, SCENE linkedScene, const std::string &text) :
+arc::Button::Button(const std::string &filename, SCENE linkedScene, const std::string &text, unsigned color) :
 	_sprite(std::make_unique<Sprite>(filename)),
 	_text(std::make_unique<Text>(text)),
-	_linkedScene(linkedScene)
+	_linkedScene(linkedScene),
+	_color(color)
 {
+	_sprite->setColor(_color);
 }
 
 void arc::Button::setPosition(const std::pair<float, float> &pos)

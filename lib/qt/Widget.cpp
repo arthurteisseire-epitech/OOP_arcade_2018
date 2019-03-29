@@ -39,19 +39,19 @@ void arc::Widget::paintEvent(QPaintEvent *)
 		spritePos.setY(size().height() * _sprite.first->getPosition().second);
 		painter.drawPixmap(spritePos, *_sprite.second);
 	}
-	for (auto text : _textsToDraw) {
-		fontSize = text->getFontSize() / (1920 / size().width());
-		fontSize = std::min(fontSize, text->getFontSize() / (1080 / size().height()));
+	for (const auto &text : _textsToDraw) {
+		fontSize = text.first->getFontSize() / (1920 / size().width());
+		fontSize = std::min(fontSize, text.first->getFontSize() / (1080 / size().height()));
 
-		textPos.setX(size().width() * text->getPosition().first);
-		textPos.setY(size().height() * text->getPosition().second - size().height());
+		textPos.setX(size().width() * text.first->getPosition().first);
+		textPos.setY(size().height() * text.first->getPosition().second - size().height());
 
 		textPos.rx() -= size().width() / 2.0f;
 		textPos.ry() += size().height() / 2.0f;
-		painter.setFont(QFont(QString::fromStdString(text->getFontPath()), fontSize));
+		painter.setFont(QFont(text.second, fontSize));
 		QRectF rect(textPos.x(), textPos.y(), size().width(), size().height());
-		painter.setPen(convertColor(text->getColor()));
-		painter.drawText(rect, Qt::AlignCenter, QString::fromStdString(text->getText()));
+		painter.setPen(convertColor(text.first->getColor()));
+		painter.drawText(rect, Qt::AlignCenter, QString::fromStdString(text.first->getText()));
 	}
 	_spritesToDraw.clear();
 	_textsToDraw.clear();
@@ -77,11 +77,15 @@ bool arc::Widget::processSprite(const ISprite &sprite)
 
 bool arc::Widget::processText(const IText &text)
 {
-	if (std::find(_texts.begin(), _texts.end(), &text) == _texts.end()) {
-		QFontDatabase::addApplicationFont(QString::fromStdString(text.getFontPath()));
-		_texts.push_back(&text);
+	int id;
+	auto it = _fonts.find(text.getFontPath());
+
+	if (it == _fonts.end()) {
+		id = QFontDatabase::addApplicationFont(QString::fromStdString(text.getFontPath()));
+		it = _fonts.emplace(text.getFontPath(), id).first;
 	}
-	_textsToDraw.push_back(&text);
+	id = it->second;
+	_textsToDraw.emplace_back(&text, QFontDatabase::applicationFontFamilies(id).at(0));
 	return true;
 }
 

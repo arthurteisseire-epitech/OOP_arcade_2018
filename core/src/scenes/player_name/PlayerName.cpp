@@ -22,7 +22,7 @@ const std::map<arc::Key, void (arc::PlayerName::*)()> arc::PlayerName::_keysMap 
 
 arc::PlayerName::PlayerName(const std::shared_ptr<SharedData> &playerData) :
 	Scene(playerData),
-	_playerText(std::make_unique<Text>(PREFIX + _playerData->playerName,
+	_playerText(std::make_unique<Text>(PREFIX + _sharedData->playerName,
 	                                   std::pair<float, float>(0.1, 0.1), FONT_SIZE)),
 	_focus(0, 0)
 {
@@ -74,10 +74,10 @@ void arc::PlayerName::moveFocusDown()
 void arc::PlayerName::action()
 {
 	if (getFocus()->getText() == "<") {
-		_playerData->playerName = _playerData->playerName.substr(0, _playerData->playerName.length() - 1);
-		_playerText->setText(PREFIX + _playerData->playerName);
-	} else if (_playerData->playerName.length() < 3 && getFocus()->getText() != "~")
-		_playerText->setText(PREFIX + (_playerData->playerName += getFocus()->getText()));
+		_sharedData->playerName = _sharedData->playerName.substr(0, _sharedData->playerName.length() - 1);
+		_playerText->setText(PREFIX + _sharedData->playerName);
+	} else if (_sharedData->playerName.length() < 3 && getFocus()->getText() != "~")
+		_playerText->setText(PREFIX + (_sharedData->playerName += getFocus()->getText()));
 }
 
 arc::Text *arc::PlayerName::getFocus() const
@@ -96,7 +96,7 @@ arc::SCENE arc::PlayerName::nextScene(const std::map<Key, KeyState> &keys) const
 	auto enterKey = keys.find(ENTER);
 	if (enterKey != keys.end() &&
 	    enterKey->second == PRESSED &&
-	    _playerData->playerName.length() == 3 &&
+	    _sharedData->playerName.length() == 3 &&
 	    getFocus()->getText() == "~")
 		return MENU;
 	return PLAYER_NAME;

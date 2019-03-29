@@ -23,6 +23,7 @@ namespace arc {
 		void update(const std::map<arc::Key, arc::KeyState> &keys, float deltaTime,
 		            const std::pair<unsigned int, unsigned int> &windowSize) override;
 		bool isRunning() const override;
+		int getScore() const override;
 	protected:
 
 		Map _map;

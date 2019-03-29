@@ -35,10 +35,9 @@ namespace arc {
 		void processKeys(const QKeyEvent *e, arc::KeyState state);
 		QColor convertColor(unsigned int color);
 
-		std::map<const ISprite *, std::unique_ptr<QPixmap>> _sprites;
 		std::vector<std::pair<const ISprite *, std::unique_ptr<QPixmap>>> _spritesToDraw;
-		std::vector<const IText *> _texts;
-		std::vector<const IText *> _textsToDraw;
+		std::vector<std::pair<const IText *, QString>> _textsToDraw;
+		std::map<std::string, int> _fonts;
 		std::map<const IAudio *, std::unique_ptr<QMediaPlayer>>_player;
 		std::map<Key, KeyState> _keys;
 		static std::map<Qt::Key, Key> _qKeys;
