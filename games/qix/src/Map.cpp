@@ -94,6 +94,17 @@ void arc::Map::findPosToLook(Position *posToLook, Position *oppositePos, const P
 	*posToLook = currPos;
 }
 
+bool arc::Map::isQixInZone(const arc::Position &position)
+{
+	bool res = tryAllZonePositions(position);
+
+	for (auto &_cell : _cells)
+		for (auto &x : _cell)
+			if (x.state() == Cell::TMP)
+				x.alterState(Cell::WALKABLE);
+	return res;
+}
+
 bool arc::Map::tryAllZonePositions(const arc::Position &position)
 {
 	if (position == _qix.position())
@@ -112,17 +123,6 @@ bool arc::Map::tryAllZonePositions(const arc::Position &position)
 		if (tryAllZonePositions({position.x - 1, position.y}))
 			return true;
 	return false;
-}
-
-bool arc::Map::isQixInZone(const arc::Position &position)
-{
-	bool res = tryAllZonePositions(position);
-
-	for (auto &_cell : _cells)
-		for (auto &x : _cell)
-			if (x.state() == Cell::TMP)
-				x.alterState(Cell::WALKABLE);
-	return res;
 }
 
 bool arc::Map::tryPosition(const Position posToTry, Position *posToLook, Position *oppositePos,
