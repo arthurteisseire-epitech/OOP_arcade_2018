@@ -22,6 +22,7 @@ namespace arc {
 		void createTexts();
 
 		Text _header;
+		Text _bestScore;
 		std::vector<std::pair<int, std::pair<std::string, std::string>>> _rows;
 		std::vector<Text> _gameNames;
 		std::vector<Text> _playerNames;
