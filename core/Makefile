@@ -21,6 +21,7 @@ INC	=	-I$(DCOMP)		\
 		-I$(DSCN)game		\
 		-I$(DSCN)menu		\
 		-I$(DSCN)player_name	\
+		-I$(DSCN)score_board	\
 		-I$(DSCN)utils		\
 
 SRC	=	$(wildcard $(DSRC)*.cpp)		\
@@ -30,6 +31,7 @@ SRC	=	$(wildcard $(DSRC)*.cpp)		\
 		$(wildcard $(DSCN)game/*.cpp)		\
 		$(wildcard $(DSCN)menu/*.cpp)		\
 		$(wildcard $(DSCN)player_name/*.cpp)	\
+		$(wildcard $(DSCN)score_board/*.cpp)	\
 		$(wildcard $(DSCN)utils/*.cpp)		\
 		$(wildcard $(DCOMP)*.cpp)		\
 
