@@ -62,15 +62,19 @@ bool arc::CacaGraphic::processSprite(const arc::ISprite &sprite)
 	}
 	imlib_context_set_image(image);
 
+	std::cout << (int)(sprite.getPosition().first * imlib_image_get_width()) << std::endl
+		<< (int)(sprite.getPosition().second * imlib_image_get_height()) << std::endl
+		<< (int)(sprite.getSize().first * imlib_image_get_width()) << std::endl
+		<< (int)(sprite.getSize().second * imlib_image_get_height()) << std::endl;
+
 	caca_dither_bitmap(_cv,
-		(int)sprite.getPosition().first * imlib_image_get_width(),
-		(int)sprite.getPosition().second * imlib_image_get_height(),
-		(int)sprite.getSize().first * imlib_image_get_width(),
-		(int)sprite.getSize().second * imlib_image_get_height(),
-		caca_create_dither(32, imlib_image_get_height(), imlib_image_get_width(), 4 * imlib_image_get_width(), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000),
+		(int)(sprite.getPosition().first * imlib_image_get_width()),
+		(int)(sprite.getPosition().second * imlib_image_get_height()),
+		(int)(sprite.getSize().first * imlib_image_get_width()),
+		(int)(sprite.getSize().second * imlib_image_get_height()),
+		caca_create_dither(32, imlib_image_get_width(), imlib_image_get_height(), 4 * imlib_image_get_width(), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000),
 		imlib_image_get_data_for_reading_only()
 		);
-
 
 	return true;
 }
@@ -92,7 +96,7 @@ void arc::CacaGraphic::processEvents()
 	caca_event_t event;
 
 	updateKeysState();
-	caca_get_event(_dp, CACA_EVENT_ANY, &event, -1);
+	caca_get_event(_dp, CACA_EVENT_ANY, &event, 1);
 
 	if (event.type == CACA_EVENT_KEY_PRESS)
 		processKey(PRESSED, event);
