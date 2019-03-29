@@ -5,6 +5,7 @@
 ** GameScene.cpp
 */
 
+#include "Score.hpp"
 #include "GameScene.hpp"
 
 arc::GameScene::GameScene(const std::shared_ptr<arc::SharedData> &playerData) :
@@ -29,5 +30,6 @@ arc::SCENE arc::GameScene::nextScene(const std::map<Key, KeyState> &) const
 {
         if (_sharedData->currentGame && _sharedData->currentGame->isRunning())
 	        return GAME;
+        Score::write(_sharedData->gameName, _sharedData->playerName, _sharedData->currentGame->getScore());
 	return MENU;
 }
