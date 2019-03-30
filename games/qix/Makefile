@@ -1,6 +1,6 @@
 ##
 ## EPITECH PROJECT, 2018
-## cpp_d01_2018
+## arcade
 ## File description:
 ## Makefile
 ##
