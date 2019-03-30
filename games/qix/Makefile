@@ -19,14 +19,16 @@ SRC		=	$(DSRC)Game.cpp			\
 			$(DSRC)Position.cpp		\
 			$(DSRC)Qix.cpp		\
 			$(DCOMPONENT)Sprite.cpp	\
+			$(DCOMPONENT)Text.cpp	\
 
-CXXFLAGS	+=  -Wall -Wextra $(INC) -shared -fPIC
+CXXFLAGS	+=	-Wall -Wextra $(INC) -fPIC -std=c++14
+LDFLAGS		+=	-shared
 OBJ		=	$(SRC:.cpp=.o)
 
 NAME	=	lib_arcade_qix.so
 
 all: $(OBJ)
-	$(CC) -o $(NAME) $(OBJ) $(CXXFLAGS)
+	$(CC) -o $(NAME) $(OBJ) $(CXXFLAGS) $(LDFLAGS)
 	cp $(NAME) ..
 
 clean:

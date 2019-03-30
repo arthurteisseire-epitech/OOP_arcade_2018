@@ -35,8 +35,8 @@ SRC	=	$(wildcard $(DSRC)*.cpp)		\
 		$(wildcard $(DSCN)utils/*.cpp)		\
 		$(wildcard $(DCOMP)*.cpp)		\
 
-CXXFLAGS=	-Wall -Wextra $(INC) -std=c++14 -O2
-LDFLAGS	=	-ldl
+CXXFLAGS=	-Wall -Wextra $(INC) -std=c++14 -O2 -fPIC
+LDFLAGS	=	-ldl -rdynamic
 OBJ	=	$(SRC:.cpp=.o)
 NAME	=	arcade
 

@@ -1,6 +1,6 @@
 ##
 ## EPITECH PROJECT, 2018
-## cpp_d01_2018
+## arcade
 ## File description:
 ## Makefile
 ##
@@ -21,13 +21,14 @@ SRC		=	$(DSRC)Nibbler.cpp		\
 
 INC		=	-I$(DSRC) -I$(DCOMPONENT) -I$(DGAMES)
 
-CXXFLAGS	+=  -Wall -Wextra $(INC) -fPIC
+CXXFLAGS	+=	-Wall -Wextra $(INC) -fPIC -std=c++14
+LDFLAGS		+=	-shared
 OBJ		=	$(SRC:.cpp=.o)
 
 NAME	=	lib_arcade_nibbler.so
 
 all: $(OBJ)
-	$(CC) -o $(NAME) -shared $(OBJ) $(CXXFLAGS)
+	$(CC) -o $(NAME) $(OBJ) $(CXXFLAGS) $(LDFLAGS)
 	cp $(NAME) ..
 
 clean:

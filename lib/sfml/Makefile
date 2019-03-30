@@ -11,8 +11,8 @@ INC	=	-I$(DSRC) -I.. -I../../component
 
 SRC	=	$(DSRC)SfmlGraphic.cpp			\
 
-CXXFLAGS=	-Wall -Wextra $(INC) -shared -fPIC -std=c++14 -O2
-LDFLAGS	=	-lsfml-graphics -lsfml-window -lsfml-system
+CXXFLAGS=	-Wall -Wextra $(INC) -fPIC -std=c++14 -O2
+LDFLAGS	=	-lsfml-graphics -lsfml-window -lsfml-system -shared
 OBJ	=	$(SRC:.cpp=.o)
 NAME	=	lib_arcade_sfml.so
 

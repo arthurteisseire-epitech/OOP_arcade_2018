@@ -5,20 +5,21 @@
 ## cacc for 2018
 ##
 
-
+CC	=	g++
 
 SRC 	=	CacaGraphic.cpp
 
 OBJ	=	$(SRC:.cpp=.o)
 
-CXXFLAGS	=	-I. -I./../ -I../../component  -Wall -Wextra -W -fPIC -lcaca -lImlib2
+CXXFLAGS	=	-I. -I./../ -I../../component  -Wall -Wextra -W -fPIC -lcaca -lImlib2 -std=c++14
+LDFLAGS		=	-shared
 
 NAME	=	lib_arcade_caca.so
 
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-	g++ -shared -o $(NAME) $(OBJ) $(CXXFLAGS)
+	g++ -o $(NAME) $(OBJ) $(CXXFLAGS) $(LDFLAGS)
 	cp $(NAME) ..
 
 clean:
