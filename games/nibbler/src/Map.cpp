@@ -24,7 +24,7 @@ void arc::Map::generateFood()
 	std::random_device randomDevice;
 	pos_t food_pos = {randomDevice() % _size.first, randomDevice() % _size.second};
 
-	if (_snake->isInSnake(food_pos))
+	if (_snake->isInSnake(food_pos) && !isFull())
 		return generateFood();
 	_food->move(food_pos, _size);
 }
