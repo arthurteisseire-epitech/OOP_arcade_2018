@@ -8,6 +8,7 @@
 #ifndef ARCADE_LIBRARYLOADER_HPP
 #define ARCADE_LIBRARYLOADER_HPP
 
+#include <dlfcn.h>
 #include <string>
 #include "LibraryLoaderException.hpp"
 
@@ -22,7 +23,7 @@ namespace arc {
 		template <typename T>
 		T *reloadInstance(const std::string &entryPoint);
 	private:
-		bool checkFileExists(const std::string &name) const;
+		bool isFile(const std::string &name) const;
 		void load(const std::string &libname);
 		void *findSym(const std::string &symname);
 
@@ -32,13 +33,8 @@ namespace arc {
 	template<typename T>
 	T *arc::LibraryLoader::loadInstance(const std::string &libname, const std::string &entryPoint)
 	{
-		T *(*instantiate)();
-
 		load(libname);
-		instantiate = (T *(*)())findSym(entryPoint);
-		if (instantiate == nullptr)
-			throw LibraryLoaderException("wrong entry point");
-		return instantiate();
+		return reloadInstance<T>(entryPoint);
 	}
 
 	template<typename T>
@@ -48,7 +44,7 @@ namespace arc {
 
 		instantiate = (T *(*)())findSym(entryPoint);
 		if (instantiate == nullptr)
-			throw LibraryLoaderException("wrong entry point");
+			throw LibraryLoaderException(dlerror());
 		return instantiate();
 	}
 }

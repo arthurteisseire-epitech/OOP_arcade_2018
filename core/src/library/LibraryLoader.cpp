@@ -5,7 +5,6 @@
 ** LibraryLoader.cpp
 */
 
-#include <dlfcn.h>
 #include <sys/stat.h>
 #include "LibraryLoader.hpp"
 #include "LibraryLoaderException.hpp"
@@ -21,7 +20,7 @@ arc::LibraryLoader::~LibraryLoader()
 		dlclose(_lib);
 }
 
-bool arc::LibraryLoader::checkFileExists(const std::string &name) const
+bool arc::LibraryLoader::isFile(const std::string &name) const
 {
 	struct stat buffer{};
 
@@ -32,7 +31,7 @@ void arc::LibraryLoader::load(const std::string &libname)
 {
 	if (_lib)
 		dlclose(_lib);
-	if (!checkFileExists(libname))
+	if (!isFile(libname))
 		throw LibraryLoaderException(libname + " does not exist");
 	_lib = dlopen(libname.c_str(), RTLD_LAZY);
 	if (!_lib)
