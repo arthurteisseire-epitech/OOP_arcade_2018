@@ -8,11 +8,6 @@
 #include "LibraryLoaderException.hpp"
 
 arc::LibraryLoaderException::LibraryLoaderException(const std::string &message) :
-	_message("SharedLibraryError: " + message)
+	std::runtime_error("SharedLibraryError : " + message)
 {
-}
-
-char const *arc::LibraryLoaderException::what() const noexcept
-{
-	return _message.c_str();
 }

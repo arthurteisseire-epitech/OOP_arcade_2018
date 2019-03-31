@@ -8,16 +8,13 @@
 #ifndef ARCADE_LIBRARYLOADEREXCEPTION_HPP
 #define ARCADE_LIBRARYLOADEREXCEPTION_HPP
 
-#include <string>
+#include <stdexcept>
 
 namespace arc {
-	class LibraryLoaderException : public std::exception {
+	class LibraryLoaderException : public std::runtime_error {
 	public:
 		explicit LibraryLoaderException(const std::string &message);
 		~LibraryLoaderException() override = default;
-		char const *what() const noexcept override;
-	private:
-		const std::string _message;
 	};
 }
 
