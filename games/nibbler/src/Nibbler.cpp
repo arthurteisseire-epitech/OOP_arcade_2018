@@ -16,11 +16,11 @@ arc::IGame *gameEntryPoint()
 	return new arc::Nibbler();
 }
 
-const float arc::Nibbler::_actionTime = 0.2;
+const float arc::Nibbler::_actionTime = 0.1;
 
 arc::Nibbler::Nibbler() :
 	_score(0),
-	_size(50),
+	_size(20),
 	_map({_size, _size}),
 	_lastDir(PLAYER_NONE),
 	_localDeltaTime(0)
