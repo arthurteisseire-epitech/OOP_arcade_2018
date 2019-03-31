@@ -80,7 +80,7 @@ bool arc::SfmlGraphic::processText(const arc::IText &text)
 	t.setPosition(text.getPosition().first * _window.getSize().x,
 	              text.getPosition().second * _window.getSize().y);
 	t.setString(text.getText());
-	t.setCharacterSize((unsigned)text.getFontSize());
+	t.setCharacterSize((unsigned)text.getFontSize() - 3);
 	t.setFillColor(sf::Color(text.getColor()));
 
 	sf::FloatRect textRect = t.getLocalBounds();
