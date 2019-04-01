@@ -31,7 +31,8 @@ arc::Qix arc::Map::initQix()
 {
 	std::random_device randomDevice;
 	const unsigned int radius = 2;
-	Position qixPos(abs(randomDevice() % _dimension.x - (radius + 1) * 2) + radius + 1, abs(randomDevice() % _dimension.y - (radius + 1) * 2) + radius + 1);
+	Position qixPos(abs(randomDevice() % (_dimension.x - (radius + 1) * 2)) + radius + 1,
+			abs(randomDevice() % (_dimension.y - (radius + 1) * 2)) + radius + 1);
 
 	return Qix(qixPos);
 }
