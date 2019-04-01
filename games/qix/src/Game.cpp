@@ -21,7 +21,7 @@ arc::IGame *gameEntryPoint()
 }
 
 arc::Game::Game() :
-	_map({11, 11}),
+	_map({101, 101}),
 	_player(_map)
 {
 }
@@ -31,11 +31,9 @@ void arc::Game::update(const std::map<arc::Key, arc::KeyState> &keys, float dTim
 {
 	static float locDTime = 0;
 
-	for (const auto &keyDir : _keyDir) {
+	for (const auto &keyDir : _keyDir)
 		updatePlayer(keys, dTime, locDTime, keyDir);
-		_map.updateQix(dTime);
-		dTime = 0;
-	}
+	_map.updateQix(dTime);
 }
 
 void arc::Game::updatePlayer(const std::map<arc::Key, arc::KeyState> &keys, float dTime, float &locDTime,

@@ -53,6 +53,7 @@ namespace arc {
 		const std::vector<arc::Position> findQixPositions() const;
 		void moveQix(const Position &direction, bool sign);
 		bool checkMovement(const arc::Position &direction, bool sign);
+		const float _updateTime;
 	};
 }
 

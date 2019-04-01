@@ -13,7 +13,7 @@
 namespace arc {
 	class Qix {
 	public:
-		explicit Qix(const Position &pos);
+		explicit Qix(const arc::Position &pos, unsigned int size);
 		const Position &position() const;
 		void move(const Position &direction);
 		unsigned int radius() const;

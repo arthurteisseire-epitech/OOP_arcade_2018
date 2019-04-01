@@ -15,7 +15,8 @@ arc::Map::Map(const Position &dimension) :
 	_cells(),
 	_qix(initQix()),
 	_qixPositions(findQixPositions()),
-	_isPlayerAlive(true)
+	_isPlayerAlive(true),
+	_updateTime(10.0f / (_dimension.x * _dimension.y))
 {
 	_cells.reserve(static_cast<size_t>(_dimension.x));
 	_sprites.reserve(static_cast<size_t>(_dimension.x) * _dimension.y);
@@ -30,11 +31,11 @@ arc::Map::Map(const Position &dimension) :
 arc::Qix arc::Map::initQix()
 {
 	std::random_device randomDevice;
-	const unsigned int radius = 2;
+	const unsigned int radius = (_dimension.x + _dimension.y) / 20;
 	Position qixPos(abs(randomDevice() % (_dimension.x - (radius + 1) * 2)) + radius + 1,
 			abs(randomDevice() % (_dimension.y - (radius + 1) * 2)) + radius + 1);
 
-	return Qix(qixPos);
+	return Qix(qixPos, radius * 2);
 }
 
 const std::vector<arc::Position> arc::Map::findQixPositions() const
@@ -238,7 +239,7 @@ int arc::Map::findPercentCovered() const
 
 	for (auto &raw : _cells)
 		for (auto &x : raw)
-			if (x.state() == Cell::NON_WALKABLE)
+			if (x.state() == Cell::NON_WALKABLE || x.state() == Cell::BORDER)
 				++possessedArea;
 	return possessedArea * 100 / (_dimension.x * _dimension.y);
 }
@@ -251,7 +252,7 @@ void arc::Map::updateQix(float dTime, bool failed)
 	unsigned int randomRes = randomDevice();
 
 	tryNb = failed ? tryNb + 1 : 0;
-	if (localDTime >= 0.5) {
+	if (localDTime >= _updateTime) {
 		if (tryNb < 4)
 			moveQix(Position(randomRes % 2, (randomRes + 1) % 2), static_cast<bool>(randomDevice() % 2));
 		localDTime = 0;
@@ -278,7 +279,7 @@ bool arc::Map::checkMovement(const arc::Position &direction, bool sign)
 		arc::Position posToTest = (sign ? pos + direction : pos - direction);
 		switch (_cells[posToTest.y][posToTest.x].state()) {
 		case Cell::BORDER:
-			updateQix(1, true);
+			updateQix(_updateTime, true);
 			return true;
 		case Cell::TRAIL:
 			_isPlayerAlive = false;

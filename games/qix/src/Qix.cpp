@@ -7,9 +7,9 @@
 
 #include "Qix.hpp"
 
-arc::Qix::Qix(const arc::Position &pos) :
+arc::Qix::Qix(const arc::Position &pos, unsigned int size) :
 	_pos(pos),
-	_size(5)
+	_size(size)
 {
 }
 
