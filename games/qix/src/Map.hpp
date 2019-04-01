@@ -50,6 +50,7 @@ namespace arc {
 		void fillZone(const Position &position);
 		const std::vector<arc::Position> findQixPositions() const;
 		void moveQix(const Position &direction, bool sign);
+		bool checkMovement(const arc::Position &direction, bool sign);
 	};
 }
 

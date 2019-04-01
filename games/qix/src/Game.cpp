@@ -34,6 +34,7 @@ void arc::Game::update(const std::map<arc::Key, arc::KeyState> &keys, float dTim
 	for (const auto &keyDir : _keyDir) {
 		updatePlayer(keys, dTime, locDTime, keyDir);
 		_map.updateQix(dTime);
+		dTime = 0;
 	}
 }
 

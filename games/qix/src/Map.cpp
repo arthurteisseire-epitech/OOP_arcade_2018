@@ -256,17 +256,25 @@ void arc::Map::updateQix(float dTime)
 
 void arc::Map::moveQix(const Position &direction, bool sign)
 {
-	for (const auto &pos : _qixPositions) {
-		Position posToTest = (sign ? pos + direction : pos - direction);
-		if (_cells[posToTest.y][posToTest.x].state() == Cell::BORDER) {
-			updateQix(0.2);
-			return;
-		}
-	}
+	if (checkMovement(direction, sign))
+		return;
 	_qix.move(direction);
 	for (auto &pos : _qixPositions) {
 		_cells[pos.y][pos.x].alterState(Cell::WALKABLE);
 		sign ? (pos += direction) : (pos -= direction);
-		_cells[pos.y][pos.x].alterState(Cell::QIX);
 	}
+	for (auto &pos : _qixPositions)
+		_cells[pos.y][pos.x].alterState(Cell::QIX);
+}
+
+bool arc::Map::checkMovement(const arc::Position &direction, bool sign)
+{
+	for (const auto &pos : _qixPositions) {
+		arc::Position posToTest = (sign ? pos + direction : pos - direction);
+		if (_cells[posToTest.y][posToTest.x].state() == arc::Cell::BORDER) {
+//			updateQix(1);
+			return true;
+		}
+	}
+	return false;
 }
