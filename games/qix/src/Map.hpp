@@ -29,12 +29,16 @@ namespace arc {
 		void transformTrailToBorder();
 		std::vector<std::reference_wrapper<const IComponent>> getSprites() const;
 		int findPercentCovered() const;
+		void updateQix(float dTime, bool failed = false);
+		bool qixTouchedTrail() const;
 
 	protected:
 		const Position _dimension;
 		std::vector<std::vector<Cell>> _cells;
 		std::vector<std::reference_wrapper<const IComponent>> _sprites;
 		Qix _qix;
+		std::vector<Position> _qixPositions;
+		bool _isPlayerAlive;
 
 	private:
 		Qix initQix();
@@ -46,6 +50,10 @@ namespace arc {
 		bool isQixInZone(const Position &position);
 		bool tryAllZonePositions(const Position &position);
 		void fillZone(const Position &position);
+		const std::vector<arc::Position> findQixPositions() const;
+		void moveQix(const Position &direction, bool sign);
+		bool checkMovement(const arc::Position &direction, bool sign);
+		const float _updateTime;
 	};
 }
 
