@@ -62,7 +62,7 @@ arc::Game::handleHold(float dTime, float &locDTime, const std::pair<const arc::K
 
 bool arc::Game::isRunning() const
 {
-	return _map.findPercentCovered() <= 75 && !_map.qixTouchedTrail();
+	return _map.findPercentCovered() <= 75 && _map.isPlayerAlive();
 }
 
 std::vector<std::reference_wrapper<const arc::IComponent>> arc::Game::getComponents() const

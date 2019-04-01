@@ -30,7 +30,7 @@ namespace arc {
 		std::vector<std::reference_wrapper<const IComponent>> getSprites() const;
 		int findPercentCovered() const;
 		void updateQix(float dTime, bool failed = false);
-		bool qixTouchedTrail() const;
+		bool isPlayerAlive() const;
 
 	protected:
 		const Position _dimension;
