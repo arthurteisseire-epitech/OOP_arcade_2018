@@ -272,7 +272,7 @@ bool arc::Map::checkMovement(const arc::Position &direction, bool sign)
 	for (const auto &pos : _qixPositions) {
 		arc::Position posToTest = (sign ? pos + direction : pos - direction);
 		if (_cells[posToTest.y][posToTest.x].state() == arc::Cell::BORDER) {
-//			updateQix(1);
+			updateQix(1);
 			return true;
 		}
 	}
