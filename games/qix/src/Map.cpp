@@ -293,5 +293,5 @@ bool arc::Map::checkMovement(const arc::Position &direction, bool sign)
 
 bool arc::Map::isPlayerAlive() const
 {
-	return !_isPlayerAlive;
+	return _isPlayerAlive;
 }

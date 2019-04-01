@@ -1,0 +1,89 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage{natbib}
+\usepackage{url}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{parskip}
+\usepackage{fancyhdr}
+\usepackage{vmargin}
+\setmarginsrb{3 cm}{2.5 cm}{3 cm}{2.5 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
+
+\title{Arcade}								% Title
+\author{13103057}								% Author
+\date{12 Sept 2015}											% Date
+
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\let\thedate\@date
+\makeatother
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\theauthor}
+\lhead{\thetitle}
+\cfoot{\thepage}
+
+\begin{document}
+
+\begin{titlepage}
+	\centering
+    \vspace*{0.5 cm}
+    \includegraphics[scale = 0.75]{logo-epitech.png}\\[1.0 cm]	% University Logo
+    \textsc{\LARGE Documentation}\\[2.0 cm]	% University Name
+	\rule{\linewidth}{0.2 mm} \\[0.4 cm]
+	{ \huge \bfseries \thetitle}\\
+	\rule{\linewidth}{0.2 mm} \\[1.5 cm]
+	
+
+\vspace{6cm}
+	\begin{minipage}{0.7\textwidth}
+		\begin{flushleft} \large
+			\emph{By:}\\
+			Adrien Fabre\\
+            Laurent Delteil\\
+            Arthur Teisseire\\
+			\end{flushleft}
+			\end{minipage}~
+			\begin{minipage}{0.4\textwidth}
+			\begin{flushright} \large
+
+		\end{flushright}
+        
+	\end{minipage}\\[2 cm]
+	
+\end{titlepage}
+
+
+\section{How to play}
+Keys :
+\begin{itemize}
+\item F1 - Previous game
+\item F2 - Next game
+\item F3 - Previous graphical lib
+\item F4 - Next graphical lib
+\item R - Reload game
+\item ESCAPE - Back to menu
+\item SUPPR - Exit
+\item ENTER - Action
+\end{itemize}
+
+
+\section{Add a game}
+\begin{itemize}
+\item Create a directory in games/ directory with your game name
+\item Compile your game to create a .so file in games/ directory
+\item You must create an entry point with the following signature : \newline arc::IGame *gameEntryPoint();
+\end{itemize}
+
+\section{Add a graphical library}
+\begin{itemize}
+\item Create a directory in lib/ directory with your graphical library name
+\item Compile your graphical library to create a .so file in lib/ directory
+\item You must create an entry point with the following signature : \newline arc::IGraphic *graphicalEntryPoint();
+\end{itemize}
+
+\end{document}
