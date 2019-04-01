@@ -22,3 +22,8 @@ unsigned int arc::Qix::radius() const
 {
 	return _size / 2;
 }
+
+void arc::Qix::move(const arc::Position &direction)
+{
+	_pos += direction;
+}

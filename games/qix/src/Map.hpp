@@ -29,6 +29,7 @@ namespace arc {
 		void transformTrailToBorder();
 		std::vector<std::reference_wrapper<const IComponent>> getSprites() const;
 		int findPercentCovered() const;
+		void updateQix(float dTime);
 
 	protected:
 		const Position _dimension;
@@ -48,6 +49,7 @@ namespace arc {
 		bool tryAllZonePositions(const Position &position);
 		void fillZone(const Position &position);
 		const std::vector<arc::Position> findQixPositions() const;
+		void moveQix(const Position &direction, bool sign);
 	};
 }
 

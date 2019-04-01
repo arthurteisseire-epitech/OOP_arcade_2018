@@ -240,3 +240,33 @@ int arc::Map::findPercentCovered() const
 				++possessedArea;
 	return possessedArea * 100 / (_dimension.x * _dimension.y);
 }
+
+void arc::Map::updateQix(float dTime)
+{
+	static float localDTime = 0;
+	std::random_device randomDevice;
+	unsigned int randomRes = randomDevice();
+
+	if (localDTime >= 0.2) {
+		moveQix(Position(randomRes % 2, (randomRes + 1) % 2), static_cast<bool>(randomDevice() % 2));
+		localDTime = 0;
+	} else
+		localDTime += dTime;
+}
+
+void arc::Map::moveQix(const Position &direction, bool sign)
+{
+	for (const auto &pos : _qixPositions) {
+		Position posToTest = (sign ? pos + direction : pos - direction);
+		if (_cells[posToTest.y][posToTest.x].state() == Cell::BORDER) {
+			updateQix(0.2);
+			return;
+		}
+	}
+	_qix.move(direction);
+	for (auto &pos : _qixPositions) {
+		_cells[pos.y][pos.x].alterState(Cell::WALKABLE);
+		sign ? (pos += direction) : (pos -= direction);
+		_cells[pos.y][pos.x].alterState(Cell::QIX);
+	}
+}

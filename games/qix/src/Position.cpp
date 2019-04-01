@@ -43,3 +43,17 @@ double arc::Position::size() const
 {
 	return sqrt(x * x + y * y);
 }
+
+arc::Position &arc::Position::operator+=(const arc::Position &pos)
+{
+	x += pos.x;
+	y += pos.y;
+	return *this;
+}
+
+arc::Position &arc::Position::operator-=(const arc::Position &pos)
+{
+	x -= pos.x;
+	y -= pos.y;
+	return *this;
+}

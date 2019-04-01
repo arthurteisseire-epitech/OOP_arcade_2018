@@ -33,6 +33,8 @@ namespace arc {
 	private:
 		void handleHold(float dTime, float &locDTime,
 		                const std::pair<const arc::Key, arc::Player::DIRECTION> &keyDir);
+		void updatePlayer(const std::map<arc::Key, arc::KeyState> &keys, float dTime, float &locDTime,
+			const std::pair<const arc::Key, arc::Player::DIRECTION> &keyDir);
 	};
 }
 

@@ -32,16 +32,23 @@ void arc::Game::update(const std::map<arc::Key, arc::KeyState> &keys, float dTim
 	static float locDTime = 0;
 
 	for (const auto &keyDir : _keyDir) {
-		auto key = keys.find(keyDir.first);
-		if (key != keys.end()) {
-			if (key->second == PRESSED)
+		updatePlayer(keys, dTime, locDTime, keyDir);
+		_map.updateQix(dTime);
+	}
+}
+
+void arc::Game::updatePlayer(const std::map<arc::Key, arc::KeyState> &keys, float dTime, float &locDTime,
+			const std::pair<const arc::Key, arc::Player::DIRECTION> &keyDir)
+{
+	auto key = keys.find(keyDir.first);
+	if (key != keys.end()) {
+			if (key->second == arc::PRESSED)
 				_player.move(keyDir.second);
-			if (key->second == HOLD)
+			if (key->second == arc::HOLD)
 				handleHold(dTime, locDTime, keyDir);
 			else
 				locDTime = 0;
 		}
-	}
 }
 
 void
