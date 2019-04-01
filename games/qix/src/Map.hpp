@@ -29,7 +29,7 @@ namespace arc {
 		void transformTrailToBorder();
 		std::vector<std::reference_wrapper<const IComponent>> getSprites() const;
 		int findPercentCovered() const;
-		void updateQix(float dTime);
+		void updateQix(float dTime, bool failed = false);
 		bool qixTouchedTrail() const;
 
 	protected:

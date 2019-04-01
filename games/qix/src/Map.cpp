@@ -242,14 +242,17 @@ int arc::Map::findPercentCovered() const
 	return possessedArea * 100 / (_dimension.x * _dimension.y);
 }
 
-void arc::Map::updateQix(float dTime)
+void arc::Map::updateQix(float dTime, bool failed)
 {
 	static float localDTime = 0;
+	static int tryNb = 0;
 	std::random_device randomDevice;
 	unsigned int randomRes = randomDevice();
 
-	if (localDTime >= 0.05) {
-		moveQix(Position(randomRes % 2, (randomRes + 1) % 2), static_cast<bool>(randomDevice() % 2));
+	tryNb = failed ? tryNb + 1 : 0;
+	if (localDTime >= 0.5) {
+		if (tryNb < 4)
+			moveQix(Position(randomRes % 2, (randomRes + 1) % 2), static_cast<bool>(randomDevice() % 2));
 		localDTime = 0;
 	} else
 		localDTime += dTime;
@@ -274,7 +277,7 @@ bool arc::Map::checkMovement(const arc::Position &direction, bool sign)
 		arc::Position posToTest = (sign ? pos + direction : pos - direction);
 		switch (_cells[posToTest.y][posToTest.x].state()) {
 		case Cell::BORDER:
-			updateQix(1);
+			updateQix(1, true);
 			return true;
 		case Cell::TRAIL:
 			_isPlayerAlive = false;
