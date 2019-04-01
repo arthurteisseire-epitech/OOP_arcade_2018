@@ -291,7 +291,7 @@ bool arc::Map::checkMovement(const arc::Position &direction, bool sign)
 	return false;
 }
 
-bool arc::Map::qixTouchedTrail() const
+bool arc::Map::isPlayerAlive() const
 {
 	return !_isPlayerAlive;
 }
