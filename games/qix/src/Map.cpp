@@ -14,7 +14,8 @@ arc::Map::Map(const Position &dimension) :
 	_dimension(dimension),
 	_cells(),
 	_qix(initQix()),
-	_qixPositions(findQixPositions())
+	_qixPositions(findQixPositions()),
+	_isPlayerAlive(true)
 {
 	_cells.reserve(static_cast<size_t>(_dimension.x));
 	_sprites.reserve(static_cast<size_t>(_dimension.x) * _dimension.y);
@@ -247,7 +248,7 @@ void arc::Map::updateQix(float dTime)
 	std::random_device randomDevice;
 	unsigned int randomRes = randomDevice();
 
-	if (localDTime >= 0.2) {
+	if (localDTime >= 0.05) {
 		moveQix(Position(randomRes % 2, (randomRes + 1) % 2), static_cast<bool>(randomDevice() % 2));
 		localDTime = 0;
 	} else
@@ -271,10 +272,21 @@ bool arc::Map::checkMovement(const arc::Position &direction, bool sign)
 {
 	for (const auto &pos : _qixPositions) {
 		arc::Position posToTest = (sign ? pos + direction : pos - direction);
-		if (_cells[posToTest.y][posToTest.x].state() == arc::Cell::BORDER) {
+		switch (_cells[posToTest.y][posToTest.x].state()) {
+		case Cell::BORDER:
 			updateQix(1);
 			return true;
+		case Cell::TRAIL:
+			_isPlayerAlive = false;
+			return true;
+		default:
+			continue;
 		}
 	}
 	return false;
+}
+
+bool arc::Map::qixTouchedTrail() const
+{
+	return !_isPlayerAlive;
 }

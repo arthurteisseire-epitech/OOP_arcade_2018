@@ -21,7 +21,7 @@ arc::IGame *gameEntryPoint()
 }
 
 arc::Game::Game() :
-	_map({31, 31}),
+	_map({11, 11}),
 	_player(_map)
 {
 }
@@ -64,7 +64,7 @@ arc::Game::handleHold(float dTime, float &locDTime, const std::pair<const arc::K
 
 bool arc::Game::isRunning() const
 {
-	return _map.findPercentCovered() <= 75;
+	return _map.findPercentCovered() <= 75 && !_map.qixTouchedTrail();
 }
 
 std::vector<std::reference_wrapper<const arc::IComponent>> arc::Game::getComponents() const
