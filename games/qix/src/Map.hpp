@@ -35,10 +35,11 @@ namespace arc {
 		std::vector<std::vector<Cell>> _cells;
 		std::vector<std::reference_wrapper<const IComponent>> _sprites;
 		Qix _qix;
+		std::vector<Position> _qixPositions;
 
 	private:
 		Qix initQix();
-		void fillCells(const Position &pos, const std::vector<arc::Position> &qixPositions);
+		void fillCells(const Position &pos);
 		Position findNonQixZone(const Position &pos);
 		bool tryPosition(Position posToTry, Position *posToLook, Position *oppositePos,
 		                 Position oppositePosToTry) const;
@@ -46,7 +47,7 @@ namespace arc {
 		bool isQixInZone(const Position &position);
 		bool tryAllZonePositions(const Position &position);
 		void fillZone(const Position &position);
-		const std::vector<Position> findQixPositions(const Qix &qix) const;
+		const std::vector<arc::Position> findQixPositions() const;
 	};
 }
 

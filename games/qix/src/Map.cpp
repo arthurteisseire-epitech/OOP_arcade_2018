@@ -13,17 +13,16 @@
 arc::Map::Map(const Position &dimension) :
 	_dimension(dimension),
 	_cells(),
-	_qix(initQix())
+	_qix(initQix()),
+	_qixPositions(findQixPositions())
 {
 	_cells.reserve(static_cast<size_t>(_dimension.x));
 	_sprites.reserve(static_cast<size_t>(_dimension.x) * _dimension.y);
-	const std::vector<Position> qixPositions = findQixPositions(_qix);
-
 	for (unsigned int y = 0; y < _dimension.x; ++y) {
 		_cells.emplace_back(std::vector<Cell>());
 		_cells[y].reserve(static_cast<size_t>(_dimension.y));
 		for (unsigned int x = 0; x < _dimension.y; ++x)
-			fillCells(Position(x, y), qixPositions);
+			fillCells(Position(x, y));
 	}
 }
 
@@ -36,25 +35,25 @@ arc::Qix arc::Map::initQix()
 	return Qix(qixPos);
 }
 
-const std::vector<arc::Position> arc::Map::findQixPositions(const Qix &qix) const
+const std::vector<arc::Position> arc::Map::findQixPositions() const
 {
-	const Position &qixCenter = qix.position();
+	const Position &qixCenter = _qix.position();
 	std::vector<Position> qixPos;
 
 	for (unsigned int y = 0; y < _dimension.y; ++y)
 		for (unsigned int x = 0; x < _dimension.x; ++x) {
 			Position currPos(x, y);
-			if (qixCenter.distance(currPos) <= qix.radius())
-				qixPos.emplace_back(currPos);
+			if (qixCenter.distance(currPos) <= _qix.radius())
+				qixPos.push_back(currPos);
 		}
 	return qixPos;
 }
 
-void arc::Map::fillCells(const Position &pos, const std::vector<Position> &qixPositions)
+void arc::Map::fillCells(const Position &pos)
 {
 	if (pos.x == 0 || pos.x == _dimension.x - 1 || pos.y == 0 || pos.y == _dimension.y - 1)
 		_cells[pos.y].emplace_back(Cell(Cell::BORDER));
-	else if (std::find(qixPositions.begin(), qixPositions.end(), pos) != qixPositions.end())
+	else if (std::find(_qixPositions.begin(), _qixPositions.end(), pos) != _qixPositions.end())
 		_cells[pos.y].emplace_back(Cell(Cell::QIX));
 	else
 		_cells[pos.y].emplace_back(Cell(Cell::WALKABLE));
