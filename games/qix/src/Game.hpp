@@ -24,8 +24,8 @@ namespace arc {
 		            const std::pair<unsigned int, unsigned int> &windowSize) override;
 		bool isRunning() const override;
 		int getScore() const override;
-	protected:
 
+	protected:
 		Map _map;
 		Player _player;
 		static const std::map<Key, Player::DIRECTION> _keyDir;

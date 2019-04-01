@@ -16,6 +16,9 @@ namespace arc {
 		unsigned int x;
 		unsigned int y;
 
+		double size() const;
+
+		double distance(const Position &pos) const;
 		Position operator+(const Position &pos) const;
 		Position operator-(const Position &pos) const;
 		bool operator!=(const Position &pos) const;

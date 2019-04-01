@@ -6,6 +6,7 @@
 */
 
 #include <random>
+#include <algorithm>
 #include "Map.hpp"
 #include "Converter.hpp"
 
@@ -16,27 +17,44 @@ arc::Map::Map(const Position &dimension) :
 {
 	_cells.reserve(static_cast<size_t>(_dimension.x));
 	_sprites.reserve(static_cast<size_t>(_dimension.x) * _dimension.y);
+	const std::vector<Position> qixPositions = findQixPositions(_qix);
+
 	for (unsigned int y = 0; y < _dimension.x; ++y) {
 		_cells.emplace_back(std::vector<Cell>());
 		_cells[y].reserve(static_cast<size_t>(_dimension.y));
 		for (unsigned int x = 0; x < _dimension.y; ++x)
-			fillCells(Position(x, y));
+			fillCells(Position(x, y), qixPositions);
 	}
 }
 
 arc::Qix arc::Map::initQix()
 {
 	std::random_device randomDevice;
-	Position qixPos(abs(randomDevice() % _dimension.x - 2) + 1, abs(randomDevice() % _dimension.y - 2) + 1);
+	const unsigned int radius = 2;
+	Position qixPos(abs(randomDevice() % _dimension.x - (radius + 1) * 2) + radius + 1, abs(randomDevice() % _dimension.y - (radius + 1) * 2) + radius + 1);
 
 	return Qix(qixPos);
 }
 
-void arc::Map::fillCells(const Position &pos)
+const std::vector<arc::Position> arc::Map::findQixPositions(const Qix &qix) const
+{
+	const Position &qixCenter = qix.position();
+	std::vector<Position> qixPos;
+
+	for (unsigned int y = 0; y < _dimension.y; ++y)
+		for (unsigned int x = 0; x < _dimension.x; ++x) {
+			Position currPos(x, y);
+			if (qixCenter.distance(currPos) <= qix.radius())
+				qixPos.emplace_back(currPos);
+		}
+	return qixPos;
+}
+
+void arc::Map::fillCells(const Position &pos, const std::vector<Position> &qixPositions)
 {
 	if (pos.x == 0 || pos.x == _dimension.x - 1 || pos.y == 0 || pos.y == _dimension.y - 1)
 		_cells[pos.y].emplace_back(Cell(Cell::BORDER));
-	else if (pos == _qix.position())
+	else if (std::find(qixPositions.begin(), qixPositions.end(), pos) != qixPositions.end())
 		_cells[pos.y].emplace_back(Cell(Cell::QIX));
 	else
 		_cells[pos.y].emplace_back(Cell(Cell::WALKABLE));
@@ -109,7 +127,7 @@ bool arc::Map::isQixInZone(const arc::Position &position)
 
 bool arc::Map::tryAllZonePositions(const arc::Position &position)
 {
-	if (position == _qix.position())
+	if (_cells[position.y][position.x].state() == Cell::QIX)
 		return true;
 	_cells[position.y][position.x].alterState(Cell::TMP);
 	if (_cells[position.y + 1][position.x].state() == Cell::WALKABLE ||
