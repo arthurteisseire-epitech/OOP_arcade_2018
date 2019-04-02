@@ -9,11 +9,23 @@
 \usepackage{parskip}
 \usepackage{fancyhdr}
 \usepackage{vmargin}
+\usepackage{listings}
+\usepackage{xcolor}
+\lstset{
+    frame=tb, % draw a frame at the top and bottom of the code block
+    tabsize=4, % tab space width
+    showstringspaces=false, % don't mark spaces in strings
+    numbers=left, % display line numbers on the left
+    commentstyle=\color{grey}, % comment color
+    keywordstyle=\color{blue}, % keyword color
+    stringstyle=\color{green} % string color
+    morecomment=[l][\color{yellow}]{\#}
+}
 \setmarginsrb{3 cm}{2.5 cm}{3 cm}{2.5 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
 
 \title{Arcade}								% Title
 \author{Fabre Delteil Teisseire}								% Author
-\date{12 Sept 2015}											% Date
+\date{Mars 2019}											% Date
 
 \makeatletter
 \let\thetitle\@title
@@ -58,32 +70,201 @@
 \end{titlepage}
 
 
-\section{How to play}
-Keys :
+\section{How to play} \label{HTP}
+Keys:
 \begin{itemize}
 \item F1 - Previous game
 \item F2 - Next game
-\item F3 - Previous graphical lib
-\item F4 - Next graphical lib
+\item F3 - Previous graphics library
+\item F4 - Next graphics library
 \item R - Reload game
-\item ESCAPE - Back to menu
-\item SUPPR - Exit
-\item ENTER - Action
+\item ESCAPE - Go back to menu
+\item SUPPR - Exit the program
+\item ENTER - Select
+\item ARROWS (UP, DOWN, LEFT, RIGHT) - Move
 \end{itemize}
 
 
 \section{Add a game}
 \begin{itemize}
-\item Create a directory in games/ directory with your game name
-\item Compile your game to create a .so file in games/ directory
-\item You must create an entry point with the following signature : \newline arc::IGame *gameEntryPoint();
+\item Create a directory in games/ named after the game you want to add
+\item Compile your game using a Makefile to create a .so library file (using -shared) in games/ named following this format:\newline\emph{lib\_arcade\_}\$GAME\_NAME\$\emph{.so} (\$GAME\_NAME\$ being the name of your game)
+\item You must implement an entry point function for your game with the following signature: \newline \emph{arc::IGame *gameEntryPoint();}
+\item You must implement a class that inherits from the interface \emph{arc::IGame}
 \end{itemize}
+\newpage
+\subsection{The Interface IGame} \label{IGame}
+Here is the interface -which syntax has been simplified- you must inherit from, which is located in games/IGame.hpp:
+\begin{lstlisting}[language=c++]
+class IGame {
+  bool isRunning() const;
+  void update(const map<Key, KeyState> &keys, float deltaTime,
+              const pair<unsigned int, unsigned int> &windowSize);
+  vector<reference_wrapper<const IComponent>> getComponents() const;
+  int getScore() const;
+};
+\end{lstlisting}
+\subsubsection{isRunning}
+The method isRunning takes no parameter but must return true or false, regarding whether or not the game is running. If this method returns false, the menu will be displayed. However if it returns true, the game will be displayed.
 
-\section{Add a graphical library}
+\subsubsection{update}
+The method update returns nothing but takes 2 parameters:
 \begin{itemize}
-\item Create a directory in lib/ directory with your graphical library name
-\item Compile your graphical library to create a .so file in lib/ directory
-\item You must create an entry point with the following signature : \newline arc::IGraphic *graphicalEntryPoint();
+    \item keys:\newline
+    Keys is a map containing a Key as map key, and a KeyState as map value.\newline
+    For more details on these two classes please refer to part 4.1 of this document\newline
+    Use this parameter to know what keys the user pressed, held, or released. Therefore this allows your game to be interactive
+    \item windowSize:\newline
+    As you will see below, your game must return sprites to draw. Therefore it must choose the size of the sprites to create.\newline
+    This parameter allows you to know the current size of the window, and to adapt the sprites' size accordingly.
 \end{itemize}
+\subsubsection{getComponents}
+The method getComponents takes no parameter but must return a vector containing references to the components of the game. That is to say the sprites to draw, the text to write, and the sounds to play.\newline
+For more details on these classes, please refer to part 4.2 of this document.\newline
+All the components returned by this method will be processed by the graphics library methods (c.f. part 3).
+\subsubsection{getScore}
+The method getScore takes no parameter but must return the score of the game. This function is called when the game is over, to keep a record of the highest scores.
+\section{Add a graphics library}
+\begin{itemize}
+\item Create a directory in lib/ named after the graphics library you want to add
+\item Compile your graphics library using a Makefile to create a .so library file (using -shared) in lib/ named following this format:\newline\emph{lib\_arcade\_}\$LIB\_NAME\$\emph{.so} (\$LIB\_NAME\$ being the name of your graphics library)
+\item You must implement an entry point function for your graphics library with the following signature: \newline \emph{arc::IGraphic *graphicEntryPoint();}
+\item You must implement a class that inherits from the interface \emph{arc::IGraphic}
+\end{itemize}
+\subsection{The Interface IGraphic}
+\begin{lstlisting}[language=c++]
+class IGraphic {
+	bool processSprite(const ISprite &sprite);
+	bool processAudio(const IAudio &audio);
+	bool processText(const IText &text;
+	void processEvents();
+	const std::map<Key, KeyState> &getKeys() const;
+	void draw();
+	bool isOpen() const;
+	std::pair<unsigned, unsigned> getWindowSize() const;
+};
+\end{lstlisting}
+\newpage
+\subsubsection{processSprite}
+The method processSprite takes an ISprite as parameter and returns a bool.\newline
+You must implement and use this method in order to add the sprite received as parameter to the buffer of sprites to be drawn.\newline
+In order to optimize your library, you may want to load textures only once.\newline
+The return value corresponds to whether or not the sprite was successfully prepared. \newline
+For more details on this class, please refer to part 4.2 of this document.\newline
+\subsubsection{processAudio}
+The method processAudio takes an IAudio as parameter and returns a bool.\newline
+You must implement and use this method in order to play the audio received as parameter.\newline
+The return value corresponds to whether or not the audio was successfully played.\newline
+For more details on this class, please refer to part 4.2 of this document.\newline
+\subsubsection{processText}
+The method processText takes an IText as parameter and returns a bool.\newline
+You must implement and use this method in order to add the text received as parameter to the buffer of texts to be written.\newline
+In order to optimize your library, you may want to load fonts only once.\newline
+The return value corresponds to whether or not the text was successfully prepared.\newline
+For more details on this class, please refer to part 4.2 of this document.\newline
+\subsubsection{processEvents}
+The method processEvents takes no parameter and returns nothing.\newline
+You must implement and use this method in order to handle the different keys used (e.g., update, close window).
+\subsubsection{getKeys}
+The method getKeys takes no parameter and returns a map of Keys associated with their KeyState (e.g., UP with PRESSED and RIGHT with RELEASED).\newline
+For more details on these classes, please refer to part 4.1 of this document.\newline
+This map will be given to the game via the method update (c.f. part 2.1.2).
+\subsubsection{draw}
+The method draw takes no parameter and returns nothing.\newline
+You must implement and use this method in order to clear the window, and draw the sprites and the texts prepared using processSprite and processText.
+\subsubsection{isOpen}
+The method isOpen takes no parameter but returns a bool corresponding to whether or not the window is open.
+\subsubsection{getWindowSize}
+The method getWindowSize takes no parameter but returns a pair of unsigned corresponding to the window size.
 
+\section{Utility interfaces and types} \label{utils}
+\subsection{Key and Keystate}
+Key and Keystate are two enums that you can find in components/Key.hpp
+\begin{itemize}
+    \item KeyState:
+    \begin{itemize}
+        \item PRESSED: The state a key is in the first time it is pressed
+        \item HOLD: The state a key is in the whole time the key is held down
+        \item RELEASED: The state a key is in when you do nothing
+    \end{itemize}
+    \newpage
+    \item Key:
+    Currently 12 keys are handled:
+    \begin{itemize}
+        \item UP
+        \item DOWN
+        \item RIGHT
+        \item LEFT
+        \item ENTER
+        \item ESCAPE
+        \item SUPPR
+        \item F1
+        \item F2
+        \item F3
+        \item F4
+        \item R
+    \end{itemize}
+    To find which key does which action, please refer to part \ref{HTP}
+\end{itemize}
+\subsection{IComponents}
+IComponent is an interface that ISprite, IText and IAudio, that are described below, inherit from.
+\begin{lstlisting}[language=c++]
+enum ComponentType {
+	SPRITE,
+	TEXT,
+	SOUND
+};
+class IComponent {
+	ComponentType getType() const;
+};
+\end{lstlisting}
+The only method described by this interface is getType, which returns the type of the component, namely SPRITE, TEXT or SOUND.\newline
+You want to use this class to transfer your components from the game (via the method getComponents of IGame, c.f. part \ref{IGame}) to the graphics library process methods.
+\subsubsection{IAudio}
+\begin{lstlisting}[language=c++]
+class IAudio : public IComponent {
+    int getVolume() const;
+	const std::string &getSoundPath() const;
+};
+\end{lstlisting}
+This interface is used to implement audio objects and inherits from IComponent.
+\begin{itemize}
+    \item getVolume: returns the volume of the audio
+    \item getSoundPath: returns the file where the audio is stored, relative to the project root
+\end{itemize}
+\subsubsection{ISprite}
+\begin{lstlisting}[language=c++]
+class ISprite : public IComponent {
+	const std::pair<float, float> &getPosition() const;
+	const std::string &getTextureName() const;
+	const std::pair<float, float> &getSize() const;
+	unsigned int getColor() const;
+};
+\end{lstlisting}
+This interface is used to implement sprite objects and inherits from IComponent.
+\begin{itemize}
+    \item getPosition: returns the position of the sprite, as a percent of the window size. Therefore positions must be between 0 and 1
+    \item getTextureName: returns the location of the texture of the sprite, relative to the project root
+    \item getSize: returns the size of the sprite to be drawn, as a percent of the window size. Therefore sizes must be between 0 and 1.
+    \item getColor: returns a color that corresponds to the sprite in order to replace it in case the texture is missing/invalid.
+\end{itemize}
+\newpage
+\subsubsection{IText}
+\begin{lstlisting}[language=c++]
+class IText : public IComponent {
+	const std::string &getText() const;
+    const std::pair<float, float> &getPosition() const;
+	int getFontSize() const;
+	const std::string &getFontPath() const;
+	unsigned int getColor() const;
+};
+\end{lstlisting}
+This interface is used to implement text objects and inherits from IComponent.
+\begin{itemize}
+    \item getText: returns the text to be written
+    \item getPosition: returns the position of the text, as a percent of the window size. Therefore positions must be between 0 and 1
+    \item getFontSize: returns the size of the font
+    \item getFontPath: returns the path to the font, relative to the project root
+    \item getColor: returns the color of the text.
+\end{itemize}
 \end{document}
