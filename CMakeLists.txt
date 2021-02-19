@@ -1,8 +1,7 @@
 cmake_minimum_required(VERSION 3.11)
 project(arcade)
 
-add_compile_options(-Wall -Wextra --coverage)
-set(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} " --coverage")
+add_compile_options(-Wall -Wextra)
 set(CMAKE_CXX_STANDARD 14)
 
 set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE 1)
