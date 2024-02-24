@@ -40,8 +40,8 @@ void arc::Widget::paintEvent(QPaintEvent *)
 		painter.drawPixmap(spritePos, *_sprite.second);
 	}
 	for (const auto &text : _textsToDraw) {
-		fontSize = text.first->getFontSize() / (1920 / size().width());
-		fontSize = std::min(fontSize, text.first->getFontSize() / (1080 / size().height()));
+		fontSize = text.first->getFontSize() / (1920 / std::min(size().width(), 2));
+		fontSize = std::min(fontSize, text.first->getFontSize() / (1080 / std::min(size().height(), 2)));
 
 		textPos.setX(size().width() * text.first->getPosition().first);
 		textPos.setY(size().height() * text.first->getPosition().second - size().height());

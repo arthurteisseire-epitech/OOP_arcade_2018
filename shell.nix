@@ -14,5 +14,6 @@ in
       pkgs.qt5.full
       pkgs.libsForQt5.qwt
       pkgs.libcaca
+      pkgs.valgrind
     ];
   }
